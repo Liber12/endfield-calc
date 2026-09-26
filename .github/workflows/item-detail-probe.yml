@@ -9,95 +9,28 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Parse Wikiru item details
+      - name: Diagnose Wikiru source response
         shell: python
         run: |
-          import html, json, re, urllib.parse, urllib.request
-
-          pages = [
-              "テーブル/天然資源",
-              "テーブル/採集素材",
-              "テーブル/工業製品",
-              "テーブル/中身入り各種ボトル",
-              "テーブル/消費アイテム",
-              "テーブル/携帯アイテム",
-          ]
-
-          with open("public/locales/ja/item.json", encoding="utf-8") as f:
-              ja = json.load(f)
-
-          name_to_ids = {}
-          for item_id, name in ja.items():
-              name_to_ids.setdefault(name, []).append(item_id)
-
-          def fetch(page):
-              url = "https://arknights-endfield.wikiru.jp/?" + urllib.parse.urlencode(
-                  {"cmd":"source","page":page}
-              )
-              req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
-              with urllib.request.urlopen(req, timeout=30) as r:
-                  body = r.read().decode("utf-8","replace")
-              m = re.search(r"<pre[^>]*>(.*?)</pre>", body, re.I|re.S)
-              if m:
-                  return html.unescape(re.sub(r"<[^>]+>", "", m.group(1)))
-              plain = html.unescape(re.sub(r"<[^>]+>", "\n", body))
-              plain = re.sub(r"\n+", "\n", plain)
-              marker = "最終更新日時:&lastmod;"
-              p = plain.find(marker)
-              return plain[p:] if p >= 0 else plain
-
-          def clean(s):
-              s = html.unescape(s)
-              s = re.sub(r"&ref\([^;]+\);?", "", s)
-              s = re.sub(r"&color\([^)]*\)\{([^}]*)\};?", r"\1", s)
-              s = re.sub(r"&size\([^)]*\)\{([^}]*)\};?", r"\1", s)
-              s = re.sub(r"&tooltip\(([^)]+)\)\{[^}]*\};?", r"\1", s)
-              s = re.sub(r"&ruby\([^)]*\)\{([^}]*)\};?", r"\1", s)
-              s = re.sub(r"\[\[([^]>]+)(?:>[^]]+)?\]\]", r"\1", s)
-              s = re.sub(r"''([^']+)''", r"\1", s)
-              s = s.replace("&br;", "\n")
-              s = s.replace("~", "")
-              s = re.sub(r"\s*\n\s*", "\n", s)
-              return s.strip()
-
-          details = {}
-          unmatched = []
-
-          for page in pages:
-              src = fetch(page)
-              header_kind = "effect" if "|~効果|" in src else "description"
-
-              for line in src.splitlines():
-                  if not line.startswith("|") or line.startswith("|~") or line.startswith("|CENTER"):
-                      continue
-                  cells = line.strip("|").split("|")
-                  if len(cells) < 5:
-                      continue
-
-                  name = clean(cells[2])
-                  primary = clean(cells[3])
-                  flavor = clean(cells[4])
-
-                  if not name or name == "　　　　":
-                      continue
-
-                  ids = name_to_ids.get(name)
-                  if not ids:
-                      if primary or flavor:
-                          unmatched.append({"page":page,"name":name})
-                      continue
-
-                  for item_id in ids:
-                      entry = details.setdefault(item_id, {
-                          "itemId": item_id,
-                          "name": name,
-                      })
-                      if primary:
-                          entry[header_kind] = primary
-                      if flavor:
-                          entry["flavor"] = flavor
-
-          print("DETAILS=" + json.dumps(list(details.values()), ensure_ascii=False, separators=(",",":")))
-          print("COUNT", len(details))
-          print("UNMATCHED=" + json.dumps(unmatched[:100], ensure_ascii=False, separators=(",",":")))
+          import html, re, urllib.parse, urllib.request
+          page="テーブル/天然資源"
+          url="https://arknights-endfield.wikiru.jp/?" + urllib.parse.urlencode({"cmd":"source","page":page})
+          req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+          with urllib.request.urlopen(req,timeout=30) as r:
+              body=r.read().decode("utf-8","replace")
+              print("FINAL",r.geturl(),"BODYLEN",len(body))
+          print("HAS_PRE",bool(re.search(r"<pre[^>]*>",body,re.I)))
+          m=re.search(r"<pre[^>]*>(.*?)</pre>",body,re.I|re.S)
+          if m:
+              src=html.unescape(re.sub(r"<[^>]+>","",m.group(1)))
+          else:
+              plain=html.unescape(re.sub(r"<[^>]+>","\n",body))
+              plain=re.sub(r"\n+","\n",plain)
+              marker="最終更新日時:&lastmod;"
+              p=plain.find(marker)
+              src=plain[p:] if p>=0 else plain
+          print("SRCLEN",len(src))
+          print("START",repr(src[:1200]))
+          rows=[line for line in src.splitlines() if line.startswith("|")]
+          print("ROWCOUNT",len(rows))
+          print("ROW0",repr(rows[:3]))
