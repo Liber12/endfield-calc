@@ -138,6 +138,15 @@
       "bomb": "爆弾",
       "event": "イベント",
       "other": "その他"
-    }
+    },
+    "tabMap": "用途マップ",
+    "hideTerminalPackaging": "行き止まり容器を隠す",
+    "onlyTerminalPackaging": "表示対象は行き止まりの容器系のみです。フィルタを解除すると表示できます。",
+    "usageMap": "用途マップ",
+    "usageMapHint": "同じ素材は1ノードに統合します。パン・ズームで下流を追えます。レシピノードには一緒に必要な素材を表示します。",
+    "graphSummary": "素材 {{items}}件 / レシピ {{recipes}}件",
+    "hiddenPackagingCount": "行き止まり容器 {{count}}件を省略",
+    "graphLimited": "大規模なため展開上限を適用",
+    "layouting": "用途マップを配置中…"
   }
 }
