@@ -12,11 +12,11 @@ import {
   BatteryCharging,
   Box,
   Boxes,
+  Building2,
   CircleDot,
   Cloud,
   Droplets,
-  Eye,
-  EyeOff,
+  Factory,
   Gem,
   GitBranch,
   HeartPulse,
@@ -24,14 +24,14 @@ import {
   Package,
   Pickaxe,
   Puzzle,
+  Route,
   Search,
-  Sparkles,
-  Wind,
+  Star,
+  Store,
   Wrench,
   Workflow,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Tabs,
@@ -45,10 +45,15 @@ import {
   getItemName,
   getRecipeName,
 } from "@/lib/i18n-helpers";
+import { buildRecipeIndex } from "@/lib/material-dictionary";
 import {
-  buildRecipeIndex,
-  recipeEndsOnlyInTerminalPackaging,
-} from "@/lib/material-dictionary";
+  findShortestMaterialRoute,
+  getItemUseSummary,
+  getMeaningfulDirectUses,
+  getUsefulEndpoints,
+  type MaterialRouteStep,
+  type UsefulEndpoint,
+} from "@/lib/material-use-routes";
 import {
   getMaterialCategory,
   getMaterialSubtype,
@@ -56,7 +61,7 @@ import {
   type MaterialCategoryId,
   type MaterialSubtypeId,
 } from "@/lib/item-category";
-import MaterialUsageGraph from "@/components/dictionary/MaterialUsageGraph";
+import { externalItemUseById } from "@/data/material-external-uses";
 import type { Facility, Item, ItemId, Recipe } from "@/types";
 
 type MaterialDictionaryProps = {
@@ -65,7 +70,7 @@ type MaterialDictionaryProps = {
   facilities: readonly Facility[];
 };
 
-type DictionaryTab = "uses" | "make" | "tree";
+type DictionaryTab = "uses" | "destinations" | "make";
 type CategoryFilter = "all" | MaterialCategoryId;
 
 function formatAmount(value: number): string {
@@ -82,7 +87,7 @@ const CATEGORY_ICON: Record<
   gathered: Leaf,
   industrial: Wrench,
   consumable: HeartPulse,
-  event: Sparkles,
+  event: Package,
   other: Boxes,
 };
 
@@ -96,7 +101,7 @@ const SUBTYPE_ICON: Record<
   powder: Cloud,
   refined: Gem,
   liquid: Droplets,
-  gas: Wind,
+  gas: Cloud,
   container: Box,
   filled: Package,
   component: Puzzle,
@@ -104,8 +109,8 @@ const SUBTYPE_ICON: Record<
   equipment: Wrench,
   medicine: HeartPulse,
   food: Package,
-  bomb: Sparkles,
-  event: Sparkles,
+  bomb: Package,
+  event: Package,
   other: Boxes,
 };
 
@@ -134,10 +139,10 @@ function ItemIcon({
     size === "sm"
       ? "h-7 w-7"
       : size === "lg"
-        ? "h-14 w-14"
+        ? "h-12 w-12"
         : size === "xl"
           ? "h-16 w-16"
-          : "h-11 w-11";
+          : "h-10 w-10";
 
   return item?.iconUrl ? (
     <img
@@ -151,44 +156,6 @@ function ItemIcon({
       className={cn(sizeClass, "shrink-0 rounded-md bg-muted")}
       aria-hidden="true"
     />
-  );
-}
-
-function MaterialNode({
-  itemId,
-  amount,
-  itemById,
-  onSelect,
-  emphasis = false,
-}: {
-  itemId: ItemId;
-  amount?: number;
-  itemById: ReadonlyMap<ItemId, Item>;
-  onSelect: (itemId: ItemId) => void;
-  emphasis?: boolean;
-}) {
-  const item = itemById.get(itemId);
-
-  return (
-    <button
-      type="button"
-      onClick={() => onSelect(itemId)}
-      title={itemId}
-      className={cn(
-        "group flex w-[112px] shrink-0 flex-col items-center rounded-xl border bg-background p-2.5 text-center transition-colors hover:bg-accent",
-        emphasis && "border-primary/60 bg-primary/5",
-      )}
-    >
-      <ItemIcon item={item} size="lg" />
-      <span className="mt-1.5 line-clamp-2 text-xs font-semibold leading-tight">
-        {item ? getItemName(item) : itemId}
-      </span>
-      {amount !== undefined && (
-        <span className="mt-0.5 text-[11px] text-muted-foreground">
-          ×{formatAmount(amount)}
-        </span>
-      )}
-    </button>
   );
 }
 
@@ -238,60 +205,27 @@ function DirectUseCard({
   facilityById: ReadonlyMap<Facility["id"], Facility>;
   onSelectItem: (itemId: ItemId) => void;
 }) {
-  const { t } = useTranslation("app");
   const facility = facilityById.get(recipe.facilityId);
-  const selectedAmount = recipe.inputs
-    .filter((entry) => entry.itemId === selectedItemId)
-    .reduce((sum, entry) => sum + entry.amount, 0);
-  const otherInputs = recipe.inputs.filter(
+  const coInputs = recipe.inputs.filter(
     (entry) => entry.itemId !== selectedItemId,
   );
 
   return (
-    <article className="rounded-2xl border bg-card p-3 shadow-xs">
-      <div className="flex items-start justify-between gap-2 border-b pb-2">
-        <div className="min-w-0">
+    <article className="rounded-xl border bg-card p-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="min-w-0 flex-1">
           <div className="truncate text-sm font-semibold">
             {getRecipeName(recipe)}
           </div>
-          <div className="truncate text-xs text-muted-foreground">
+          <div className="truncate text-[11px] text-muted-foreground">
             {facility ? getFacilityName(facility) : recipe.facilityId} ·{" "}
             {recipe.craftingTime}s
           </div>
         </div>
-      </div>
-
-      <div className="mt-3 overflow-x-auto pb-1">
-        <div className="flex min-w-max items-center gap-2">
-          <MaterialNode
-            itemId={selectedItemId}
-            amount={selectedAmount || undefined}
-            itemById={itemById}
-            onSelect={onSelectItem}
-            emphasis
-          />
-
-          {otherInputs.map((entry, index) => (
-            <div
-              key={`${entry.itemId}-${index}`}
-              className="flex shrink-0 items-center gap-2"
-            >
-              <span className="text-xl font-semibold text-muted-foreground">
-                +
-              </span>
-              <MaterialNode
-                itemId={entry.itemId}
-                amount={entry.amount}
-                itemById={itemById}
-                onSelect={onSelectItem}
-              />
-            </div>
-          ))}
-
-          <ArrowRight className="mx-1 h-7 w-7 shrink-0 text-muted-foreground" />
-
+        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+        <div className="flex flex-wrap gap-1">
           {recipe.outputs.map((entry, index) => (
-            <MaterialNode
+            <MiniMaterialChip
               key={`${entry.itemId}-${index}`}
               itemId={entry.itemId}
               amount={entry.amount}
@@ -302,11 +236,20 @@ function DirectUseCard({
         </div>
       </div>
 
-      <p className="mt-2 text-[11px] text-muted-foreground">
-        {t("dictionary.combineHint", {
-          defaultValue: "Selected material + required inputs → output",
-        })}
-      </p>
+      {coInputs.length > 0 && (
+        <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t pt-2">
+          <span className="text-[11px] text-muted-foreground">＋</span>
+          {coInputs.map((entry, index) => (
+            <MiniMaterialChip
+              key={`${entry.itemId}-${index}`}
+              itemId={entry.itemId}
+              amount={entry.amount}
+              itemById={itemById}
+              onSelect={onSelectItem}
+            />
+          ))}
+        </div>
+      )}
     </article>
   );
 }
@@ -326,61 +269,303 @@ function RecipeCard({
   const facility = facilityById.get(recipe.facilityId);
 
   return (
-    <article className="rounded-2xl border bg-card p-3 shadow-xs">
-      <div>
-        <div className="font-medium">{getRecipeName(recipe)}</div>
-        <div className="mt-0.5 text-xs text-muted-foreground">
+    <article className="rounded-xl border bg-card p-3">
+      <div className="mb-2">
+        <div className="text-sm font-semibold">{getRecipeName(recipe)}</div>
+        <div className="text-[11px] text-muted-foreground">
           {facility ? getFacilityName(facility) : recipe.facilityId} ·{" "}
           {recipe.craftingTime}s
         </div>
       </div>
-
-      <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-        <div>
-          <div className="mb-1.5 text-xs font-medium text-muted-foreground">
-            {t("dictionary.inputs", { defaultValue: "Inputs" })}
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {recipe.inputs.length > 0 ? (
-              recipe.inputs.map((entry, index) => (
-                <MiniMaterialChip
-                  key={`${entry.itemId}-${index}`}
-                  itemId={entry.itemId}
-                  amount={entry.amount}
-                  itemById={itemById}
-                  onSelect={onSelectItem}
-                />
-              ))
-            ) : (
-              <span className="text-xs text-muted-foreground">—</span>
-            )}
-          </div>
-        </div>
-
-        <ArrowRight className="hidden h-5 w-5 text-muted-foreground lg:block" />
-
-        <div>
-          <div className="mb-1.5 text-xs font-medium text-muted-foreground">
-            {t("dictionary.outputs", { defaultValue: "Produces" })}
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {recipe.outputs.length > 0 ? (
-              recipe.outputs.map((entry, index) => (
-                <MiniMaterialChip
-                  key={`${entry.itemId}-${index}`}
-                  itemId={entry.itemId}
-                  amount={entry.amount}
-                  itemById={itemById}
-                  onSelect={onSelectItem}
-                />
-              ))
-            ) : (
-              <span className="text-xs text-muted-foreground">—</span>
-            )}
-          </div>
-        </div>
+      <div className="flex flex-wrap items-center gap-1.5">
+        {recipe.inputs.map((entry, index) => (
+          <MiniMaterialChip
+            key={`in-${entry.itemId}-${index}`}
+            itemId={entry.itemId}
+            amount={entry.amount}
+            itemById={itemById}
+            onSelect={onSelectItem}
+          />
+        ))}
+        <ArrowRight className="mx-1 h-4 w-4 text-muted-foreground" />
+        {recipe.outputs.map((entry, index) => (
+          <MiniMaterialChip
+            key={`out-${entry.itemId}-${index}`}
+            itemId={entry.itemId}
+            amount={entry.amount}
+            itemById={itemById}
+            onSelect={onSelectItem}
+          />
+        ))}
+      </div>
+      <div className="sr-only">
+        {t("dictionary.howToMake", { defaultValue: "How to make" })}
       </div>
     </article>
+  );
+}
+
+function ExternalDirectUses({
+  itemId,
+}: {
+  itemId: ItemId;
+}) {
+  const { t } = useTranslation("app");
+  const external = externalItemUseById.get(itemId);
+
+  if (!external?.facilityUses?.length && !external?.tradeUses?.length) {
+    return null;
+  }
+
+  const tradeBases = new Map<string, number>();
+  for (const use of external.tradeUses ?? []) {
+    tradeBases.set(use.base, Math.max(tradeBases.get(use.base) ?? 0, use.price));
+  }
+
+  return (
+    <div className="grid gap-3 xl:grid-cols-2">
+      {!!external.facilityUses?.length && (
+        <section className="rounded-xl border bg-card p-3">
+          <div className="mb-2 flex items-center gap-2">
+            <Factory className="h-4 w-4" />
+            <h4 className="text-sm font-semibold">
+              {t("dictionary.facilityUse", {
+                defaultValue: "Facility construction",
+              })}
+            </h4>
+            <span className="ml-auto text-xs text-muted-foreground">
+              {external.facilityUses.length}
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {external.facilityUses.map((use) => (
+              <span
+                key={use.facility}
+                className="rounded-lg bg-muted px-2 py-1 text-xs"
+              >
+                {use.facility} ×{use.amount}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {tradeBases.size > 0 && (
+        <section className="rounded-xl border bg-card p-3">
+          <div className="mb-2 flex items-center gap-2">
+            <Store className="h-4 w-4" />
+            <h4 className="text-sm font-semibold">
+              {t("dictionary.tradeUse", {
+                defaultValue: "Regional trade",
+              })}
+            </h4>
+            <span className="ml-auto text-xs text-muted-foreground">
+              {tradeBases.size}
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {[...tradeBases.entries()].map(([base, price]) => (
+              <span
+                key={base}
+                className="rounded-lg bg-muted px-2 py-1 text-xs"
+              >
+                {base} · {t("dictionary.unitPrice", { defaultValue: "Unit" })}{" "}
+                {price}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
+
+function EndpointCard({
+  endpoint,
+  itemById,
+  selected,
+  onSelect,
+}: {
+  endpoint: UsefulEndpoint;
+  itemById: ReadonlyMap<ItemId, Item>;
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  const { t } = useTranslation("app");
+  const item = itemById.get(endpoint.targetItemId);
+  const uniqueBases = new Set(endpoint.tradeUses?.map((use) => use.base) ?? []);
+  const facilityCount = endpoint.facilityUses?.length ?? 0;
+
+  const icon =
+    endpoint.kind === "product" ? (
+      <Package className="h-4 w-4" />
+    ) : endpoint.kind === "trade" ? (
+      <Store className="h-4 w-4" />
+    ) : (
+      <Factory className="h-4 w-4" />
+    );
+
+  const description =
+    endpoint.kind === "product"
+      ? t("dictionary.endpointProduct", { defaultValue: "Product" })
+      : endpoint.kind === "trade"
+        ? t("dictionary.endpointTradeCount", {
+            count: uniqueBases.size,
+            defaultValue: "{{count}} trade locations",
+          })
+        : t("dictionary.endpointFacilityCount", {
+            count: facilityCount,
+            defaultValue: "{{count}} facilities",
+          });
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className={cn(
+        "flex min-h-[84px] items-center gap-3 rounded-xl border p-3 text-left transition-colors",
+        selected
+          ? "border-primary bg-primary/10"
+          : "bg-card hover:bg-accent",
+      )}
+    >
+      <ItemIcon item={item} size="md" />
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-sm font-semibold">
+          {item ? getItemName(item) : endpoint.targetItemId}
+        </span>
+        <span className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+          {icon}
+          {description}
+        </span>
+      </span>
+      <Route className="h-4 w-4 shrink-0 text-muted-foreground" />
+    </button>
+  );
+}
+
+function RouteMaterial({
+  itemId,
+  itemById,
+  onSelectItem,
+  emphasis = false,
+}: {
+  itemId: ItemId;
+  itemById: ReadonlyMap<ItemId, Item>;
+  onSelectItem: (itemId: ItemId) => void;
+  emphasis?: boolean;
+}) {
+  const item = itemById.get(itemId);
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelectItem(itemId)}
+      className={cn(
+        "flex w-[112px] shrink-0 flex-col items-center rounded-xl border bg-card p-2 text-center",
+        emphasis && "border-primary bg-primary/5",
+      )}
+    >
+      <ItemIcon item={item} size="lg" />
+      <span className="mt-1 line-clamp-2 text-xs font-semibold">
+        {item ? getItemName(item) : itemId}
+      </span>
+    </button>
+  );
+}
+
+function RouteRecipe({
+  step,
+  itemById,
+  onSelectItem,
+}: {
+  step: MaterialRouteStep;
+  itemById: ReadonlyMap<ItemId, Item>;
+  onSelectItem: (itemId: ItemId) => void;
+}) {
+  return (
+    <div className="w-[150px] shrink-0 rounded-xl border border-dashed bg-background p-2">
+      <div className="line-clamp-2 text-[11px] font-semibold">
+        {getRecipeName(step.recipe)}
+      </div>
+      {step.coInputs.length > 0 && (
+        <div className="mt-1.5 flex flex-wrap gap-1">
+          {step.coInputs.map((entry, index) => {
+            const item = itemById.get(entry.itemId);
+            return (
+              <button
+                key={`${entry.itemId}-${index}`}
+                type="button"
+                onClick={() => onSelectItem(entry.itemId)}
+                title={item ? getItemName(item) : entry.itemId}
+                className="inline-flex items-center gap-1 rounded-md bg-muted px-1 py-0.5 text-[10px]"
+              >
+                <ItemIcon item={item} size="sm" />
+                ×{formatAmount(entry.amount)}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RouteEndpointDetail({
+  endpoint,
+}: {
+  endpoint: UsefulEndpoint;
+}) {
+  const { t } = useTranslation("app");
+
+  if (endpoint.kind === "product") {
+    return (
+      <div className="flex w-[150px] shrink-0 items-center justify-center rounded-xl border bg-muted/50 p-3 text-center text-xs font-semibold">
+        {t("dictionary.completedProduct", { defaultValue: "Product" })}
+      </div>
+    );
+  }
+
+  if (endpoint.kind === "trade") {
+    return (
+      <div className="w-[180px] shrink-0 rounded-xl border bg-muted/50 p-3">
+        <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold">
+          <Store className="h-4 w-4" />
+          {t("dictionary.regionalTrade", { defaultValue: "Regional trade" })}
+        </div>
+        <div className="space-y-1 text-[11px] text-muted-foreground">
+          {endpoint.tradeUses?.map((use, index) => (
+            <div key={`${use.base}-${use.stage}-${index}`}>
+              {use.base} · Lv.{use.stage || "?"} ·{" "}
+              {t("dictionary.unitPrice", { defaultValue: "Unit" })} {use.price}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-[190px] shrink-0 rounded-xl border bg-muted/50 p-3">
+      <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold">
+        <Building2 className="h-4 w-4" />
+        {t("dictionary.facilityConstruction", {
+          defaultValue: "Facility construction",
+        })}
+      </div>
+      <div className="space-y-1 text-[11px] text-muted-foreground">
+        {endpoint.facilityUses?.slice(0, 6).map((use) => (
+          <div key={use.facility}>
+            {use.facility} ×{use.amount}
+          </div>
+        ))}
+        {(endpoint.facilityUses?.length ?? 0) > 6 && (
+          <div>
+            +{(endpoint.facilityUses?.length ?? 0) - 6}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -394,16 +579,15 @@ export default function MaterialDictionary({
   const [categoryFilter, setCategoryFilter] =
     useState<CategoryFilter>("all");
   const [activeTab, setActiveTab] = useState<DictionaryTab>("uses");
-  const [hideTerminalPackaging, setHideTerminalPackaging] = useState(true);
+  const [selectedEndpointId, setSelectedEndpointId] = useState<string | null>(
+    null,
+  );
   const detailRef = useRef<HTMLDivElement>(null);
+  const routeRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
     () => new Map(items.map((item) => [item.id, item] as const)),
     [items],
-  );
-  const recipeById = useMemo(
-    () => new Map(recipes.map((recipe) => [recipe.id, recipe] as const)),
-    [recipes],
   );
   const facilityById = useMemo(
     () =>
@@ -435,6 +619,7 @@ export default function MaterialDictionary({
       if (!itemById.has(itemId)) return;
       setSelectedId(itemId);
       setActiveTab("uses");
+      setSelectedEndpointId(null);
 
       const url = new URL(window.location.href);
       url.searchParams.set("view", "dictionary");
@@ -461,7 +646,6 @@ export default function MaterialDictionary({
         }
 
         if (!normalized) return true;
-
         const name = getItemName(item).toLocaleLowerCase(i18n.language);
         return (
           name.includes(normalized) ||
@@ -483,19 +667,64 @@ export default function MaterialDictionary({
   const selectedSubtype = selectedItem
     ? getMaterialSubtype(selectedItem)
     : undefined;
+
   const producers = selectedId ? index.producedBy.get(selectedId) ?? [] : [];
-  const allUses = selectedId ? index.usedBy.get(selectedId) ?? [] : [];
-  const visibleUses = useMemo(
+  const directUses = useMemo(
     () =>
-      hideTerminalPackaging
-        ? allUses.filter(
-            (recipe) =>
-              !recipeEndsOnlyInTerminalPackaging(recipe, itemById, index),
-          )
-        : allUses,
-    [allUses, hideTerminalPackaging, itemById, index],
+      selectedId
+        ? getMeaningfulDirectUses(selectedId, index, itemById)
+        : [],
+    [selectedId, index, itemById],
   );
-  const hiddenPackagingUses = allUses.length - visibleUses.length;
+
+  const endpoints = useMemo(
+    () =>
+      selectedId
+        ? getUsefulEndpoints(selectedId, index, itemById)
+        : [],
+    [selectedId, index, itemById],
+  );
+
+  const selectedEndpoint = selectedEndpointId
+    ? endpoints.find((endpoint) => endpoint.id === selectedEndpointId) ?? null
+    : null;
+
+  const route = useMemo(
+    () =>
+      selectedId && selectedEndpoint
+        ? findShortestMaterialRoute(
+            selectedId,
+            selectedEndpoint.targetItemId,
+            index,
+            itemById,
+          )
+        : null,
+    [selectedId, selectedEndpoint, index, itemById],
+  );
+
+  const selectedSummary = selectedId
+    ? getItemUseSummary(selectedId, index, itemById)
+    : null;
+
+  const productEndpoints = endpoints.filter(
+    (endpoint) => endpoint.kind === "product",
+  );
+  const tradeEndpoints = endpoints.filter(
+    (endpoint) => endpoint.kind === "trade",
+  );
+  const facilityEndpoints = endpoints.filter(
+    (endpoint) => endpoint.kind === "facility",
+  );
+
+  const selectEndpoint = (endpoint: UsefulEndpoint) => {
+    setSelectedEndpointId(endpoint.id);
+    requestAnimationFrame(() => {
+      routeRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    });
+  };
 
   return (
     <section className="grid min-h-0 flex-1 gap-4 md:grid-cols-[minmax(330px,390px)_minmax(0,1fr)]">
@@ -508,9 +737,6 @@ export default function MaterialDictionary({
               onChange={(event) => setQuery(event.target.value)}
               className="h-10 pl-9"
               placeholder={t("dictionary.search", {
-                defaultValue: "Search materials",
-              })}
-              aria-label={t("dictionary.search", {
                 defaultValue: "Search materials",
               })}
             />
@@ -564,20 +790,17 @@ export default function MaterialDictionary({
               );
             })}
           </div>
-
-          <div className="mt-2 text-xs text-muted-foreground">
-            {t("dictionary.resultCount", {
-              count: filteredItems.length,
-              defaultValue: "{{count}} items",
-            })}
-          </div>
         </div>
 
         <div className="max-h-[42vh] overflow-y-auto p-2 md:max-h-none md:flex-1">
           <div className="grid grid-cols-3 gap-1.5">
             {filteredItems.map((item) => {
               const active = item.id === selectedId;
-              const useCount = index.usedBy.get(item.id)?.length ?? 0;
+              const useCount = getMeaningfulDirectUses(
+                item.id,
+                index,
+                itemById,
+              ).length;
               const subtype = getMaterialSubtype(item);
               const Icon = SUBTYPE_ICON[subtype];
 
@@ -587,7 +810,7 @@ export default function MaterialDictionary({
                   type="button"
                   onClick={() => selectItem(item.id)}
                   className={cn(
-                    "relative flex min-h-[112px] flex-col items-center rounded-xl border p-2 text-center transition-colors",
+                    "relative flex min-h-[108px] flex-col items-center rounded-xl border p-2 text-center transition-colors",
                     active
                       ? "border-primary bg-primary/8"
                       : "bg-background hover:bg-accent",
@@ -595,7 +818,7 @@ export default function MaterialDictionary({
                   title={item.id}
                 >
                   <ItemIcon item={item} size="lg" />
-                  <span className="mt-1.5 line-clamp-2 text-xs font-semibold leading-tight">
+                  <span className="mt-1 line-clamp-2 text-xs font-semibold leading-tight">
                     {getItemName(item)}
                   </span>
                   <span className="mt-auto flex items-center gap-1 pt-1 text-[10px] text-muted-foreground">
@@ -603,7 +826,7 @@ export default function MaterialDictionary({
                     {subtypeLabel(t, subtype)}
                   </span>
                   {useCount > 0 && (
-                    <span className="absolute right-1.5 top-1.5 rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                    <span className="absolute right-1.5 top-1.5 rounded-full bg-muted px-1.5 py-0.5 text-[10px]">
                       {useCount}
                     </span>
                   )}
@@ -637,9 +860,19 @@ export default function MaterialDictionary({
                 <ItemIcon item={selectedItem} size="xl" />
 
                 <div className="min-w-0 flex-1">
-                  <h2 className="text-2xl font-bold">
-                    {getItemName(selectedItem)}
-                  </h2>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-2xl font-bold">
+                      {getItemName(selectedItem)}
+                    </h2>
+                    {selectedSummary?.stockCandidate && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">
+                        <Star className="h-3.5 w-3.5" />
+                        {t("dictionary.stockCandidate", {
+                          defaultValue: "Stock candidate",
+                        })}
+                      </span>
+                    )}
+                  </div>
 
                   <div className="mt-1 flex flex-wrap items-center gap-1.5">
                     {selectedCategory &&
@@ -652,97 +885,61 @@ export default function MaterialDictionary({
                           </span>
                         );
                       })()}
-
                     {selectedSubtype && (
                       <span className="rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
                         {subtypeLabel(t, selectedSubtype)}
                       </span>
                     )}
-
                     <span className="rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
                       T{selectedItem.tier}
                     </span>
-                  </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <div className="rounded-xl border px-3 py-2 text-center">
-                    <div className="text-xl font-semibold">
-                      {visibleUses.length}
-                    </div>
-                    <div className="text-[11px] text-muted-foreground">
-                      {t("dictionary.directUses", {
-                        defaultValue: "Direct uses",
-                      })}
-                    </div>
-                  </div>
-                  <div className="rounded-xl border px-3 py-2 text-center">
-                    <div className="text-xl font-semibold">
-                      {producers.length}
-                    </div>
-                    <div className="text-[11px] text-muted-foreground">
-                      {t("dictionary.madeBy", {
-                        defaultValue: "Ways to make",
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-                <Tabs
-                  value={activeTab}
-                  onValueChange={(value) =>
-                    setActiveTab(value as DictionaryTab)
-                  }
-                  className="gap-0"
-                >
-                  <TabsList className="grid h-11 w-full grid-cols-3 md:w-auto">
-                    <TabsTrigger value="uses">
-                      <Workflow className="h-4 w-4" />
-                      {t("dictionary.tabUses", { defaultValue: "Uses" })}
-                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">
-                        {visibleUses.length}
+                    {selectedSummary && (
+                      <span className="rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
+                        {t("dictionary.useSummary", {
+                          recipes: selectedSummary.directRecipeCount,
+                          facilities: selectedSummary.facilityUseCount,
+                          trades: selectedSummary.tradeBaseCount,
+                          defaultValue:
+                            "Production {{recipes}} / Facilities {{facilities}} / Trade {{trades}}",
+                        })}
                       </span>
-                    </TabsTrigger>
-                    <TabsTrigger value="make">
-                      <Wrench className="h-4 w-4" />
-                      {t("dictionary.tabMake", {
-                        defaultValue: "How to make",
-                      })}
-                    </TabsTrigger>
-                    <TabsTrigger value="tree">
-                      <GitBranch className="h-4 w-4" />
-                      {t("dictionary.tabMap", {
-                        defaultValue: "Usage map",
-                      })}
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-
-                <Button
-                  type="button"
-                  size="sm"
-                  variant={hideTerminalPackaging ? "secondary" : "outline"}
-                  onClick={() =>
-                    setHideTerminalPackaging((value) => !value)
-                  }
-                >
-                  {hideTerminalPackaging ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                  {t("dictionary.hideTerminalPackaging", {
-                    defaultValue: "Hide terminal packaging",
-                  })}
-                  {hiddenPackagingUses > 0 && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">
-                      {hiddenPackagingUses}
-                    </span>
-                  )}
-                </Button>
+                    )}
+                  </div>
+                </div>
               </div>
+
+              <Tabs
+                value={activeTab}
+                onValueChange={(value) =>
+                  setActiveTab(value as DictionaryTab)
+                }
+                className="mt-3 gap-0"
+              >
+                <TabsList className="grid h-11 w-full grid-cols-3 md:w-auto">
+                  <TabsTrigger value="uses">
+                    <Workflow className="h-4 w-4" />
+                    {t("dictionary.tabUses", { defaultValue: "Uses" })}
+                    <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">
+                      {directUses.length}
+                    </span>
+                  </TabsTrigger>
+                  <TabsTrigger value="destinations">
+                    <Route className="h-4 w-4" />
+                    {t("dictionary.tabDestinations", {
+                      defaultValue: "Destinations",
+                    })}
+                    <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">
+                      {endpoints.length}
+                    </span>
+                  </TabsTrigger>
+                  <TabsTrigger value="make">
+                    <Wrench className="h-4 w-4" />
+                    {t("dictionary.tabMake", {
+                      defaultValue: "How to make",
+                    })}
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
 
             <Tabs
@@ -752,22 +949,22 @@ export default function MaterialDictionary({
               }
               className="p-4 md:p-5"
             >
-              <TabsContent value="uses" className="mt-0">
-                <div className="mb-3">
+              <TabsContent value="uses" className="mt-0 space-y-4">
+                <div>
                   <h3 className="text-lg font-semibold">
                     {t("dictionary.usedFor", { defaultValue: "Direct uses" })}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {t("dictionary.usedForVisualHint", {
+                    {t("dictionary.directUseHint", {
                       defaultValue:
-                        "Each row shows what this material must be combined with and what it produces.",
+                        "Logistics-only fill/dismantle cycles are omitted.",
                     })}
                   </p>
                 </div>
 
-                {visibleUses.length > 0 ? (
-                  <div className="grid gap-3 2xl:grid-cols-2">
-                    {visibleUses.map((recipe) => (
+                {directUses.length > 0 ? (
+                  <div className="grid gap-2 2xl:grid-cols-2">
+                    {directUses.map((recipe) => (
                       <DirectUseCard
                         key={recipe.id}
                         recipe={recipe}
@@ -780,16 +977,154 @@ export default function MaterialDictionary({
                   </div>
                 ) : (
                   <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                    {hiddenPackagingUses > 0 && hideTerminalPackaging
-                      ? t("dictionary.onlyTerminalPackaging", {
-                          count: hiddenPackagingUses,
-                          defaultValue:
-                            "Only terminal packaging uses are hidden. Turn the filter off to show them.",
-                        })
-                      : t("dictionary.noUse", {
-                          defaultValue: "No recipe consumes this item.",
-                        })}
+                    {t("dictionary.noUse", {
+                      defaultValue: "No recipe consumes this item.",
+                    })}
                   </p>
+                )}
+
+                <ExternalDirectUses itemId={selectedItem.id} />
+              </TabsContent>
+
+              <TabsContent value="destinations" className="mt-0 space-y-5">
+                <div>
+                  <h3 className="text-lg font-semibold">
+                    {t("dictionary.useDestinations", {
+                      defaultValue: "Reachable useful destinations",
+                    })}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {t("dictionary.destinationHint", {
+                      defaultValue:
+                        "Choose one endpoint to show only the shortest production route to it.",
+                    })}
+                  </p>
+                </div>
+
+                {productEndpoints.length > 0 && (
+                  <section>
+                    <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold">
+                      <Package className="h-4 w-4" />
+                      {t("dictionary.products", { defaultValue: "Products" })}
+                    </h4>
+                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                      {productEndpoints.map((endpoint) => (
+                        <EndpointCard
+                          key={endpoint.id}
+                          endpoint={endpoint}
+                          itemById={itemById}
+                          selected={selectedEndpointId === endpoint.id}
+                          onSelect={() => selectEndpoint(endpoint)}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {tradeEndpoints.length > 0 && (
+                  <section>
+                    <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold">
+                      <Store className="h-4 w-4" />
+                      {t("dictionary.tradeDestinations", {
+                        defaultValue: "Regional trade",
+                      })}
+                    </h4>
+                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                      {tradeEndpoints.map((endpoint) => (
+                        <EndpointCard
+                          key={endpoint.id}
+                          endpoint={endpoint}
+                          itemById={itemById}
+                          selected={selectedEndpointId === endpoint.id}
+                          onSelect={() => selectEndpoint(endpoint)}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {facilityEndpoints.length > 0 && (
+                  <section>
+                    <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold">
+                      <Factory className="h-4 w-4" />
+                      {t("dictionary.facilityDestinations", {
+                        defaultValue: "Facility construction",
+                      })}
+                    </h4>
+                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                      {facilityEndpoints.map((endpoint) => (
+                        <EndpointCard
+                          key={endpoint.id}
+                          endpoint={endpoint}
+                          itemById={itemById}
+                          selected={selectedEndpointId === endpoint.id}
+                          onSelect={() => selectEndpoint(endpoint)}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {endpoints.length === 0 && (
+                  <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+                    {t("dictionary.noUsefulDestination", {
+                      defaultValue: "No useful destination is registered.",
+                    })}
+                  </p>
+                )}
+
+                {selectedEndpoint && route && (
+                  <section
+                    ref={routeRef}
+                    className="rounded-2xl border bg-muted/20 p-3"
+                  >
+                    <div className="mb-3 flex items-center gap-2">
+                      <Route className="h-4 w-4" />
+                      <h4 className="text-sm font-semibold">
+                        {t("dictionary.selectedRoute", {
+                          defaultValue: "Selected route",
+                        })}
+                      </h4>
+                      <span className="text-xs text-muted-foreground">
+                        {route.length}{" "}
+                        {t("dictionary.steps", { defaultValue: "steps" })}
+                      </span>
+                    </div>
+
+                    <div className="overflow-x-auto pb-2">
+                      <div className="flex min-w-max items-center gap-2">
+                        <RouteMaterial
+                          itemId={selectedItem.id}
+                          itemById={itemById}
+                          onSelectItem={selectItem}
+                          emphasis
+                        />
+
+                        {route.map((step, index) => (
+                          <div
+                            key={`${step.recipe.id}-${index}`}
+                            className="flex shrink-0 items-center gap-2"
+                          >
+                            <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                            <RouteRecipe
+                              step={step}
+                              itemById={itemById}
+                              onSelectItem={selectItem}
+                            />
+                            <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                            <RouteMaterial
+                              itemId={step.toItemId}
+                              itemById={itemById}
+                              onSelectItem={selectItem}
+                            />
+                          </div>
+                        ))}
+
+                        <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                        <RouteEndpointDetail endpoint={selectedEndpoint} />
+                      </div>
+                    </div>
+                  </section>
                 )}
               </TabsContent>
 
@@ -803,7 +1138,7 @@ export default function MaterialDictionary({
                 </div>
 
                 {producers.length > 0 ? (
-                  <div className="grid gap-3 xl:grid-cols-2">
+                  <div className="grid gap-2 xl:grid-cols-2">
                     {producers.map((recipe) => (
                       <RecipeCard
                         key={recipe.id}
@@ -822,31 +1157,6 @@ export default function MaterialDictionary({
                     })}
                   </p>
                 )}
-              </TabsContent>
-
-              <TabsContent value="tree" className="mt-0">
-                <div className="mb-3">
-                  <h3 className="text-lg font-semibold">
-                    {t("dictionary.usageMap", {
-                      defaultValue: "Usage map",
-                    })}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t("dictionary.usageMapHint", {
-                      defaultValue:
-                        "Materials are de-duplicated. Pan and zoom to follow the downstream graph; recipe cards show required co-inputs.",
-                    })}
-                  </p>
-                </div>
-
-                <MaterialUsageGraph
-                  rootItemId={selectedItem.id}
-                  index={index}
-                  itemById={itemById}
-                  recipeById={recipeById}
-                  hideTerminalPackaging={hideTerminalPackaging}
-                  onSelectItem={selectItem}
-                />
               </TabsContent>
             </Tabs>
           </div>
