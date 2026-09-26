@@ -169,6 +169,8 @@
     "noUsefulDestination": "登録された有用な用途先はありません。",
     "selectedRoute": "選択した用途までのルート",
     "steps": "工程",
-    "backToMaterials": "素材一覧に戻る"
+    "backToMaterials": "素材一覧に戻る",
+    "itemDescription": "説明",
+    "itemEffect": "効果"
   }
 }
