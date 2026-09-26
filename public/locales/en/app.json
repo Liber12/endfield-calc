@@ -71,5 +71,34 @@
   "collapsePanel": "Collapse panel",
   "gasEnvUnavailable": "Gas environment: {{item}} cannot be supplied, so no Gas Dispersing Unit was planned. Gas consumption is understated.",
   "machinesPerVaporizer": "Machines per Gas Dispersing Unit",
-  "machinesPerVaporizerHint": "How many machines that need a gaseous environment one Gas Dispersing Unit's aura covers (13×13 area, buildings must fit fully inside). The plan adds one always-on unit (6 gas/min) per group."
+  "machinesPerVaporizerHint": "How many machines that need a gaseous environment one Gas Dispersing Unit's aura covers (13×13 area, buildings must fit fully inside). The plan adds one always-on unit (6 gas/min) per group.",
+  "appMode": {
+    "label": "Tool mode",
+    "calculator": "Calculator",
+    "dictionary": "Material dictionary"
+  },
+  "dictionary": {
+    "search": "Search materials",
+    "resultCount": "{{count}} items",
+    "selectPrompt": "Select a material to see how it is made and where it is used.",
+    "directSafe": "Direct usage lookup does not recursively traverse recipes.",
+    "madeBy": "Ways to make",
+    "directUses": "Direct uses",
+    "howToMake": "How to make",
+    "noProducer": "No production recipe is registered for this item.",
+    "usedFor": "Direct uses",
+    "usedForHint": "Every recipe that consumes this item. This list is non-recursive and cannot loop.",
+    "recipeCount": "{{count}} recipes",
+    "noUse": "No recipe consumes this item.",
+    "downstream": "Downstream usage tree",
+    "downstreamHint": "Recursive expansion stops at cycles and has depth/node limits as a second safeguard.",
+    "noDownstream": "No downstream uses found.",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "cycle": "Cycle",
+    "limit": "Expansion limit",
+    "liquid": "Liquid",
+    "gas": "Gas",
+    "internal": "Intermediate/internal"
+  }
 }
