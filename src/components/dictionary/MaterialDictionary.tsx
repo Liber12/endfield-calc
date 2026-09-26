@@ -1,19 +1,21 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import type { ComponentType } from "react";
 import { useTranslation } from "react-i18next";
-import type { TFunction } from "i18next";
 import {
   ArrowRight,
   BatteryCharging,
   Box,
   Boxes,
-  ChevronRight,
-  ChevronsDown,
-  ChevronsUp,
-  CircleAlert,
   CircleDot,
   Cloud,
   Droplets,
+  Eye,
+  EyeOff,
   Gem,
   GitBranch,
   HeartPulse,
@@ -23,7 +25,6 @@ import {
   Puzzle,
   Search,
   Sparkles,
-  Undo2,
   Wind,
   Wrench,
   Workflow,
@@ -45,9 +46,7 @@ import {
 } from "@/lib/i18n-helpers";
 import {
   buildRecipeIndex,
-  buildUsageTree,
-  type RecipeIndex,
-  type UsageTreeNode,
+  recipeEndsOnlyInTerminalPackaging,
 } from "@/lib/material-dictionary";
 import {
   getMaterialCategory,
@@ -56,7 +55,8 @@ import {
   type MaterialCategoryId,
   type MaterialSubtypeId,
 } from "@/lib/item-category";
-import type { Facility, Item, ItemId, Recipe, RecipeId } from "@/types";
+import MaterialUsageGraph from "@/components/dictionary/MaterialUsageGraph";
+import type { Facility, Item, ItemId, Recipe } from "@/types";
 
 type MaterialDictionaryProps = {
   items: readonly Item[];
@@ -109,14 +109,14 @@ const SUBTYPE_ICON: Record<
 };
 
 function categoryLabel(
-  t: TFunction<"app">,
+  t: ReturnType<typeof useTranslation<"app">>["t"],
   category: MaterialCategoryId,
 ): string {
   return t(`dictionary.category.${category}`, { defaultValue: category });
 }
 
 function subtypeLabel(
-  t: TFunction<"app">,
+  t: ReturnType<typeof useTranslation<"app">>["t"],
   subtype: MaterialSubtypeId,
 ): string {
   return t(`dictionary.subtype.${subtype}`, { defaultValue: subtype });
@@ -174,7 +174,7 @@ function MaterialNode({
       onClick={() => onSelect(itemId)}
       title={itemId}
       className={cn(
-        "group flex w-[104px] shrink-0 flex-col items-center rounded-xl border bg-background p-2.5 text-center transition-colors hover:bg-accent",
+        "group flex w-[112px] shrink-0 flex-col items-center rounded-xl border bg-background p-2.5 text-center transition-colors hover:bg-accent",
         emphasis && "border-primary/60 bg-primary/5",
       )}
     >
@@ -383,196 +383,6 @@ function RecipeCard({
   );
 }
 
-function UsageTreeRow({
-  node,
-  itemById,
-  recipeById,
-  depth,
-  expandDepth,
-  onSelectItem,
-  t,
-}: {
-  node: UsageTreeNode;
-  itemById: ReadonlyMap<ItemId, Item>;
-  recipeById: ReadonlyMap<RecipeId, Recipe>;
-  depth: number;
-  expandDepth: number;
-  onSelectItem: (itemId: ItemId) => void;
-  t: TFunction<"app">;
-}) {
-  const [open, setOpen] = useState(depth < expandDepth);
-  const item = itemById.get(node.itemId);
-  const recipe = node.viaRecipeId ? recipeById.get(node.viaRecipeId) : undefined;
-  const canExpand =
-    !node.cycle &&
-    !node.depthLimited &&
-    !node.nodeLimited &&
-    node.children.length > 0;
-
-  useEffect(() => {
-    setOpen(depth < expandDepth);
-  }, [depth, expandDepth]);
-
-  return (
-    <div className={cn(depth > 0 && "ml-4 border-l pl-3")}>
-      <div className="flex min-w-0 items-center gap-2 py-1.5">
-        {canExpand ? (
-          <button
-            type="button"
-            onClick={() => setOpen((value) => !value)}
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded hover:bg-muted"
-            aria-label={
-              open
-                ? t("dictionary.collapse", { defaultValue: "Collapse" })
-                : t("dictionary.expand", { defaultValue: "Expand" })
-            }
-          >
-            <ChevronRight
-              className={cn(
-                "h-4 w-4 transition-transform",
-                open && "rotate-90",
-              )}
-            />
-          </button>
-        ) : (
-          <span className="h-7 w-7 shrink-0" />
-        )}
-
-        <button
-          type="button"
-          onClick={() => onSelectItem(node.itemId)}
-          className="flex min-w-0 items-center gap-2 rounded-lg px-1 py-1 text-left hover:bg-muted"
-          title={node.itemId}
-        >
-          <ItemIcon item={item} size="sm" />
-          <span className="min-w-0 text-sm">
-            {recipe && (
-              <span className="text-muted-foreground">
-                {getRecipeName(recipe)} →{" "}
-              </span>
-            )}
-            <span className="font-medium">
-              {item ? getItemName(item) : node.itemId}
-            </span>
-          </span>
-        </button>
-
-        {node.cycle && (
-          <span className="inline-flex shrink-0 items-center gap-1 rounded bg-amber-500/10 px-1.5 py-0.5 text-[11px] text-amber-700 dark:text-amber-300">
-            <Undo2 className="h-3 w-3" />
-            {t("dictionary.cycle", { defaultValue: "Cycle" })}
-          </span>
-        )}
-
-        {(node.depthLimited || node.nodeLimited) && (
-          <span className="inline-flex shrink-0 items-center gap-1 rounded bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground">
-            <CircleAlert className="h-3 w-3" />
-            {t("dictionary.limit", { defaultValue: "Expansion limit" })}
-          </span>
-        )}
-      </div>
-
-      {open &&
-        node.children.map((child, index) => (
-          <UsageTreeRow
-            key={`${child.viaRecipeId ?? "root"}:${child.itemId}:${index}`}
-            node={child}
-            itemById={itemById}
-            recipeById={recipeById}
-            depth={depth + 1}
-            expandDepth={expandDepth}
-            onSelectItem={onSelectItem}
-            t={t}
-          />
-        ))}
-    </div>
-  );
-}
-
-function UsageTree({
-  rootItemId,
-  index,
-  itemById,
-  recipeById,
-  onSelectItem,
-}: {
-  rootItemId: ItemId;
-  index: RecipeIndex;
-  itemById: ReadonlyMap<ItemId, Item>;
-  recipeById: ReadonlyMap<RecipeId, Recipe>;
-  onSelectItem: (itemId: ItemId) => void;
-}) {
-  const { t } = useTranslation("app");
-  const [expandDepth, setExpandDepth] = useState(2);
-  const tree = useMemo(
-    () => buildUsageTree(rootItemId, index, { maxDepth: 8, maxNodes: 600 }),
-    [rootItemId, index],
-  );
-
-  useEffect(() => {
-    setExpandDepth(2);
-  }, [rootItemId]);
-
-  if (tree.children.length === 0) {
-    return (
-      <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-        {t("dictionary.noDownstream", {
-          defaultValue: "No downstream uses found.",
-        })}
-      </p>
-    );
-  }
-
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <Button
-          type="button"
-          size="sm"
-          variant={expandDepth === 2 ? "secondary" : "outline"}
-          onClick={() => setExpandDepth(2)}
-        >
-          <ChevronsDown className="h-4 w-4" />
-          {t("dictionary.expandTwo", { defaultValue: "Open 2 levels" })}
-        </Button>
-        <Button
-          type="button"
-          size="sm"
-          variant={expandDepth >= 8 ? "secondary" : "outline"}
-          onClick={() => setExpandDepth(8)}
-        >
-          <ChevronsDown className="h-4 w-4" />
-          {t("dictionary.expandAll", { defaultValue: "Open all" })}
-        </Button>
-        <Button
-          type="button"
-          size="sm"
-          variant={expandDepth === 0 ? "secondary" : "outline"}
-          onClick={() => setExpandDepth(0)}
-        >
-          <ChevronsUp className="h-4 w-4" />
-          {t("dictionary.collapseAll", { defaultValue: "Collapse all" })}
-        </Button>
-      </div>
-
-      <div className="rounded-xl border bg-card px-2 py-1">
-        {tree.children.map((child, indexInTree) => (
-          <UsageTreeRow
-            key={`${child.viaRecipeId ?? "root"}:${child.itemId}:${indexInTree}`}
-            node={child}
-            itemById={itemById}
-            recipeById={recipeById}
-            depth={0}
-            expandDepth={expandDepth}
-            onSelectItem={onSelectItem}
-            t={t}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function MaterialDictionary({
   items,
   recipes,
@@ -583,6 +393,7 @@ export default function MaterialDictionary({
   const [categoryFilter, setCategoryFilter] =
     useState<CategoryFilter>("all");
   const [activeTab, setActiveTab] = useState<DictionaryTab>("uses");
+  const [hideTerminalPackaging, setHideTerminalPackaging] = useState(true);
   const detailRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
@@ -618,22 +429,23 @@ export default function MaterialDictionary({
       : null;
   });
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("view", "dictionary");
-    if (selectedId) url.searchParams.set("item", selectedId);
-    else url.searchParams.delete("item");
-    window.history.replaceState(null, "", url.toString());
-  }, [selectedId]);
+  const selectItem = useCallback(
+    (itemId: ItemId) => {
+      if (!itemById.has(itemId)) return;
+      setSelectedId(itemId);
+      setActiveTab("uses");
 
-  const selectItem = (itemId: ItemId) => {
-    if (!itemById.has(itemId)) return;
-    setSelectedId(itemId);
-    setActiveTab("uses");
-    requestAnimationFrame(() => {
-      detailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  };
+      const url = new URL(window.location.href);
+      url.searchParams.set("view", "dictionary");
+      url.searchParams.set("item", itemId);
+      window.history.replaceState(null, "", url.toString());
+
+      requestAnimationFrame(() => {
+        detailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    },
+    [itemById],
+  );
 
   const filteredItems = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase(i18n.language);
@@ -671,7 +483,18 @@ export default function MaterialDictionary({
     ? getMaterialSubtype(selectedItem)
     : undefined;
   const producers = selectedId ? index.producedBy.get(selectedId) ?? [] : [];
-  const uses = selectedId ? index.usedBy.get(selectedId) ?? [] : [];
+  const allUses = selectedId ? index.usedBy.get(selectedId) ?? [] : [];
+  const visibleUses = useMemo(
+    () =>
+      hideTerminalPackaging
+        ? allUses.filter(
+            (recipe) =>
+              !recipeEndsOnlyInTerminalPackaging(recipe, itemById, index),
+          )
+        : allUses,
+    [allUses, hideTerminalPackaging, itemById, index],
+  );
+  const hiddenPackagingUses = allUses.length - visibleUses.length;
 
   return (
     <section className="grid min-h-0 flex-1 gap-4 md:grid-cols-[minmax(330px,390px)_minmax(0,1fr)]">
@@ -779,12 +602,7 @@ export default function MaterialDictionary({
                     {subtypeLabel(t, subtype)}
                   </span>
                   {useCount > 0 && (
-                    <span
-                      className="absolute right-1.5 top-1.5 rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground"
-                      title={t("dictionary.directUses", {
-                        defaultValue: "Direct uses",
-                      })}
-                    >
+                    <span className="absolute right-1.5 top-1.5 rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
                       {useCount}
                     </span>
                   )}
@@ -823,15 +641,16 @@ export default function MaterialDictionary({
                   </h2>
 
                   <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                    {selectedCategory && (() => {
-                      const Icon = CATEGORY_ICON[selectedCategory];
-                      return (
-                        <span className="inline-flex items-center gap-1 rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
-                          <Icon className="h-3.5 w-3.5" />
-                          {categoryLabel(t, selectedCategory)}
-                        </span>
-                      );
-                    })()}
+                    {selectedCategory &&
+                      (() => {
+                        const Icon = CATEGORY_ICON[selectedCategory];
+                        return (
+                          <span className="inline-flex items-center gap-1 rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
+                            <Icon className="h-3.5 w-3.5" />
+                            {categoryLabel(t, selectedCategory)}
+                          </span>
+                        );
+                      })()}
 
                     {selectedSubtype && (
                       <span className="rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground">
@@ -847,7 +666,9 @@ export default function MaterialDictionary({
 
                 <div className="flex gap-2">
                   <div className="rounded-xl border px-3 py-2 text-center">
-                    <div className="text-xl font-semibold">{uses.length}</div>
+                    <div className="text-xl font-semibold">
+                      {visibleUses.length}
+                    </div>
                     <div className="text-[11px] text-muted-foreground">
                       {t("dictionary.directUses", {
                         defaultValue: "Direct uses",
@@ -867,35 +688,60 @@ export default function MaterialDictionary({
                 </div>
               </div>
 
-              <Tabs
-                value={activeTab}
-                onValueChange={(value) =>
-                  setActiveTab(value as DictionaryTab)
-                }
-                className="mt-3 gap-0"
-              >
-                <TabsList className="grid h-11 w-full grid-cols-3 md:w-auto">
-                  <TabsTrigger value="uses">
-                    <Workflow className="h-4 w-4" />
-                    {t("dictionary.tabUses", { defaultValue: "Uses" })}
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                <Tabs
+                  value={activeTab}
+                  onValueChange={(value) =>
+                    setActiveTab(value as DictionaryTab)
+                  }
+                  className="gap-0"
+                >
+                  <TabsList className="grid h-11 w-full grid-cols-3 md:w-auto">
+                    <TabsTrigger value="uses">
+                      <Workflow className="h-4 w-4" />
+                      {t("dictionary.tabUses", { defaultValue: "Uses" })}
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">
+                        {visibleUses.length}
+                      </span>
+                    </TabsTrigger>
+                    <TabsTrigger value="make">
+                      <Wrench className="h-4 w-4" />
+                      {t("dictionary.tabMake", {
+                        defaultValue: "How to make",
+                      })}
+                    </TabsTrigger>
+                    <TabsTrigger value="tree">
+                      <GitBranch className="h-4 w-4" />
+                      {t("dictionary.tabMap", {
+                        defaultValue: "Usage map",
+                      })}
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={hideTerminalPackaging ? "secondary" : "outline"}
+                  onClick={() =>
+                    setHideTerminalPackaging((value) => !value)
+                  }
+                >
+                  {hideTerminalPackaging ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                  {t("dictionary.hideTerminalPackaging", {
+                    defaultValue: "Hide terminal packaging",
+                  })}
+                  {hiddenPackagingUses > 0 && (
                     <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">
-                      {uses.length}
+                      {hiddenPackagingUses}
                     </span>
-                  </TabsTrigger>
-                  <TabsTrigger value="make">
-                    <Wrench className="h-4 w-4" />
-                    {t("dictionary.tabMake", {
-                      defaultValue: "How to make",
-                    })}
-                  </TabsTrigger>
-                  <TabsTrigger value="tree">
-                    <GitBranch className="h-4 w-4" />
-                    {t("dictionary.tabTree", {
-                      defaultValue: "Usage tree",
-                    })}
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
+                  )}
+                </Button>
+              </div>
             </div>
 
             <Tabs
@@ -918,9 +764,9 @@ export default function MaterialDictionary({
                   </p>
                 </div>
 
-                {uses.length > 0 ? (
+                {visibleUses.length > 0 ? (
                   <div className="grid gap-3 2xl:grid-cols-2">
-                    {uses.map((recipe) => (
+                    {visibleUses.map((recipe) => (
                       <DirectUseCard
                         key={recipe.id}
                         recipe={recipe}
@@ -933,9 +779,15 @@ export default function MaterialDictionary({
                   </div>
                 ) : (
                   <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                    {t("dictionary.noUse", {
-                      defaultValue: "No recipe consumes this item.",
-                    })}
+                    {hiddenPackagingUses > 0 && hideTerminalPackaging
+                      ? t("dictionary.onlyTerminalPackaging", {
+                          count: hiddenPackagingUses,
+                          defaultValue:
+                            "Only terminal packaging uses are hidden. Turn the filter off to show them.",
+                        })
+                      : t("dictionary.noUse", {
+                          defaultValue: "No recipe consumes this item.",
+                        })}
                   </p>
                 )}
               </TabsContent>
@@ -974,23 +826,24 @@ export default function MaterialDictionary({
               <TabsContent value="tree" className="mt-0">
                 <div className="mb-3">
                   <h3 className="text-lg font-semibold">
-                    {t("dictionary.downstream", {
-                      defaultValue: "Downstream usage tree",
+                    {t("dictionary.usageMap", {
+                      defaultValue: "Usage map",
                     })}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {t("dictionary.downstreamHint", {
+                    {t("dictionary.usageMapHint", {
                       defaultValue:
-                        "Recursive expansion stops at cycles and has depth/node limits as a second safeguard.",
+                        "Materials are de-duplicated. Pan and zoom to follow the downstream graph; recipe cards show required co-inputs.",
                     })}
                   </p>
                 </div>
 
-                <UsageTree
+                <MaterialUsageGraph
                   rootItemId={selectedItem.id}
                   index={index}
                   itemById={itemById}
                   recipeById={recipeById}
+                  hideTerminalPackaging={hideTerminalPackaging}
                   onSelectItem={selectItem}
                 />
               </TabsContent>
