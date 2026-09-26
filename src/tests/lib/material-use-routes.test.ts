@@ -122,6 +122,43 @@ describe("meaningful material uses", () => {
     ]);
   });
 
+  test("only exposes terminal event products, not event intermediates", () => {
+    const root = makeItem("item_originium_ore");
+    const intermediate = makeItem("item_activity_xiranite_cmpt");
+    const final = makeItem("item_activity_xiranite_hulu");
+    const itemById = new Map(
+      [root, intermediate, final].map((item) => [item.id, item] as const),
+    );
+
+    const index = buildRecipeIndex([
+      makeRecipe(
+        "event_mid",
+        ["item_originium_ore"],
+        ["item_activity_xiranite_cmpt"],
+      ),
+      makeRecipe(
+        "event_final",
+        ["item_activity_xiranite_cmpt"],
+        ["item_activity_xiranite_hulu"],
+      ),
+    ]);
+
+    const endpoints = getUsefulEndpoints(root.id, index, itemById);
+
+    expect(
+      endpoints.some(
+        (endpoint) => endpoint.targetItemId === intermediate.id,
+      ),
+    ).toBe(false);
+    expect(
+      endpoints.some(
+        (endpoint) =>
+          endpoint.kind === "product" &&
+          endpoint.targetItemId === final.id,
+      ),
+    ).toBe(true);
+  });
+
   test("exposes reachable Wikiru-backed trade and facility destinations", () => {
     const root = makeItem("item_originium_ore");
     const target = makeItem("item_crystal_shell");
