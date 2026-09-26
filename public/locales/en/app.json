@@ -138,6 +138,15 @@
       "bomb": "Bomb",
       "event": "Event",
       "other": "Other"
-    }
+    },
+    "tabMap": "Usage map",
+    "hideTerminalPackaging": "Hide terminal packaging",
+    "onlyTerminalPackaging": "Only terminal packaging uses are hidden. Turn the filter off to show them.",
+    "usageMap": "Usage map",
+    "usageMapHint": "Materials are de-duplicated. Pan and zoom to follow the downstream graph; recipe cards show required co-inputs.",
+    "graphSummary": "{{items}} materials / {{recipes}} recipes",
+    "hiddenPackagingCount": "{{count}} terminal packaging uses hidden",
+    "graphLimited": "Large graph: expansion limit applied",
+    "layouting": "Arranging usage map…"
   }
 }
