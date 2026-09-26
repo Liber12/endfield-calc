@@ -107,6 +107,37 @@
     "tabTree": "Usage tree",
     "expandTwo": "Open 2 levels",
     "expandAll": "Open all",
-    "collapseAll": "Collapse all"
+    "collapseAll": "Collapse all",
+    "usedForVisualHint": "Each row shows what this material must be combined with and what it produces.",
+    "combineHint": "Selected material + required inputs → output",
+    "inputs": "Inputs",
+    "category": {
+      "all": "All",
+      "natural": "Natural resources",
+      "gathered": "Gathered materials",
+      "industrial": "AIC products",
+      "consumable": "Usable items",
+      "event": "Event items",
+      "other": "Other"
+    },
+    "subtype": {
+      "ore": "Raw resource",
+      "plant": "Plant",
+      "seed": "Seed",
+      "powder": "Powder",
+      "refined": "Refined",
+      "liquid": "Liquid",
+      "gas": "Gas",
+      "container": "Container",
+      "filled": "Filled product",
+      "component": "Component",
+      "battery": "Battery",
+      "equipment": "Equipment material",
+      "medicine": "Medicine",
+      "food": "Food",
+      "bomb": "Bomb",
+      "event": "Event",
+      "other": "Other"
+    }
   }
 }
