@@ -71,5 +71,34 @@
   "collapsePanel": "パネルを折りたたむ",
   "gasEnvUnavailable": "ガス環境：現在の設定では{{item}}を供給できないため、ガス散布機は計画されていません。ガス消費量が過小評価されています。",
   "machinesPerVaporizer": "ガス散布機1台あたりの設備数",
-  "machinesPerVaporizerHint": "ガス環境を必要とする設備を、ガス散布機1台の範囲（13×13、設備全体が範囲内に収まる必要あり）でいくつカバーするかを設定します。プランはグループごとに常時稼働の散布機（1台あたり毎分ガス6消費）を追加します。"
+  "machinesPerVaporizerHint": "ガス環境を必要とする設備を、ガス散布機1台の範囲（13×13、設備全体が範囲内に収まる必要あり）でいくつカバーするかを設定します。プランはグループごとに常時稼働の散布機（1台あたり毎分ガス6消費）を追加します。",
+  "appMode": {
+    "label": "ツール切替",
+    "calculator": "生産計算",
+    "dictionary": "素材辞書"
+  },
+  "dictionary": {
+    "search": "素材を検索",
+    "resultCount": "{{count}}件",
+    "selectPrompt": "素材を選ぶと、作り方と使い道を確認できます。",
+    "directSafe": "直接用途の検索ではレシピを再帰展開しません。",
+    "madeBy": "作り方",
+    "directUses": "直接用途",
+    "howToMake": "作り方",
+    "noProducer": "この素材を生産するレシピは登録されていません。",
+    "usedFor": "使い道（直接）",
+    "usedForHint": "この素材を入力として消費する全レシピです。再帰しないためループしません。",
+    "recipeCount": "{{count}}レシピ",
+    "noUse": "この素材を消費するレシピはありません。",
+    "downstream": "その先の用途ツリー",
+    "downstreamHint": "再帰展開は循環した時点で停止し、深さ・ノード数にも安全上限があります。",
+    "noDownstream": "これより先の用途はありません。",
+    "expand": "展開",
+    "collapse": "折りたたむ",
+    "cycle": "循環",
+    "limit": "展開上限",
+    "liquid": "液体",
+    "gas": "気体",
+    "internal": "中間・内部素材"
+  }
 }
