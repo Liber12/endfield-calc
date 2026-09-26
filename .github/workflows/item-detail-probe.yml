@@ -79,8 +79,7 @@ jobs:
                   if not primary:
                       continue
 
-                  ids = name_to_ids.get(name, [])
-                  for item_id in ids:
+                  for item_id in name_to_ids.get(name, []):
                       if (
                           page != "テーブル/中身入り各種ボトル"
                           and (item_id.startswith("item_fbottle_") or item_id.startswith("item_gasjar_"))
@@ -92,25 +91,25 @@ jobs:
                           "sourcePage": page,
                       }
 
-          out = """import type { ItemId } from "@/types";
-
-export type MaterialItemDetail = {
-  kind: "description" | "effect";
-  text: string;
-  sourcePage: string;
-};
-
-/**
- * Compact functional item text extracted from Wikiru item tables.
- * Flavor/lore columns are intentionally not copied.
- * Last generated: 2026-09-27.
- */
-export const materialItemDetails: Readonly<Record<string, MaterialItemDetail>> = %s;
-
-export function getMaterialItemDetail(itemId: ItemId): MaterialItemDetail | undefined {
-  return materialItemDetails[itemId];
-}
-""" % json.dumps(details, ensure_ascii=False, indent=2)
+          serialized = json.dumps(details, ensure_ascii=False, indent=2)
+          out = (
+              'import type { ItemId } from "@/types";\n\n'
+              'export type MaterialItemDetail = {\n'
+              '  kind: "description" | "effect";\n'
+              '  text: string;\n'
+              '  sourcePage: string;\n'
+              '};\n\n'
+              '/** Compact functional item text extracted from Wikiru item tables.\n'
+              ' * Flavor/lore columns are intentionally not copied.\n'
+              ' * Last generated: 2026-09-27.\n'
+              ' */\n'
+              'export const materialItemDetails: Readonly<Record<string, MaterialItemDetail>> = '
+              + serialized
+              + ';\n\n'
+              'export function getMaterialItemDetail(itemId: ItemId): MaterialItemDetail | undefined {\n'
+              '  return materialItemDetails[itemId];\n'
+              '}\n'
+          )
 
           Path("src/data/material-item-details.ts").write_text(out, encoding="utf-8")
           print("generated", len(details), "entries")
