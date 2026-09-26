@@ -8,6 +8,8 @@ import type { ComponentType } from "react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import {
+  ArrowDown,
+  ArrowLeft,
   ArrowRight,
   BatteryCharging,
   Box,
@@ -137,12 +139,12 @@ function ItemIcon({
 }) {
   const sizeClass =
     size === "sm"
-      ? "h-7 w-7"
+      ? "h-9 w-9 md:h-7 md:w-7"
       : size === "lg"
-        ? "h-12 w-12"
+        ? "h-14 w-14 md:h-12 md:w-12"
         : size === "xl"
-          ? "h-16 w-16"
-          : "h-10 w-10";
+          ? "h-16 w-16 md:h-16 md:w-16"
+          : "h-12 w-12 md:h-10 md:w-10";
 
   return item?.iconUrl ? (
     <img
@@ -164,11 +166,13 @@ function MiniMaterialChip({
   amount,
   itemById,
   onSelect,
+  prominent = false,
 }: {
   itemId: ItemId;
   amount?: number;
   itemById: ReadonlyMap<ItemId, Item>;
   onSelect: (itemId: ItemId) => void;
+  prominent?: boolean;
 }) {
   const item = itemById.get(itemId);
 
@@ -176,15 +180,20 @@ function MiniMaterialChip({
     <button
       type="button"
       onClick={() => onSelect(itemId)}
-      className="inline-flex items-center gap-1.5 rounded-lg border bg-background px-2 py-1.5 text-left transition-colors hover:bg-accent"
+      className={cn(
+        "inline-flex items-center gap-2 rounded-lg border bg-background text-left transition-colors hover:bg-accent",
+        prominent
+          ? "min-h-14 w-full px-3 py-2.5 md:min-h-0 md:w-auto md:px-2 md:py-1.5"
+          : "min-h-11 px-2.5 py-1.5 md:min-h-0 md:px-2 md:py-1.5",
+      )}
       title={itemId}
     >
       <ItemIcon item={item} size="sm" />
-      <span className="text-xs font-medium">
+      <span className="text-sm font-medium md:text-xs">
         {item ? getItemName(item) : itemId}
       </span>
       {amount !== undefined && (
-        <span className="text-[11px] text-muted-foreground">
+        <span className="text-xs text-muted-foreground md:text-[11px]">
           ×{formatAmount(amount)}
         </span>
       )}
@@ -211,19 +220,19 @@ function DirectUseCard({
   );
 
   return (
-    <article className="rounded-xl border bg-card p-3">
-      <div className="flex flex-wrap items-center gap-2">
+    <article className="rounded-xl border bg-card p-4 md:p-3">
+      <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center md:gap-2">
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-semibold">
+          <div className="text-base font-semibold md:truncate md:text-sm">
             {getRecipeName(recipe)}
           </div>
-          <div className="truncate text-[11px] text-muted-foreground">
+          <div className="mt-0.5 text-xs text-muted-foreground md:truncate md:text-[11px]">
             {facility ? getFacilityName(facility) : recipe.facilityId} ·{" "}
             {recipe.craftingTime}s
           </div>
         </div>
-        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
-        <div className="flex flex-wrap gap-1">
+        <ArrowRight className="hidden h-4 w-4 shrink-0 text-muted-foreground md:block" />
+        <div className="grid w-full gap-2 md:flex md:w-auto md:flex-wrap md:gap-1">
           {recipe.outputs.map((entry, index) => (
             <MiniMaterialChip
               key={`${entry.itemId}-${index}`}
@@ -231,14 +240,17 @@ function DirectUseCard({
               amount={entry.amount}
               itemById={itemById}
               onSelect={onSelectItem}
+              prominent
             />
           ))}
         </div>
       </div>
 
       {coInputs.length > 0 && (
-        <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t pt-2">
-          <span className="text-[11px] text-muted-foreground">＋</span>
+        <div className="mt-3 border-t pt-3 md:mt-2 md:flex md:flex-wrap md:items-center md:gap-1.5 md:pt-2">
+          <div className="mb-2 text-xs font-medium text-muted-foreground md:mb-0">
+            ＋ 一緒に必要
+          </div>
           {coInputs.map((entry, index) => (
             <MiniMaterialChip
               key={`${entry.itemId}-${index}`}
@@ -341,7 +353,7 @@ function ExternalDirectUses({
             {external.facilityUses.map((use) => (
               <span
                 key={use.facility}
-                className="rounded-lg bg-muted px-2 py-1 text-xs"
+                className="rounded-lg bg-muted px-3 py-2 text-sm md:px-2 md:py-1 md:text-xs"
               >
                 {use.facility} ×{use.amount}
               </span>
@@ -367,7 +379,7 @@ function ExternalDirectUses({
             {[...tradeBases.entries()].map(([base, price]) => (
               <span
                 key={base}
-                className="rounded-lg bg-muted px-2 py-1 text-xs"
+                className="rounded-lg bg-muted px-3 py-2 text-sm md:px-2 md:py-1 md:text-xs"
               >
                 {base} · {t("dictionary.unitPrice", { defaultValue: "Unit" })}{" "}
                 {price}
@@ -423,7 +435,7 @@ function EndpointCard({
       type="button"
       onClick={onSelect}
       className={cn(
-        "flex min-h-[84px] items-center gap-3 rounded-xl border p-3 text-left transition-colors",
+        "flex min-h-[96px] items-center gap-3 rounded-xl border p-4 text-left transition-colors md:min-h-[84px] md:p-3",
         selected
           ? "border-primary bg-primary/10"
           : "bg-card hover:bg-accent",
@@ -431,7 +443,7 @@ function EndpointCard({
     >
       <ItemIcon item={item} size="md" />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm font-semibold">
+        <span className="block text-base font-semibold md:truncate md:text-sm">
           {item ? getItemName(item) : endpoint.targetItemId}
         </span>
         <span className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
@@ -462,12 +474,12 @@ function RouteMaterial({
       type="button"
       onClick={() => onSelectItem(itemId)}
       className={cn(
-        "flex w-[112px] shrink-0 flex-col items-center rounded-xl border bg-card p-2 text-center",
+        "flex w-full flex-col items-center rounded-xl border bg-card p-3 text-center md:w-[112px] md:shrink-0 md:p-2",
         emphasis && "border-primary bg-primary/5",
       )}
     >
       <ItemIcon item={item} size="lg" />
-      <span className="mt-1 line-clamp-2 text-xs font-semibold">
+      <span className="mt-1 line-clamp-2 text-sm font-semibold md:text-xs">
         {item ? getItemName(item) : itemId}
       </span>
     </button>
@@ -484,8 +496,8 @@ function RouteRecipe({
   onSelectItem: (itemId: ItemId) => void;
 }) {
   return (
-    <div className="w-[150px] shrink-0 rounded-xl border border-dashed bg-background p-2">
-      <div className="line-clamp-2 text-[11px] font-semibold">
+    <div className="w-full rounded-xl border border-dashed bg-background p-3 md:w-[150px] md:shrink-0 md:p-2">
+      <div className="line-clamp-2 text-sm font-semibold md:text-[11px]">
         {getRecipeName(step.recipe)}
       </div>
       {step.coInputs.length > 0 && (
@@ -520,7 +532,7 @@ function RouteEndpointDetail({
 
   if (endpoint.kind === "product") {
     return (
-      <div className="flex w-[150px] shrink-0 items-center justify-center rounded-xl border bg-muted/50 p-3 text-center text-xs font-semibold">
+      <div className="flex w-full items-center justify-center rounded-xl border bg-muted/50 p-4 text-center text-sm font-semibold md:w-[150px] md:shrink-0 md:p-3 md:text-xs">
         {t("dictionary.completedProduct", { defaultValue: "Product" })}
       </div>
     );
@@ -528,7 +540,7 @@ function RouteEndpointDetail({
 
   if (endpoint.kind === "trade") {
     return (
-      <div className="w-[180px] shrink-0 rounded-xl border bg-muted/50 p-3">
+      <div className="w-full rounded-xl border bg-muted/50 p-4 md:w-[180px] md:shrink-0 md:p-3">
         <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold">
           <Store className="h-4 w-4" />
           {t("dictionary.regionalTrade", { defaultValue: "Regional trade" })}
@@ -546,7 +558,7 @@ function RouteEndpointDetail({
   }
 
   return (
-    <div className="w-[190px] shrink-0 rounded-xl border bg-muted/50 p-3">
+    <div className="w-full rounded-xl border bg-muted/50 p-4 md:w-[190px] md:shrink-0 md:p-3">
       <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold">
         <Building2 className="h-4 w-4" />
         {t("dictionary.facilityConstruction", {
@@ -726,9 +738,22 @@ export default function MaterialDictionary({
     });
   };
 
+  const showMobilePicker = () => {
+    setSelectedId(null);
+    setSelectedEndpointId(null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("item");
+    window.history.replaceState(null, "", url.toString());
+  };
+
   return (
-    <section className="grid min-h-0 flex-1 gap-4 md:grid-cols-[minmax(330px,390px)_minmax(0,1fr)]">
-      <aside className="flex min-h-0 flex-col rounded-xl border bg-card">
+    <section className="grid min-h-0 flex-1 gap-2 md:gap-4 md:grid-cols-[minmax(330px,390px)_minmax(0,1fr)]">
+      <aside
+        className={cn(
+          "min-h-0 flex-col rounded-xl border bg-card",
+          selectedItem ? "hidden md:flex" : "flex",
+        )}
+      >
         <div className="border-b p-3">
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -792,8 +817,8 @@ export default function MaterialDictionary({
           </div>
         </div>
 
-        <div className="max-h-[42vh] overflow-y-auto p-2 md:max-h-none md:flex-1">
-          <div className="grid grid-cols-3 gap-1.5">
+        <div className="min-h-0 flex-1 overflow-y-auto p-2">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:gap-1.5">
             {filteredItems.map((item) => {
               const active = item.id === selectedId;
               const useCount = getMeaningfulDirectUses(
@@ -810,7 +835,7 @@ export default function MaterialDictionary({
                   type="button"
                   onClick={() => selectItem(item.id)}
                   className={cn(
-                    "relative flex min-h-[108px] flex-col items-center rounded-xl border p-2 text-center transition-colors",
+                    "relative flex min-h-[132px] flex-col items-center rounded-xl border p-3 text-center transition-colors md:min-h-[108px] md:p-2",
                     active
                       ? "border-primary bg-primary/8"
                       : "bg-background hover:bg-accent",
@@ -818,7 +843,7 @@ export default function MaterialDictionary({
                   title={item.id}
                 >
                   <ItemIcon item={item} size="lg" />
-                  <span className="mt-1 line-clamp-2 text-xs font-semibold leading-tight">
+                  <span className="mt-2 line-clamp-2 text-sm font-semibold leading-tight md:mt-1 md:text-xs">
                     {getItemName(item)}
                   </span>
                   <span className="mt-auto flex items-center gap-1 pt-1 text-[10px] text-muted-foreground">
@@ -839,7 +864,10 @@ export default function MaterialDictionary({
 
       <div
         ref={detailRef}
-        className="min-h-0 overflow-y-auto rounded-xl border bg-background"
+        className={cn(
+          "min-h-0 overflow-y-auto rounded-xl border bg-background",
+          selectedItem ? "block" : "hidden md:block",
+        )}
       >
         {!selectedItem ? (
           <div className="flex h-full min-h-52 items-center justify-center p-6 text-center">
@@ -855,13 +883,22 @@ export default function MaterialDictionary({
           </div>
         ) : (
           <div className="min-h-full">
-            <div className="sticky top-0 z-10 border-b bg-background/95 px-4 py-3 backdrop-blur md:px-5">
-              <div className="flex flex-wrap items-center gap-3">
+            <div className="sticky top-0 z-10 border-b bg-background/95 px-3 py-3 backdrop-blur md:px-5">
+              <button
+                type="button"
+                onClick={showMobilePicker}
+                className="mb-3 inline-flex min-h-11 items-center gap-2 rounded-lg border bg-background px-3 text-sm font-medium md:hidden"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                {t("dictionary.backToMaterials", { defaultValue: "Materials" })}
+              </button>
+
+              <div className="flex items-center gap-3 md:flex-wrap">
                 <ItemIcon item={selectedItem} size="xl" />
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-2xl font-bold">
+                    <h2 className="text-xl font-bold md:text-2xl">
                       {getItemName(selectedItem)}
                     </h2>
                     {selectedSummary?.stockCandidate && (
@@ -915,7 +952,7 @@ export default function MaterialDictionary({
                 }
                 className="mt-3 gap-0"
               >
-                <TabsList className="grid h-11 w-full grid-cols-3 md:w-auto">
+                <TabsList className="grid h-12 w-full grid-cols-3 md:h-11 md:w-auto">
                   <TabsTrigger value="uses">
                     <Workflow className="h-4 w-4" />
                     {t("dictionary.tabUses", { defaultValue: "Uses" })}
@@ -947,7 +984,7 @@ export default function MaterialDictionary({
               onValueChange={(value) =>
                 setActiveTab(value as DictionaryTab)
               }
-              className="p-4 md:p-5"
+              className="p-3 md:p-5"
             >
               <TabsContent value="uses" className="mt-0 space-y-4">
                 <div>
@@ -1007,7 +1044,7 @@ export default function MaterialDictionary({
                       <Package className="h-4 w-4" />
                       {t("dictionary.products", { defaultValue: "Products" })}
                     </h4>
-                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       {productEndpoints.map((endpoint) => (
                         <EndpointCard
                           key={endpoint.id}
@@ -1029,7 +1066,7 @@ export default function MaterialDictionary({
                         defaultValue: "Regional trade",
                       })}
                     </h4>
-                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       {tradeEndpoints.map((endpoint) => (
                         <EndpointCard
                           key={endpoint.id}
@@ -1051,7 +1088,7 @@ export default function MaterialDictionary({
                         defaultValue: "Facility construction",
                       })}
                     </h4>
-                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       {facilityEndpoints.map((endpoint) => (
                         <EndpointCard
                           key={endpoint.id}
@@ -1091,7 +1128,36 @@ export default function MaterialDictionary({
                       </span>
                     </div>
 
-                    <div className="overflow-x-auto pb-2">
+                    <div className="space-y-2 md:hidden">
+                      <RouteMaterial
+                        itemId={selectedItem.id}
+                        itemById={itemById}
+                        onSelectItem={selectItem}
+                        emphasis
+                      />
+
+                      {route.map((step, index) => (
+                        <div key={`mobile-${step.recipe.id}-${index}`} className="space-y-2">
+                          <ArrowDown className="mx-auto h-5 w-5 text-muted-foreground" />
+                          <RouteRecipe
+                            step={step}
+                            itemById={itemById}
+                            onSelectItem={selectItem}
+                          />
+                          <ArrowDown className="mx-auto h-5 w-5 text-muted-foreground" />
+                          <RouteMaterial
+                            itemId={step.toItemId}
+                            itemById={itemById}
+                            onSelectItem={selectItem}
+                          />
+                        </div>
+                      ))}
+
+                      <ArrowDown className="mx-auto h-5 w-5 text-muted-foreground" />
+                      <RouteEndpointDetail endpoint={selectedEndpoint} />
+                    </div>
+
+                    <div className="hidden overflow-x-auto pb-2 md:block">
                       <div className="flex min-w-max items-center gap-2">
                         <RouteMaterial
                           itemId={selectedItem.id}
