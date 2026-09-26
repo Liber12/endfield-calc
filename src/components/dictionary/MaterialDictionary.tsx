@@ -6,6 +6,7 @@ import {
 } from "react";
 import type { ComponentType } from "react";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import {
   ArrowRight,
   BatteryCharging,
@@ -109,14 +110,14 @@ const SUBTYPE_ICON: Record<
 };
 
 function categoryLabel(
-  t: ReturnType<typeof useTranslation<"app">>["t"],
+  t: TFunction<"app">,
   category: MaterialCategoryId,
 ): string {
   return t(`dictionary.category.${category}`, { defaultValue: category });
 }
 
 function subtypeLabel(
-  t: ReturnType<typeof useTranslation<"app">>["t"],
+  t: TFunction<"app">,
   subtype: MaterialSubtypeId,
 ): string {
   return t(`dictionary.subtype.${subtype}`, { defaultValue: subtype });
