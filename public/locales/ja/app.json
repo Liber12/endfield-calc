@@ -99,6 +99,14 @@
     "limit": "展開上限",
     "liquid": "液体",
     "gas": "気体",
-    "internal": "中間・内部素材"
+    "internal": "中間・内部素材",
+    "outputs": "生成されるもの",
+    "otherInputs": "他に必要",
+    "tabUses": "使い道",
+    "tabMake": "作り方",
+    "tabTree": "用途ツリー",
+    "expandTwo": "2段開く",
+    "expandAll": "すべて開く",
+    "collapseAll": "すべて閉じる"
   }
 }
