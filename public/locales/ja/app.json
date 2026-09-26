@@ -168,6 +168,7 @@
     "facilityDestinations": "設備製造",
     "noUsefulDestination": "登録された有用な用途先はありません。",
     "selectedRoute": "選択した用途までのルート",
-    "steps": "工程"
+    "steps": "工程",
+    "backToMaterials": "素材一覧に戻る"
   }
 }
