@@ -147,6 +147,27 @@
     "graphSummary": "{{items}} materials / {{recipes}} recipes",
     "hiddenPackagingCount": "{{count}} terminal packaging uses hidden",
     "graphLimited": "Large graph: expansion limit applied",
-    "layouting": "Arranging usage map…"
+    "layouting": "Arranging usage map…",
+    "tabDestinations": "Destinations",
+    "stockCandidate": "Stock candidate",
+    "useSummary": "Production {{recipes}} / Facilities {{facilities}} / Trade {{trades}}",
+    "directUseHint": "Logistics-only filling and dismantling cycles are omitted.",
+    "facilityUse": "Facility construction",
+    "tradeUse": "Regional trade",
+    "unitPrice": "Unit",
+    "endpointProduct": "Product",
+    "endpointTradeCount": "{{count}} trade locations",
+    "endpointFacilityCount": "{{count}} facilities",
+    "completedProduct": "Product",
+    "regionalTrade": "Regional trade",
+    "facilityConstruction": "Facility construction",
+    "useDestinations": "Reachable useful destinations",
+    "destinationHint": "Choose a destination to show only the shortest production route from the current material.",
+    "products": "Products",
+    "tradeDestinations": "Regional trade",
+    "facilityDestinations": "Facility construction",
+    "noUsefulDestination": "No registered useful destination is reachable.",
+    "selectedRoute": "Route to selected destination",
+    "steps": "steps"
   }
 }
