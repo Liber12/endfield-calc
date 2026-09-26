@@ -9,10 +9,11 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract relevant Wikiru source sections
+      - name: Parse Wikiru usage data
         shell: python
         run: |
           import html
+          import json
           import re
           import urllib.parse
           import urllib.request
@@ -27,39 +28,85 @@ jobs:
               m = re.search(r"<pre[^>]*>(.*?)</pre>", body, re.I|re.S)
               if m:
                   return html.unescape(re.sub(r"<[^>]+>", "", m.group(1)))
-              # Wikiru currently renders source as escaped text outside a textarea/pre
               plain = html.unescape(re.sub(r"<[^>]+>", "\n", body))
               plain = re.sub(r"\n+", "\n", plain)
               marker = "最終更新日時:&lastmod;"
               pos = plain.find(marker)
               return plain[pos:] if pos >= 0 else plain
 
-          def section(src, start_markers, end_markers=()):
-              starts = [src.find(m) for m in start_markers if src.find(m) >= 0]
-              if not starts:
-                  return ""
-              s = min(starts)
-              ends = [src.find(m, s + 1) for m in end_markers if src.find(m, s + 1) >= 0]
-              e = min(ends) if ends else len(src)
-              return src[s:e]
+          def clean(cell):
+              cell = re.sub(r"&ref\([^;]+;?", "", cell)
+              cell = re.sub(r"&tooltip\(([^)]+)\)\{[^}]*\};?", r"\1", cell)
+              cell = re.sub(r"&ruby\([^)]*\)\{\s*([^}]*)\};?", r"\1", cell)
+              cell = re.sub(r"&color\([^)]*\)\{([^}]*)\};?", r"\1", cell)
+              cell = re.sub(r"\[\[([^]>]+)(?:>[^]]+)?\]\]", r"\1", cell)
+              cell = re.sub(r"\(\([^)]*\)\)", "", cell)
+              cell = cell.replace("&br;", " / ")
+              cell = cell.replace("~", "").strip()
+              return cell
 
-          production = fetch_source("工業製品加工レシピ")
+          prod = fetch_source("工業製品加工レシピ")
+          s = prod.find("*工業設備 [#Production]")
+          if s < 0:
+              s = prod.find("*工業設備")
+          e = prod.find("*コメントフォーム", s)
+          prod_sec = prod[s:e if e >= 0 else None]
+
+          print("=== RAW PRODUCTION HEAD ===")
+          print(prod_sec[:16000])
+
+          facilities = []
+          current = None
+          for line in prod_sec.splitlines():
+              m = re.match(r"\*\*\*\[\[([^]]+)\]\]", line)
+              if m:
+                  if current:
+                      facilities.append(current)
+                  current = {"name": clean(m.group(1)), "rows": []}
+                  continue
+              if current and line.startswith("|") and not line.startswith("//"):
+                  cells = [clean(x) for x in line.strip("|").split("|")]
+                  if any(cells):
+                      current["rows"].append(cells)
+          if current:
+              facilities.append(current)
+
+          print("=== FACILITY ROWS JSON ===")
+          print(json.dumps(facilities, ensure_ascii=False, indent=2))
+
           region = fetch_source("地域建設システム")
-          market = fetch_source("地域建設システム/時価商品一覧")
+          # Each base subsection contains a development table with repeated item/price pairs.
+          bases = []
+          current_name = None
+          current_area = None
+          for line in region.splitlines():
+              m = re.match(r"\*\*\*([^\[]+)", line)
+              if m:
+                  current_name = clean(m.group(1)).strip()
+                  current_area = None
+                  continue
+              if current_name and " - " in line and not line.startswith("|"):
+                  val = clean(line).strip()
+                  if 1 < len(val) < 100:
+                      current_area = val
+              if current_name and line.startswith("|") and "取引商品" not in line and "発展段階" not in line:
+                  cells = [clean(x) for x in line.strip("|").split("|")]
+                  if len(cells) < 6:
+                      continue
+                  stage = cells[0]
+                  pairs = []
+                  for i in range(4, len(cells)-1, 2):
+                      item = cells[i].strip()
+                      price = cells[i+1].strip() if i+1 < len(cells) else ""
+                      if item and item not in {"-", ""} and re.fullmatch(r"[0-9,]+", price or ""):
+                          pairs.append({"item": item, "price": int(price.replace(",",""))})
+                  if pairs:
+                      bases.append({
+                          "base": current_name,
+                          "area": current_area,
+                          "stage": stage,
+                          "items": pairs,
+                      })
 
-          print("=== PRODUCTION ===")
-          print(section(
-              production,
-              ["*工業設備 [#Production]", "*工業設備"],
-              ["*コメントフォーム", "#pcomment"]
-          )[:50000])
-
-          print("=== REGION KEY SECTIONS ===")
-          for key in ["拠点取引", "納品", "商品", "取引", "発展値", "地域建設"]:
-              pos = region.find(key)
-              if pos >= 0:
-                  print(f"--- MATCH {key} ---")
-                  print(region[max(0,pos-2000):pos+12000])
-
-          print("=== MARKET TABLE ===")
-          print(market[:40000])
+          print("=== REGION TRADE JSON ===")
+          print(json.dumps(bases, ensure_ascii=False, indent=2))
