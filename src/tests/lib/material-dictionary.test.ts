@@ -79,7 +79,7 @@ describe("material dictionary downstream tree", () => {
     const tree = buildUsageTree("a" as ItemId, index);
     const dNodes = tree.children.flatMap((child) => child.children);
 
-    expect(dNodes.filter((node) => node.itemId === "d")).toHaveLength(2);
+    expect(dNodes.filter((node) => node.itemId === ("d" as ItemId))).toHaveLength(2);
     expect(dNodes.every((node) => node.cycle === false)).toBe(true);
   });
 
