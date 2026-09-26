@@ -107,6 +107,37 @@
     "tabTree": "用途ツリー",
     "expandTwo": "2段開く",
     "expandAll": "すべて開く",
-    "collapseAll": "すべて閉じる"
+    "collapseAll": "すべて閉じる",
+    "usedForVisualHint": "この素材を何と組み合わせ、何ができるかをレシピごとに表示します。",
+    "combineHint": "選択素材 ＋ 必要素材 → 生成物",
+    "inputs": "必要素材",
+    "category": {
+      "all": "すべて",
+      "natural": "天然資源",
+      "gathered": "採集素材",
+      "industrial": "工業製品",
+      "consumable": "消費アイテム",
+      "event": "イベント",
+      "other": "その他"
+    },
+    "subtype": {
+      "ore": "原料",
+      "plant": "植物",
+      "seed": "種子",
+      "powder": "粉末",
+      "refined": "精製素材",
+      "liquid": "液体",
+      "gas": "気体",
+      "container": "容器",
+      "filled": "充填品",
+      "component": "部品",
+      "battery": "バッテリー",
+      "equipment": "装備素材",
+      "medicine": "薬品",
+      "food": "食品",
+      "bomb": "爆弾",
+      "event": "イベント",
+      "other": "その他"
+    }
   }
 }
