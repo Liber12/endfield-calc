@@ -134,3 +134,9 @@ export function getMaterialCategory(item: Item): MaterialCategoryId {
 
   return "other";
 }
+
+export function isPackagingItem(item: Item): boolean {
+  const subtype = getMaterialSubtype(item);
+  return subtype === "container" || subtype === "filled";
+}
+
