@@ -99,6 +99,14 @@
     "limit": "Expansion limit",
     "liquid": "Liquid",
     "gas": "Gas",
-    "internal": "Intermediate/internal"
+    "internal": "Intermediate/internal",
+    "outputs": "Produces",
+    "otherInputs": "Also requires",
+    "tabUses": "Uses",
+    "tabMake": "How to make",
+    "tabTree": "Usage tree",
+    "expandTwo": "Open 2 levels",
+    "expandAll": "Open all",
+    "collapseAll": "Collapse all"
   }
 }
