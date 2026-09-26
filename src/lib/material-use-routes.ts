@@ -38,7 +38,6 @@ const USEFUL_PRODUCT_SUBTYPES = new Set([
   "bomb",
   "battery",
   "equipment",
-  "event",
 ]);
 
 /**
@@ -114,10 +113,16 @@ export function getUsefulEndpoints(
     const item = itemById.get(itemId);
     if (!item) continue;
 
+    const subtype = getMaterialSubtype(item);
+    const isUsefulProduct =
+      USEFUL_PRODUCT_SUBTYPES.has(subtype) ||
+      (subtype === "event" &&
+        getMeaningfulDirectUses(itemId, index, itemById).length === 0);
+
     if (
       itemId !== rootItemId &&
       item.asTarget !== false &&
-      USEFUL_PRODUCT_SUBTYPES.has(getMaterialSubtype(item))
+      isUsefulProduct
     ) {
       endpoints.push({
         id: `product:${itemId}`,
