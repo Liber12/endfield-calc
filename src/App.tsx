@@ -7,6 +7,7 @@ import { items, recipes, facilities } from "./data";
 import { useProductionPlan } from "./hooks/useProductionPlan";
 import { usePortrait } from "./hooks/usePortrait";
 import AppHeader from "./components/layout/AppHeader";
+import AppModeNav, { type AppMode } from "./components/layout/AppModeNav";
 import MobileNav, { type MobileView } from "./components/layout/MobileNav";
 import LeftPanel from "./components/panels/LeftPanel";
 import PlanPanel from "./components/panels/PlanPanel";
@@ -15,6 +16,7 @@ import PortraitDrawer from "./components/panels/PortraitDrawer";
 import ProductionViewTabs from "./components/production/ProductionViewTabs";
 import AddTargetDialogGrid from "./components/panels/AddTargetDialogGrid";
 import AppFooter from "./components/layout/AppFooter";
+import MaterialDictionary from "./components/dictionary/MaterialDictionary";
 import { SettingsSheet } from "./components/settings/SettingsSheet";
 import { ThemeProvider } from "./components/ui/theme-provider";
 import { useTheme } from "./components/ui/theme-context";
@@ -559,6 +561,24 @@ function AppContent() {
   // Deliberately NOT auto-switched after adding targets.
   const [mobileView, setMobileView] = useState<MobileView>("plan");
 
+  // Top-level tool switch. `view=dictionary` makes material links shareable
+  // without introducing a router or interfering with the production-plan hash.
+  const [appMode, setAppMode] = useState<AppMode>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("view") === "dictionary" ? "dictionary" : "calculator";
+  });
+  const handleAppModeChange = useCallback((mode: AppMode) => {
+    setAppMode(mode);
+    const url = new URL(window.location.href);
+    if (mode === "dictionary") {
+      url.searchParams.set("view", "dictionary");
+    } else {
+      url.searchParams.delete("view");
+      url.searchParams.delete("item");
+    }
+    window.history.replaceState(null, "", url.toString());
+  }, []);
+
   // Settings-sheet visibility lives here (not in AppHeader) so both the
   // header gear and the left-rail Options card can open it. Stable
   // callback: LeftPanel / PortraitDrawer are memoised.
@@ -628,7 +648,21 @@ function AppContent() {
         onOpenSettings={handleOpenSettings}
       />
 
-      <div className="flex-1 flex gap-4 min-h-0">
+      <AppModeNav mode={appMode} onModeChange={handleAppModeChange} />
+
+      {appMode === "dictionary" && (
+        <MaterialDictionary
+          items={items}
+          recipes={recipes}
+          facilities={facilities}
+        />
+      )}
+
+      <div
+        className={
+          appMode === "dictionary" ? "hidden" : "flex-1 flex gap-4 min-h-0"
+        }
+      >
         <div className={isPortrait ? "hidden" : "contents"}>
               <LeftPanel
                 targets={targets}
@@ -727,7 +761,11 @@ function AppContent() {
         </div>
       </div>
 
-      <div className={isPortrait ? "hidden" : "contents"}>
+      <div
+        className={
+          appMode === "dictionary" || isPortrait ? "hidden" : "contents"
+        }
+      >
         <BottomDock
           stats={stats}
           facilities={facilities}
@@ -742,7 +780,11 @@ function AppContent() {
 
       {/* Portrait: stats ticker/drawer on BOTH nav tabs (live feedback
           while adding targets), then the bottom nav itself. */}
-      <div className={isPortrait ? "contents" : "hidden"}>
+      <div
+        className={
+          appMode === "dictionary" || !isPortrait ? "hidden" : "contents"
+        }
+      >
         <PortraitDrawer
           items={items}
           facilities={facilities}
@@ -757,7 +799,7 @@ function AppContent() {
       </div>
 
       <AddTargetDialogGrid
-        open={dialogOpen}
+        open={appMode === "calculator" && dialogOpen}
         onOpenChange={setDialogOpen}
         items={targetableItems}
         lockedItems={lockedTargetItems}
@@ -771,7 +813,7 @@ function AppContent() {
       />
 
       <SettingsSheet
-        open={settingsOpen}
+        open={appMode === "calculator" && settingsOpen}
         onOpenChange={setSettingsOpen}
         focus={settingsFocus}
       />
