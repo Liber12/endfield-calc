@@ -147,6 +147,27 @@
     "graphSummary": "素材 {{items}}件 / レシピ {{recipes}}件",
     "hiddenPackagingCount": "行き止まり容器 {{count}}件を省略",
     "graphLimited": "大規模なため展開上限を適用",
-    "layouting": "用途マップを配置中…"
+    "layouting": "用途マップを配置中…",
+    "tabDestinations": "用途先",
+    "stockCandidate": "ストック候補",
+    "useSummary": "生産 {{recipes}} / 設備 {{facilities}} / 納品 {{trades}}",
+    "directUseHint": "充填・解体など物流だけの循環は省略しています。",
+    "facilityUse": "設備製造",
+    "tradeUse": "拠点取引",
+    "unitPrice": "単価",
+    "endpointProduct": "製品",
+    "endpointTradeCount": "納品 {{count}}拠点",
+    "endpointFacilityCount": "設備 {{count}}種",
+    "completedProduct": "完成品",
+    "regionalTrade": "拠点取引",
+    "facilityConstruction": "設備製造",
+    "useDestinations": "到達できる主な用途",
+    "destinationHint": "用途先を選ぶと、現在の素材からそこまでの最短生産ルートだけを表示します。",
+    "products": "実用品・製品",
+    "tradeDestinations": "納品・取引",
+    "facilityDestinations": "設備製造",
+    "noUsefulDestination": "登録された有用な用途先はありません。",
+    "selectedRoute": "選択した用途までのルート",
+    "steps": "工程"
   }
 }
