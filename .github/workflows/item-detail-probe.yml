@@ -1,19 +1,23 @@
-name: Item detail probe
+name: Generate item details
 
 on:
   push:
     paths:
       - ".github/workflows/item-detail-probe.yml"
 
+permissions:
+  contents: write
+
 jobs:
-  probe:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Parse Wikiru item details
+      - name: Generate compact item detail data from Wikiru
         shell: python
         run: |
           import html, json, re, urllib.parse, urllib.request
+          from pathlib import Path
 
           pages = [
               "テーブル/天然資源",
@@ -55,16 +59,14 @@ jobs:
               return s.strip()
 
           details = {}
-          unmatched = []
 
           for page in pages:
               src = fetch(page)
-              header_kind = "effect" if "|~効果|" in src else "description"
+              kind = "effect" if "|~効果|" in src else "description"
 
               for line in src.splitlines():
                   if not line.startswith("|&ref") and not line.startswith("||"):
                       continue
-
                   cells = line.strip("|").split("|")
                   if len(cells) < 5:
                       continue
@@ -74,33 +76,53 @@ jobs:
                       continue
                   name = name_match.group(1).strip()
                   primary = clean_text(cells[3])
-                  flavor = clean_text(cells[4])
-
-                  ids = name_to_ids.get(name)
-                  if not ids:
-                      unmatched.append({"page":page,"name":name})
+                  if not primary:
                       continue
 
+                  ids = name_to_ids.get(name, [])
                   for item_id in ids:
-                      # Filled transport containers share display names with empty
-                      # containers. Do not copy empty-container prose onto hidden
-                      # transport variants unless the source table is specifically
-                      # the filled-container table.
                       if (
                           page != "テーブル/中身入り各種ボトル"
                           and (item_id.startswith("item_fbottle_") or item_id.startswith("item_gasjar_"))
                       ):
                           continue
+                      details[item_id] = {
+                          "kind": kind,
+                          "text": primary,
+                          "sourcePage": page,
+                      }
 
-                      entry = details.setdefault(item_id, {
-                          "itemId": item_id,
-                          "name": name,
-                      })
-                      if primary:
-                          entry[header_kind] = primary
-                      if flavor:
-                          entry["flavor"] = flavor
+          out = """import type { ItemId } from "@/types";
 
-          print("DETAILS=" + json.dumps(list(details.values()), ensure_ascii=False, separators=(",",":")))
-          print("COUNT", len(details))
-          print("UNMATCHED=" + json.dumps(unmatched[:100], ensure_ascii=False, separators=(",",":")))
+export type MaterialItemDetail = {
+  kind: "description" | "effect";
+  text: string;
+  sourcePage: string;
+};
+
+/**
+ * Compact functional item text extracted from Wikiru item tables.
+ * Flavor/lore columns are intentionally not copied.
+ * Last generated: 2026-09-27.
+ */
+export const materialItemDetails: Readonly<Record<string, MaterialItemDetail>> = %s;
+
+export function getMaterialItemDetail(itemId: ItemId): MaterialItemDetail | undefined {
+  return materialItemDetails[itemId];
+}
+""" % json.dumps(details, ensure_ascii=False, indent=2)
+
+          Path("src/data/material-item-details.ts").write_text(out, encoding="utf-8")
+          print("generated", len(details), "entries")
+
+      - name: Commit generated item details
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/material-item-details.ts
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "Data: add item descriptions and effects"
+          git push
