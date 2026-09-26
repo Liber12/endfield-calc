@@ -22,6 +22,7 @@ import {
   Gem,
   GitBranch,
   HeartPulse,
+  Info,
   Leaf,
   Package,
   Pickaxe,
@@ -64,6 +65,7 @@ import {
   type MaterialSubtypeId,
 } from "@/lib/item-category";
 import { externalItemUseById } from "@/data/material-external-uses";
+import { getMaterialItemDetail } from "@/data/material-item-details";
 import type { Facility, Item, ItemId, Recipe } from "@/types";
 
 type MaterialDictionaryProps = {
@@ -717,6 +719,9 @@ export default function MaterialDictionary({
   const selectedSummary = selectedId
     ? getItemUseSummary(selectedId, index, itemById)
     : null;
+  const selectedDetail = selectedId
+    ? getMaterialItemDetail(selectedId)
+    : undefined;
 
   const productEndpoints = endpoints.filter(
     (endpoint) => endpoint.kind === "product",
@@ -944,6 +949,48 @@ export default function MaterialDictionary({
                   </div>
                 </div>
               </div>
+
+              {selectedDetail && (
+                <div
+                  className={cn(
+                    "mt-3 rounded-xl border p-3 md:p-3",
+                    selectedDetail.kind === "effect"
+                      ? "border-primary/30 bg-primary/5"
+                      : "bg-muted/30",
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    {selectedDetail.kind === "effect" ? (
+                      <HeartPulse className="h-4 w-4 shrink-0" />
+                    ) : (
+                      <Info className="h-4 w-4 shrink-0" />
+                    )}
+                    <span className="text-sm font-semibold">
+                      {selectedDetail.kind === "effect"
+                        ? t("dictionary.itemEffect", {
+                            defaultValue: "Effect",
+                          })
+                        : t("dictionary.itemDescription", {
+                            defaultValue: "Description",
+                          })}
+                    </span>
+                    <a
+                      href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ml-auto text-[11px] text-muted-foreground underline-offset-2 hover:underline"
+                    >
+                      Wikiru
+                    </a>
+                  </div>
+                  <p
+                    lang="ja"
+                    className="mt-2 whitespace-pre-line text-sm leading-relaxed text-foreground/90 md:text-sm"
+                  >
+                    {selectedDetail.text}
+                  </p>
+                </div>
+              )}
 
               <Tabs
                 value={activeTab}
