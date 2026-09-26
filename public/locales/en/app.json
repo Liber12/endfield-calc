@@ -169,6 +169,8 @@
     "noUsefulDestination": "No registered useful destination is reachable.",
     "selectedRoute": "Route to selected destination",
     "steps": "steps",
-    "backToMaterials": "Back to materials"
+    "backToMaterials": "Back to materials",
+    "itemDescription": "Description",
+    "itemEffect": "Effect"
   }
 }
