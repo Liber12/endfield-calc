@@ -1,4 +1,5 @@
-import type { ItemId, Recipe, RecipeId } from "@/types";
+import type { Item, ItemId, Recipe, RecipeId } from "@/types";
+import { isPackagingItem } from "@/lib/item-category";
 
 export type RecipeIndex = {
   producedBy: ReadonlyMap<ItemId, readonly Recipe[]>;
@@ -148,4 +149,28 @@ export function buildUsageTree(
   };
 
   return walk(rootItemId, undefined, new Set<ItemId>(), 0);
+}
+
+
+export function isTerminalPackagingItem(
+  itemId: ItemId,
+  itemById: ReadonlyMap<ItemId, Item>,
+  index: RecipeIndex,
+): boolean {
+  const item = itemById.get(itemId);
+  if (!item || !isPackagingItem(item)) return false;
+  return (index.usedBy.get(itemId)?.length ?? 0) === 0;
+}
+
+export function recipeEndsOnlyInTerminalPackaging(
+  recipe: Recipe,
+  itemById: ReadonlyMap<ItemId, Item>,
+  index: RecipeIndex,
+): boolean {
+  return (
+    recipe.outputs.length > 0 &&
+    recipe.outputs.every((output) =>
+      isTerminalPackagingItem(output.itemId, itemById, index),
+    )
+  );
 }
