@@ -168,6 +168,7 @@
     "facilityDestinations": "Facility construction",
     "noUsefulDestination": "No registered useful destination is reachable.",
     "selectedRoute": "Route to selected destination",
-    "steps": "steps"
+    "steps": "steps",
+    "backToMaterials": "Back to materials"
   }
 }
