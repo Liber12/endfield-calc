@@ -171,6 +171,27 @@
     "steps": "工程",
     "backToMaterials": "素材一覧に戻る",
     "itemDescription": "説明",
-    "itemEffect": "効果"
+    "itemEffect": "効果",
+    "chooseMaterial": "起点素材を選ぶ",
+    "chooseMaterialHint": "直接の使い道と、その先の生産ルートを確認したい素材を選択します。",
+    "routeFrom": "起点素材",
+    "routeTo": "用途先",
+    "destinationsCount": "用途先",
+    "changeDestination": "下から変更",
+    "directUsesSelected": "直接用途を表示中。用途先を選ぶと、その目的までのルートに切り替わります。",
+    "chooseMaterialFirst": "まず起点素材を選択してください。",
+    "endpointAll": "すべて",
+    "directUsesRoute": "直接の使い道",
+    "recipesCount": "レシピ",
+    "alsoRequires": "一緒に必要",
+    "routeSummary": "{{from}} → {{to}}・{{steps}}工程",
+    "changeMaterial": "素材を変更",
+    "routeEmptyTitle": "起点素材を選択",
+    "routeEmptyHint": "素材を1つ選ぶと、まず直接の使い道を表示します。その後、到達できる製品・納品・設備を選ぶと、その用途までの経路だけを表示します。",
+    "consumedBy": "この素材を直接使う",
+    "productionUsesShort": "生産用途",
+    "facilitiesShort": "設備",
+    "tradeShort": "納品",
+    "contextPanelEmpty": "素材を選ぶと、説明・効果・ストック候補・設備/納品用途・作り方がここに表示されます。"
   }
 }
