@@ -194,6 +194,10 @@
     "tradeShort": "Trade",
     "contextPanelEmpty": "Item description, effects, stock hints, facility/trade uses, and recipes appear here after choosing a material.",
     "noItemDescription": "No description or effect is registered.",
-    "destinationSidebarHint": "Choose a product, trade item, or facility use to show only that route in the main view."
+    "destinationSidebarHint": "Choose a product, trade item, or facility use to show only that route in the main view.",
+    "dependenciesView": "Dependencies",
+    "routeView": "Production route",
+    "routeNeedsDestinationTitle": "Choose a destination",
+    "routeNeedsDestination": "Choose a product, trade item, or facility from the right sidebar to show its route."
   }
 }
