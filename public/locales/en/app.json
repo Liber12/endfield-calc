@@ -171,6 +171,27 @@
     "steps": "steps",
     "backToMaterials": "Back to materials",
     "itemDescription": "Description",
-    "itemEffect": "Effect"
+    "itemEffect": "Effect",
+    "chooseMaterial": "Choose starting material",
+    "chooseMaterialHint": "Pick the material whose direct uses and downstream production routes you want to inspect.",
+    "routeFrom": "Starting material",
+    "routeTo": "Destination",
+    "destinationsCount": "destinations",
+    "changeDestination": "Change below",
+    "directUsesSelected": "Showing direct uses. Choose a destination below to switch to its production route.",
+    "chooseMaterialFirst": "Choose a starting material first.",
+    "endpointAll": "All",
+    "directUsesRoute": "Direct uses",
+    "recipesCount": "recipes",
+    "alsoRequires": "Also requires",
+    "routeSummary": "{{from}} → {{to}} · {{steps}} steps",
+    "changeMaterial": "Change material",
+    "routeEmptyTitle": "Choose a starting material",
+    "routeEmptyHint": "Choose one material to see its direct uses first. Then choose a reachable product, trade item, or facility use to show only that route.",
+    "consumedBy": "directly consumed by",
+    "productionUsesShort": "Recipes",
+    "facilitiesShort": "Facilities",
+    "tradeShort": "Trade",
+    "contextPanelEmpty": "Item description, effects, stock hints, facility/trade uses, and recipes appear here after choosing a material."
   }
 }
