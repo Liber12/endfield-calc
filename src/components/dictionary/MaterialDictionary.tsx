@@ -426,7 +426,7 @@ function EndpointChoice({
       type="button"
       onClick={onSelect}
       className={cn(
-        "flex w-[154px] shrink-0 items-center gap-2 rounded-xl border p-2 text-left transition-colors",
+        "flex w-full items-center gap-2 rounded-xl border p-2.5 text-left transition-colors",
         selected
           ? "border-primary bg-primary/10"
           : "bg-background hover:bg-accent",
@@ -876,179 +876,164 @@ export default function MaterialDictionary({
         onSelectItem={selectItem}
       />
 
-      <header className="flex flex-col gap-2 rounded-xl border bg-card p-2 md:flex-row md:items-center md:gap-3">
-        <button
-          type="button"
-          onClick={() => setPickerOpen(true)}
-          className="flex min-h-14 min-w-0 items-center gap-3 rounded-lg border bg-background px-3 text-left transition-colors hover:bg-accent md:min-w-[250px]"
-        >
-          {selectedItem ? (
-            <>
-              <ItemIcon item={selectedItem} size="md" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                  {t("dictionary.routeFrom", {
-                    defaultValue: "Starting material",
-                  })}
+      <header className="rounded-xl border bg-card p-3">
+        {selectedItem ? (
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 md:flex-row md:items-start">
+              <button
+                type="button"
+                onClick={() => setPickerOpen(true)}
+                className="flex min-h-16 min-w-0 items-center gap-3 rounded-xl border bg-background px-3 text-left transition-colors hover:bg-accent md:min-w-[280px]"
+              >
+                <ItemIcon item={selectedItem} size="xl" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                    {t("dictionary.routeFrom", {
+                      defaultValue: "Starting material",
+                    })}
+                  </span>
+                  <span className="block truncate text-lg font-bold">
+                    {getItemName(selectedItem)}
+                  </span>
+                  <span className="mt-1 flex flex-wrap gap-1">
+                    {selectedCategory && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                        {categoryLabel(t, selectedCategory)}
+                      </span>
+                    )}
+                    {selectedSubtype && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                        {subtypeLabel(t, selectedSubtype)}
+                      </span>
+                    )}
+                    <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                      T{selectedItem.tier}
+                    </span>
+                  </span>
                 </span>
-                <span className="block truncate text-sm font-semibold">
-                  {getItemName(selectedItem)}
-                </span>
-              </span>
-            </>
-          ) : (
-            <>
-              <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                  {t("dictionary.routeFrom", {
-                    defaultValue: "Starting material",
-                  })}
-                </span>
-                <span className="block text-sm font-semibold">
-                  {t("dictionary.chooseMaterial", {
-                    defaultValue: "Choose material",
-                  })}
-                </span>
-              </span>
-            </>
-          )}
-          <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
-        </button>
+                <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </button>
 
-        <ArrowRight className="hidden h-5 w-5 shrink-0 text-muted-foreground md:block" />
+              <div className="min-w-0 flex-1">
+                {selectedDetail ? (
+                  <section
+                    className={cn(
+                      "h-full rounded-xl border p-3",
+                      selectedDetail.kind === "effect"
+                        ? "border-primary/30 bg-primary/5"
+                        : "bg-background",
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      {selectedDetail.kind === "effect" ? (
+                        <HeartPulse className="h-4 w-4 shrink-0" />
+                      ) : (
+                        <Info className="h-4 w-4 shrink-0" />
+                      )}
+                      <h2 className="text-xs font-semibold">
+                        {selectedDetail.kind === "effect"
+                          ? t("dictionary.itemEffect", {
+                              defaultValue: "Effect",
+                            })
+                          : t("dictionary.itemDescription", {
+                              defaultValue: "Description",
+                            })}
+                      </h2>
+                      <a
+                        href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="ml-auto text-[10px] text-muted-foreground hover:underline"
+                      >
+                        Wikiru
+                      </a>
+                    </div>
+                    <p
+                      lang="ja"
+                      className="mt-2 whitespace-pre-line text-sm leading-relaxed text-foreground/90"
+                    >
+                      {selectedDetail.text}
+                    </p>
+                  </section>
+                ) : (
+                  <div className="flex h-full min-h-16 items-center rounded-xl border border-dashed px-3 text-sm text-muted-foreground">
+                    {t("dictionary.noItemDescription", {
+                      defaultValue: "No description or effect is registered.",
+                    })}
+                  </div>
+                )}
+              </div>
 
-        <div className="min-w-0 flex-1">
-          <div className="mb-1 flex items-center justify-between gap-2">
-            <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-              {t("dictionary.routeTo", { defaultValue: "Destination" })}
-            </span>
-            {selectedItem && (
-              <span className="text-[10px] text-muted-foreground">
-                {endpoints.length}{" "}
-                {t("dictionary.destinationsCount", {
-                  defaultValue: "destinations",
-                })}
-              </span>
-            )}
-          </div>
-
-          {selectedEndpoint ? (
-            <button
-              type="button"
-              onClick={showDirectUses}
-              className="flex min-h-11 w-full items-center gap-2 rounded-lg border bg-primary/5 px-3 text-left transition-colors hover:bg-accent"
-            >
-              <Route className="h-4 w-4 shrink-0" />
-              <span className="min-w-0 flex-1 truncate text-sm font-semibold">
-                {itemById.get(selectedEndpoint.targetItemId)
-                  ? getItemName(itemById.get(selectedEndpoint.targetItemId)!)
-                  : selectedEndpoint.targetItemId}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {t("dictionary.changeDestination", {
-                  defaultValue: "Change below",
-                })}
-              </span>
-            </button>
-          ) : (
-            <div className="flex min-h-11 items-center rounded-lg border border-dashed px-3 text-sm text-muted-foreground">
-              {selectedItem
-                ? t("dictionary.directUsesSelected", {
-                    defaultValue:
-                      "Showing direct uses. Choose a destination below to see its route.",
-                  })
-                : t("dictionary.chooseMaterialFirst", {
-                    defaultValue: "Choose a starting material first.",
-                  })}
+              <div className="flex shrink-0 gap-1.5 md:flex-col">
+                {selectedSummary?.stockCandidate && (
+                  <div className="flex items-center gap-1.5 rounded-lg bg-amber-500/10 px-2.5 py-2 text-xs font-medium text-amber-700 dark:text-amber-300">
+                    <Star className="h-3.5 w-3.5" />
+                    {t("dictionary.stockCandidate", {
+                      defaultValue: "Stock candidate",
+                    })}
+                  </div>
+                )}
+                <div className="grid grid-cols-3 gap-1.5">
+                  <div className="rounded-lg bg-muted px-2 py-1.5 text-center">
+                    <div className="text-sm font-bold">
+                      {selectedSummary?.directRecipeCount ?? 0}
+                    </div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.productionUsesShort", {
+                        defaultValue: "Recipes",
+                      })}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-muted px-2 py-1.5 text-center">
+                    <div className="text-sm font-bold">
+                      {selectedSummary?.facilityUseCount ?? 0}
+                    </div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.facilitiesShort", {
+                        defaultValue: "Facilities",
+                      })}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-muted px-2 py-1.5 text-center">
+                    <div className="text-sm font-bold">
+                      {selectedSummary?.tradeBaseCount ?? 0}
+                    </div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.tradeShort", {
+                        defaultValue: "Trade",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPickerOpen(true)}
+            className="flex min-h-16 w-full items-center gap-3 rounded-xl border border-dashed bg-background px-4 text-left hover:bg-accent"
+          >
+            <Search className="h-5 w-5 text-muted-foreground" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-semibold">
+                {t("dictionary.chooseMaterial", {
+                  defaultValue: "Choose starting material",
+                })}
+              </span>
+              <span className="mt-0.5 block text-xs text-muted-foreground">
+                {t("dictionary.chooseMaterialHint", {
+                  defaultValue:
+                    "Pick the material whose direct uses and production routes you want to inspect.",
+                })}
+              </span>
+            </span>
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          </button>
+        )}
       </header>
 
-      {selectedItem && (
-        <div className="rounded-xl border bg-card px-2 py-2">
-          <div className="mb-2 flex flex-wrap items-center gap-1.5">
-            {(
-              [
-                ["all", t("dictionary.endpointAll", { defaultValue: "All" })],
-                [
-                  "product",
-                  t("dictionary.products", { defaultValue: "Products" }),
-                ],
-                [
-                  "trade",
-                  t("dictionary.tradeDestinations", {
-                    defaultValue: "Trade",
-                  }),
-                ],
-                [
-                  "facility",
-                  t("dictionary.facilityDestinations", {
-                    defaultValue: "Facilities",
-                  }),
-                ],
-              ] as const
-            ).map(([filter, label]) => (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setEndpointFilter(filter)}
-                className={cn(
-                  "rounded-md px-2 py-1 text-xs font-medium transition-colors",
-                  endpointFilter === filter
-                    ? "bg-foreground text-background"
-                    : "bg-muted text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {label} {endpointCounts[filter]}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex gap-2 overflow-x-auto pb-1">
-            <button
-              type="button"
-              onClick={showDirectUses}
-              className={cn(
-                "flex w-[154px] shrink-0 items-center gap-2 rounded-xl border p-2 text-left transition-colors",
-                selectedEndpointId === null
-                  ? "border-primary bg-primary/10"
-                  : "bg-background hover:bg-accent",
-              )}
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted">
-                <Workflow className="h-5 w-5" />
-              </div>
-              <span className="min-w-0">
-                <span className="block truncate text-xs font-semibold">
-                  {t("dictionary.directUsesRoute", {
-                    defaultValue: "Direct uses",
-                  })}
-                </span>
-                <span className="mt-0.5 block text-[10px] text-muted-foreground">
-                  {directUses.length}{" "}
-                  {t("dictionary.recipesCount", {
-                    defaultValue: "recipes",
-                  })}
-                </span>
-              </span>
-            </button>
-
-            {visibleEndpoints.map((endpoint) => (
-              <EndpointChoice
-                key={endpoint.id}
-                endpoint={endpoint}
-                itemById={itemById}
-                selected={selectedEndpointId === endpoint.id}
-                onSelect={() => selectEndpoint(endpoint)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_310px]">
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_340px]">
         <main className="flex min-h-[360px] min-w-0 flex-col overflow-hidden rounded-xl border bg-background lg:min-h-0">
           <div className="flex items-center justify-between gap-3 border-b px-3 py-2">
             <div className="flex min-w-0 items-center gap-2">
@@ -1241,171 +1226,171 @@ export default function MaterialDictionary({
         </main>
 
         {selectedItem ? (
-          <aside className="min-h-0 overflow-y-auto rounded-xl border bg-card p-3">
-            <div className="flex items-center gap-3">
-              <ItemIcon item={selectedItem} size="xl" />
-              <div className="min-w-0 flex-1">
-                <h2 className="truncate text-lg font-bold">
-                  {getItemName(selectedItem)}
+          <aside className="min-h-0 overflow-y-auto rounded-xl border bg-card">
+            <div className="sticky top-0 z-10 border-b bg-card/95 p-3 backdrop-blur">
+              <div className="flex items-center gap-2">
+                <Route className="h-4 w-4" />
+                <h2 className="text-sm font-semibold">
+                  {t("dictionary.useDestinations", {
+                    defaultValue: "Reachable useful destinations",
+                  })}
                 </h2>
-                <div className="mt-1 flex flex-wrap gap-1">
-                  {selectedCategory && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                      {categoryLabel(t, selectedCategory)}
-                    </span>
-                  )}
-                  {selectedSubtype && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                      {subtypeLabel(t, selectedSubtype)}
-                    </span>
-                  )}
-                  <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                    T{selectedItem.tier}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {selectedSummary?.stockCandidate && (
-              <div className="mt-3 flex items-center gap-2 rounded-lg bg-amber-500/10 px-2.5 py-2 text-xs font-medium text-amber-700 dark:text-amber-300">
-                <Star className="h-4 w-4" />
-                {t("dictionary.stockCandidate", {
-                  defaultValue: "Stock candidate",
-                })}
-              </div>
-            )}
-
-            {selectedDetail && (
-              <section
-                className={cn(
-                  "mt-3 rounded-xl border p-3",
-                  selectedDetail.kind === "effect"
-                    ? "border-primary/30 bg-primary/5"
-                    : "bg-background",
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  {selectedDetail.kind === "effect" ? (
-                    <HeartPulse className="h-4 w-4" />
-                  ) : (
-                    <Info className="h-4 w-4" />
-                  )}
-                  <h3 className="text-xs font-semibold">
-                    {selectedDetail.kind === "effect"
-                      ? t("dictionary.itemEffect", {
-                          defaultValue: "Effect",
-                        })
-                      : t("dictionary.itemDescription", {
-                          defaultValue: "Description",
-                        })}
-                  </h3>
-                  <a
-                    href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="ml-auto text-[10px] text-muted-foreground hover:underline"
-                  >
-                    Wikiru
-                  </a>
-                </div>
-                <p
-                  lang="ja"
-                  className="mt-2 whitespace-pre-line text-xs leading-relaxed text-foreground/90"
-                >
-                  {selectedDetail.text}
-                </p>
-              </section>
-            )}
-
-            <div className="mt-3 grid grid-cols-3 gap-1.5">
-              <div className="rounded-lg bg-muted p-2 text-center">
-                <div className="text-base font-bold">
-                  {selectedSummary?.directRecipeCount ?? 0}
-                </div>
-                <div className="text-[10px] text-muted-foreground">
-                  {t("dictionary.productionUsesShort", {
-                    defaultValue: "Recipes",
-                  })}
-                </div>
-              </div>
-              <div className="rounded-lg bg-muted p-2 text-center">
-                <div className="text-base font-bold">
-                  {selectedSummary?.facilityUseCount ?? 0}
-                </div>
-                <div className="text-[10px] text-muted-foreground">
-                  {t("dictionary.facilitiesShort", {
-                    defaultValue: "Facilities",
-                  })}
-                </div>
-              </div>
-              <div className="rounded-lg bg-muted p-2 text-center">
-                <div className="text-base font-bold">
-                  {selectedSummary?.tradeBaseCount ?? 0}
-                </div>
-                <div className="text-[10px] text-muted-foreground">
-                  {t("dictionary.tradeShort", {
-                    defaultValue: "Trade",
-                  })}
-                </div>
-              </div>
-            </div>
-
-            <div className="my-3 border-t" />
-
-            <ExternalDirectUses itemId={selectedItem.id} />
-
-            <section className="mt-4">
-              <div className="mb-2 flex items-center gap-2">
-                <Wrench className="h-4 w-4" />
-                <h3 className="text-xs font-semibold">
-                  {t("dictionary.howToMake", {
-                    defaultValue: "How to make",
-                  })}
-                </h3>
                 <span className="ml-auto text-[10px] text-muted-foreground">
-                  {producers.length}
+                  {endpoints.length}
                 </span>
               </div>
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                {t("dictionary.destinationSidebarHint", {
+                  defaultValue:
+                    "Choose a product, trade item, or facility use to show only that route in the main view.",
+                })}
+              </p>
 
-              {producers.length > 0 ? (
-                <div className="space-y-2">
-                  {producers.map((recipe) => (
-                    <div
-                      key={recipe.id}
-                      className="rounded-lg border bg-background p-2"
-                    >
-                      <div className="text-[11px] font-semibold">
-                        {getRecipeName(recipe)}
-                      </div>
-                      <div className="mt-1 flex flex-wrap items-center gap-1">
-                        {recipe.inputs.map((entry, index) => (
-                          <MiniMaterialChip
-                            key={`${entry.itemId}-${index}`}
-                            itemId={entry.itemId}
-                            amount={entry.amount}
-                            itemById={itemById}
-                            onSelect={selectItem}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+              <div className="mt-2 flex flex-wrap gap-1">
+                {(
+                  [
+                    ["all", t("dictionary.endpointAll", { defaultValue: "All" })],
+                    [
+                      "product",
+                      t("dictionary.products", { defaultValue: "Products" }),
+                    ],
+                    [
+                      "trade",
+                      t("dictionary.tradeDestinations", {
+                        defaultValue: "Trade",
+                      }),
+                    ],
+                    [
+                      "facility",
+                      t("dictionary.facilityDestinations", {
+                        defaultValue: "Facilities",
+                      }),
+                    ],
+                  ] as const
+                ).map(([filter, label]) => (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => setEndpointFilter(filter)}
+                    className={cn(
+                      "rounded-md px-2 py-1 text-[11px] font-medium transition-colors",
+                      endpointFilter === filter
+                        ? "bg-foreground text-background"
+                        : "bg-muted text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {label} {endpointCounts[filter]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2 p-2">
+              <button
+                type="button"
+                onClick={showDirectUses}
+                className={cn(
+                  "flex w-full items-center gap-2 rounded-xl border p-2.5 text-left transition-colors",
+                  selectedEndpointId === null
+                    ? "border-primary bg-primary/10"
+                    : "bg-background hover:bg-accent",
+                )}
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted">
+                  <Workflow className="h-5 w-5" />
                 </div>
-              ) : (
-                <p className="text-xs text-muted-foreground">
-                  {t("dictionary.noProducer", {
-                    defaultValue:
-                      "No production recipe is registered for this item.",
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-xs font-semibold">
+                    {t("dictionary.directUsesRoute", {
+                      defaultValue: "Direct uses",
+                    })}
+                  </span>
+                  <span className="mt-0.5 block text-[10px] text-muted-foreground">
+                    {directUses.length}{" "}
+                    {t("dictionary.recipesCount", {
+                      defaultValue: "recipes",
+                    })}
+                  </span>
+                </span>
+              </button>
+
+              {visibleEndpoints.map((endpoint) => (
+                <EndpointChoice
+                  key={endpoint.id}
+                  endpoint={endpoint}
+                  itemById={itemById}
+                  selected={selectedEndpointId === endpoint.id}
+                  onSelect={() => selectEndpoint(endpoint)}
+                />
+              ))}
+
+              {visibleEndpoints.length === 0 && (
+                <div className="rounded-lg border border-dashed p-3 text-xs text-muted-foreground">
+                  {t("dictionary.noUsefulDestination", {
+                    defaultValue: "No useful destination is registered.",
                   })}
-                </p>
+                </div>
               )}
-            </section>
+            </div>
+
+            <div className="mx-3 border-t" />
+
+            <div className="space-y-4 p-3">
+              <ExternalDirectUses itemId={selectedItem.id} />
+
+              <section>
+                <div className="mb-2 flex items-center gap-2">
+                  <Wrench className="h-4 w-4" />
+                  <h3 className="text-xs font-semibold">
+                    {t("dictionary.howToMake", {
+                      defaultValue: "How to make",
+                    })}
+                  </h3>
+                  <span className="ml-auto text-[10px] text-muted-foreground">
+                    {producers.length}
+                  </span>
+                </div>
+
+                {producers.length > 0 ? (
+                  <div className="space-y-2">
+                    {producers.map((recipe) => (
+                      <div
+                        key={recipe.id}
+                        className="rounded-lg border bg-background p-2"
+                      >
+                        <div className="text-[11px] font-semibold">
+                          {getRecipeName(recipe)}
+                        </div>
+                        <div className="mt-1 flex flex-wrap items-center gap-1">
+                          {recipe.inputs.map((entry, index) => (
+                            <MiniMaterialChip
+                              key={`${entry.itemId}-${index}`}
+                              itemId={entry.itemId}
+                              amount={entry.amount}
+                              itemById={itemById}
+                              onSelect={selectItem}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    {t("dictionary.noProducer", {
+                      defaultValue:
+                        "No production recipe is registered for this item.",
+                    })}
+                  </p>
+                )}
+              </section>
+            </div>
           </aside>
         ) : (
           <aside className="hidden rounded-xl border bg-card p-4 text-sm text-muted-foreground lg:block">
             {t("dictionary.contextPanelEmpty", {
               defaultValue:
-                "Item description, effects, stock hints, trade, facilities, and recipes appear here after choosing a material.",
+                "Choose a material to see reachable products and other destinations here.",
             })}
           </aside>
         )}
