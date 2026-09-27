@@ -192,6 +192,8 @@
     "productionUsesShort": "Recipes",
     "facilitiesShort": "Facilities",
     "tradeShort": "Trade",
-    "contextPanelEmpty": "Item description, effects, stock hints, facility/trade uses, and recipes appear here after choosing a material."
+    "contextPanelEmpty": "Item description, effects, stock hints, facility/trade uses, and recipes appear here after choosing a material.",
+    "noItemDescription": "No description or effect is registered.",
+    "destinationSidebarHint": "Choose a product, trade item, or facility use to show only that route in the main view."
   }
 }
