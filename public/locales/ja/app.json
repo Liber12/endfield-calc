@@ -192,6 +192,8 @@
     "productionUsesShort": "生産用途",
     "facilitiesShort": "設備",
     "tradeShort": "納品",
-    "contextPanelEmpty": "素材を選ぶと、説明・効果・ストック候補・設備/納品用途・作り方がここに表示されます。"
+    "contextPanelEmpty": "素材を選ぶと、説明・効果・ストック候補・設備/納品用途・作り方がここに表示されます。",
+    "noItemDescription": "説明・効果は未登録です。",
+    "destinationSidebarHint": "製品・納品・設備を選ぶと、中央にその用途までのルートだけを表示します。"
   }
 }
