@@ -32,6 +32,11 @@ import {
 
 import { Input } from "@/components/ui/input";
 import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -73,6 +78,7 @@ type MaterialDictionaryProps = {
 
 type CategoryFilter = "all" | MaterialCategoryId;
 type EndpointFilter = "all" | UsefulEndpointKind;
+type MainView = "dependencies" | "route";
 
 function formatAmount(value: number): string {
   return Number.isInteger(value)
@@ -719,6 +725,7 @@ export default function MaterialDictionary({
     useState<CategoryFilter>("all");
   const [endpointFilter, setEndpointFilter] =
     useState<EndpointFilter>("all");
+  const [mainView, setMainView] = useState<MainView>("dependencies");
   const routeRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
@@ -820,6 +827,7 @@ export default function MaterialDictionary({
       setSelectedId(itemId);
       setSelectedEndpointId(null);
       setEndpointFilter("all");
+      setMainView("dependencies");
 
       const url = new URL(window.location.href);
       url.searchParams.set("view", "dictionary");
@@ -832,6 +840,7 @@ export default function MaterialDictionary({
 
   const showDirectUses = () => {
     setSelectedEndpointId(null);
+    setMainView("dependencies");
     const url = new URL(window.location.href);
     url.searchParams.delete("endpoint");
     window.history.replaceState(null, "", url.toString());
@@ -839,6 +848,7 @@ export default function MaterialDictionary({
 
   const selectEndpoint = (endpoint: UsefulEndpoint) => {
     setSelectedEndpointId(endpoint.id);
+    setMainView("route");
     const url = new URL(window.location.href);
     url.searchParams.set("endpoint", endpoint.id);
     window.history.replaceState(null, "", url.toString());
@@ -1035,22 +1045,37 @@ export default function MaterialDictionary({
 
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_340px]">
         <main className="flex min-h-[360px] min-w-0 flex-col overflow-hidden rounded-xl border bg-background lg:min-h-0">
-          <div className="flex items-center justify-between gap-3 border-b px-3 py-2">
-            <div className="flex min-w-0 items-center gap-2">
-              <Route className="h-4 w-4 shrink-0" />
-              <div className="min-w-0">
-                <h2 className="truncate text-sm font-semibold">
-                  {selectedEndpoint
-                    ? t("dictionary.selectedRoute", {
-                        defaultValue: "Selected production route",
-                      })
-                    : t("dictionary.directUsesRoute", {
-                        defaultValue: "Direct uses",
-                      })}
-                </h2>
-                {selectedItem && (
-                  <p className="truncate text-[11px] text-muted-foreground">
-                    {selectedEndpoint
+          <div className="flex flex-col gap-2 border-b px-3 py-2 md:flex-row md:items-center md:justify-between">
+            <Tabs
+              value={mainView}
+              onValueChange={(value) => setMainView(value as MainView)}
+              className="min-w-0"
+            >
+              <TabsList className="grid h-9 w-full grid-cols-2 md:w-[320px]">
+                <TabsTrigger value="dependencies" className="gap-2">
+                  <Workflow className="h-4 w-4 shrink-0" />
+                  <span>
+                    {t("dictionary.dependenciesView", {
+                      defaultValue: "Dependencies",
+                    })}
+                  </span>
+                </TabsTrigger>
+                <TabsTrigger value="route" className="gap-2">
+                  <Route className="h-4 w-4 shrink-0" />
+                  <span>
+                    {t("dictionary.routeView", {
+                      defaultValue: "Production route",
+                    })}
+                  </span>
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+
+            <div className="flex min-w-0 items-center justify-between gap-3 md:flex-1 md:justify-end">
+              {selectedItem && (
+                <p className="min-w-0 truncate text-[11px] text-muted-foreground">
+                  {mainView === "route"
+                    ? selectedEndpoint
                       ? t("dictionary.routeSummary", {
                           from: getItemName(selectedItem),
                           to: itemById.get(selectedEndpoint.targetItemId)
@@ -1061,26 +1086,29 @@ export default function MaterialDictionary({
                           steps: route?.length ?? 0,
                           defaultValue: "{{from}} → {{to}} · {{steps}} steps",
                         })
-                      : t("dictionary.directUseHint", {
+                      : t("dictionary.routeNeedsDestination", {
                           defaultValue:
-                            "Shows only recipes that directly consume the selected material.",
-                        })}
-                  </p>
-                )}
-              </div>
-            </div>
+                            "Choose a destination from the right sidebar.",
+                        })
+                    : t("dictionary.directUseHint", {
+                        defaultValue:
+                          "Shows only recipes that directly consume the selected material.",
+                      })}
+                </p>
+              )}
 
-            {selectedItem && (
-              <button
-                type="button"
-                onClick={() => setPickerOpen(true)}
-                className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs hover:bg-accent"
-              >
-                {t("dictionary.changeMaterial", {
-                  defaultValue: "Change material",
-                })}
-              </button>
-            )}
+              {selectedItem && (
+                <button
+                  type="button"
+                  onClick={() => setPickerOpen(true)}
+                  className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs hover:bg-accent"
+                >
+                  {t("dictionary.changeMaterial", {
+                    defaultValue: "Change material",
+                  })}
+                </button>
+              )}
+            </div>
           </div>
 
           <div
@@ -1113,7 +1141,8 @@ export default function MaterialDictionary({
                   </button>
                 </div>
               </div>
-            ) : selectedEndpoint && route ? (
+            ) : mainView === "route" ? (
+              selectedEndpoint && route ? (
               <>
                 <div className="space-y-2 md:hidden">
                   <RouteMaterial
@@ -1181,6 +1210,24 @@ export default function MaterialDictionary({
                   <RouteEndpointDetail endpoint={selectedEndpoint} />
                 </div>
               </>
+              ) : (
+                <div className="flex min-h-full items-center justify-center">
+                  <div className="max-w-sm rounded-xl border border-dashed bg-background/80 p-5 text-center">
+                    <Route className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
+                    <h3 className="text-sm font-semibold">
+                      {t("dictionary.routeNeedsDestinationTitle", {
+                        defaultValue: "Choose a destination",
+                      })}
+                    </h3>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                      {t("dictionary.routeNeedsDestination", {
+                        defaultValue:
+                          "Choose a product, trade item, or facility from the right sidebar to show its route.",
+                      })}
+                    </p>
+                  </div>
+                </div>
+              )
             ) : (
               <div className="flex min-h-full flex-col gap-3 md:flex-row md:items-start">
                 <div className="md:sticky md:left-0 md:top-0 md:w-[140px] md:shrink-0">
