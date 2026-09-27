@@ -194,6 +194,10 @@
     "tradeShort": "納品",
     "contextPanelEmpty": "素材を選ぶと、説明・効果・ストック候補・設備/納品用途・作り方がここに表示されます。",
     "noItemDescription": "説明・効果は未登録です。",
-    "destinationSidebarHint": "製品・納品・設備を選ぶと、中央にその用途までのルートだけを表示します。"
+    "destinationSidebarHint": "製品・納品・設備を選ぶと、中央にその用途までのルートだけを表示します。",
+    "dependenciesView": "依存関係",
+    "routeView": "生産ルート",
+    "routeNeedsDestinationTitle": "用途先を選択",
+    "routeNeedsDestination": "右サイドバーから製品・納品・設備を選ぶと、その用途までのルートを表示します。"
   }
 }
