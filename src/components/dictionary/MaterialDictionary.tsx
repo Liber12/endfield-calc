@@ -61,9 +61,12 @@ import {
 } from "@/lib/material-use-routes";
 import {
   getMaterialCategory,
+  getMaterialGroup,
   getMaterialSubtype,
   MATERIAL_CATEGORY_ORDER,
+  MATERIAL_GROUP_ORDER,
   type MaterialCategoryId,
+  type MaterialGroupId,
   type MaterialSubtypeId,
 } from "@/lib/item-category";
 import { externalItemUseById } from "@/data/material-external-uses";
@@ -133,6 +136,13 @@ function subtypeLabel(
   subtype: MaterialSubtypeId,
 ): string {
   return t(`dictionary.subtype.${subtype}`, { defaultValue: subtype });
+}
+
+function groupLabel(
+  t: TFunction<"app">,
+  group: MaterialGroupId,
+): string {
+  return t(`dictionary.group.${group}`, { defaultValue: group });
 }
 
 function ItemIcon({
@@ -262,6 +272,15 @@ function MaterialPicker({
       );
   }, [items, query, categoryFilter, i18n.language]);
 
+  const groupedItems = useMemo(
+    () =>
+      MATERIAL_GROUP_ORDER.map((group) => ({
+        group,
+        items: filteredItems.filter((item) => getMaterialGroup(item) === group),
+      })).filter((entry) => entry.items.length > 0),
+    [filteredItems],
+  );
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
@@ -292,7 +311,6 @@ function MaterialPicker({
               placeholder={t("dictionary.search", {
                 defaultValue: "Search materials",
               })}
-              autoFocus
             />
           </div>
 
@@ -341,49 +359,65 @@ function MaterialPicker({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto p-3">
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-            {filteredItems.map((item) => {
-              const active = item.id === selectedId;
-              const subtype = getMaterialSubtype(item);
-              const Icon = SUBTYPE_ICON[subtype];
-              const useCount = getMeaningfulDirectUses(
-                item.id,
-                index,
-                itemById,
-              ).length;
+          <div className="space-y-4">
+            {groupedItems.map(({ group, items: groupItems }) => (
+              <section key={group}>
+                <div className="endfield-group-heading mb-2 flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-[0.14em]">
+                    {groupLabel(t, group)}
+                  </span>
+                  <span className="text-[9px] text-muted-foreground">
+                    {groupItems.length}
+                  </span>
+                  <span className="h-px flex-1 bg-border" />
+                </div>
 
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => {
-                    onSelectItem(item.id);
-                    onOpenChange(false);
-                  }}
-                  className={cn(
-                    "endfield-item-card relative flex min-h-[132px] flex-col items-center border p-3 text-center transition-colors",
-                    active
-                      ? "is-active border-primary bg-primary/10"
-                      : "bg-background hover:bg-accent",
-                  )}
-                  title={item.id}
-                >
-                  <ItemIcon item={item} size="lg" />
-                  <span className="mt-2 line-clamp-2 text-sm font-semibold leading-tight">
-                    {getItemName(item)}
-                  </span>
-                  <span className="mt-auto flex items-center gap-1 pt-2 text-[11px] text-muted-foreground">
-                    <Icon className="h-3 w-3" />
-                    {subtypeLabel(t, subtype)}
-                  </span>
-                  {useCount > 0 && (
-                    <span className="absolute right-2 top-2 rounded-full bg-muted px-1.5 py-0.5 text-[10px]">
-                      {useCount}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                  {groupItems.map((item) => {
+                    const active = item.id === selectedId;
+                    const subtype = getMaterialSubtype(item);
+                    const Icon = SUBTYPE_ICON[subtype];
+                    const useCount = getMeaningfulDirectUses(
+                      item.id,
+                      index,
+                      itemById,
+                    ).length;
+
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => {
+                          onSelectItem(item.id);
+                          onOpenChange(false);
+                        }}
+                        className={cn(
+                          "endfield-item-card relative flex min-h-[132px] flex-col items-center border p-3 text-center transition-colors",
+                          active
+                            ? "is-active border-primary bg-primary/10"
+                            : "bg-background hover:bg-accent",
+                        )}
+                        title={item.id}
+                      >
+                        <ItemIcon item={item} size="lg" />
+                        <span className="mt-2 line-clamp-2 text-sm font-semibold leading-tight">
+                          {getItemName(item)}
+                        </span>
+                        <span className="mt-auto flex items-center gap-1 pt-2 text-[11px] text-muted-foreground">
+                          <Icon className="h-3 w-3" />
+                          {subtypeLabel(t, subtype)}
+                        </span>
+                        {useCount > 0 && (
+                          <span className="absolute right-2 top-2 rounded-full bg-muted px-1.5 py-0.5 text-[10px]">
+                            {useCount}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       </SheetContent>
@@ -726,6 +760,7 @@ export default function MaterialDictionary({
   const [endpointFilter, setEndpointFilter] =
     useState<EndpointFilter>("all");
   const [mainView, setMainView] = useState<MainView>("dependencies");
+  const [mobileDestinationsOpen, setMobileDestinationsOpen] = useState(false);
   const routeRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
@@ -841,6 +876,7 @@ export default function MaterialDictionary({
   const showDirectUses = () => {
     setSelectedEndpointId(null);
     setMainView("dependencies");
+    setMobileDestinationsOpen(false);
     const url = new URL(window.location.href);
     url.searchParams.delete("endpoint");
     window.history.replaceState(null, "", url.toString());
@@ -849,6 +885,7 @@ export default function MaterialDictionary({
   const selectEndpoint = (endpoint: UsefulEndpoint) => {
     setSelectedEndpointId(endpoint.id);
     setMainView("route");
+    setMobileDestinationsOpen(false);
     const url = new URL(window.location.href);
     url.searchParams.set("endpoint", endpoint.id);
     window.history.replaceState(null, "", url.toString());
@@ -1046,6 +1083,31 @@ export default function MaterialDictionary({
           </button>
         )}
       </header>
+
+      {selectedItem && (
+        <button
+          type="button"
+          onClick={() => setMobileDestinationsOpen(true)}
+          className="endfield-mobile-destinations flex min-h-11 items-center gap-2 border px-3 text-left lg:hidden"
+        >
+          <Route className="h-4 w-4 shrink-0" />
+          <span className="min-w-0 flex-1">
+            <span className="block text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+              {t("dictionary.routeTo", { defaultValue: "Destination" })}
+            </span>
+            <span className="block truncate text-sm font-semibold">
+              {selectedEndpoint
+                ? itemById.get(selectedEndpoint.targetItemId)
+                  ? getItemName(itemById.get(selectedEndpoint.targetItemId)!)
+                  : selectedEndpoint.targetItemId
+                : t("dictionary.directUsesRoute", {
+                    defaultValue: "Direct uses",
+                  })}
+            </span>
+          </span>
+          <ChevronDown className="h-4 w-4 shrink-0" />
+        </button>
+      )}
 
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_340px]">
         <main className="endfield-workbench flex min-h-[360px] min-w-0 flex-col overflow-hidden border bg-background lg:min-h-0">
@@ -1277,7 +1339,7 @@ export default function MaterialDictionary({
         </main>
 
         {selectedItem ? (
-          <aside className="endfield-sidebar min-h-0 overflow-y-auto border bg-card">
+          <aside className="endfield-sidebar hidden min-h-0 overflow-y-auto border bg-card lg:block">
             <div className="endfield-sidebar-header sticky top-0 z-10 border-b bg-card/95 p-3 backdrop-blur">
               <div className="flex items-center gap-2">
                 <Route className="h-4 w-4" />
@@ -1446,6 +1508,108 @@ export default function MaterialDictionary({
           </aside>
         )}
       </div>
+
+      <Sheet
+        open={mobileDestinationsOpen}
+        onOpenChange={setMobileDestinationsOpen}
+      >
+        <SheetContent
+          side="bottom"
+          className="endfield-mobile-destination-sheet max-h-[78dvh] gap-0 p-0"
+        >
+          <SheetHeader className="endfield-sidebar-header border-b pr-12">
+            <SheetTitle className="text-left text-sm">
+              {t("dictionary.useDestinations", {
+                defaultValue: "Reachable useful destinations",
+              })}
+            </SheetTitle>
+            <SheetDescription className="text-left text-xs">
+              {t("dictionary.destinationSidebarHint", {
+                defaultValue:
+                  "Choose a product, trade item, or facility use to show only that route in the main view.",
+              })}
+            </SheetDescription>
+          </SheetHeader>
+
+          <div className="flex flex-wrap gap-1 border-b p-2">
+            {(
+              [
+                ["all", t("dictionary.endpointAll", { defaultValue: "All" })],
+                [
+                  "product",
+                  t("dictionary.products", { defaultValue: "Products" }),
+                ],
+                [
+                  "trade",
+                  t("dictionary.tradeDestinations", {
+                    defaultValue: "Trade",
+                  }),
+                ],
+                [
+                  "facility",
+                  t("dictionary.facilityDestinations", {
+                    defaultValue: "Facilities",
+                  }),
+                ],
+              ] as const
+            ).map(([filter, label]) => (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setEndpointFilter(filter)}
+                className={cn(
+                  "endfield-sidebar-filter px-2 py-1 text-[11px] font-medium transition-colors",
+                  endpointFilter === filter
+                    ? "is-active bg-foreground text-background"
+                    : "bg-muted text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {label} {endpointCounts[filter]}
+              </button>
+            ))}
+          </div>
+
+          <div className="min-h-0 flex-1 space-y-2 overflow-y-auto p-2">
+            <button
+              type="button"
+              onClick={showDirectUses}
+              className={cn(
+                "endfield-endpoint-card flex w-full items-center gap-2 border p-2.5 text-left transition-colors",
+                selectedEndpointId === null
+                  ? "is-active border-primary bg-primary/10"
+                  : "bg-background hover:bg-accent",
+              )}
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-muted">
+                <Workflow className="h-5 w-5" />
+              </div>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-xs font-semibold">
+                  {t("dictionary.directUsesRoute", {
+                    defaultValue: "Direct uses",
+                  })}
+                </span>
+                <span className="mt-0.5 block text-[10px] text-muted-foreground">
+                  {directUses.length}{" "}
+                  {t("dictionary.recipesCount", {
+                    defaultValue: "recipes",
+                  })}
+                </span>
+              </span>
+            </button>
+
+            {visibleEndpoints.map((endpoint) => (
+              <EndpointChoice
+                key={endpoint.id}
+                endpoint={endpoint}
+                itemById={itemById}
+                selected={selectedEndpointId === endpoint.id}
+                onSelect={() => selectEndpoint(endpoint)}
+              />
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
     </section>
   );
 }
