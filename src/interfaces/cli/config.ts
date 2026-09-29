@@ -1,4 +1,3 @@
-import { readFileSync } from "node:fs";
 import {
   facilities,
   items,
@@ -44,9 +43,7 @@ export function requireKnownItemId(value: string): ItemId {
   return requireId("item id", value, itemIds) as ItemId;
 }
 
-export function readCliConfig(path: string | undefined): CliConfig {
-  if (!path) return {};
-  const raw = path === "-" ? readFileSync(0, "utf8") : readFileSync(path, "utf8");
+export function parseCliConfig(raw: string): CliConfig {
   const parsed = JSON.parse(raw);
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
     throw new Error("Config root must be a JSON object");
