@@ -66,16 +66,16 @@ The production solver can also run without React through the Bun-based CLI. It u
 
 ```bash
 # One target, using the web app defaults for Valley IV
-pnpm calc -- plan --target item_iron_powder:60 --pretty
+pnpm --silent calc -- plan --target item_iron_powder:60 --pretty
 
 # Reproduce a fuller site configuration from JSON
-pnpm calc -- plan --config examples/cli-plan.json --pretty
+pnpm --silent calc -- plan --config examples/cli-plan.json --pretty
 
 # Priority-Max for one target (locked target suffix: 30l)
-pnpm calc -- max --config examples/cli-plan.json --item item_iron_powder --pretty
+pnpm --silent calc -- max --config examples/cli-plan.json --item item_iron_powder --pretty
 
 # Scale unlocked targets to configured limits
-pnpm calc -- fit --config examples/cli-plan.json --pretty
+pnpm --silent calc -- fit --config examples/cli-plan.json --pretty
 ```
 
 The CLI writes machine-readable JSON to stdout. Its config deliberately mirrors the site's state split:
