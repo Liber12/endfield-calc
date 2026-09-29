@@ -198,6 +198,27 @@
     "dependenciesView": "Dependencies",
     "routeView": "Production route",
     "routeNeedsDestinationTitle": "Choose a destination",
-    "routeNeedsDestination": "Choose a product, trade item, or facility from the right sidebar to show its route."
+    "routeNeedsDestination": "Choose a product, trade item, or facility from the right sidebar to show its route.",
+    "group": {
+      "rawOre": "Ores & Raw Solids",
+      "rawLiquid": "Natural Liquids",
+      "rawGas": "Natural Gases",
+      "plant": "Plant Materials",
+      "seed": "Seeds",
+      "powder": "Powders",
+      "refined": "Refined Materials",
+      "industrialLiquid": "Industrial Liquids",
+      "industrialGas": "Industrial Gases",
+      "container": "Empty Containers",
+      "filledContainer": "Filled Containers",
+      "component": "Industrial Components",
+      "battery": "Batteries",
+      "equipment": "Equipment",
+      "medicine": "Medicine",
+      "food": "Food",
+      "bomb": "Explosives",
+      "event": "Event Materials",
+      "other": "Other"
+    }
   }
 }
