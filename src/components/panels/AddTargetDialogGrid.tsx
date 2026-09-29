@@ -17,6 +17,10 @@ import { getItemName } from "@/lib/i18n-helpers";
 import { MAX_TARGETS } from "@/data";
 import { tierClasses } from "@/lib/tier-styles";
 import { cn } from "@/lib/utils";
+import {
+  getMaterialGroup,
+  MATERIAL_GROUP_ORDER,
+} from "@/lib/item-category";
 
 /* ── Types ── */
 
@@ -135,7 +139,7 @@ export default function AddTargetDialogGrid({
   onLockedItemClick,
 }: AddTargetDialogGridProps) {
   const { t } = useTranslation("dialog");
-  const searchRef = useRef<HTMLInputElement>(null);
+  const { t: tApp } = useTranslation("app");
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTier, setActiveTier] = useState<number | null>(null);
@@ -150,9 +154,6 @@ export default function AddTargetDialogGrid({
       setSearchQuery("");
       setActiveTier(null);
       setQueue([]);
-      /* auto-focus search after dialog animation */
-      const raf = requestAnimationFrame(() => searchRef.current?.focus());
-      return () => cancelAnimationFrame(raf);
     }
   }, [open]);
 
@@ -247,6 +248,22 @@ export default function AddTargetDialogGrid({
     [applyFilter, lockedPickable],
   );
 
+  const groupedFilteredItems = useMemo(
+    () =>
+      MATERIAL_GROUP_ORDER.map((group) => ({
+        group,
+        available: filteredItems.filter(
+          (item) => getMaterialGroup(item) === group,
+        ),
+        locked: filteredLocked.filter(
+          (item) => getMaterialGroup(item) === group,
+        ),
+      })).filter(
+        (entry) => entry.available.length > 0 || entry.locked.length > 0,
+      ),
+    [filteredItems, filteredLocked],
+  );
+
   /* Tier counts for filter chips — union of available + locked. */
   const tierCounts = useMemo(() => {
     const counts = new Map<number, number>();
@@ -331,7 +348,7 @@ export default function AddTargetDialogGrid({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-sm:inset-0 max-sm:max-w-none max-sm:h-dvh max-sm:rounded-none max-sm:translate-x-0 max-sm:translate-y-0 sm:max-w-6xl sm:h-[80vh] flex flex-col gap-0 p-0 overflow-hidden">
+      <DialogContent className="endfield-target-dialog max-sm:inset-0 max-sm:max-w-none max-sm:h-dvh max-sm:rounded-none max-sm:translate-x-0 max-sm:translate-y-0 sm:max-w-6xl sm:h-[80vh] flex flex-col gap-0 p-0 overflow-hidden">
         {/* ── Header ── */}
         <DialogHeader className="px-3 sm:px-5 pt-5 pb-0 shrink-0">
           <div className="flex items-center gap-1.5">
@@ -370,7 +387,6 @@ export default function AddTargetDialogGrid({
           <div className="relative">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
             <Input
-              ref={searchRef}
               placeholder={t("searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -474,32 +490,53 @@ export default function AddTargetDialogGrid({
               </p>
             </div>
           ) : (
-            <div className="grid gap-2.5 grid-cols-[repeat(auto-fill,minmax(90px,1fr))]">
-              {filteredItems.map((item) => (
-                <ItemCell
-                  key={item.id}
-                  item={item}
-                  isQueued={queuedIds.has(item.id)}
-                  isDisabled={remainingSlots <= 0 && !queuedIds.has(item.id)}
-                  metastorageOnly={metastorageOnlyIds.has(item.id)}
-                  metastorageUnlockable={metastorageUnlockableIds.has(item.id)}
-                  onToggle={toggleItem}
-                  onDoubleClick={handleDoubleClick}
-                />
-              ))}
-              {/* Locked (greyed) items — producible here once their AIC
-                  plan is researched; click routes to Settings. */}
-              {filteredLocked.map((item) => (
-                <ItemCell
-                  key={item.id}
-                  item={item}
-                  isQueued={false}
-                  isDisabled={false}
-                  locked
-                  onToggle={toggleItem}
-                  onDoubleClick={handleDoubleClick}
-                  onLockedClick={onLockedItemClick}
-                />
+            <div className="space-y-5">
+              {groupedFilteredItems.map(({ group, available, locked }) => (
+                <section key={group}>
+                  <div className="endfield-group-heading mb-2 flex items-center gap-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.14em]">
+                      {tApp(`dictionary.group.${group}`, {
+                        defaultValue: group,
+                      })}
+                    </span>
+                    <span className="text-[9px] text-muted-foreground">
+                      {available.length + locked.length}
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
+
+                  <div className="grid gap-2.5 grid-cols-[repeat(auto-fill,minmax(90px,1fr))]">
+                    {available.map((item) => (
+                      <ItemCell
+                        key={item.id}
+                        item={item}
+                        isQueued={queuedIds.has(item.id)}
+                        isDisabled={
+                          remainingSlots <= 0 && !queuedIds.has(item.id)
+                        }
+                        metastorageOnly={metastorageOnlyIds.has(item.id)}
+                        metastorageUnlockable={metastorageUnlockableIds.has(
+                          item.id,
+                        )}
+                        onToggle={toggleItem}
+                        onDoubleClick={handleDoubleClick}
+                      />
+                    ))}
+
+                    {locked.map((item) => (
+                      <ItemCell
+                        key={item.id}
+                        item={item}
+                        isQueued={false}
+                        isDisabled={false}
+                        locked
+                        onToggle={toggleItem}
+                        onDoubleClick={handleDoubleClick}
+                        onLockedClick={onLockedItemClick}
+                      />
+                    ))}
+                  </div>
+                </section>
               ))}
             </div>
           )}
@@ -602,7 +639,7 @@ const ItemCell = memo(function ItemCell({
       title={tileHint ?? getItemName(item)}
       aria-label={tileHint}
       className={cn(
-        "group relative aspect-square rounded-lg overflow-hidden border-l-2 border border-border transition-all duration-150 cursor-pointer",
+        "endfield-target-item group relative aspect-square overflow-hidden border-l-2 border border-border transition-all duration-150 cursor-pointer",
         tc.border,
         isQueued
           ? cn("ring-2", tc.ring, tc.bg)
