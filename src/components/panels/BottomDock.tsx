@@ -84,7 +84,7 @@ const BottomDock = memo(function BottomDock({
     !hasFacilities && !hasRawMaterials && !hasLogistics && issueCount === 0;
 
   return (
-    <div className="shrink-0 rounded-lg border border-border bg-card shadow-sm overflow-hidden">
+    <div className="endfield-bottom-dock shrink-0 border border-border bg-card overflow-hidden">
       <StatsTicker
         totalPowerConsumption={stats.totalPowerConsumption}
         totalPowerGeneration={stats.totalPowerGeneration}
