@@ -35,8 +35,22 @@ jobs:
           node-version: "20.x"
           cache: "pnpm"
 
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Run tests
         run: pnpm test
+
+      - name: Build web app
+        run: pnpm build
+
+      - name: Smoke-test CLI
+        run: |
+          bun run scripts/calc.ts --help > /tmp/cli-help.txt
+          bun run scripts/calc.ts plan --config examples/cli-plan.json > /tmp/cli-plan.json
+          node -e 'const x=require("/tmp/cli-plan.json"); if(x.schemaVersion!==1 || x.command!=="plan" || !x.plan) process.exit(1)'

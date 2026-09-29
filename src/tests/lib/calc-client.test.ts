@@ -28,7 +28,7 @@
  * fresh dynamic import.
  */
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
-import type { CalcRequest } from "@/lib/calc-client";
+import type { CalcRequest } from "@/interfaces/web/calc-client";
 import type { MaximizeResult } from "@/lib/target-optimizer";
 
 const FAKE_PLAN = { fake: "plan" };
@@ -105,7 +105,7 @@ const makeRequest = (): CalcRequest => ({
 const makeSearchArgs = () => ({ ...makeRequest(), targets: [] });
 
 async function importClient() {
-  return await import("@/lib/calc-client");
+  return await import("@/interfaces/web/calc-client");
 }
 
 beforeEach(() => {

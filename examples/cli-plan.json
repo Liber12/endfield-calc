@@ -1,0 +1,33 @@
+{
+  "targets": [
+    {
+      "itemId": "item_iron_powder",
+      "rate": 60
+    }
+  ],
+  "settings": {
+    "domains": {
+      "current": "domain_1",
+      "inactive": ["domain_2"]
+    },
+    "aic": {
+      "unresearched": [],
+      "capOverrides": []
+    },
+    "rawLimits": {
+      "overrides": []
+    },
+    "structures": {
+      "disabled": []
+    },
+    "metastorage": {
+      "routes": []
+    }
+  },
+  "plan": {
+    "recipeOverrides": [],
+    "manualRawMaterials": [],
+    "powerSustain": false,
+    "machinesPerVaporizer": 4
+  }
+}
