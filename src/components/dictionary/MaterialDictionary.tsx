@@ -266,9 +266,9 @@ function MaterialPicker({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="left"
-        className="w-[94vw] gap-0 p-0 sm:max-w-2xl"
+        className="endfield-picker w-[94vw] gap-0 p-0 sm:max-w-2xl"
       >
-        <SheetHeader className="border-b pr-12">
+        <SheetHeader className="endfield-picker-header border-b pr-12">
           <SheetTitle>
             {t("dictionary.chooseMaterial", {
               defaultValue: "Choose starting material",
@@ -288,7 +288,7 @@ function MaterialPicker({
             <Input
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
-              className="h-11 pl-9"
+              className="endfield-search-input h-11 pl-9"
               placeholder={t("dictionary.search", {
                 defaultValue: "Search materials",
               })}
@@ -301,9 +301,9 @@ function MaterialPicker({
               type="button"
               onClick={() => onCategoryFilterChange("all")}
               className={cn(
-                "inline-flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2 text-sm",
+                "endfield-filter-pill inline-flex shrink-0 items-center gap-2 border px-3 py-2 text-sm",
                 categoryFilter === "all"
-                  ? "border-primary bg-primary/10"
+                  ? "is-active border-primary bg-primary/10"
                   : "bg-background hover:bg-accent",
               )}
             >
@@ -327,7 +327,7 @@ function MaterialPicker({
                   className={cn(
                     "inline-flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2 text-sm",
                     categoryFilter === category
-                      ? "border-primary bg-primary/10"
+                      ? "is-active border-primary bg-primary/10"
                       : "bg-background hover:bg-accent",
                   )}
                 >
@@ -361,9 +361,9 @@ function MaterialPicker({
                     onOpenChange(false);
                   }}
                   className={cn(
-                    "relative flex min-h-[132px] flex-col items-center rounded-xl border p-3 text-center transition-colors",
+                    "endfield-item-card relative flex min-h-[132px] flex-col items-center border p-3 text-center transition-colors",
                     active
-                      ? "border-primary bg-primary/10"
+                      ? "is-active border-primary bg-primary/10"
                       : "bg-background hover:bg-accent",
                   )}
                   title={item.id}
@@ -432,9 +432,9 @@ function EndpointChoice({
       type="button"
       onClick={onSelect}
       className={cn(
-        "flex w-full items-center gap-2 rounded-xl border p-2.5 text-left transition-colors",
+        "endfield-endpoint-card flex w-full items-center gap-2 border p-2.5 text-left transition-colors",
         selected
-          ? "border-primary bg-primary/10"
+          ? "is-active border-primary bg-primary/10"
           : "bg-background hover:bg-accent",
       )}
     >
@@ -472,7 +472,7 @@ function DirectUseLane({
   );
 
   return (
-    <article className="rounded-xl border bg-card p-3">
+    <article className="endfield-direct-lane border bg-card p-3">
       <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
         <div className="min-w-[150px]">
           <div className="text-sm font-semibold">{getRecipeName(recipe)}</div>
@@ -538,8 +538,8 @@ function RouteMaterial({
       type="button"
       onClick={() => onSelectItem(itemId)}
       className={cn(
-        "flex w-full flex-col items-center rounded-xl border bg-card p-3 text-center md:w-[128px] md:shrink-0",
-        emphasis && "border-primary bg-primary/5 shadow-sm",
+        "endfield-route-material flex w-full flex-col items-center border bg-card p-3 text-center md:w-[128px] md:shrink-0",
+        emphasis && "is-emphasis border-primary bg-primary/5",
       )}
     >
       <ItemIcon item={item} size="lg" />
@@ -565,7 +565,7 @@ function RouteRecipe({
   const facility = facilityById.get(step.recipe.facilityId);
 
   return (
-    <div className="w-full rounded-xl border border-dashed bg-background p-3 md:w-[180px] md:shrink-0">
+    <div className="endfield-route-recipe w-full border border-dashed bg-background p-3 md:w-[180px] md:shrink-0">
       <div className="text-xs font-semibold">{getRecipeName(step.recipe)}</div>
       <div className="mt-0.5 text-[10px] text-muted-foreground">
         {facility ? getFacilityName(facility) : step.recipe.facilityId} ·{" "}
@@ -607,7 +607,7 @@ function RouteEndpointDetail({ endpoint }: { endpoint: UsefulEndpoint }) {
 
   if (endpoint.kind === "product") {
     return (
-      <div className="flex w-full items-center justify-center rounded-xl border bg-primary/5 p-4 text-center text-sm font-semibold md:w-[160px] md:shrink-0">
+      <div className="endfield-route-destination flex w-full items-center justify-center border bg-primary/5 p-4 text-center text-sm font-semibold md:w-[160px] md:shrink-0">
         <Package className="mr-2 h-4 w-4" />
         {t("dictionary.completedProduct", { defaultValue: "Product" })}
       </div>
@@ -616,7 +616,7 @@ function RouteEndpointDetail({ endpoint }: { endpoint: UsefulEndpoint }) {
 
   if (endpoint.kind === "trade") {
     return (
-      <div className="w-full rounded-xl border bg-muted/50 p-3 md:w-[210px] md:shrink-0">
+      <div className="endfield-route-destination w-full border bg-muted/50 p-3 md:w-[210px] md:shrink-0">
         <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold">
           <Store className="h-4 w-4" />
           {t("dictionary.regionalTrade", { defaultValue: "Regional trade" })}
@@ -634,7 +634,7 @@ function RouteEndpointDetail({ endpoint }: { endpoint: UsefulEndpoint }) {
   }
 
   return (
-    <div className="w-full rounded-xl border bg-muted/50 p-3 md:w-[220px] md:shrink-0">
+    <div className="endfield-route-destination w-full border bg-muted/50 p-3 md:w-[220px] md:shrink-0">
       <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold">
         <Building2 className="h-4 w-4" />
         {t("dictionary.facilityConstruction", {
@@ -870,7 +870,11 @@ export default function MaterialDictionary({
   }, [endpoints]);
 
   return (
-    <section className="flex min-h-0 flex-1 flex-col gap-3">
+    <section className="endfield-dictionary flex min-h-0 flex-1 flex-col gap-3">
+      <div className="endfield-system-bar" aria-hidden="true">
+        <span>ENDFIELD INDUSTRIES // MATERIAL RECORD</span>
+        <span>SUPPLY NETWORK / ACTIVE</span>
+      </div>
       <MaterialPicker
         open={pickerOpen}
         onOpenChange={setPickerOpen}
@@ -886,14 +890,14 @@ export default function MaterialDictionary({
         onSelectItem={selectItem}
       />
 
-      <header className="rounded-xl border bg-card p-3">
+      <header className="endfield-material-header border bg-card p-3">
         {selectedItem ? (
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-3 md:flex-row md:items-start">
               <button
                 type="button"
                 onClick={() => setPickerOpen(true)}
-                className="flex min-h-16 min-w-0 items-center gap-3 rounded-xl border bg-background px-3 text-left transition-colors hover:bg-accent md:min-w-[280px]"
+                className="endfield-material-subject flex min-h-16 min-w-0 items-center gap-3 border bg-background px-3 text-left transition-colors hover:bg-accent md:min-w-[280px]"
               >
                 <ItemIcon item={selectedItem} size="xl" />
                 <span className="min-w-0 flex-1">
@@ -902,7 +906,7 @@ export default function MaterialDictionary({
                       defaultValue: "Starting material",
                     })}
                   </span>
-                  <span className="block truncate text-lg font-bold">
+                  <span className="endfield-display-name block truncate text-lg font-bold">
                     {getItemName(selectedItem)}
                   </span>
                   <span className="mt-1 flex flex-wrap gap-1">
@@ -928,7 +932,7 @@ export default function MaterialDictionary({
                 {selectedDetail ? (
                   <section
                     className={cn(
-                      "h-full rounded-xl border p-3",
+                      "endfield-description h-full border p-3",
                       selectedDetail.kind === "effect"
                         ? "border-primary/30 bg-primary/5"
                         : "bg-background",
@@ -1044,14 +1048,14 @@ export default function MaterialDictionary({
       </header>
 
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_340px]">
-        <main className="flex min-h-[360px] min-w-0 flex-col overflow-hidden rounded-xl border bg-background lg:min-h-0">
+        <main className="endfield-workbench flex min-h-[360px] min-w-0 flex-col overflow-hidden border bg-background lg:min-h-0">
           <div className="flex flex-col gap-2 border-b px-3 py-2 md:flex-row md:items-center md:justify-between">
             <Tabs
               value={mainView}
               onValueChange={(value) => setMainView(value as MainView)}
               className="min-w-0"
             >
-              <TabsList className="grid h-9 w-full grid-cols-2 md:w-[320px]">
+              <TabsList className="endfield-view-tabs grid h-9 w-full grid-cols-2 md:w-[320px]">
                 <TabsTrigger value="dependencies" className="gap-2">
                   <Workflow className="h-4 w-4 shrink-0" />
                   <span>
@@ -1113,7 +1117,7 @@ export default function MaterialDictionary({
 
           <div
             ref={routeRef}
-            className="min-h-0 flex-1 overflow-auto bg-[radial-gradient(circle_at_1px_1px,hsl(var(--border))_1px,transparent_0)] bg-[size:22px_22px] p-3 md:p-5"
+            className="endfield-route-canvas min-h-0 flex-1 overflow-auto p-3 md:p-5"
           >
             {!selectedItem ? (
               <div className="flex h-full min-h-[300px] items-center justify-center">
@@ -1273,8 +1277,8 @@ export default function MaterialDictionary({
         </main>
 
         {selectedItem ? (
-          <aside className="min-h-0 overflow-y-auto rounded-xl border bg-card">
-            <div className="sticky top-0 z-10 border-b bg-card/95 p-3 backdrop-blur">
+          <aside className="endfield-sidebar min-h-0 overflow-y-auto border bg-card">
+            <div className="endfield-sidebar-header sticky top-0 z-10 border-b bg-card/95 p-3 backdrop-blur">
               <div className="flex items-center gap-2">
                 <Route className="h-4 w-4" />
                 <h2 className="text-sm font-semibold">
@@ -1320,9 +1324,9 @@ export default function MaterialDictionary({
                     type="button"
                     onClick={() => setEndpointFilter(filter)}
                     className={cn(
-                      "rounded-md px-2 py-1 text-[11px] font-medium transition-colors",
+                      "endfield-sidebar-filter px-2 py-1 text-[11px] font-medium transition-colors",
                       endpointFilter === filter
-                        ? "bg-foreground text-background"
+                        ? "is-active bg-foreground text-background"
                         : "bg-muted text-muted-foreground hover:text-foreground",
                     )}
                   >
@@ -1337,7 +1341,7 @@ export default function MaterialDictionary({
                 type="button"
                 onClick={showDirectUses}
                 className={cn(
-                  "flex w-full items-center gap-2 rounded-xl border p-2.5 text-left transition-colors",
+                  "endfield-endpoint-card flex w-full items-center gap-2 border p-2.5 text-left transition-colors",
                   selectedEndpointId === null
                     ? "border-primary bg-primary/10"
                     : "bg-background hover:bg-accent",
