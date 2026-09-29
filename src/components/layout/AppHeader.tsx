@@ -137,8 +137,8 @@ export default function AppHeader({
   const settingsLabel = t("title", { ns: "settings", defaultValue: "Settings" });
 
   return (
-    <div className="flex items-center justify-between gap-2 min-h-9">
-      <h1 className="text-xl font-bold whitespace-nowrap">{t("title")}</h1>
+    <div className="app-header flex items-center justify-between gap-2 min-h-9">
+      <h1 className="app-header-title text-xl font-bold whitespace-nowrap">{t("title")}</h1>
 
       {/* Desktop toolbar */}
       <div className="hidden md:flex items-center gap-1">
