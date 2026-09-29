@@ -5,7 +5,6 @@ import {
   items,
   metastorageExports,
   metastorageSources,
-  powerFuels,
   rawAvailabilityByDomain,
   recipes,
   regionStructures,
