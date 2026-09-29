@@ -327,3 +327,612 @@
     border-radius: var(--radius-md);
   }
 }
+
+
+/* ── Endfield dictionary surface ─────────────────────────────────────── */
+@layer components {
+  .endfield-app-shell {
+    --ef-signal: #e9ff00;
+    --ef-ink: #1b1d1b;
+    --ef-ink-soft: #30332f;
+    --ef-paper: #f0f1ed;
+    --ef-paper-strong: #fafbf8;
+    --ef-subtle: #e3e5e0;
+    --ef-line: #aeb2ab;
+    --ef-line-strong: #62665f;
+    --ef-meta: #72766f;
+    --ef-blue: #45bdf1;
+    --ef-green: #b7df38;
+    --ef-purple: #a468ff;
+    --ef-orange: #ff9f45;
+
+    background-color: var(--ef-paper);
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--ef-ink) 3%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 72px 72px;
+    color: var(--ef-ink);
+  }
+
+  .dark .endfield-app-shell {
+    --ef-ink: #f3f4ef;
+    --ef-ink-soft: #d8dbd4;
+    --ef-paper: #151715;
+    --ef-paper-strong: #1d201d;
+    --ef-subtle: #292c28;
+    --ef-line: #4a4f48;
+    --ef-line-strong: #858a82;
+    --ef-meta: #a4a9a1;
+  }
+
+  .endfield-app-shell .app-header {
+    border-bottom: 1px solid var(--ef-line-strong);
+    padding: 0 0 0.55rem;
+  }
+
+  .endfield-app-shell .app-header-title {
+    position: relative;
+    font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+    font-weight: 850;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+
+  .endfield-app-shell .app-header-title::after {
+    content: " / INDUSTRIAL OPERATIONS";
+    margin-left: 0.5rem;
+    color: var(--ef-meta);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    vertical-align: middle;
+  }
+
+  .endfield-app-shell .app-header button,
+  .endfield-app-shell .app-header [role="combobox"] {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .endfield-app-shell .app-mode-nav {
+    border: 1px solid var(--ef-ink);
+    border-radius: 0;
+    background: var(--ef-subtle);
+    padding: 2px;
+  }
+
+  .endfield-app-shell .app-mode-button {
+    min-height: 2rem;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ef-meta);
+    box-shadow: none;
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.025em;
+  }
+
+  .endfield-app-shell .app-mode-button.is-active {
+    position: relative;
+    background: var(--ef-ink);
+    color: var(--ef-paper-strong);
+  }
+
+  .endfield-app-shell .app-mode-button.is-active::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 3px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-dictionary {
+    --radius: 0px;
+    color: var(--ef-ink);
+  }
+
+  .endfield-system-bar {
+    position: relative;
+    display: flex;
+    min-height: 22px;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    border-left: 9px solid var(--ef-signal);
+    background: var(--ef-ink);
+    padding: 0.2rem 0.7rem;
+    color: var(--ef-paper-strong);
+    font-size: 0.53rem;
+    font-weight: 750;
+    letter-spacing: 0.145em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .endfield-system-bar::after {
+    content: "";
+    position: absolute;
+    right: 2.1rem;
+    top: -1rem;
+    width: 1px;
+    height: 3rem;
+    background: color-mix(in srgb, var(--ef-paper-strong) 40%, transparent);
+    transform: rotate(32deg);
+  }
+
+  .endfield-material-header {
+    position: relative;
+    overflow: hidden;
+    border-color: var(--ef-line-strong);
+    border-radius: 0;
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+  }
+
+  .endfield-material-header::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--ef-signal) 0 22%,
+      var(--ef-ink) 22% 30%,
+      transparent 30%
+    );
+    pointer-events: none;
+  }
+
+  .endfield-material-subject {
+    position: relative;
+    border-radius: 0;
+    border-color: var(--ef-line);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .endfield-material-subject::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-material-subject:hover {
+    background: var(--ef-subtle);
+  }
+
+  .endfield-display-name {
+    font-size: clamp(1.15rem, 2.1vw, 1.8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+
+  .endfield-description {
+    border-radius: 0;
+    border-color: var(--ef-line);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .endfield-description > div:first-child {
+    border-bottom: 1px solid var(--ef-line);
+    padding-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .endfield-workbench {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+  }
+
+  .endfield-workbench > div:first-child {
+    background: color-mix(in srgb, var(--ef-paper) 88%, var(--ef-ink) 12%);
+  }
+
+  .endfield-view-tabs {
+    gap: 1px;
+    border: 1px solid var(--ef-ink);
+    border-radius: 0;
+    background: var(--ef-line);
+    padding: 0;
+  }
+
+  .endfield-view-tabs button {
+    position: relative;
+    border-radius: 0 !important;
+    background: var(--ef-subtle) !important;
+    color: var(--ef-meta) !important;
+    box-shadow: none !important;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+  }
+
+  .endfield-view-tabs button[data-state="active"] {
+    background: var(--ef-ink) !important;
+    color: var(--ef-paper-strong) !important;
+  }
+
+  .endfield-view-tabs button[data-state="active"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 3px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-route-canvas {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--ef-paper-strong);
+    background-image:
+      radial-gradient(
+        ellipse at 48% 56%,
+        transparent 0 22%,
+        color-mix(in srgb, var(--ef-ink) 5%, transparent) 22.2% 22.45%,
+        transparent 22.6% 34%,
+        color-mix(in srgb, var(--ef-ink) 4%, transparent) 34.2% 34.45%,
+        transparent 34.6% 46%,
+        color-mix(in srgb, var(--ef-ink) 3%, transparent) 46.2% 46.45%,
+        transparent 46.6%
+      ),
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 100% 100%, 32px 32px, 32px 32px;
+  }
+
+  .endfield-route-canvas::before {
+    content: "SUPPLY RELATION CANVAS / GRID 04";
+    position: absolute;
+    z-index: -1;
+    top: 0.45rem;
+    left: 0.55rem;
+    color: var(--ef-meta);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    opacity: 0.58;
+    pointer-events: none;
+  }
+
+  .endfield-route-material {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    border-color: #3c403b;
+    border-bottom: 3px solid var(--ef-green);
+    background:
+      linear-gradient(160deg, #202320 0%, #121412 100%) !important;
+    color: #f8f9f5;
+    box-shadow: none;
+    transition:
+      transform 120ms ease,
+      border-color 120ms ease;
+  }
+
+  .endfield-route-material::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 7px,
+        rgba(255, 255, 255, 0.025) 7px 8px
+      );
+    pointer-events: none;
+  }
+
+  .endfield-route-material:hover {
+    transform: translateY(-1px);
+    border-color: var(--ef-signal);
+  }
+
+  .endfield-route-material.is-emphasis {
+    border: 1px solid var(--ef-ink);
+    border-left: 5px solid var(--ef-signal);
+    border-bottom: 3px solid var(--ef-signal);
+    background: #202320 !important;
+    box-shadow: none;
+  }
+
+  .endfield-route-recipe {
+    position: relative;
+    border-radius: 1px;
+    border: 1px solid var(--ef-line-strong);
+    border-left: 5px solid var(--ef-ink);
+    background: var(--ef-subtle) !important;
+    box-shadow: none;
+  }
+
+  .endfield-route-recipe::after {
+    content: "PROCESS";
+    position: absolute;
+    top: 0.3rem;
+    right: 0.4rem;
+    color: var(--ef-meta);
+    font-size: 0.42rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .endfield-route-destination {
+    border-radius: 1px;
+    border-color: var(--ef-line-strong);
+    border-right: 5px solid var(--ef-signal);
+    background: var(--ef-paper-strong) !important;
+    box-shadow: none;
+  }
+
+  .endfield-direct-lane {
+    position: relative;
+    border-radius: 0;
+    border-color: var(--ef-line);
+    border-left: 5px solid var(--ef-ink);
+    background: color-mix(in srgb, var(--ef-paper-strong) 94%, var(--ef-subtle) 6%);
+    box-shadow: none;
+    transition:
+      border-color 120ms ease,
+      background-color 120ms ease;
+  }
+
+  .endfield-direct-lane:hover {
+    border-left-color: var(--ef-signal);
+    background: var(--ef-paper-strong);
+  }
+
+  .endfield-sidebar {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+    scrollbar-color: var(--ef-line-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  .endfield-sidebar-header {
+    border-color: var(--ef-line-strong);
+    border-left: 5px solid var(--ef-signal);
+    background: color-mix(in srgb, var(--ef-ink) 96%, transparent) !important;
+    color: var(--ef-paper-strong);
+    backdrop-filter: none;
+  }
+
+  .endfield-sidebar-header .text-muted-foreground {
+    color: color-mix(in srgb, var(--ef-paper-strong) 62%, transparent) !important;
+  }
+
+  .endfield-sidebar-filter {
+    border-radius: 0;
+    border: 1px solid color-mix(in srgb, var(--ef-paper-strong) 20%, transparent);
+    background: color-mix(in srgb, var(--ef-paper-strong) 7%, transparent);
+    color: color-mix(in srgb, var(--ef-paper-strong) 72%, transparent);
+  }
+
+  .endfield-sidebar-filter:hover {
+    color: var(--ef-paper-strong);
+  }
+
+  .endfield-sidebar-filter.is-active {
+    border-color: var(--ef-signal);
+    background: var(--ef-signal) !important;
+    color: #161816 !important;
+  }
+
+  .endfield-endpoint-card {
+    position: relative;
+    border-radius: 0;
+    border-color: var(--ef-line);
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+    transition:
+      border-color 120ms ease,
+      background-color 120ms ease,
+      color 120ms ease;
+  }
+
+  .endfield-endpoint-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: transparent;
+  }
+
+  .endfield-endpoint-card:hover {
+    border-color: var(--ef-line-strong);
+    background: var(--ef-subtle);
+  }
+
+  .endfield-endpoint-card.is-active {
+    border-color: var(--ef-ink);
+    background: var(--ef-ink) !important;
+    color: var(--ef-paper-strong);
+  }
+
+  .endfield-endpoint-card.is-active::before {
+    width: 5px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-endpoint-card.is-active .text-muted-foreground {
+    color: color-mix(in srgb, var(--ef-paper-strong) 62%, transparent) !important;
+  }
+
+  .endfield-picker {
+    --radius: 0px;
+    border-right: 2px solid var(--ef-ink, #1b1d1b);
+    border-radius: 0 !important;
+    background: var(--ef-paper, #f0f1ed) !important;
+    color: var(--ef-ink, #1b1d1b);
+    box-shadow: none !important;
+  }
+
+  .endfield-picker-header {
+    border-left: 7px solid var(--ef-signal, #e9ff00);
+    border-bottom-color: var(--ef-line-strong, #62665f);
+    background: var(--ef-ink, #1b1d1b);
+    color: var(--ef-paper-strong, #fafbf8);
+  }
+
+  .endfield-picker-header [data-slot="sheet-description"] {
+    color: #bfc3bc;
+  }
+
+  .endfield-search-input {
+    border-radius: 0;
+    border-color: var(--ef-line-strong, #62665f);
+    background: var(--ef-paper-strong, #fafbf8);
+    box-shadow: none;
+  }
+
+  .endfield-filter-pill {
+    border-radius: 0;
+    border-color: var(--ef-line, #aeb2ab);
+    background: var(--ef-paper-strong, #fafbf8);
+    color: var(--ef-ink, #1b1d1b);
+  }
+
+  .endfield-filter-pill:hover {
+    background: var(--ef-subtle, #e3e5e0);
+  }
+
+  .endfield-filter-pill.is-active {
+    position: relative;
+    border-color: var(--ef-ink, #1b1d1b) !important;
+    background: var(--ef-ink, #1b1d1b) !important;
+    color: var(--ef-paper-strong, #fafbf8);
+  }
+
+  .endfield-filter-pill.is-active::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 3px;
+    background: var(--ef-signal, #e9ff00);
+  }
+
+  .endfield-item-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    border-color: #454942;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 8px,
+        rgba(255, 255, 255, 0.025) 8px 9px
+      ),
+      linear-gradient(155deg, #252825 0%, #111311 100%) !important;
+    color: #f4f6f1;
+    box-shadow: none;
+  }
+
+  .endfield-item-card:hover {
+    border-color: #8e9489;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 8px,
+        rgba(255, 255, 255, 0.04) 8px 9px
+      ),
+      linear-gradient(155deg, #2d312d 0%, #181b18 100%) !important;
+  }
+
+  .endfield-item-card.is-active {
+    border-color: var(--ef-signal, #e9ff00) !important;
+    box-shadow: inset 0 -4px 0 var(--ef-signal, #e9ff00);
+  }
+
+  .endfield-item-card .text-muted-foreground {
+    color: #aeb3aa !important;
+  }
+
+  .endfield-item-card .bg-muted {
+    background: #303530 !important;
+    color: #f4f6f1;
+  }
+
+  .endfield-dictionary button,
+  .endfield-picker button {
+    transition-duration: 120ms;
+  }
+
+  .endfield-dictionary .rounded-xl,
+  .endfield-dictionary .rounded-lg,
+  .endfield-dictionary .rounded-md {
+    border-radius: 2px;
+  }
+
+  .endfield-dictionary .shadow-sm,
+  .endfield-dictionary .shadow,
+  .endfield-dictionary .shadow-md {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .endfield-app-shell {
+    background-size: 48px 48px;
+  }
+
+  .endfield-app-shell .app-header-title::after {
+    display: none;
+  }
+
+  .endfield-system-bar span:last-child {
+    display: none;
+  }
+
+  .endfield-system-bar {
+    font-size: 0.48rem;
+  }
+
+  .endfield-material-header {
+    padding: 0.6rem;
+  }
+
+  .endfield-display-name {
+    font-size: 1.3rem;
+  }
+
+  .endfield-sidebar {
+    max-height: 55vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .endfield-route-material,
+  .endfield-direct-lane,
+  .endfield-endpoint-card,
+  .endfield-dictionary button,
+  .endfield-picker button {
+    transition: none !important;
+  }
+
+  .endfield-route-material:hover {
+    transform: none;
+  }
+}
