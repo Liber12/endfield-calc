@@ -285,6 +285,7 @@ function MaterialPicker({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="left"
+        onOpenAutoFocus={(event) => event.preventDefault()}
         className="endfield-picker w-[94vw] gap-0 p-0 sm:max-w-2xl"
       >
         <SheetHeader className="endfield-picker-header border-b pr-12">
@@ -1607,6 +1608,57 @@ export default function MaterialDictionary({
                 onSelect={() => selectEndpoint(endpoint)}
               />
             ))}
+
+            <div className="my-3 border-t" />
+
+            <ExternalDirectUses itemId={selectedItem.id} />
+
+            <section className="mt-4">
+              <div className="mb-2 flex items-center gap-2">
+                <Wrench className="h-4 w-4" />
+                <h3 className="text-xs font-semibold">
+                  {t("dictionary.howToMake", {
+                    defaultValue: "How to make",
+                  })}
+                </h3>
+                <span className="ml-auto text-[10px] text-muted-foreground">
+                  {producers.length}
+                </span>
+              </div>
+
+              {producers.length > 0 ? (
+                <div className="space-y-2">
+                  {producers.map((recipe) => (
+                    <div
+                      key={recipe.id}
+                      className="border bg-background p-2"
+                    >
+                      <div className="text-[11px] font-semibold">
+                        {getRecipeName(recipe)}
+                      </div>
+                      <div className="mt-1 flex flex-wrap items-center gap-1">
+                        {recipe.inputs.map((entry, index) => (
+                          <MiniMaterialChip
+                            key={`${entry.itemId}-${index}`}
+                            itemId={entry.itemId}
+                            amount={entry.amount}
+                            itemById={itemById}
+                            onSelect={selectItem}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs text-muted-foreground">
+                  {t("dictionary.noProducer", {
+                    defaultValue:
+                      "No production recipe is registered for this item.",
+                  })}
+                </p>
+              )}
+            </section>
           </div>
         </SheetContent>
       </Sheet>
