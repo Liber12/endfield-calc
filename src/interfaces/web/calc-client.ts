@@ -1,5 +1,5 @@
 /**
- * Client for the calculation worker (`src/workers/calc.worker.ts`).
+ * Client for the calculation worker (`src/interfaces/web/calc.worker.ts`).
  *
  * Responsibilities:
  *   1. **Transport** — module-worker preferred; graceful main-thread
@@ -43,7 +43,7 @@ import type {
   CalcSearchRequest,
   CalcSolveRequest,
   CalcWorkerResponse,
-} from "@/workers/calc.worker";
+} from "@/interfaces/web/calc.worker";
 
 export type CalcProblem = CalculationProblem;
 
@@ -177,7 +177,7 @@ function ensureWorker(): Promise<void> {
   readyPromise = new Promise<void>((resolve, reject) => {
     try {
       worker = new Worker(
-        new URL("../../workers/calc.worker.ts", import.meta.url),
+        new URL("./calc.worker.ts", import.meta.url),
         { type: "module" },
       );
     } catch (e) {
