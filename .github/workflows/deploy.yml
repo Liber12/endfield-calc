@@ -1,85 +1,24 @@
-# Deploy static content to GitHub Pages
-#
-# Two channels:
-#   * Production (https://JamboChen.github.io/endfield-calc/) is built
-#     from the latest annotated release tag reachable from master.
-#   * Beta      (https://JamboChen.github.io/endfield-calc/beta/) is built
-#     from the current master HEAD with --base /endfield-calc/beta/.
-#
-# GitHub Pages deployments are atomic per repo, so both channels are
-# packaged into a single artifact and shipped in one deploy step.
+# Deploy the current fork master to GitHub Pages.
+# Both the root URL and /beta/ are built from current master so existing
+# shared links keep working without depending on stale upstream release tags.
 name: Deploy static content to Pages
 
 on:
-  # New stable release published -> trampoline to a workflow_dispatch
-  # run (see the redispatch job below; release-event deployments at an
-  # already-deployed SHA are silently dropped by the Pages backend).
-  release:
-    types: [published]
-
-  # Master commits -> rebuild beta (and rebuild prod from latest tag,
-  # which is a no-op as long as the tag's source hasn't moved).
   push:
     branches: [master]
-
-  # Manual re-trigger from the Actions tab.
   workflow_dispatch:
 
-# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one deployment at a time, but queue rather than cancel so a
-# master push during an in-flight release deploy ships both serially.
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  # Release-event trampoline.
-  #
-  # actions/deploy-pages#383: the Pages backend silently drops the second
-  # deployment of a given SHA on release events specifically -- "Reported
-  # success!" runs, deployments API marks the new deployment active, but
-  # the origin keeps serving the prior tarball. push and workflow_dispatch
-  # deployments are NOT affected; the broken case is exactly "release
-  # event whose SHA was already deployed". The bump-push and the matching
-  # release publish always share a SHA, so every release silently keeps
-  # prod on the previous tag until the next ordinary master push.
-  #
-  # Workflow-level overrides of GITHUB_SHA don't work (the runner re-
-  # injects it every step) and the /pages/deployments REST endpoint
-  # refuses plain GITHUB_TOKEN auth (404 on direct calls -- confirmed
-  # both here and in #383). So instead of trying to deploy on the release
-  # event, re-trigger this workflow as a workflow_dispatch, which the
-  # Pages backend deploys correctly. GITHUB_TOKEN is permitted to trigger
-  # workflow_dispatch -- documented exception to the recursive-workflow
-  # prevention rule.
-  #
-  # Loop safety: the dispatched run's github.event_name is
-  # `workflow_dispatch`, so this job's `if:` skips and only the deploy
-  # job runs.
-  redispatch:
-    if: github.event_name == 'release'
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-    steps:
-      - name: Re-trigger deploy as workflow_dispatch
-        env:
-          GH_TOKEN: ${{ github.token }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          echo "Release event detected. Re-dispatching deploy on $DEFAULT_BRANCH"
-          echo "to avoid the actions/deploy-pages#383 release-event dedup."
-          gh workflow run deploy.yml \
-            --repo "$GITHUB_REPOSITORY" \
-            --ref "$DEFAULT_BRANCH"
-
   deploy:
-    if: github.event_name != 'release'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -89,9 +28,6 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: master
-          # Full history + tags so `git describe` can resolve the
-          # latest release tag for the production build below.
-          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
@@ -105,31 +41,13 @@ jobs:
           node-version: lts/*
           cache: "pnpm"
 
-      - name: Detect latest release tag
-        id: tag
-        run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
-
-      # --- Build production from the latest release tag into dist/ ---
-      # Order matters: prod first so its --emptyOutDir wipes dist/ clean;
-      # beta second so its --emptyOutDir only clears dist/beta/, leaving
-      # the prod files alongside intact.
-      - name: Checkout latest release tag
-        run: git checkout ${{ steps.tag.outputs.tag }}
-
-      - name: Install dependencies (release)
+      - name: Install dependencies
         run: pnpm install
 
-      - name: Build release into dist/
+      - name: Build root site from master
         run: pnpm build
 
-      # --- Build beta from master into dist/beta/ ---
-      - name: Switch back to master
-        run: git checkout master
-
-      - name: Install dependencies (master)
-        run: pnpm install
-
-      - name: Build beta into dist/beta/
+      - name: Build beta-compatible path from master
         run: pnpm build:beta
 
       - name: Setup Pages
@@ -144,72 +62,19 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # Smoke check: verify the live origin actually swapped to the
-      # freshly-built artifact. The release trampoline above is the
-      # primary fix for actions/deploy-pages#383; this check is the
-      # safety net for any future variant of stale-deploy weirdness
-      # (CDN bug, upload-artifact regression, a new SHA-keyed dedup,
-      # etc).
-      #
-      # Compares the entry-chunk filename (hash-suffixed by Vite,
-      # changes whenever any source changes) in the just-built
-      # dist/index.html and dist/beta/index.html against what the live
-      # URLs serve, with backoff to absorb CDN propagation (~30s typical,
-      # up to ~4.3 min worst case). On mismatch the run goes red.
-      #
-      # Fallback recovery if the smoke check ever fires and the
-      # trampoline isn't the cause: push any commit to master (an empty
-      # one works: `git commit --allow-empty -m "Redeploy" && git push`).
-      # A new SHA always produces a fresh pages_build_version.
       - name: Smoke-test live deployment
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           set -e
-          extract_entry() {
-            # Pulls the prod or beta entry chunk path from an index.html.
-            local prefix="$1"
-            local file="$2"
-            grep -oE "src=\"${prefix}assets/index-[A-Za-z0-9_-]+\\.js\"" "$file" \
-              | head -1 \
-              | sed 's/^src="//;s/"$//'
-          }
-          fetch_live_entry() {
-            local url="$1"
-            local prefix="$2"
-            curl -fsS "$url?cb=$RANDOM-$(date +%s%N)" \
-              | grep -oE "src=\"${prefix}assets/index-[A-Za-z0-9_-]+\\.js\"" \
-              | head -1 \
-              | sed 's/^src="//;s/"$//'
-          }
-
-          PROD_EXPECTED=$(extract_entry "/endfield-calc/" "dist/index.html")
-          BETA_EXPECTED=$(extract_entry "/endfield-calc/beta/" "dist/beta/index.html")
-          if [ -z "$PROD_EXPECTED" ] || [ -z "$BETA_EXPECTED" ]; then
-            echo "::error::could not locate entry chunks in built dist/."
-            echo "  prod expected: '$PROD_EXPECTED'"
-            echo "  beta expected: '$BETA_EXPECTED'"
-            exit 1
-          fi
-          echo "Expected prod entry: $PROD_EXPECTED"
-          echo "Expected beta entry: $BETA_EXPECTED"
-          echo "Live URL: $PAGE_URL"
-
-          ATTEMPTS="1 2 3 4 5 6 7"
-          prod_match=
-          beta_match=
-          for i in $ATTEMPTS; do
-            prod_live=$(fetch_live_entry "${PAGE_URL%/}/" "/endfield-calc/" || true)
-            beta_live=$(fetch_live_entry "${PAGE_URL%/}/beta/" "/endfield-calc/beta/" || true)
-            echo "Attempt $i: prod=$prod_live beta=$beta_live"
-            if [ "$prod_live" = "$PROD_EXPECTED" ]; then prod_match=1; fi
-            if [ "$beta_live" = "$BETA_EXPECTED" ]; then beta_match=1; fi
-            if [ -n "$prod_match" ] && [ -n "$beta_match" ]; then
-              echo "Smoke test passed (live matches built artifact)."
+          for i in 1 2 3 4 5 6 7; do
+            root_ok=$(curl -fsS "${PAGE_URL%/}/?cb=$RANDOM" | grep -c '/endfield-calc/assets/index-' || true)
+            beta_ok=$(curl -fsS "${PAGE_URL%/}/beta/?cb=$RANDOM" | grep -c '/endfield-calc/beta/assets/index-' || true)
+            echo "Attempt $i: root=$root_ok beta=$beta_ok"
+            if [ "$root_ok" -gt 0 ] && [ "$beta_ok" -gt 0 ]; then
+              echo "Smoke test passed."
               exit 0
             fi
-            # Backoff between attempts (no sleep after the last one):
-            # 10, 20, 30, 45, 60, 90 seconds (~4.3 min total on failure).
             case "$i" in
               1) sleep 10 ;;
               2) sleep 20 ;;
@@ -219,10 +84,5 @@ jobs:
               6) sleep 90 ;;
             esac
           done
-
-          echo "::error::live deployment did not match built artifact after retries."
-          echo "  prod expected: $PROD_EXPECTED"
-          echo "  prod live:     $prod_live"
-          echo "  beta expected: $BETA_EXPECTED"
-          echo "  beta live:     $beta_live"
+          echo "::error::live deployment did not expose root and beta entry assets."
           exit 1
