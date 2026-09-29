@@ -332,7 +332,7 @@
 /* ── Endfield dictionary surface ─────────────────────────────────────── */
 @layer components {
   .endfield-app-shell {
-    --ef-signal: #e9ff00;
+    --ef-signal: #fffa00;
     --ef-ink: #1b1d1b;
     --ef-ink-soft: #30332f;
     --ef-paper: #f0f1ed;
@@ -791,7 +791,7 @@
   }
 
   .endfield-picker-header {
-    border-left: 7px solid var(--ef-signal, #e9ff00);
+    border-left: 7px solid var(--ef-signal, #fffa00);
     border-bottom-color: var(--ef-line-strong, #62665f);
     background: var(--ef-ink, #1b1d1b);
     color: var(--ef-paper-strong, #fafbf8);
@@ -831,7 +831,7 @@
     position: absolute;
     inset: auto 0 0;
     height: 3px;
-    background: var(--ef-signal, #e9ff00);
+    background: var(--ef-signal, #fffa00);
   }
 
   .endfield-item-card {
@@ -862,8 +862,8 @@
   }
 
   .endfield-item-card.is-active {
-    border-color: var(--ef-signal, #e9ff00) !important;
-    box-shadow: inset 0 -4px 0 var(--ef-signal, #e9ff00);
+    border-color: var(--ef-signal, #fffa00) !important;
+    box-shadow: inset 0 -4px 0 var(--ef-signal, #fffa00);
   }
 
   .endfield-item-card .text-muted-foreground {
@@ -958,7 +958,7 @@
 
   .endfield-mobile-destination-sheet,
   .endfield-target-dialog {
-    --ef-signal: #e9ff00;
+    --ef-signal: #fffa00;
     --ef-ink: #1b1d1b;
     --ef-ink-soft: #30332f;
     --ef-paper: #f0f1ed;
