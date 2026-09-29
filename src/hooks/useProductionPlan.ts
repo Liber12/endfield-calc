@@ -3,7 +3,7 @@ import {
   initCalcEngine,
   isCalcEngineReady,
   isCalcSuperseded,
-} from "@/lib/calc-client";
+} from "@/interfaces/web/calc-client";
 import { DEFAULT_MACHINES_PER_VAPORIZER } from "@/lib/sustain-constants";
 import { useTargetOptimizer } from "@/hooks/useTargetOptimizer";
 import { items, recipes, facilities, powerFuels, MAX_TARGETS } from "@/data";
