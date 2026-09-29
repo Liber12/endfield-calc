@@ -115,16 +115,16 @@ export default function ProductionViewTabs({
     plan?.bins.some((bin) => bin.isGrouped) ?? false;
 
   return (
-    <div className="flex-1 min-w-0">
-      <Card className="h-full flex flex-col">
-        <CardHeader className="shrink-0">
+    <div className="factory-production-view flex-1 min-w-0">
+      <Card className="endfield-production-card h-full flex flex-col">
+        <CardHeader className="endfield-production-header shrink-0">
           <div className="flex items-center justify-between gap-4">
             <Tabs
               value={activeTab}
               onValueChange={(val) => onTabChange(val as "table" | "tree")}
               className="flex-1"
             >
-              <TabsList className="grid w-full max-w-md grid-cols-2">
+              <TabsList className="endfield-factory-view-tabs grid w-full max-w-md grid-cols-2">
                 <TabsTrigger value="table" className="gap-2">
                   <BarChart3 className="h-4 w-4 shrink-0" />
                   <span className="hidden sm:inline">{t("tabs.table")}</span>
