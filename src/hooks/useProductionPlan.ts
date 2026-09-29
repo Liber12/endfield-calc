@@ -3,10 +3,11 @@ import {
   initCalcEngine,
   isCalcEngineReady,
   isCalcSuperseded,
-} from "@/lib/calc-client";
+} from "@/interfaces/web/calc-client";
+import { buildCalculationProblem } from "@/core/calculation";
 import { DEFAULT_MACHINES_PER_VAPORIZER } from "@/lib/sustain-constants";
 import { useTargetOptimizer } from "@/hooks/useTargetOptimizer";
-import { items, recipes, facilities, powerFuels, MAX_TARGETS } from "@/data";
+import { items, recipes, facilities, MAX_TARGETS } from "@/data";
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import type { ProductionTarget } from "@/components/panels/TargetItemsGrid";
@@ -520,24 +521,20 @@ export function useProductionPlan(
   // `cancelActiveSearch` effect kills any in-flight search when it
   // changes.
   const calcProblem = useMemo(
-    () => ({
-      items,
-      recipes: availableRecipes,
-      facilities,
-      options: {
+    () =>
+      buildCalculationProblem({
+        items,
+        recipes: availableRecipes,
+        facilities,
         rawMaterials: regionRawMaterials,
         rawCaps: rawMaterialCaps,
         recipeOverrides,
         manualRawMaterials,
         facilityCaps,
         metastorageRoutes,
-        powerSustain: powerSustain ? { fuels: powerFuels } : undefined,
-        gasSustain:
-          machinesPerVaporizer !== DEFAULT_MACHINES_PER_VAPORIZER
-            ? { machinesPerVaporizer }
-            : undefined,
-      },
-    }),
+        powerSustain,
+        machinesPerVaporizer,
+      }),
     [
       availableRecipes,
       regionRawMaterials,
