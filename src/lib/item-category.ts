@@ -27,6 +27,50 @@ export type MaterialSubtypeId =
   | "event"
   | "other";
 
+
+export type MaterialGroupId =
+  | "rawOre"
+  | "rawLiquid"
+  | "rawGas"
+  | "plant"
+  | "seed"
+  | "powder"
+  | "refined"
+  | "industrialLiquid"
+  | "industrialGas"
+  | "container"
+  | "filledContainer"
+  | "component"
+  | "battery"
+  | "equipment"
+  | "medicine"
+  | "food"
+  | "bomb"
+  | "event"
+  | "other";
+
+export const MATERIAL_GROUP_ORDER: readonly MaterialGroupId[] = [
+  "rawOre",
+  "rawLiquid",
+  "rawGas",
+  "plant",
+  "seed",
+  "powder",
+  "refined",
+  "industrialLiquid",
+  "industrialGas",
+  "container",
+  "filledContainer",
+  "component",
+  "battery",
+  "equipment",
+  "medicine",
+  "food",
+  "bomb",
+  "event",
+  "other",
+];
+
 export const MATERIAL_CATEGORY_ORDER: readonly MaterialCategoryId[] = [
   "natural",
   "gathered",
@@ -132,6 +176,44 @@ export function getMaterialCategory(item: Item): MaterialCategoryId {
     return "industrial";
   }
 
+  return "other";
+}
+
+
+export function getMaterialGroup(item: Item): MaterialGroupId {
+  const category = getMaterialCategory(item);
+  const subtype = getMaterialSubtype(item);
+
+  if (category === "natural") {
+    if (item.isLiquid || subtype === "liquid") return "rawLiquid";
+    if (item.isGas || subtype === "gas") return "rawGas";
+    return "rawOre";
+  }
+
+  if (category === "gathered") {
+    return subtype === "seed" ? "seed" : "plant";
+  }
+
+  if (category === "industrial") {
+    if (subtype === "powder") return "powder";
+    if (subtype === "refined") return "refined";
+    if (subtype === "liquid") return "industrialLiquid";
+    if (subtype === "gas") return "industrialGas";
+    if (subtype === "container") return "container";
+    if (subtype === "filled") return "filledContainer";
+    if (subtype === "component") return "component";
+    if (subtype === "battery") return "battery";
+    if (subtype === "equipment") return "equipment";
+    return "other";
+  }
+
+  if (category === "consumable") {
+    if (subtype === "medicine") return "medicine";
+    if (subtype === "food") return "food";
+    if (subtype === "bomb") return "bomb";
+  }
+
+  if (category === "event") return "event";
   return "other";
 }
 
