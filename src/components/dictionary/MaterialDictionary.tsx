@@ -1450,7 +1450,7 @@ export default function MaterialDictionary({
             <div className="mx-3 border-t" />
 
             <div className="space-y-4 p-3">
-              <ExternalDirectUses itemId={selectedItem.id} />
+              {selectedId && <ExternalDirectUses itemId={selectedId} />}
 
               <section>
                 <div className="mb-2 flex items-center gap-2">
