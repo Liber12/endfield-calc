@@ -30,19 +30,13 @@
  * request is already carrying the fresh answer (see the catch branch
  * in `useProductionPlan`'s calc effect).
  */
-import type { CalculateProductionPlanOptions } from "@/lib/calculator";
+import type { CalculationProblem } from "@/core/calculation/problem";
 import type {
   FitResult,
   MaximizeResult,
   OptimizableTarget,
 } from "@/lib/target-optimizer";
-import type {
-  Facility,
-  Item,
-  ItemId,
-  ProductionDependencyGraph,
-  Recipe,
-} from "@/types";
+import type { ItemId, ProductionDependencyGraph } from "@/types";
 import type {
   CalcSearchCancel,
   CalcSearchOp,
@@ -51,30 +45,19 @@ import type {
   CalcWorkerResponse,
 } from "@/workers/calc.worker";
 
-export interface CalcRequest {
-  targets: Array<{ itemId: ItemId; rate: number }>;
-  items: readonly Item[];
-  recipes: readonly Recipe[];
-  facilities: readonly Facility[];
-  options: CalculateProductionPlanOptions;
-}
+export type CalcProblem = CalculationProblem;
 
-/** The problem definition minus targets — what `useProductionPlan`'s
- *  `calcProblem` memo builds once and both the display calc and the
- *  optimizer searches consume (the probe≡UI invariant, structurally). */
-export type CalcProblem = Omit<CalcRequest, "targets">;
+export type CalcRequest = CalculationProblem & {
+  targets: Array<{ itemId: ItemId; rate: number }>;
+};
 
 /** A worker search job minus transport framing — what the hook hands
  *  `searchMaximize` / `searchFit`. Same shape as `CalcSearchRequest`
  *  without `kind`/`seq`. (Spelled out rather than `Omit`-derived:
  *  `Omit` over the op-discriminated union would collapse the
  *  discriminant and drop the per-op fields.) */
-export type SearchRequest = {
+export type SearchRequest = CalculationProblem & {
   targets: readonly OptimizableTarget[];
-  items: readonly Item[];
-  recipes: readonly Recipe[];
-  facilities: readonly Facility[];
-  options: CalculateProductionPlanOptions;
 } & CalcSearchOp;
 
 type SearchOutcome = MaximizeResult | FitResult;
