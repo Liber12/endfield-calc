@@ -348,7 +348,10 @@ export default function AddTargetDialogGrid({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="endfield-target-dialog max-sm:inset-0 max-sm:max-w-none max-sm:h-dvh max-sm:rounded-none max-sm:translate-x-0 max-sm:translate-y-0 sm:max-w-6xl sm:h-[80vh] flex flex-col gap-0 p-0 overflow-hidden">
+      <DialogContent
+        onOpenAutoFocus={(event) => event.preventDefault()}
+        className="endfield-target-dialog max-sm:inset-0 max-sm:max-w-none max-sm:h-dvh max-sm:rounded-none max-sm:translate-x-0 max-sm:translate-y-0 sm:max-w-6xl sm:h-[80vh] flex flex-col gap-0 p-0 overflow-hidden"
+      >
         {/* ── Header ── */}
         <DialogHeader className="px-3 sm:px-5 pt-5 pb-0 shrink-0">
           <div className="flex items-center gap-1.5">
