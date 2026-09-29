@@ -640,7 +640,13 @@ function AppContent() {
   };
 
   return (
-    <div className="h-screen flex flex-col p-4 pb-0 gap-4 overflow-x-hidden [@media(orientation:portrait)]:pb-[max(1rem,env(safe-area-inset-bottom))]">
+    <div
+      className={
+        appMode === "dictionary"
+          ? "endfield-app-shell h-screen flex flex-col p-4 pb-0 gap-3 overflow-x-hidden [@media(orientation:portrait)]:pb-[max(1rem,env(safe-area-inset-bottom))]"
+          : "h-screen flex flex-col p-4 pb-0 gap-4 overflow-x-hidden [@media(orientation:portrait)]:pb-[max(1rem,env(safe-area-inset-bottom))]"
+      }
+    >
       <AppHeader
         onLanguageChange={handleLanguageChange}
         onSavePlan={handleSavePlan}
