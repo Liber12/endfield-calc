@@ -81,7 +81,7 @@ const PlanPanel = memo(function PlanPanel({
   return (
     <div
       className={cn(
-        "rounded-lg border border-border bg-card shadow-sm divide-y divide-border h-fit",
+        "endfield-plan-panel border border-border bg-card divide-y divide-border h-fit",
         className,
       )}
     >
