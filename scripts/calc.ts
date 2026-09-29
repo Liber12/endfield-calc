@@ -1,8 +1,15 @@
 #!/usr/bin/env bun
 
+import { readFileSync } from "node:fs";
 import { executeCli } from "../src/interfaces/cli/runner";
 
-executeCli(process.argv.slice(2))
+const configLoader = {
+  read(path: string): string {
+    return path === "-" ? readFileSync(0, "utf8") : readFileSync(path, "utf8");
+  },
+};
+
+executeCli(process.argv.slice(2), configLoader)
   .then(({ stdout }) => {
     process.stdout.write(stdout);
   })
