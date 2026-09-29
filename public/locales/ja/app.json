@@ -198,6 +198,27 @@
     "dependenciesView": "依存関係",
     "routeView": "生産ルート",
     "routeNeedsDestinationTitle": "用途先を選択",
-    "routeNeedsDestination": "右サイドバーから製品・納品・設備を選ぶと、その用途までのルートを表示します。"
+    "routeNeedsDestination": "右サイドバーから製品・納品・設備を選ぶと、その用途までのルートを表示します。",
+    "group": {
+      "rawOre": "鉱石・天然固体",
+      "rawLiquid": "天然液体",
+      "rawGas": "天然ガス",
+      "plant": "植物素材",
+      "seed": "種子",
+      "powder": "粉末素材",
+      "refined": "精製素材",
+      "industrialLiquid": "工業液体",
+      "industrialGas": "工業ガス",
+      "container": "空容器",
+      "filledContainer": "充填容器",
+      "component": "工業部品",
+      "battery": "バッテリー",
+      "equipment": "装備・機能品",
+      "medicine": "医薬品",
+      "food": "食品",
+      "bomb": "爆発物",
+      "event": "イベント素材",
+      "other": "その他"
+    }
   }
 }
