@@ -5,7 +5,6 @@ import {
 } from "@/lib/target-optimizer";
 import type { ItemId, ProductionDependencyGraph } from "@/types";
 import {
-  buildSiteCalculationContext,
   solveSiteCalculation,
   type SiteCalculationContext,
   type SiteCalculationSettingsInput,
@@ -26,7 +25,7 @@ export async function solveCalculationProblem(
   targets: readonly Pick<SiteTargetInput, "itemId" | "rate">[],
 ): Promise<ProductionDependencyGraph> {
   return calculateProductionPlan(
-    targets,
+    targets.map(({ itemId, rate }) => ({ itemId, rate })),
     problem.items,
     problem.recipes,
     problem.facilities,
