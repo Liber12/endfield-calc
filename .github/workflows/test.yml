@@ -51,6 +51,6 @@ jobs:
 
       - name: Smoke-test CLI
         run: |
-          pnpm calc -- --help > /tmp/cli-help.txt
-          pnpm calc -- plan --config examples/cli-plan.json > /tmp/cli-plan.json
+          bun run scripts/calc.ts --help > /tmp/cli-help.txt
+          bun run scripts/calc.ts plan --config examples/cli-plan.json > /tmp/cli-plan.json
           node -e 'const x=require("/tmp/cli-plan.json"); if(x.schemaVersion!==1 || x.command!=="plan" || !x.plan) process.exit(1)'
