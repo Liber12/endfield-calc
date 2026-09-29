@@ -33,7 +33,7 @@ import {
   searchFit,
   searchMaximize,
   type CalcProblem,
-} from "@/lib/calc-client";
+} from "@/interfaces/web/calc-client";
 import {
   INITIAL_ORCHESTRATION_STATE,
   optimizerOrchestrationReducer,
