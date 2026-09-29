@@ -60,6 +60,32 @@ pnpm install
 pnpm run dev
 ```
 
+### CLI calculation
+
+The production solver can also run without React through the Bun-based CLI. It uses the same game data, AIC/region filtering, facility and raw limits, region structures, Metastorage rules, recipe pins, manual raws, self-sustaining power, gas-environment coverage, and HiGHS-backed production solver as the web app.
+
+```bash
+# One target, using the web app defaults for Valley IV
+pnpm calc -- plan --target item_iron_powder:60 --pretty
+
+# Reproduce a fuller site configuration from JSON
+pnpm calc -- plan --config examples/cli-plan.json --pretty
+
+# Priority-Max for one target (locked target suffix: 30l)
+pnpm calc -- max --config examples/cli-plan.json --item item_iron_powder --pretty
+
+# Scale unlocked targets to configured limits
+pnpm calc -- fit --config examples/cli-plan.json --pretty
+```
+
+The CLI writes machine-readable JSON to stdout. Its config deliberately mirrors the site's state split:
+
+- `settings.domains/aic/rawLimits/structures/metastorage` correspond to persisted domain settings.
+- `plan.recipeOverrides/manualRawMaterials/powerSustain/machinesPerVaporizer` correspond to plan-specific calculation options.
+- `targets[].locked` is used by `max` and `fit`; it does not change an ordinary `plan` solve.
+
+Use `pnpm calc -- --help` for the complete command-line syntax. Bun is required, matching the existing `extract:*` scripts.
+
 ### Docker
 
 **Step 1: Build the image via GitHub Actions**
