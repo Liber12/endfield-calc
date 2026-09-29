@@ -51,8 +51,12 @@ export function buildCalculationProblem(
     options: {
       rawMaterials: input.rawMaterials,
       rawCaps: input.rawCaps,
-      recipeOverrides: input.recipeOverrides,
-      manualRawMaterials: input.manualRawMaterials,
+      recipeOverrides: input.recipeOverrides
+        ? new Map(input.recipeOverrides)
+        : undefined,
+      manualRawMaterials: input.manualRawMaterials
+        ? new Set(input.manualRawMaterials)
+        : undefined,
       facilityCaps: input.facilityCaps,
       metastorageRoutes: input.metastorageRoutes,
       powerSustain: input.powerSustain ? { fuels: powerFuels } : undefined,
