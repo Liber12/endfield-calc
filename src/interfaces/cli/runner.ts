@@ -5,7 +5,7 @@ import {
 } from "@/core/calculation";
 import { CLI_HELP, parseCliArgs } from "@/interfaces/cli/args";
 import {
-  readCliConfig,
+  parseCliConfig,
   requireKnownItemId,
   settingsFromCli,
   targetsFromCli,
@@ -19,13 +19,26 @@ export interface CliExecutionResult {
   stdout: string;
 }
 
+export interface CliConfigLoader {
+  read(path: string): string;
+}
+
 export async function executeCli(
   argv: readonly string[],
+  configLoader?: CliConfigLoader,
 ): Promise<CliExecutionResult> {
   const args = parseCliArgs(argv);
   if (args.help) return { stdout: CLI_HELP + "\n" };
 
-  const config = readCliConfig(args.configPath);
+  const config = args.configPath
+    ? parseCliConfig(
+        configLoader
+          ? configLoader.read(args.configPath)
+          : (() => {
+              throw new Error("No config loader is available");
+            })(),
+      )
+    : {};
   const targets = targetsFromCli(config, args.targets);
   if (targets.length === 0) {
     throw new Error("At least one target is required");
