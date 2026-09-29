@@ -936,3 +936,277 @@
     transform: none;
   }
 }
+
+
+/* ── Endfield factory + responsive extensions ─────────────────────── */
+@layer components {
+  .endfield-group-heading {
+    color: var(--ef-ink, #1b1d1b);
+  }
+
+  .dark .endfield-group-heading {
+    color: var(--ef-ink, #f3f4ef);
+  }
+
+  .endfield-mobile-destinations {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    border-left: 5px solid var(--ef-signal);
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+  }
+
+  .endfield-mobile-destination-sheet,
+  .endfield-target-dialog {
+    --ef-signal: #e9ff00;
+    --ef-ink: #1b1d1b;
+    --ef-ink-soft: #30332f;
+    --ef-paper: #f0f1ed;
+    --ef-paper-strong: #fafbf8;
+    --ef-subtle: #e3e5e0;
+    --ef-line: #aeb2ab;
+    --ef-line-strong: #62665f;
+    --ef-meta: #72766f;
+  }
+
+  .dark .endfield-mobile-destination-sheet,
+  .dark .endfield-target-dialog {
+    --ef-ink: #f3f4ef;
+    --ef-ink-soft: #d8dbd4;
+    --ef-paper: #151715;
+    --ef-paper-strong: #1d201d;
+    --ef-subtle: #292c28;
+    --ef-line: #4a4f48;
+    --ef-line-strong: #858a82;
+    --ef-meta: #a4a9a1;
+  }
+
+  .endfield-mobile-destination-sheet {
+    border-radius: 0 !important;
+    border-top: 2px solid var(--ef-ink);
+    background: var(--ef-paper-strong) !important;
+    color: var(--ef-ink);
+    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
+  }
+
+  .endfield-mobile-destination-sheet .endfield-sidebar-header {
+    border-left: 6px solid var(--ef-signal);
+    background: #1b1d1b !important;
+    color: #fafbf8;
+  }
+
+  .endfield-target-dialog {
+    border-radius: 0 !important;
+    border: 2px solid var(--ef-ink) !important;
+    background: var(--ef-paper) !important;
+    color: var(--ef-ink);
+    box-shadow: 0 16px 48px rgb(0 0 0 / 0.24) !important;
+  }
+
+  .endfield-target-dialog [data-slot="dialog-header"] {
+    border-left: 7px solid var(--ef-signal);
+  }
+
+  .endfield-target-dialog [data-slot="dialog-title"] {
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .endfield-target-dialog input {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .endfield-target-dialog button {
+    border-radius: 2px;
+  }
+
+  .endfield-target-item {
+    border-radius: 1px;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 8px,
+        rgba(255, 255, 255, 0.025) 8px 9px
+      ),
+      linear-gradient(155deg, #252825 0%, #111311 100%);
+    color: #f4f6f1;
+    box-shadow: none !important;
+  }
+
+  .endfield-target-item:hover {
+    border-color: var(--ef-signal);
+    box-shadow: inset 0 -3px 0 var(--ef-signal) !important;
+  }
+
+  .endfield-calculator-shell .endfield-plan-panel,
+  .endfield-calculator-shell .endfield-production-card,
+  .endfield-calculator-shell .endfield-bottom-dock {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+  }
+
+  .endfield-calculator-shell .endfield-plan-panel {
+    border-left: 5px solid var(--ef-ink);
+  }
+
+  .endfield-calculator-shell .endfield-plan-panel > section,
+  .endfield-calculator-shell .endfield-plan-panel > div {
+    background: transparent;
+  }
+
+  .endfield-calculator-shell .endfield-plan-panel h2,
+  .endfield-calculator-shell .endfield-plan-panel h3 {
+    font-weight: 850;
+    letter-spacing: -0.02em;
+  }
+
+  .endfield-calculator-shell .endfield-plan-panel button,
+  .endfield-calculator-shell .endfield-plan-panel input,
+  .endfield-calculator-shell .endfield-plan-panel [role="combobox"] {
+    border-radius: 1px;
+    box-shadow: none;
+  }
+
+  .endfield-calculator-shell .endfield-production-card {
+    overflow: hidden;
+  }
+
+  .endfield-calculator-shell .endfield-production-header {
+    border-bottom: 1px solid var(--ef-line-strong);
+    background: color-mix(in srgb, var(--ef-paper) 86%, var(--ef-ink) 14%);
+  }
+
+  .endfield-calculator-shell .endfield-factory-view-tabs {
+    gap: 1px;
+    border: 1px solid var(--ef-ink);
+    border-radius: 0;
+    background: var(--ef-line);
+    padding: 0;
+  }
+
+  .endfield-calculator-shell .endfield-factory-view-tabs button {
+    position: relative;
+    border-radius: 0 !important;
+    background: var(--ef-subtle) !important;
+    color: var(--ef-meta) !important;
+    box-shadow: none !important;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+  }
+
+  .endfield-calculator-shell
+    .endfield-factory-view-tabs
+    button[data-state="active"] {
+    background: var(--ef-ink) !important;
+    color: var(--ef-paper-strong) !important;
+  }
+
+  .endfield-calculator-shell
+    .endfield-factory-view-tabs
+    button[data-state="active"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 3px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-calculator-shell .factory-production-view [data-slot="card-content"] {
+    background: var(--ef-paper-strong);
+  }
+
+  .endfield-calculator-shell .factory-production-view table {
+    border-color: var(--ef-line);
+  }
+
+  .endfield-calculator-shell .factory-production-view thead {
+    background: var(--ef-ink);
+    color: var(--ef-paper-strong);
+  }
+
+  .endfield-calculator-shell .factory-production-view th {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  .endfield-calculator-shell .factory-production-view tr {
+    border-color: var(--ef-line);
+  }
+
+  .endfield-calculator-shell .factory-production-view tbody tr:hover {
+    background: color-mix(in srgb, var(--ef-signal) 9%, transparent);
+  }
+
+  .endfield-calculator-shell .flow-theme {
+    background-color: var(--ef-paper-strong);
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 32px 32px;
+  }
+
+  .endfield-calculator-shell .flow-theme .react-flow__controls,
+  .endfield-calculator-shell .flow-theme .react-flow__minimap {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    box-shadow: none;
+  }
+
+  .endfield-calculator-shell .endfield-bottom-dock {
+    border-top: 2px solid var(--ef-ink);
+  }
+
+  .endfield-calculator-shell .endfield-bottom-dock > div:first-child {
+    position: relative;
+    background: var(--ef-ink);
+    color: var(--ef-paper-strong);
+  }
+
+  .endfield-calculator-shell .endfield-bottom-dock > div:first-child::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 6px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-calculator-shell .endfield-bottom-dock .text-muted-foreground {
+    color: color-mix(in srgb, currentColor 62%, transparent);
+  }
+
+  .endfield-calculator-shell [data-slot="card"],
+  .endfield-calculator-shell [data-slot="dialog-content"],
+  .endfield-calculator-shell [data-slot="sheet-content"] {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .endfield-mobile-destination-sheet {
+    height: min(78dvh, 680px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .endfield-target-dialog {
+    border: 0 !important;
+    border-top: 6px solid var(--ef-signal) !important;
+  }
+
+  .endfield-target-dialog [data-slot="dialog-header"] {
+    border-left: 0;
+  }
+}
