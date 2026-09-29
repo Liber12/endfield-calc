@@ -14,13 +14,14 @@ export default function AppModeNav({ mode, onModeChange }: AppModeNavProps) {
 
   return (
     <nav
-      className="flex w-fit items-center gap-1 rounded-lg bg-muted p-1"
+      className="app-mode-nav flex w-fit items-center gap-1 bg-muted p-1"
       aria-label={t("appMode.label", { defaultValue: "Tool mode" })}
     >
       <Button
         type="button"
         size="sm"
         variant={mode === "calculator" ? "secondary" : "ghost"}
+        className={mode === "calculator" ? "app-mode-button is-active" : "app-mode-button"}
         aria-current={mode === "calculator" ? "page" : undefined}
         onClick={() => onModeChange("calculator")}
       >
@@ -31,6 +32,7 @@ export default function AppModeNav({ mode, onModeChange }: AppModeNavProps) {
         type="button"
         size="sm"
         variant={mode === "dictionary" ? "secondary" : "ghost"}
+        className={mode === "dictionary" ? "app-mode-button is-active" : "app-mode-button"}
         aria-current={mode === "dictionary" ? "page" : undefined}
         onClick={() => onModeChange("dictionary")}
       >
