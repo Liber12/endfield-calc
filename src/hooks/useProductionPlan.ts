@@ -4,7 +4,7 @@ import {
   isCalcEngineReady,
   isCalcSuperseded,
 } from "@/interfaces/web/calc-client";
-import { buildCalculationProblem } from "@/core/calculation";
+import { buildCalculationProblem } from "@/core/calculation/problem";
 import { DEFAULT_MACHINES_PER_VAPORIZER } from "@/lib/sustain-constants";
 import { useTargetOptimizer } from "@/hooks/useTargetOptimizer";
 import { items, recipes, facilities, MAX_TARGETS } from "@/data";
