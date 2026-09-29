@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   buildSiteCalculationContext,
   solveSiteCalculation,
-} from "@/lib/calc-environment";
+} from "@/core/calculation";
 import { aicNodes } from "@/data/aic-plans";
 import { DomainId, FacilityId, ItemId, RecipeId } from "@/types/constants";
 
