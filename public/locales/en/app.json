@@ -243,6 +243,9 @@
     "useRouteSummary": "Use path: {{from}} → {{to}} · {{steps}} steps",
     "useRouteTitle": "Use path",
     "backToDirectUses": "Direct uses",
-    "productionRouteTitle": "Production route"
+    "productionRouteTitle": "Production route",
+    "itemRecipes": "Production recipe",
+    "recipeInputs": "Inputs",
+    "recipeOutputs": "Outputs"
   }
 }

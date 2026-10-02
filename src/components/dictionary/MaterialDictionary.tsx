@@ -220,6 +220,112 @@ function MiniMaterialChip({
   );
 }
 
+function ItemRecipeSummary({
+  recipes,
+  itemById,
+  facilityById,
+  onSelectItem,
+}: {
+  recipes: readonly Recipe[];
+  itemById: ReadonlyMap<ItemId, Item>;
+  facilityById: ReadonlyMap<Facility["id"], Facility>;
+  onSelectItem: (itemId: ItemId) => void;
+}) {
+  const { t } = useTranslation("app");
+
+  return (
+    <section className="endfield-item-recipes border bg-background p-3">
+      <div className="flex items-center gap-2 border-b pb-2">
+        <Wrench className="h-4 w-4 shrink-0" />
+        <h2 className="text-xs font-semibold">
+          {t("dictionary.itemRecipes", {
+            defaultValue: "Production recipe",
+          })}
+        </h2>
+        <span className="ml-auto text-[10px] text-muted-foreground">
+          {recipes.length}
+        </span>
+      </div>
+
+      {recipes.length > 0 ? (
+        <div className="mt-2 space-y-2">
+          {recipes.map((recipe) => {
+            const facility = facilityById.get(recipe.facilityId);
+
+            return (
+              <article
+                key={recipe.id}
+                className="endfield-item-recipe border bg-card p-2.5"
+              >
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <h3 className="text-[11px] font-bold">
+                    {getRecipeName(recipe)}
+                  </h3>
+                  <span className="text-[10px] text-muted-foreground">
+                    {facility ? getFacilityName(facility) : recipe.facilityId}
+                    {" · "}
+                    {recipe.craftingTime}s
+                  </span>
+                </div>
+
+                <div className="mt-2 grid gap-2 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-center">
+                  <div className="min-w-0">
+                    <div className="mb-1 text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                      {t("dictionary.recipeInputs", {
+                        defaultValue: "Inputs",
+                      })}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {recipe.inputs.map((entry, index) => (
+                        <MiniMaterialChip
+                          key={entry.itemId + "-" + index}
+                          itemId={entry.itemId}
+                          amount={entry.amount}
+                          itemById={itemById}
+                          onSelect={onSelectItem}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <ArrowRight className="hidden h-4 w-4 shrink-0 text-muted-foreground md:block" />
+                  <ArrowDown className="mx-auto h-4 w-4 text-muted-foreground md:hidden" />
+
+                  <div className="min-w-0">
+                    <div className="mb-1 text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                      {t("dictionary.recipeOutputs", {
+                        defaultValue: "Outputs",
+                      })}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {recipe.outputs.map((entry, index) => (
+                        <MiniMaterialChip
+                          key={entry.itemId + "-" + index}
+                          itemId={entry.itemId}
+                          amount={entry.amount}
+                          itemById={itemById}
+                          onSelect={onSelectItem}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          {t("dictionary.noProducer", {
+            defaultValue:
+              "No production recipe is registered for this item.",
+          })}
+        </p>
+      )}
+    </section>
+  );
+}
+
 function MaterialPicker({
   open,
   onOpenChange,
@@ -957,7 +1063,6 @@ export default function MaterialDictionary({
     return craftable ? "production" : "uses";
   });
   const [mobileDestinationsOpen, setMobileDestinationsOpen] = useState(false);
-  const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
   const routeRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
@@ -1159,7 +1264,7 @@ export default function MaterialDictionary({
   }, [endpoints]);
 
   return (
-    <section className="endfield-dictionary flex min-h-0 flex-1 flex-col gap-3">
+    <section className="endfield-dictionary flex min-h-0 flex-none flex-col gap-3 md:flex-1">
       <div className="endfield-system-bar" aria-hidden="true">
         <span>ENDFIELD INDUSTRIES // MATERIAL RECORD</span>
         <span>SUPPLY NETWORK / ACTIVE</span>
@@ -1182,46 +1287,79 @@ export default function MaterialDictionary({
 
       <header className="endfield-material-header border bg-card p-2.5 md:p-3">
         {selectedItem ? (
-          <div className="flex items-center gap-2 md:items-start md:gap-3">
-            <button
-              type="button"
-              onClick={() => setPickerOpen(true)}
-              className="endfield-material-subject flex min-h-16 min-w-0 flex-1 items-center gap-2.5 border bg-background px-2.5 text-left transition-colors hover:bg-accent md:min-w-[280px] md:max-w-[320px] md:gap-3 md:px-3"
-            >
-              <ItemIcon item={selectedItem} size="md" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[9px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
-                  {t("dictionary.selectedItem", {
-                    defaultValue: "Selected item",
-                  })}
-                </span>
-                <span className="endfield-display-name block truncate text-lg font-bold">
-                  {getItemName(selectedItem)}
-                </span>
-                <span className="mt-1 flex flex-wrap gap-1">
-                  {selectedCategory && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 md:items-start md:gap-3">
+              <button
+                type="button"
+                onClick={() => setPickerOpen(true)}
+                className="endfield-material-subject flex min-h-16 min-w-0 flex-1 items-center gap-2.5 border bg-background px-2.5 text-left transition-colors hover:bg-accent md:min-w-[280px] md:max-w-[360px] md:gap-3 md:px-3"
+              >
+                <ItemIcon item={selectedItem} size="md" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[9px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                    {t("dictionary.selectedItem", {
+                      defaultValue: "Selected item",
+                    })}
+                  </span>
+                  <span className="endfield-display-name block truncate text-lg font-bold">
+                    {getItemName(selectedItem)}
+                  </span>
+                  <span className="mt-1 flex flex-wrap gap-1">
+                    {selectedCategory && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
+                        {categoryLabel(t, selectedCategory)}
+                      </span>
+                    )}
+                    {selectedSubtype && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
+                        {subtypeLabel(t, selectedSubtype)}
+                      </span>
+                    )}
                     <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                      {categoryLabel(t, selectedCategory)}
+                      T{selectedItem.tier}
                     </span>
-                  )}
-                  {selectedSubtype && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                      {subtypeLabel(t, selectedSubtype)}
-                    </span>
-                  )}
-                  <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                    T{selectedItem.tier}
                   </span>
                 </span>
-              </span>
-              <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
-            </button>
+                <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </button>
 
-            <div className="hidden min-w-0 flex-1 md:block">
+              <div className="hidden shrink-0 md:flex md:flex-col md:gap-1.5">
+                {selectedSummary?.stockCandidate && (
+                  <div className="flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-2 text-xs font-medium text-amber-700 dark:text-amber-300">
+                    <Star className="h-3.5 w-3.5" />
+                    {t("dictionary.stockCandidate", {
+                      defaultValue: "Stock candidate",
+                    })}
+                  </div>
+                )}
+                <div className="grid grid-cols-2 gap-1.5">
+                  <div className="bg-muted px-2.5 py-1.5 text-center">
+                    <div className="text-sm font-bold">{producers.length}</div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.productionMethodsShort", {
+                        defaultValue: "Methods",
+                      })}
+                    </div>
+                  </div>
+                  <div className="bg-muted px-2.5 py-1.5 text-center">
+                    <div className="text-sm font-bold">
+                      {selectedSummary?.directRecipeCount ?? 0}
+                    </div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.productionUsesShort", {
+                        defaultValue: "Uses",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-2 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)]">
               {selectedDetail ? (
                 <section
                   className={cn(
-                    "endfield-description h-full border p-3",
+                    "endfield-description border p-3",
                     selectedDetail.kind === "effect"
                       ? "border-primary/30 bg-primary/5"
                       : "bg-background",
@@ -1241,7 +1379,7 @@ export default function MaterialDictionary({
                           })}
                     </h2>
                     <a
-                      href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
+                      href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%A0%E4%B8%80%E8%A6%A7"
                       target="_blank"
                       rel="noreferrer"
                       className="ml-auto text-[10px] text-muted-foreground hover:underline"
@@ -1257,56 +1395,20 @@ export default function MaterialDictionary({
                   </p>
                 </section>
               ) : (
-                <div className="flex h-full min-h-16 items-center border border-dashed px-3 text-sm text-muted-foreground">
+                <div className="flex min-h-16 items-center border border-dashed px-3 text-sm text-muted-foreground">
                   {t("dictionary.noItemDescription", {
                     defaultValue: "No description or effect is registered.",
                   })}
                 </div>
               )}
-            </div>
 
-            <div className="hidden shrink-0 md:flex md:flex-col md:gap-1.5">
-              {selectedSummary?.stockCandidate && (
-                <div className="flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-2 text-xs font-medium text-amber-700 dark:text-amber-300">
-                  <Star className="h-3.5 w-3.5" />
-                  {t("dictionary.stockCandidate", {
-                    defaultValue: "Stock candidate",
-                  })}
-                </div>
-              )}
-              <div className="grid grid-cols-2 gap-1.5">
-                <div className="bg-muted px-2.5 py-1.5 text-center">
-                  <div className="text-sm font-bold">{producers.length}</div>
-                  <div className="text-[9px] text-muted-foreground">
-                    {t("dictionary.productionMethodsShort", {
-                      defaultValue: "Methods",
-                    })}
-                  </div>
-                </div>
-                <div className="bg-muted px-2.5 py-1.5 text-center">
-                  <div className="text-sm font-bold">
-                    {selectedSummary?.directRecipeCount ?? 0}
-                  </div>
-                  <div className="text-[9px] text-muted-foreground">
-                    {t("dictionary.productionUsesShort", {
-                      defaultValue: "Uses",
-                    })}
-                  </div>
-                </div>
-              </div>
+              <ItemRecipeSummary
+                recipes={producers}
+                itemById={itemById}
+                facilityById={facilityById}
+                onSelectItem={selectItem}
+              />
             </div>
-
-            <button
-              type="button"
-              onClick={() => setMobileInfoOpen(true)}
-              className="endfield-item-info-button flex h-16 w-12 shrink-0 flex-col items-center justify-center gap-1 border bg-background text-[9px] font-bold md:hidden"
-              aria-label={t("dictionary.itemDetails", {
-                defaultValue: "Item details",
-              })}
-            >
-              <Info className="h-4 w-4" />
-              {t("dictionary.detailsShort", { defaultValue: "Details" })}
-            </button>
           </div>
         ) : (
           <button
@@ -1332,89 +1434,6 @@ export default function MaterialDictionary({
           </button>
         )}
       </header>
-
-      <Sheet open={mobileInfoOpen} onOpenChange={setMobileInfoOpen}>
-        <SheetContent
-          side="bottom"
-          className="endfield-mobile-info-sheet max-h-[72dvh] gap-0 overflow-y-auto p-0"
-        >
-          {selectedItem && (
-            <>
-              <SheetHeader className="endfield-sidebar-header border-b pr-12">
-                <SheetTitle className="text-left text-sm">
-                  {getItemName(selectedItem)}
-                </SheetTitle>
-                <SheetDescription className="text-left text-xs">
-                  {selectedCategory ? categoryLabel(t, selectedCategory) : ""}
-                  {selectedSubtype ? " · " + subtypeLabel(t, selectedSubtype) : ""}
-                  {" · T" + selectedItem.tier}
-                </SheetDescription>
-              </SheetHeader>
-              <div className="space-y-4 p-4">
-                {selectedDetail ? (
-                  <section className="endfield-description border bg-background p-3">
-                    <div className="flex items-center gap-2">
-                      {selectedDetail.kind === "effect" ? (
-                        <HeartPulse className="h-4 w-4 shrink-0" />
-                      ) : (
-                        <Info className="h-4 w-4 shrink-0" />
-                      )}
-                      <h2 className="text-xs font-semibold">
-                        {selectedDetail.kind === "effect"
-                          ? t("dictionary.itemEffect", { defaultValue: "Effect" })
-                          : t("dictionary.itemDescription", {
-                              defaultValue: "Description",
-                            })}
-                      </h2>
-                      <a
-                        href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="ml-auto text-[10px] text-muted-foreground hover:underline"
-                      >
-                        Wikiru
-                      </a>
-                    </div>
-                    <p
-                      lang="ja"
-                      className="mt-2 whitespace-pre-line text-sm leading-relaxed"
-                    >
-                      {selectedDetail.text}
-                    </p>
-                  </section>
-                ) : (
-                  <p className="text-sm text-muted-foreground">
-                    {t("dictionary.noItemDescription", {
-                      defaultValue: "No description or effect is registered.",
-                    })}
-                  </p>
-                )}
-
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="border bg-muted/40 p-3 text-center">
-                    <div className="text-lg font-bold">{producers.length}</div>
-                    <div className="text-[10px] text-muted-foreground">
-                      {t("dictionary.productionMethodsShort", {
-                        defaultValue: "Production methods",
-                      })}
-                    </div>
-                  </div>
-                  <div className="border bg-muted/40 p-3 text-center">
-                    <div className="text-lg font-bold">
-                      {selectedSummary?.directRecipeCount ?? 0}
-                    </div>
-                    <div className="text-[10px] text-muted-foreground">
-                      {t("dictionary.productionUsesShort", {
-                        defaultValue: "Direct uses",
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </SheetContent>
-      </Sheet>
 
       {selectedItem && mainView === "uses" && (
         <button
@@ -1443,7 +1462,7 @@ export default function MaterialDictionary({
 
       <div
         className={cn(
-          "grid min-h-0 flex-1 gap-3",
+          "endfield-dictionary-main grid min-h-0 flex-1 gap-3",
           mainView === "uses" && selectedItem
             ? "lg:grid-cols-[minmax(0,1fr)_340px]"
             : "lg:grid-cols-1",

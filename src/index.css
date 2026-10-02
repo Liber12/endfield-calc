@@ -926,23 +926,38 @@
     box-shadow: none;
   }
 
-  .endfield-item-info-button {
+  .endfield-item-recipes {
     border-radius: 0;
-    border-color: var(--ef-line-strong);
+    border-color: var(--ef-line);
+    border-left: 4px solid var(--ef-ink);
+    background: var(--ef-paper-strong);
     box-shadow: none;
   }
 
-  .endfield-mobile-info-sheet {
-    border-radius: 0 !important;
-    border-top: 5px solid var(--ef-signal);
-    background: var(--ef-paper-strong) !important;
-    color: var(--ef-ink);
-    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
+  .endfield-item-recipe {
+    border-radius: 0;
+    border-color: var(--ef-line);
+    background: color-mix(in srgb, var(--ef-paper-strong) 94%, var(--ef-subtle) 6%);
+    box-shadow: none;
   }
 
 @media (max-width: 767px) {
   .endfield-app-shell {
     background-size: 48px 48px;
+  }
+
+  .endfield-dictionary-shell {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow-y: visible !important;
+  }
+
+  .endfield-dictionary-shell .endfield-dictionary {
+    flex: 0 0 auto;
+  }
+
+  .endfield-dictionary-shell .endfield-dictionary-main {
+    flex: 0 0 auto;
   }
 
   .endfield-app-shell .app-header-title::after {
@@ -998,6 +1013,18 @@
     margin-top: 0 !important;
   }
 
+  .endfield-item-recipes {
+    padding: 0.6rem;
+  }
+
+  .endfield-item-recipe {
+    padding: 0.55rem;
+  }
+
+  .endfield-item-recipe .min-h-10 {
+    min-height: 2.25rem;
+  }
+
   .endfield-material-header {
     padding: 0.6rem;
   }
@@ -1045,7 +1072,6 @@
   }
 
   .endfield-mobile-destination-sheet,
-  .endfield-mobile-info-sheet,
   .endfield-target-dialog {
     --ef-signal: #fffa00;
     --ef-ink: #1b1d1b;
@@ -1059,7 +1085,6 @@
   }
 
   .dark .endfield-mobile-destination-sheet,
-  .dark .endfield-mobile-info-sheet,
   .dark .endfield-target-dialog {
     --ef-ink: #f3f4ef;
     --ef-ink-soft: #d8dbd4;

@@ -16,7 +16,13 @@ production route.
 ### Item identity
 
 The item selector, name, icon, category, subtype, and tier identify the current object.
-Description/effect text and secondary statistics are supporting information, not the primary task.
+Description/effect text and the item's **immediate production recipe(s)** are part of the
+item's basic information and are visible by default. A recipe here is a concise item-level
+fact: facility, crafting time, all inputs, and all outputs.
+
+The recursive production view below is not a replacement for that basic recipe. It is the
+expanded dependency view used to answer the broader "what does this ultimately require?"
+question.
 
 ### Production
 
@@ -34,10 +40,13 @@ trade destinations, and facility uses are secondary destinations. Selecting one 
 
 ## Responsive rules
 
-The design follows progressive disclosure and mobile-first hierarchy:
+The design follows mobile-first hierarchy without hiding basic item facts:
 
-- On narrow screens, the item identity row and the primary task switch appear before descriptive text.
-- Description/effect text moves to a bottom sheet opened by **Details**.
+- On narrow screens, item identity, description/effect, and immediate recipe(s) remain inline and
+  visible on initial load.
+- Basic information is **not** moved behind an expand/details control merely to fit one viewport.
+  When it does not fit, the page uses normal vertical document scrolling and the basic-information
+  block scrolls away naturally as the user reaches the work area.
 - Decorative system chrome is removed on narrow screens.
 - Destination controls exist only in the Uses context.
 - Production gets the full workbench width; the destination sidebar appears only for Uses.
