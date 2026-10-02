@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import {
   buildRecipeIndex,
+  buildRequirementTree,
   buildUsageTree,
 } from "@/lib/material-dictionary";
 import type { FacilityId, ItemId, Recipe, RecipeId } from "@/types";
@@ -96,5 +97,65 @@ describe("material dictionary downstream tree", () => {
     expect(c?.itemId).toBe("c");
     expect(c?.depthLimited).toBe(true);
     expect(c?.children).toEqual([]);
+  });
+});
+
+
+describe("material dictionary requirement tree", () => {
+  test("expands producer inputs upstream and normalizes cumulative amounts", () => {
+    const makeB = {
+      ...recipe("make_b", ["a"], ["b"]),
+      inputs: [{ itemId: "a" as ItemId, amount: 3 }],
+      outputs: [{ itemId: "b" as ItemId, amount: 2 }],
+    };
+    const makeC = {
+      ...recipe("make_c", ["b"], ["c"]),
+      inputs: [{ itemId: "b" as ItemId, amount: 4 }],
+      outputs: [{ itemId: "c" as ItemId, amount: 1 }],
+    };
+    const index = buildRecipeIndex([makeB, makeC]);
+
+    const tree = buildRequirementTree("c" as ItemId, index);
+    const b = tree.recipes[0]?.inputs[0];
+    const a = b?.recipes[0]?.inputs[0];
+
+    expect(tree.amount).toBe(1);
+    expect(b?.itemId).toBe("b");
+    expect(b?.amount).toBe(4);
+    expect(a?.itemId).toBe("a");
+    expect(a?.amount).toBe(6);
+  });
+
+  test("keeps alternative producer recipes instead of choosing one silently", () => {
+    const index = buildRecipeIndex([
+      recipe("a_to_c", ["a"], ["c"]),
+      recipe("b_to_c", ["b"], ["c"]),
+    ]);
+
+    const tree = buildRequirementTree("c" as ItemId, index);
+
+    expect(tree.recipes.map((branch) => branch.recipeId)).toEqual([
+      "a_to_c",
+      "b_to_c",
+    ]);
+    expect(tree.recipes[0]?.inputs[0]?.itemId).toBe("a");
+    expect(tree.recipes[1]?.inputs[0]?.itemId).toBe("b");
+  });
+
+  test("marks upstream cycles and stops recursion", () => {
+    const index = buildRecipeIndex([
+      recipe("a_to_b", ["a"], ["b"]),
+      recipe("b_to_a", ["b"], ["a"]),
+    ]);
+
+    const tree = buildRequirementTree("a" as ItemId, index, {
+      maxDepth: 20,
+      maxNodes: 100,
+    });
+
+    const cycleNode = tree.recipes[0]?.inputs[0]?.recipes[0]?.inputs[0];
+    expect(cycleNode?.itemId).toBe("a");
+    expect(cycleNode?.cycle).toBe(true);
+    expect(cycleNode?.recipes).toEqual([]);
   });
 });

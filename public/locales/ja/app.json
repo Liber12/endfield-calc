@@ -219,6 +219,18 @@
       "bomb": "爆発物",
       "event": "イベント素材",
       "other": "その他"
-    }
+    },
+    "directUsesView": "直接用途",
+    "requirementsView": "必要素材",
+    "requirementTreeHint": "選択したアイテムを生産するために必要な全レシピ経路を表示します。",
+    "requirementTreeDescription": "選択したアイテム1個を基準に、各生産レシピを必要素材側へ展開します。数量は累計必要数です。",
+    "requirementRootAmount": "基準数量",
+    "requirementCumulativeAmount": "基準1個あたり",
+    "requirementAlternative": "代替 {{index}}",
+    "requirementSource": "原料 / 生産レシピなし",
+    "requirementCycle": "循環を検出したため展開を停止",
+    "requirementDepthLimit": "深さ上限に達したため展開を停止",
+    "requirementNodeLimit": "ツリーサイズ上限に達したため展開を停止",
+    "requirementNoInputs": "このレシピには素材入力がありません。"
   }
 }
