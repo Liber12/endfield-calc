@@ -1,4 +1,5 @@
 import type { Item, ItemId, Recipe, RecipeId } from "@/types";
+import { FacilityId } from "@/types/constants";
 import { isPackagingItem } from "@/lib/item-category";
 
 export type RecipeIndex = {
@@ -37,6 +38,29 @@ export type RequirementTreeNode = {
 };
 
 export type RequirementTreeOptions = UsageTreeOptions;
+
+
+/**
+ * Recovery/disassembly recipes are valid game operations, but they should not
+ * be treated as normal upstream manufacturing choices in the dictionary.
+ *
+ * In particular, every empty bottle can be recovered by dismantling many
+ * different filled bottles. Treating those recovery outputs as alternative
+ * "production recipes" makes an upstream dependency tree explode without
+ * helping answer "what do I need to manufacture this item?".
+ */
+export function isRecoveryRecipe(recipe: Recipe): boolean {
+  return recipe.facilityId === FacilityId.DISMANTLER_1;
+}
+
+export function getPrimaryProductionRecipes(
+  itemId: ItemId,
+  index: RecipeIndex,
+): readonly Recipe[] {
+  return (index.producedBy.get(itemId) ?? []).filter(
+    (recipe) => !isRecoveryRecipe(recipe),
+  );
+}
 
 function pushUniqueRecipe(
   map: Map<ItemId, Recipe[]>,
@@ -237,7 +261,7 @@ export function buildRequirementTree(
     nextPath.add(itemId);
     const branches: RequirementTreeRecipe[] = [];
 
-    for (const recipe of index.producedBy.get(itemId) ?? []) {
+    for (const recipe of getPrimaryProductionRecipes(itemId, index)) {
       if (nodeCount >= maxNodes) break;
 
       const outputAmount = recipe.outputs

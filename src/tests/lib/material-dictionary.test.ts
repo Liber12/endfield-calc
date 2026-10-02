@@ -4,8 +4,10 @@ import {
   buildRecipeIndex,
   buildRequirementTree,
   buildUsageTree,
+  getPrimaryProductionRecipes,
 } from "@/lib/material-dictionary";
 import type { FacilityId, ItemId, Recipe, RecipeId } from "@/types";
+import { FacilityId as FacilityIds } from "@/types/constants";
 
 const recipe = (
   id: string,
@@ -140,6 +142,37 @@ describe("material dictionary requirement tree", () => {
     ]);
     expect(tree.recipes[0]?.inputs[0]?.itemId).toBe("a");
     expect(tree.recipes[1]?.inputs[0]?.itemId).toBe("b");
+  });
+
+  test("excludes dismantler recovery branches from normal production", () => {
+    const shapedBottle = {
+      ...recipe("shape_bottle", ["copper"], ["bottle"]),
+      facilityId: "shaper_1" as FacilityId,
+    };
+    const recoveredBottle = {
+      ...recipe("recover_bottle", ["filled_bottle"], ["bottle"]),
+      facilityId: FacilityIds.DISMANTLER_1,
+    };
+    const makeProduct = recipe("make_product", ["bottle"], ["product"]);
+    const index = buildRecipeIndex([
+      shapedBottle,
+      recoveredBottle,
+      makeProduct,
+    ]);
+
+    expect(
+      getPrimaryProductionRecipes("bottle" as ItemId, index).map(
+        (entry) => entry.id,
+      ),
+    ).toEqual(["shape_bottle"]);
+
+    const tree = buildRequirementTree("product" as ItemId, index);
+    const bottle = tree.recipes[0]?.inputs[0];
+
+    expect(bottle?.itemId).toBe("bottle");
+    expect(bottle?.recipes.map((branch) => branch.recipeId)).toEqual([
+      "shape_bottle",
+    ]);
   });
 
   test("marks upstream cycles and stops recursion", () => {
