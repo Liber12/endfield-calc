@@ -946,6 +946,7 @@ export default function MaterialDictionary({
     const params = new URLSearchParams(window.location.search);
     const requested = params.get("section");
     if (requested === "production" || requested === "uses") return requested;
+    if (params.has("endpoint")) return "uses";
 
     const itemId = params.get("item") as ItemId | null;
     const craftable =
@@ -1653,24 +1654,20 @@ export default function MaterialDictionary({
                 </div>
               </>
             ) : (
-              <div className="flex min-h-full flex-col gap-3 md:flex-row md:items-start">
-                <div className="md:sticky md:left-0 md:top-0 md:w-[140px] md:shrink-0">
-                  <RouteMaterial
-                    itemId={selectedItem.id}
-                    itemById={itemById}
-                    onSelectItem={selectItem}
-                    emphasis
-                  />
-                  <div className="mt-2 text-center text-[11px] text-muted-foreground">
-                    {t("dictionary.consumedBy", {
-                      defaultValue: "consumed by",
+              <div className="min-h-full">
+                <div className="mb-3 flex items-center gap-2 border-b pb-2">
+                  <Workflow className="h-4 w-4" />
+                  <h2 className="text-sm font-bold">
+                    {t("dictionary.directUsesView", {
+                      defaultValue: "Direct uses",
                     })}
-                  </div>
+                  </h2>
+                  <span className="text-[10px] text-muted-foreground">
+                    {directUses.length}
+                  </span>
                 </div>
 
-                <ArrowRight className="hidden h-5 w-5 shrink-0 text-muted-foreground md:mt-12 md:block" />
-
-                <div className="grid min-w-0 flex-1 gap-2 xl:grid-cols-2">
+                <div className="grid min-w-0 gap-2 xl:grid-cols-2">
                   {directUses.length > 0 ? (
                     directUses.map((recipe) => (
                       <DirectUseLane
@@ -1808,17 +1805,16 @@ export default function MaterialDictionary({
 
             <div className="space-y-4 p-3">
               {selectedId && <ExternalDirectUses itemId={selectedId} />}
-
             </div>
           </aside>
-        ) : (
-          <aside className="hidden rounded-xl border bg-card p-4 text-sm text-muted-foreground lg:block">
+        ) : !selectedItem ? (
+          <aside className="hidden border bg-card p-4 text-sm text-muted-foreground lg:block">
             {t("dictionary.contextPanelEmpty", {
               defaultValue:
-                "Choose a material to see reachable products and other destinations here.",
+                "Choose an item to inspect its production and uses.",
             })}
           </aside>
-        )}
+        ) : null}
       </div>
 
       <Sheet
@@ -1923,7 +1919,6 @@ export default function MaterialDictionary({
             <div className="my-3 border-t" />
 
             {selectedId && <ExternalDirectUses itemId={selectedId} />}
-
           </div>
         </SheetContent>
       </Sheet>
