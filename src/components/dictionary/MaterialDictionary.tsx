@@ -1512,35 +1512,70 @@ export default function MaterialDictionary({
             ref={routeRef}
             className="endfield-route-canvas min-h-0 flex-1 overflow-auto p-3 md:p-5"
           >
+
             {!selectedItem ? (
               <div className="flex h-full min-h-[300px] items-center justify-center">
                 <div className="max-w-sm text-center">
                   <GitBranch className="mx-auto mb-3 h-10 w-10 text-muted-foreground" />
                   <h3 className="font-semibold">
                     {t("dictionary.routeEmptyTitle", {
-                      defaultValue: "Start with a material",
+                      defaultValue: "Choose an item",
                     })}
                   </h3>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {t("dictionary.routeEmptyHint", {
                       defaultValue:
-                        "Choose one material. Its direct uses appear here immediately, then you can switch to any useful final destination.",
+                        "Choose one item to see how it is produced and where it is used.",
                     })}
                   </p>
                   <button
                     type="button"
                     onClick={() => setPickerOpen(true)}
-                    className="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+                    className="mt-4 bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
                   >
                     {t("dictionary.chooseMaterial", {
-                      defaultValue: "Choose material",
+                      defaultValue: "Choose item",
                     })}
                   </button>
                 </div>
               </div>
-            ) : mainView === "route" ? (
-              selectedEndpoint && route ? (
+            ) : mainView === "production" ? (
+              requirementTree ? (
+                <RequirementTree
+                  tree={requirementTree}
+                  itemById={itemById}
+                  recipeById={recipeById}
+                  facilityById={facilityById}
+                  onSelectItem={selectProductionItem}
+                />
+              ) : null
+            ) : selectedEndpoint && route ? (
               <>
+                <div className="mb-3 flex items-center justify-between gap-2 border-b pb-2">
+                  <div className="min-w-0">
+                    <div className="text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                      {t("dictionary.useRouteTitle", {
+                        defaultValue: "Use path",
+                      })}
+                    </div>
+                    <div className="truncate text-sm font-semibold">
+                      {getItemName(selectedItem)} {" → "}
+                      {itemById.get(selectedEndpoint.targetItemId)
+                        ? getItemName(itemById.get(selectedEndpoint.targetItemId)!)
+                        : selectedEndpoint.targetItemId}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={showDirectUses}
+                    className="shrink-0 border bg-background px-2 py-1 text-[11px] hover:bg-accent"
+                  >
+                    {t("dictionary.backToDirectUses", {
+                      defaultValue: "Direct uses",
+                    })}
+                  </button>
+                </div>
+
                 <div className="space-y-2 md:hidden">
                   <RouteMaterial
                     itemId={selectedItem.id}
@@ -1551,7 +1586,7 @@ export default function MaterialDictionary({
 
                   {route.map((step, index) => (
                     <div
-                      key={`mobile-${step.recipe.id}-${index}`}
+                      key={"mobile-" + step.recipe.id + "-" + index}
                       className="space-y-2"
                     >
                       <ArrowDown className="mx-auto h-5 w-5 text-muted-foreground" />
@@ -1584,7 +1619,7 @@ export default function MaterialDictionary({
 
                   {route.map((step, index) => (
                     <div
-                      key={`${step.recipe.id}-${index}`}
+                      key={step.recipe.id + "-" + index}
                       className="flex shrink-0 items-center gap-2"
                     >
                       <ArrowRight className="mx-1 h-5 w-5 text-muted-foreground" />
@@ -1607,34 +1642,6 @@ export default function MaterialDictionary({
                   <RouteEndpointDetail endpoint={selectedEndpoint} />
                 </div>
               </>
-              ) : (
-                <div className="flex min-h-full items-center justify-center">
-                  <div className="max-w-sm rounded-xl border border-dashed bg-background/80 p-5 text-center">
-                    <Route className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
-                    <h3 className="text-sm font-semibold">
-                      {t("dictionary.routeNeedsDestinationTitle", {
-                        defaultValue: "Choose a destination",
-                      })}
-                    </h3>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                      {t("dictionary.routeNeedsDestination", {
-                        defaultValue:
-                          "Choose a product, trade item, or facility from the right sidebar to show its route.",
-                      })}
-                    </p>
-                  </div>
-                </div>
-              )
-            ) : mainView === "requirements" ? (
-              requirementTree ? (
-                <RequirementTree
-                  tree={requirementTree}
-                  itemById={itemById}
-                  recipeById={recipeById}
-                  facilityById={facilityById}
-                  onSelectItem={selectRequirementItem}
-                />
-              ) : null
             ) : (
               <div className="flex min-h-full flex-col gap-3 md:flex-row md:items-start">
                 <div className="md:sticky md:left-0 md:top-0 md:w-[140px] md:shrink-0">
@@ -1666,7 +1673,7 @@ export default function MaterialDictionary({
                       />
                     ))
                   ) : (
-                    <div className="rounded-xl border border-dashed bg-background/70 p-5 text-sm text-muted-foreground">
+                    <div className="border border-dashed bg-background/70 p-5 text-sm text-muted-foreground">
                       {t("dictionary.noUse", {
                         defaultValue:
                           "No normal production recipe directly consumes this item.",
