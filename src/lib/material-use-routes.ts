@@ -5,7 +5,7 @@ import {
   type TradeUse,
 } from "@/data/material-external-uses";
 import { getMaterialSubtype } from "@/lib/item-category";
-import type { RecipeIndex } from "@/lib/material-dictionary";
+import { isRecoveryRecipe, type RecipeIndex } from "@/lib/material-dictionary";
 
 export type UsefulEndpointKind = "product" | "trade" | "facility";
 
@@ -52,7 +52,7 @@ export function isMeaningfulUsageRecipe(
   recipe: Recipe,
   itemById: ReadonlyMap<ItemId, Item>,
 ): boolean {
-  if (String(recipe.facilityId) === "dismantler_1") return false;
+  if (isRecoveryRecipe(recipe)) return false;
   if (recipe.outputs.length === 0) return false;
 
   const outputs = recipe.outputs
