@@ -52,6 +52,7 @@ import {
 import {
   buildRecipeIndex,
   buildRequirementTree,
+  getPrimaryProductionRecipes,
 } from "@/lib/material-dictionary";
 import type { RequirementTreeNode as RequirementNode } from "@/lib/material-dictionary";
 import {
@@ -1110,7 +1111,7 @@ export default function MaterialDictionary({
     ? getMaterialSubtype(selectedItem)
     : undefined;
 
-  const producers = selectedId ? index.producedBy.get(selectedId) ?? [] : [];
+  const producers = selectedId ? getPrimaryProductionRecipes(selectedId, index) : [];
 
   const requirementTree = useMemo(
     () =>
