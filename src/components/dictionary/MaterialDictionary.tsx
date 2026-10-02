@@ -1063,7 +1063,6 @@ export default function MaterialDictionary({
     return craftable ? "production" : "uses";
   });
   const [mobileDestinationsOpen, setMobileDestinationsOpen] = useState(false);
-  const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
   const routeRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
@@ -1288,46 +1287,79 @@ export default function MaterialDictionary({
 
       <header className="endfield-material-header border bg-card p-2.5 md:p-3">
         {selectedItem ? (
-          <div className="flex items-center gap-2 md:items-start md:gap-3">
-            <button
-              type="button"
-              onClick={() => setPickerOpen(true)}
-              className="endfield-material-subject flex min-h-16 min-w-0 flex-1 items-center gap-2.5 border bg-background px-2.5 text-left transition-colors hover:bg-accent md:min-w-[280px] md:max-w-[320px] md:gap-3 md:px-3"
-            >
-              <ItemIcon item={selectedItem} size="md" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[9px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
-                  {t("dictionary.selectedItem", {
-                    defaultValue: "Selected item",
-                  })}
-                </span>
-                <span className="endfield-display-name block truncate text-lg font-bold">
-                  {getItemName(selectedItem)}
-                </span>
-                <span className="mt-1 flex flex-wrap gap-1">
-                  {selectedCategory && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 md:items-start md:gap-3">
+              <button
+                type="button"
+                onClick={() => setPickerOpen(true)}
+                className="endfield-material-subject flex min-h-16 min-w-0 flex-1 items-center gap-2.5 border bg-background px-2.5 text-left transition-colors hover:bg-accent md:min-w-[280px] md:max-w-[360px] md:gap-3 md:px-3"
+              >
+                <ItemIcon item={selectedItem} size="md" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[9px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                    {t("dictionary.selectedItem", {
+                      defaultValue: "Selected item",
+                    })}
+                  </span>
+                  <span className="endfield-display-name block truncate text-lg font-bold">
+                    {getItemName(selectedItem)}
+                  </span>
+                  <span className="mt-1 flex flex-wrap gap-1">
+                    {selectedCategory && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
+                        {categoryLabel(t, selectedCategory)}
+                      </span>
+                    )}
+                    {selectedSubtype && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
+                        {subtypeLabel(t, selectedSubtype)}
+                      </span>
+                    )}
                     <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                      {categoryLabel(t, selectedCategory)}
+                      T{selectedItem.tier}
                     </span>
-                  )}
-                  {selectedSubtype && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                      {subtypeLabel(t, selectedSubtype)}
-                    </span>
-                  )}
-                  <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                    T{selectedItem.tier}
                   </span>
                 </span>
-              </span>
-              <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
-            </button>
+                <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </button>
 
-            <div className="hidden min-w-0 flex-1 md:block">
+              <div className="hidden shrink-0 md:flex md:flex-col md:gap-1.5">
+                {selectedSummary?.stockCandidate && (
+                  <div className="flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-2 text-xs font-medium text-amber-700 dark:text-amber-300">
+                    <Star className="h-3.5 w-3.5" />
+                    {t("dictionary.stockCandidate", {
+                      defaultValue: "Stock candidate",
+                    })}
+                  </div>
+                )}
+                <div className="grid grid-cols-2 gap-1.5">
+                  <div className="bg-muted px-2.5 py-1.5 text-center">
+                    <div className="text-sm font-bold">{producers.length}</div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.productionMethodsShort", {
+                        defaultValue: "Methods",
+                      })}
+                    </div>
+                  </div>
+                  <div className="bg-muted px-2.5 py-1.5 text-center">
+                    <div className="text-sm font-bold">
+                      {selectedSummary?.directRecipeCount ?? 0}
+                    </div>
+                    <div className="text-[9px] text-muted-foreground">
+                      {t("dictionary.productionUsesShort", {
+                        defaultValue: "Uses",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-2 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)]">
               {selectedDetail ? (
                 <section
                   className={cn(
-                    "endfield-description h-full border p-3",
+                    "endfield-description border p-3",
                     selectedDetail.kind === "effect"
                       ? "border-primary/30 bg-primary/5"
                       : "bg-background",
@@ -1347,7 +1379,7 @@ export default function MaterialDictionary({
                           })}
                     </h2>
                     <a
-                      href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
+                      href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%A0%E4%B8%80%E8%A6%A7"
                       target="_blank"
                       rel="noreferrer"
                       className="ml-auto text-[10px] text-muted-foreground hover:underline"
@@ -1363,56 +1395,20 @@ export default function MaterialDictionary({
                   </p>
                 </section>
               ) : (
-                <div className="flex h-full min-h-16 items-center border border-dashed px-3 text-sm text-muted-foreground">
+                <div className="flex min-h-16 items-center border border-dashed px-3 text-sm text-muted-foreground">
                   {t("dictionary.noItemDescription", {
                     defaultValue: "No description or effect is registered.",
                   })}
                 </div>
               )}
-            </div>
 
-            <div className="hidden shrink-0 md:flex md:flex-col md:gap-1.5">
-              {selectedSummary?.stockCandidate && (
-                <div className="flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-2 text-xs font-medium text-amber-700 dark:text-amber-300">
-                  <Star className="h-3.5 w-3.5" />
-                  {t("dictionary.stockCandidate", {
-                    defaultValue: "Stock candidate",
-                  })}
-                </div>
-              )}
-              <div className="grid grid-cols-2 gap-1.5">
-                <div className="bg-muted px-2.5 py-1.5 text-center">
-                  <div className="text-sm font-bold">{producers.length}</div>
-                  <div className="text-[9px] text-muted-foreground">
-                    {t("dictionary.productionMethodsShort", {
-                      defaultValue: "Methods",
-                    })}
-                  </div>
-                </div>
-                <div className="bg-muted px-2.5 py-1.5 text-center">
-                  <div className="text-sm font-bold">
-                    {selectedSummary?.directRecipeCount ?? 0}
-                  </div>
-                  <div className="text-[9px] text-muted-foreground">
-                    {t("dictionary.productionUsesShort", {
-                      defaultValue: "Uses",
-                    })}
-                  </div>
-                </div>
-              </div>
+              <ItemRecipeSummary
+                recipes={producers}
+                itemById={itemById}
+                facilityById={facilityById}
+                onSelectItem={selectItem}
+              />
             </div>
-
-            <button
-              type="button"
-              onClick={() => setMobileInfoOpen(true)}
-              className="endfield-item-info-button flex h-16 w-12 shrink-0 flex-col items-center justify-center gap-1 border bg-background text-[9px] font-bold md:hidden"
-              aria-label={t("dictionary.itemDetails", {
-                defaultValue: "Item details",
-              })}
-            >
-              <Info className="h-4 w-4" />
-              {t("dictionary.detailsShort", { defaultValue: "Details" })}
-            </button>
           </div>
         ) : (
           <button
@@ -1438,89 +1434,6 @@ export default function MaterialDictionary({
           </button>
         )}
       </header>
-
-      <Sheet open={mobileInfoOpen} onOpenChange={setMobileInfoOpen}>
-        <SheetContent
-          side="bottom"
-          className="endfield-mobile-info-sheet max-h-[72dvh] gap-0 overflow-y-auto p-0"
-        >
-          {selectedItem && (
-            <>
-              <SheetHeader className="endfield-sidebar-header border-b pr-12">
-                <SheetTitle className="text-left text-sm">
-                  {getItemName(selectedItem)}
-                </SheetTitle>
-                <SheetDescription className="text-left text-xs">
-                  {selectedCategory ? categoryLabel(t, selectedCategory) : ""}
-                  {selectedSubtype ? " · " + subtypeLabel(t, selectedSubtype) : ""}
-                  {" · T" + selectedItem.tier}
-                </SheetDescription>
-              </SheetHeader>
-              <div className="space-y-4 p-4">
-                {selectedDetail ? (
-                  <section className="endfield-description border bg-background p-3">
-                    <div className="flex items-center gap-2">
-                      {selectedDetail.kind === "effect" ? (
-                        <HeartPulse className="h-4 w-4 shrink-0" />
-                      ) : (
-                        <Info className="h-4 w-4 shrink-0" />
-                      )}
-                      <h2 className="text-xs font-semibold">
-                        {selectedDetail.kind === "effect"
-                          ? t("dictionary.itemEffect", { defaultValue: "Effect" })
-                          : t("dictionary.itemDescription", {
-                              defaultValue: "Description",
-                            })}
-                      </h2>
-                      <a
-                        href="https://arknights-endfield.wikiru.jp/?%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E4%B8%80%E8%A6%A7"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="ml-auto text-[10px] text-muted-foreground hover:underline"
-                      >
-                        Wikiru
-                      </a>
-                    </div>
-                    <p
-                      lang="ja"
-                      className="mt-2 whitespace-pre-line text-sm leading-relaxed"
-                    >
-                      {selectedDetail.text}
-                    </p>
-                  </section>
-                ) : (
-                  <p className="text-sm text-muted-foreground">
-                    {t("dictionary.noItemDescription", {
-                      defaultValue: "No description or effect is registered.",
-                    })}
-                  </p>
-                )}
-
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="border bg-muted/40 p-3 text-center">
-                    <div className="text-lg font-bold">{producers.length}</div>
-                    <div className="text-[10px] text-muted-foreground">
-                      {t("dictionary.productionMethodsShort", {
-                        defaultValue: "Production methods",
-                      })}
-                    </div>
-                  </div>
-                  <div className="border bg-muted/40 p-3 text-center">
-                    <div className="text-lg font-bold">
-                      {selectedSummary?.directRecipeCount ?? 0}
-                    </div>
-                    <div className="text-[10px] text-muted-foreground">
-                      {t("dictionary.productionUsesShort", {
-                        defaultValue: "Direct uses",
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </SheetContent>
-      </Sheet>
 
       {selectedItem && mainView === "uses" && (
         <button
