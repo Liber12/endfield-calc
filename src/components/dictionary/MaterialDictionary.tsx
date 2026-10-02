@@ -1686,14 +1686,14 @@ export default function MaterialDictionary({
           </div>
         </main>
 
-        {selectedItem ? (
+        {selectedItem && mainView === "uses" ? (
           <aside className="endfield-sidebar hidden min-h-0 overflow-y-auto border bg-card lg:block">
             <div className="endfield-sidebar-header sticky top-0 z-10 border-b bg-card/95 p-3 backdrop-blur">
               <div className="flex items-center gap-2">
                 <Route className="h-4 w-4" />
                 <h2 className="text-sm font-semibold">
                   {t("dictionary.useDestinations", {
-                    defaultValue: "Reachable useful destinations",
+                    defaultValue: "Use destinations",
                   })}
                 </h2>
                 <span className="ml-auto text-[10px] text-muted-foreground">
@@ -1703,7 +1703,7 @@ export default function MaterialDictionary({
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
                 {t("dictionary.destinationSidebarHint", {
                   defaultValue:
-                    "Choose a product, trade item, or facility use to show only that route in the main view.",
+                    "Choose a reachable product, trade item, or facility use to inspect the path from this item.",
                 })}
               </p>
 
@@ -1799,52 +1799,6 @@ export default function MaterialDictionary({
             <div className="space-y-4 p-3">
               {selectedId && <ExternalDirectUses itemId={selectedId} />}
 
-              <section>
-                <div className="mb-2 flex items-center gap-2">
-                  <Wrench className="h-4 w-4" />
-                  <h3 className="text-xs font-semibold">
-                    {t("dictionary.howToMake", {
-                      defaultValue: "How to make",
-                    })}
-                  </h3>
-                  <span className="ml-auto text-[10px] text-muted-foreground">
-                    {producers.length}
-                  </span>
-                </div>
-
-                {producers.length > 0 ? (
-                  <div className="space-y-2">
-                    {producers.map((recipe) => (
-                      <div
-                        key={recipe.id}
-                        className="rounded-lg border bg-background p-2"
-                      >
-                        <div className="text-[11px] font-semibold">
-                          {getRecipeName(recipe)}
-                        </div>
-                        <div className="mt-1 flex flex-wrap items-center gap-1">
-                          {recipe.inputs.map((entry, index) => (
-                            <MiniMaterialChip
-                              key={`${entry.itemId}-${index}`}
-                              itemId={entry.itemId}
-                              amount={entry.amount}
-                              itemById={itemById}
-                              onSelect={selectItem}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-xs text-muted-foreground">
-                    {t("dictionary.noProducer", {
-                      defaultValue:
-                        "No production recipe is registered for this item.",
-                    })}
-                  </p>
-                )}
-              </section>
             </div>
           </aside>
         ) : (
@@ -1868,13 +1822,13 @@ export default function MaterialDictionary({
           <SheetHeader className="endfield-sidebar-header border-b pr-12">
             <SheetTitle className="text-left text-sm">
               {t("dictionary.useDestinations", {
-                defaultValue: "Reachable useful destinations",
+                defaultValue: "Use destinations",
               })}
             </SheetTitle>
             <SheetDescription className="text-left text-xs">
               {t("dictionary.destinationSidebarHint", {
                 defaultValue:
-                  "Choose a product, trade item, or facility use to show only that route in the main view.",
+                  "Choose a reachable product, trade item, or facility use to inspect the path from this item.",
               })}
             </SheetDescription>
           </SheetHeader>
@@ -1960,52 +1914,6 @@ export default function MaterialDictionary({
 
             {selectedId && <ExternalDirectUses itemId={selectedId} />}
 
-            <section className="mt-4">
-              <div className="mb-2 flex items-center gap-2">
-                <Wrench className="h-4 w-4" />
-                <h3 className="text-xs font-semibold">
-                  {t("dictionary.howToMake", {
-                    defaultValue: "How to make",
-                  })}
-                </h3>
-                <span className="ml-auto text-[10px] text-muted-foreground">
-                  {producers.length}
-                </span>
-              </div>
-
-              {producers.length > 0 ? (
-                <div className="space-y-2">
-                  {producers.map((recipe) => (
-                    <div
-                      key={recipe.id}
-                      className="border bg-background p-2"
-                    >
-                      <div className="text-[11px] font-semibold">
-                        {getRecipeName(recipe)}
-                      </div>
-                      <div className="mt-1 flex flex-wrap items-center gap-1">
-                        {recipe.inputs.map((entry, index) => (
-                          <MiniMaterialChip
-                            key={`${entry.itemId}-${index}`}
-                            itemId={entry.itemId}
-                            amount={entry.amount}
-                            itemById={itemById}
-                            onSelect={selectItem}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-xs text-muted-foreground">
-                  {t("dictionary.noProducer", {
-                    defaultValue:
-                      "No production recipe is registered for this item.",
-                  })}
-                </p>
-              )}
-            </section>
           </div>
         </SheetContent>
       </Sheet>
