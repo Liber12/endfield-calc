@@ -27,8 +27,14 @@ question.
 ### Production
 
 Production is owned by the selected item. It uses the upstream requirement tree and includes
-**all recipe inputs recursively**, including co-inputs. Alternative producer recipes remain
+**all recipe inputs recursively**, including co-inputs. Alternative normal producer recipes remain
 separate branches rather than being silently chosen.
+
+Recovery/disassembly operations are not normal upstream manufacturing choices. In particular,
+dismantling a filled container to recover an empty bottle must not create an alternative production
+branch for that bottle; otherwise packaging loops and recovery variants dominate the tree. Recovery
+data may be surfaced separately when needed, but is excluded from the default production tree and
+the item's basic production-recipe summary.
 
 Quantities are normalized to one unit of the selected item.
 
