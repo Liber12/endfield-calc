@@ -1264,7 +1264,7 @@ export default function MaterialDictionary({
   }, [endpoints]);
 
   return (
-    <section className="endfield-dictionary flex min-h-0 flex-1 flex-col gap-3">
+    <section className="endfield-dictionary flex min-h-0 flex-none flex-col gap-3 md:flex-1">
       <div className="endfield-system-bar" aria-hidden="true">
         <span>ENDFIELD INDUSTRIES // MATERIAL RECORD</span>
         <span>SUPPLY NETWORK / ACTIVE</span>
@@ -1462,7 +1462,7 @@ export default function MaterialDictionary({
 
       <div
         className={cn(
-          "grid min-h-0 flex-1 gap-3",
+          "endfield-dictionary-main grid min-h-0 flex-1 gap-3",
           mainView === "uses" && selectedItem
             ? "lg:grid-cols-[minmax(0,1fr)_340px]"
             : "lg:grid-cols-1",
