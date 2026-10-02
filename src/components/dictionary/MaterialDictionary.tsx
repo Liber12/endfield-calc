@@ -1061,6 +1061,14 @@ export default function MaterialDictionary({
     [itemById],
   );
 
+  const selectRequirementItem = useCallback(
+    (itemId: ItemId) => {
+      selectItem(itemId);
+      setMainView("requirements");
+    },
+    [selectItem],
+  );
+
   const showDirectUses = () => {
     setSelectedEndpointId(null);
     setMainView("dependencies");
@@ -1502,7 +1510,7 @@ export default function MaterialDictionary({
                   itemById={itemById}
                   recipeById={recipeById}
                   facilityById={facilityById}
-                  onSelectItem={selectItem}
+                  onSelectItem={selectRequirementItem}
                 />
               ) : null
             ) : (
