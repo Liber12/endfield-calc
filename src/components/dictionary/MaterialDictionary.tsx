@@ -736,7 +736,7 @@ function RequirementTreeNode({
         type="button"
         onClick={() => onSelectItem(node.itemId)}
         className={cn(
-          "flex w-full items-center gap-2 rounded-lg border bg-card p-2.5 text-left transition-colors hover:bg-accent",
+          "endfield-production-item flex w-full items-center gap-2 border bg-card p-2.5 text-left transition-colors hover:bg-accent",
           depth === 0 && "border-primary bg-primary/5",
           node.cycle && "border-destructive/50",
         )}
@@ -762,11 +762,11 @@ function RequirementTreeNode({
       </button>
 
       {stopReason ? (
-        <div className="ml-4 mt-1.5 border-l pl-3 text-[10px] text-muted-foreground">
+        <div className="mt-1.5 border-l-2 pl-2 text-[10px] text-muted-foreground">
           {stopReason}
         </div>
       ) : (
-        <div className="ml-4 mt-2 space-y-2 border-l pl-3">
+        <div className="mt-2 space-y-2 border-l pl-2 md:pl-3">
           {node.recipes.map((branch, recipeIndex) => {
             const recipe = recipeById.get(branch.recipeId);
             const facility = recipe
@@ -776,7 +776,7 @@ function RequirementTreeNode({
             return (
               <section
                 key={branch.recipeId}
-                className="rounded-lg border border-dashed bg-background/70 p-2.5"
+                className="endfield-production-process border border-dashed bg-background/70 p-2.5"
               >
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span className="text-[11px] font-semibold">
@@ -799,7 +799,7 @@ function RequirementTreeNode({
                 </div>
 
                 {branch.inputs.length > 0 ? (
-                  <div className="mt-2 grid gap-2 sm:grid-cols-2 2xl:grid-cols-3">
+                  <div className="mt-2 space-y-2">
                     {branch.inputs.map((input, inputIndex) => (
                       <RequirementTreeNode
                         key={`${branch.recipeId}-${input.itemId}-${inputIndex}`}
@@ -845,11 +845,21 @@ function RequirementTree({
 
   return (
     <div className="space-y-3">
-      <div className="rounded-lg border bg-muted/30 px-3 py-2 text-[11px] leading-relaxed text-muted-foreground">
-        {t("dictionary.requirementTreeDescription", {
-          defaultValue:
-            "Expands every production recipe toward its required inputs. Quantities are cumulative amounts needed for one unit of the selected item.",
-        })}
+      <div className="endfield-production-intro border bg-muted/30 px-3 py-2.5">
+        <div className="flex items-center gap-2">
+          <Factory className="h-4 w-4 shrink-0" />
+          <h2 className="text-sm font-bold">
+            {t("dictionary.productionRouteTitle", {
+              defaultValue: "Production route",
+            })}
+          </h2>
+        </div>
+        <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+          {t("dictionary.requirementTreeDescription", {
+            defaultValue:
+              "Shows how to produce the selected item, expanding every required input. Quantities are cumulative amounts needed for one unit of the selected item.",
+          })}
+        </p>
       </div>
       <RequirementTreeNode
         node={tree}
