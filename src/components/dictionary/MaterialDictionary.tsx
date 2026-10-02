@@ -220,6 +220,112 @@ function MiniMaterialChip({
   );
 }
 
+function ItemRecipeSummary({
+  recipes,
+  itemById,
+  facilityById,
+  onSelectItem,
+}: {
+  recipes: readonly Recipe[];
+  itemById: ReadonlyMap<ItemId, Item>;
+  facilityById: ReadonlyMap<Facility["id"], Facility>;
+  onSelectItem: (itemId: ItemId) => void;
+}) {
+  const { t } = useTranslation("app");
+
+  return (
+    <section className="endfield-item-recipes border bg-background p-3">
+      <div className="flex items-center gap-2 border-b pb-2">
+        <Wrench className="h-4 w-4 shrink-0" />
+        <h2 className="text-xs font-semibold">
+          {t("dictionary.itemRecipes", {
+            defaultValue: "Production recipe",
+          })}
+        </h2>
+        <span className="ml-auto text-[10px] text-muted-foreground">
+          {recipes.length}
+        </span>
+      </div>
+
+      {recipes.length > 0 ? (
+        <div className="mt-2 space-y-2">
+          {recipes.map((recipe) => {
+            const facility = facilityById.get(recipe.facilityId);
+
+            return (
+              <article
+                key={recipe.id}
+                className="endfield-item-recipe border bg-card p-2.5"
+              >
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <h3 className="text-[11px] font-bold">
+                    {getRecipeName(recipe)}
+                  </h3>
+                  <span className="text-[10px] text-muted-foreground">
+                    {facility ? getFacilityName(facility) : recipe.facilityId}
+                    {" · "}
+                    {recipe.craftingTime}s
+                  </span>
+                </div>
+
+                <div className="mt-2 grid gap-2 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-center">
+                  <div className="min-w-0">
+                    <div className="mb-1 text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                      {t("dictionary.recipeInputs", {
+                        defaultValue: "Inputs",
+                      })}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {recipe.inputs.map((entry, index) => (
+                        <MiniMaterialChip
+                          key={entry.itemId + "-" + index}
+                          itemId={entry.itemId}
+                          amount={entry.amount}
+                          itemById={itemById}
+                          onSelect={onSelectItem}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <ArrowRight className="hidden h-4 w-4 shrink-0 text-muted-foreground md:block" />
+                  <ArrowDown className="mx-auto h-4 w-4 text-muted-foreground md:hidden" />
+
+                  <div className="min-w-0">
+                    <div className="mb-1 text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                      {t("dictionary.recipeOutputs", {
+                        defaultValue: "Outputs",
+                      })}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {recipe.outputs.map((entry, index) => (
+                        <MiniMaterialChip
+                          key={entry.itemId + "-" + index}
+                          itemId={entry.itemId}
+                          amount={entry.amount}
+                          itemById={itemById}
+                          onSelect={onSelectItem}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          {t("dictionary.noProducer", {
+            defaultValue:
+              "No production recipe is registered for this item.",
+          })}
+        </p>
+      )}
+    </section>
+  );
+}
+
 function MaterialPicker({
   open,
   onOpenChange,
