@@ -893,6 +893,53 @@
   }
 }
 
+
+  .endfield-production-intro {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    border-left: 5px solid var(--ef-signal);
+    background: color-mix(in srgb, var(--ef-paper) 84%, var(--ef-ink) 16%);
+  }
+
+  .endfield-production-item {
+    position: relative;
+    border-radius: 0;
+    border-color: var(--ef-line);
+    background: var(--ef-paper-strong);
+    box-shadow: none;
+  }
+
+  .endfield-production-item::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--ef-ink);
+  }
+
+  .endfield-production-process {
+    position: relative;
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    border-left: 4px solid var(--ef-ink);
+    background: color-mix(in srgb, var(--ef-paper-strong) 90%, var(--ef-subtle) 10%) !important;
+    box-shadow: none;
+  }
+
+  .endfield-item-info-button {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    box-shadow: none;
+  }
+
+  .endfield-mobile-info-sheet {
+    border-radius: 0 !important;
+    border-top: 5px solid var(--ef-signal);
+    background: var(--ef-paper-strong) !important;
+    color: var(--ef-ink);
+    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
+  }
+
 @media (max-width: 767px) {
   .endfield-app-shell {
     background-size: 48px 48px;
@@ -907,7 +954,30 @@
   }
 
   .endfield-system-bar {
-    font-size: 0.48rem;
+    display: none;
+  }
+
+  .endfield-dictionary {
+    gap: 0.5rem;
+  }
+
+  .endfield-workbench-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+
+  .endfield-route-canvas::before {
+    display: none;
+  }
+
+  .endfield-production-process {
+    padding: 0.55rem;
+  }
+
+  .endfield-production-item {
+    min-height: 3rem;
+    padding: 0.5rem;
   }
 
   .endfield-material-header {
@@ -957,6 +1027,7 @@
   }
 
   .endfield-mobile-destination-sheet,
+  .endfield-mobile-info-sheet,
   .endfield-target-dialog {
     --ef-signal: #fffa00;
     --ef-ink: #1b1d1b;
@@ -970,6 +1041,7 @@
   }
 
   .dark .endfield-mobile-destination-sheet,
+  .dark .endfield-mobile-info-sheet,
   .dark .endfield-target-dialog {
     --ef-ink: #f3f4ef;
     --ef-ink-soft: #d8dbd4;
