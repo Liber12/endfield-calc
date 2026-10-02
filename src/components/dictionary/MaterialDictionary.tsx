@@ -1405,7 +1405,7 @@ export default function MaterialDictionary({
         </SheetContent>
       </Sheet>
 
-      {selectedItem && (
+      {selectedItem && mainView === "uses" && (
         <button
           type="button"
           onClick={() => setMobileDestinationsOpen(true)}
@@ -1414,7 +1414,7 @@ export default function MaterialDictionary({
           <Route className="h-4 w-4 shrink-0" />
           <span className="min-w-0 flex-1">
             <span className="block text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground">
-              {t("dictionary.routeTo", { defaultValue: "Destination" })}
+              {t("dictionary.useDestination", { defaultValue: "Use destination" })}
             </span>
             <span className="block truncate text-sm font-semibold">
               {selectedEndpoint
@@ -1430,36 +1430,36 @@ export default function MaterialDictionary({
         </button>
       )}
 
-      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1fr)_340px]">
-        <main className="endfield-workbench flex min-h-[360px] min-w-0 flex-col overflow-hidden border bg-background lg:min-h-0">
-          <div className="flex flex-col gap-2 border-b px-3 py-2 md:flex-row md:items-center md:justify-between">
+      <div
+        className={cn(
+          "grid min-h-0 flex-1 gap-3",
+          mainView === "uses" && selectedItem
+            ? "lg:grid-cols-[minmax(0,1fr)_340px]"
+            : "lg:grid-cols-1",
+        )}
+      >
+        <main className="endfield-workbench flex min-h-[62dvh] min-w-0 flex-col overflow-hidden border bg-background md:min-h-[480px] lg:min-h-0">
+
+          <div className="endfield-workbench-header flex flex-col gap-2 border-b px-2.5 py-2 md:flex-row md:items-center md:justify-between md:px-3">
             <Tabs
               value={mainView}
-              onValueChange={(value) => setMainView(value as MainView)}
+              onValueChange={(value) => changeMainView(value as MainView)}
               className="min-w-0"
             >
-              <TabsList className="endfield-view-tabs grid h-9 w-full grid-cols-3 md:w-[480px]">
-                <TabsTrigger value="dependencies" className="gap-2">
+              <TabsList className="endfield-view-tabs grid h-10 w-full grid-cols-2 md:w-[340px]">
+                <TabsTrigger value="production" className="gap-2">
+                  <Factory className="h-4 w-4 shrink-0" />
+                  <span>
+                    {t("dictionary.productionView", {
+                      defaultValue: "Production",
+                    })}
+                  </span>
+                </TabsTrigger>
+                <TabsTrigger value="uses" className="gap-2">
                   <Workflow className="h-4 w-4 shrink-0" />
                   <span>
-                    {t("dictionary.directUsesView", {
-                      defaultValue: "Direct uses",
-                    })}
-                  </span>
-                </TabsTrigger>
-                <TabsTrigger value="requirements" className="gap-2">
-                  <GitBranch className="h-4 w-4 shrink-0" />
-                  <span>
-                    {t("dictionary.requirementsView", {
-                      defaultValue: "Required materials",
-                    })}
-                  </span>
-                </TabsTrigger>
-                <TabsTrigger value="route" className="gap-2">
-                  <Route className="h-4 w-4 shrink-0" />
-                  <span>
-                    {t("dictionary.routeView", {
-                      defaultValue: "Production route",
+                    {t("dictionary.usesView", {
+                      defaultValue: "Uses",
                     })}
                   </span>
                 </TabsTrigger>
@@ -1469,9 +1469,14 @@ export default function MaterialDictionary({
             <div className="flex min-w-0 items-center justify-between gap-3 md:flex-1 md:justify-end">
               {selectedItem && (
                 <p className="min-w-0 truncate text-[11px] text-muted-foreground">
-                  {mainView === "route"
-                    ? selectedEndpoint
-                      ? t("dictionary.routeSummary", {
+                  {mainView === "production"
+                    ? t("dictionary.productionViewHint", {
+                        item: getItemName(selectedItem),
+                        defaultValue:
+                          "How {{item}} is produced, including every required input.",
+                      })
+                    : selectedEndpoint
+                      ? t("dictionary.useRouteSummary", {
                           from: getItemName(selectedItem),
                           to: itemById.get(selectedEndpoint.targetItemId)
                             ? getItemName(
@@ -1479,20 +1484,12 @@ export default function MaterialDictionary({
                               )
                             : selectedEndpoint.targetItemId,
                           steps: route?.length ?? 0,
-                          defaultValue: "{{from}} → {{to}} · {{steps}} steps",
-                        })
-                      : t("dictionary.routeNeedsDestination", {
                           defaultValue:
-                            "Choose a destination from the right sidebar.",
-                        })
-                    : mainView === "requirements"
-                      ? t("dictionary.requirementTreeHint", {
-                          defaultValue:
-                            "Shows every recipe path needed to produce the selected item.",
+                            "Use path: {{from}} → {{to}} · {{steps}} steps",
                         })
                       : t("dictionary.directUseHint", {
                           defaultValue:
-                            "Shows only recipes that directly consume the selected material.",
+                            "Shows where the selected item is consumed directly.",
                         })}
                 </p>
               )}
@@ -1501,10 +1498,10 @@ export default function MaterialDictionary({
                 <button
                   type="button"
                   onClick={() => setPickerOpen(true)}
-                  className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs hover:bg-accent"
+                  className="hidden shrink-0 border bg-background px-2 py-1 text-xs hover:bg-accent md:inline-flex"
                 >
                   {t("dictionary.changeMaterial", {
-                    defaultValue: "Change material",
+                    defaultValue: "Change item",
                   })}
                 </button>
               )}
