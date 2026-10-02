@@ -219,6 +219,18 @@
       "bomb": "Explosives",
       "event": "Event Materials",
       "other": "Other"
-    }
+    },
+    "directUsesView": "Direct uses",
+    "requirementsView": "Required materials",
+    "requirementTreeHint": "Shows every recipe path needed to produce the selected item.",
+    "requirementTreeDescription": "Expands each production recipe toward its required inputs. Quantities are cumulative amounts needed for one unit of the selected item.",
+    "requirementRootAmount": "Target amount",
+    "requirementCumulativeAmount": "Required per target",
+    "requirementAlternative": "Alternative {{index}}",
+    "requirementSource": "Source material / no production recipe",
+    "requirementCycle": "Cycle detected — expansion stopped",
+    "requirementDepthLimit": "Depth limit reached",
+    "requirementNodeLimit": "Tree size limit reached",
+    "requirementNoInputs": "This recipe has no material inputs."
   }
 }
