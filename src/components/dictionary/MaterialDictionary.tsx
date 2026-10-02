@@ -85,7 +85,7 @@ type MaterialDictionaryProps = {
 
 type CategoryFilter = "all" | MaterialCategoryId;
 type EndpointFilter = "all" | UsefulEndpointKind;
-type MainView = "dependencies" | "requirements" | "route";
+type MainView = "production" | "uses";
 
 function formatAmount(value: number): string {
   return Number.isInteger(value)
@@ -932,8 +932,21 @@ export default function MaterialDictionary({
     useState<CategoryFilter>("all");
   const [endpointFilter, setEndpointFilter] =
     useState<EndpointFilter>("all");
-  const [mainView, setMainView] = useState<MainView>("dependencies");
+  const [mainView, setMainView] = useState<MainView>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("section");
+    if (requested === "production" || requested === "uses") return requested;
+
+    const itemId = params.get("item") as ItemId | null;
+    const craftable =
+      !!itemId &&
+      recipes.some((recipe) =>
+        recipe.outputs.some((output) => output.itemId === itemId),
+      );
+    return craftable ? "production" : "uses";
+  });
   const [mobileDestinationsOpen, setMobileDestinationsOpen] = useState(false);
+  const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
   const routeRef = useRef<HTMLDivElement>(null);
 
   const itemById = useMemo(
@@ -1047,42 +1060,74 @@ export default function MaterialDictionary({
     (itemId: ItemId) => {
       if (!itemById.has(itemId)) return;
 
+      const nextView: MainView =
+        (index.producedBy.get(itemId)?.length ?? 0) > 0
+          ? "production"
+          : "uses";
+
       setSelectedId(itemId);
       setSelectedEndpointId(null);
       setEndpointFilter("all");
-      setMainView("dependencies");
+      setMainView(nextView);
 
       const url = new URL(window.location.href);
       url.searchParams.set("view", "dictionary");
       url.searchParams.set("item", itemId);
+      url.searchParams.set("section", nextView);
+      url.searchParams.delete("endpoint");
+      window.history.replaceState(null, "", url.toString());
+    },
+    [itemById, index],
+  );
+
+  const selectProductionItem = useCallback(
+    (itemId: ItemId) => {
+      if (!itemById.has(itemId)) return;
+
+      setSelectedId(itemId);
+      setSelectedEndpointId(null);
+      setEndpointFilter("all");
+      setMainView("production");
+
+      const url = new URL(window.location.href);
+      url.searchParams.set("view", "dictionary");
+      url.searchParams.set("item", itemId);
+      url.searchParams.set("section", "production");
       url.searchParams.delete("endpoint");
       window.history.replaceState(null, "", url.toString());
     },
     [itemById],
   );
 
-  const selectRequirementItem = useCallback(
-    (itemId: ItemId) => {
-      selectItem(itemId);
-      setMainView("requirements");
-    },
-    [selectItem],
-  );
+  const changeMainView = (view: MainView) => {
+    setMainView(view);
+    if (view === "production") {
+      setSelectedEndpointId(null);
+      setMobileDestinationsOpen(false);
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("section", view);
+    if (view === "production") url.searchParams.delete("endpoint");
+    window.history.replaceState(null, "", url.toString());
+  };
 
   const showDirectUses = () => {
     setSelectedEndpointId(null);
-    setMainView("dependencies");
+    setMainView("uses");
     setMobileDestinationsOpen(false);
     const url = new URL(window.location.href);
+    url.searchParams.set("section", "uses");
     url.searchParams.delete("endpoint");
     window.history.replaceState(null, "", url.toString());
   };
 
   const selectEndpoint = (endpoint: UsefulEndpoint) => {
     setSelectedEndpointId(endpoint.id);
-    setMainView("route");
+    setMainView("uses");
     setMobileDestinationsOpen(false);
     const url = new URL(window.location.href);
+    url.searchParams.set("section", "uses");
     url.searchParams.set("endpoint", endpoint.id);
     window.history.replaceState(null, "", url.toString());
 
