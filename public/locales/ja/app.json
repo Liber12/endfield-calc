@@ -243,6 +243,9 @@
     "useRouteSummary": "用途経路: {{from}} → {{to}}・{{steps}}工程",
     "useRouteTitle": "用途経路",
     "backToDirectUses": "直接用途",
-    "productionRouteTitle": "生産ルート"
+    "productionRouteTitle": "生産ルート",
+    "itemRecipes": "製造レシピ",
+    "recipeInputs": "入力素材",
+    "recipeOutputs": "生産物"
   }
 }
