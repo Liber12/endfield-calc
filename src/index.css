@@ -980,6 +980,24 @@
     padding: 0.5rem;
   }
 
+  .endfield-route-material {
+    flex-direction: row !important;
+    min-height: 3.25rem;
+    gap: 0.65rem;
+    padding: 0.5rem !important;
+    text-align: left;
+  }
+
+  .endfield-route-material img,
+  .endfield-route-material > div[aria-hidden="true"] {
+    height: 2.5rem !important;
+    width: 2.5rem !important;
+  }
+
+  .endfield-route-material > span {
+    margin-top: 0 !important;
+  }
+
   .endfield-material-header {
     padding: 0.6rem;
   }
