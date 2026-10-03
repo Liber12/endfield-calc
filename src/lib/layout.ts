@@ -174,6 +174,8 @@ const NODE_DIMENSIONS = {
   PRODUCTION_NODE_PARTIAL: { width: 208, height: 157 },
   TARGET_NODE: { width: 208, height: 160 },
   DISPOSAL_NODE: { width: 208, height: 160 },
+  DICTIONARY_ITEM: { width: 156, height: 86 },
+  DICTIONARY_RECIPE: { width: 124, height: 68 },
 } as const;
 
 /**
@@ -216,6 +218,14 @@ function getNodeDimensions(node: Node): { width: number; height: number } {
     return isPartialLoad
       ? NODE_DIMENSIONS.PRODUCTION_NODE_PARTIAL
       : NODE_DIMENSIONS.PRODUCTION_NODE;
+  }
+
+  if (node.type === "dictionaryItem") {
+    return NODE_DIMENSIONS.DICTIONARY_ITEM;
+  }
+
+  if (node.type === "dictionaryRecipe") {
+    return NODE_DIMENSIONS.DICTIONARY_RECIPE;
   }
 
   // Fallback
@@ -395,12 +405,19 @@ const PLACEMENT_TUNING_MAX_NODES = 600;
  *   mid-flight; every OTHER failure keeps the legacy behaviour of
  *   returning the un-layouted inputs.
  */
+export type LayoutSpacing = {
+  layerGap?: number;
+  nodeGap?: number;
+  padding?: number;
+};
+
 export const getLayoutedElements = async (
   nodes: Node[],
   edges: Edge[],
   direction = "RIGHT",
   twoEndAlignment = false,
   lane: LayoutLane = "interactive",
+  spacing: LayoutSpacing = {},
 ) => {
   // Capture the lane's CURRENT cancel deferred: `cancelLayoutLane`
   // swaps it, so this job races the one live at its start.
@@ -413,8 +430,10 @@ export const getLayoutedElements = async (
     layoutOptions: {
       "elk.algorithm": "layered",
       "elk.direction": direction,
-      "elk.layered.spacing.nodeNodeBetweenLayers": "200",
-      "elk.spacing.nodeNode":"100",
+      "elk.layered.spacing.nodeNodeBetweenLayers": String(
+        spacing.layerGap ?? 200,
+      ),
+      "elk.spacing.nodeNode": String(spacing.nodeGap ?? 100),
       "elk.edgeRouting": "SPLINES",
       "elk.layered.feedbackEdges": "true",
       "elk.layered.nodePlacement.favorStraightEdges": "0.2",
@@ -446,7 +465,7 @@ export const getLayoutedElements = async (
             "elk.layered.considerModelOrder.strategy": "NODES_AND_EDGES",
           }
         : {}),
-      "org.eclipse.elk.padding": "[top=40,left=40,bottom=40,right=40]",
+      "org.eclipse.elk.padding": `[top=${spacing.padding ?? 40},left=${spacing.padding ?? 40},bottom=${spacing.padding ?? 40},right=${spacing.padding ?? 40}]`,
     },
     children: nodes.map((node) => {
       const dimensions = getNodeDimensions(node);
