@@ -390,3 +390,39 @@ Hypergryph or Arknights: Endfield design-token names or values.
 **Validation**  
 For each promoted token, changing its value should intentionally affect a
 coherent family of UI elements rather than unrelated components.
+
+
+---
+
+## ADR-UI-017 — Global chrome is contextual to the active tool
+
+**Decision**  
+Plan-specific header actions (Save, Open, Settings) are rendered only in the
+production calculator. The material dictionary keeps global actions such as
+theme, language, and community links but does not show calculator actions.
+
+**User / context**  
+Dictionary users are usually performing quick reference or structure
+investigation, while Save/Open/Settings act on the production-planning model.
+
+**Goal**  
+Reduce irrelevant chrome and ensure every visible action has a valid effect in
+the current conceptual surface.
+
+**Evidence**  
+- Suitability for the task: controls should correspond to actions available in
+  the user's current task context.
+- Recognition over recall: hiding an inapplicable action is preferable to
+  exposing a control whose meaning depends on remembering another tool mode.
+- Product observation: the Settings sheet is explicitly calculator-scoped in
+  `App.tsx`, so displaying its header button in dictionary mode created a
+  visible control that could not open its destination.
+
+**Rejected**  
+Keeping Save/Open/Settings permanently visible for visual consistency across
+the two tools.
+
+**Validation**  
+In dictionary mode, every remaining header action should have an immediate and
+valid dictionary/global effect. Switching back to calculator restores the plan
+actions without losing plan state.
