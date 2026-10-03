@@ -21,6 +21,7 @@ Surface-specific specifications:
 - [Material Dictionary UI Specification](./material-dictionary-ui-spec.md)
 - [Production Calculator UI Specification](./production-calculator-ui-spec.md)
 - [UI Decision Records](./ui-decisions.md)
+- [UI Review Checklist](./ui-review-checklist.md)
 
 ## 2. User model
 
