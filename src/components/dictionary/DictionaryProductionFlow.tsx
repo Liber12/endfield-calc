@@ -111,7 +111,7 @@ function DictionaryItemNode({
   return (
     <div
       className={cn(
-        "endfield-dictionary-flow-item w-[208px] border bg-card",
+        "endfield-dictionary-flow-item w-[156px] border bg-card",
         data.root && "border-primary",
         selected && "ring-2 ring-primary/40",
       )}
@@ -120,14 +120,14 @@ function DictionaryItemNode({
       <button
         type="button"
         onClick={() => data.onSelectItem(data.itemId)}
-        className="flex min-h-[88px] w-full items-center gap-2.5 p-2.5 text-left"
+        className="flex min-h-[72px] w-full items-center gap-2 p-2 text-left"
       >
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center border bg-background">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center border bg-background">
           {data.item?.iconUrl ? (
             <img
               src={data.item.iconUrl}
               alt=""
-              className="h-10 w-10 object-contain"
+              className="h-8 w-8 object-contain"
               loading="lazy"
             />
           ) : (
@@ -181,10 +181,10 @@ function DictionaryRecipeNode({ data }: NodeProps<RecipeFlowNode>) {
     : data.recipe?.facilityId;
 
   return (
-    <div className="endfield-dictionary-flow-recipe w-[208px] border border-dashed bg-background p-2.5">
+    <div className="endfield-dictionary-flow-recipe w-[124px] border border-dashed bg-background p-2">
       <FlowHandles orientation={data.orientation} />
       <div className="flex items-start gap-2">
-        <Factory className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
+        <Factory className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
         <div className="min-w-0 flex-1">
           <div className="text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
             {data.alternativeCount > 1
@@ -194,10 +194,10 @@ function DictionaryRecipeNode({ data }: NodeProps<RecipeFlowNode>) {
                 })
               : t("dictionary.flowProcess", { defaultValue: "Process" })}
           </div>
-          <div className="mt-0.5 line-clamp-2 text-[11px] font-bold">
+          <div className="mt-0.5 line-clamp-2 text-[10px] font-bold leading-tight">
             {recipeName}
           </div>
-          <div className="mt-1 text-[9px] leading-relaxed text-muted-foreground">
+          <div className="mt-1 text-[8px] leading-snug text-muted-foreground">
             {facilityName ?? "—"}
             {data.recipe ? ` · ${data.recipe.craftingTime}s` : ""}
           </div>
@@ -351,6 +351,12 @@ export default function DictionaryProductionFlow({
       rawGraph.edges,
       direction,
       false,
+      "interactive",
+      {
+        layerGap: isPortrait ? 74 : 96,
+        nodeGap: isPortrait ? 44 : 54,
+        padding: 28,
+      },
     ).then((layouted) => {
       if (!active) return;
       setNodes(layouted.nodes as DictionaryFlowNode[]);
@@ -361,7 +367,17 @@ export default function DictionaryProductionFlow({
     return () => {
       active = false;
     };
-  }, [rawGraph, direction]);
+  }, [rawGraph, direction, isPortrait]);
+
+  const graphCounts = useMemo(() => {
+    let materials = 0;
+    let processes = 0;
+    for (const node of rawGraph.nodes) {
+      if (node.type === "dictionaryItem") materials += 1;
+      if (node.type === "dictionaryRecipe") processes += 1;
+    }
+    return { materials, processes };
+  }, [rawGraph.nodes]);
 
   const fitGraph = useCallback(() => {
     void instanceRef.current?.fitView({
@@ -397,10 +413,12 @@ export default function DictionaryProductionFlow({
             })}
           </p>
         </div>
-        <span className="shrink-0 text-[9px] text-muted-foreground">
-          {t("dictionary.productionFlowNodeCount", {
-            count: nodes.length,
-            defaultValue: "{{count}} nodes",
+        <span className="shrink-0 text-right text-[9px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          {t("dictionary.productionFlowSummary", {
+            materials: graphCounts.materials,
+            processes: graphCounts.processes,
+            defaultValue:
+              "{{materials}} materials · {{processes}} processes",
           })}
         </span>
       </div>
