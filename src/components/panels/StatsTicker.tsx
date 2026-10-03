@@ -137,6 +137,16 @@ const StatsTicker = memo(function StatsTicker({
       )}
       {...rest}
     >
+      {hero && (
+        <span className="hidden shrink-0 border-r border-border/60 pr-5 text-left xl:block">
+          <span className="block text-[9px] font-black uppercase tracking-[0.14em] text-muted-foreground">
+            PLAN
+          </span>
+          <span className="mt-0.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground">
+            TELEMETRY
+          </span>
+        </span>
+      )}
       {issueCount > 0 &&
         (hero ? (
           <span className="min-w-0 shrink-0 text-left text-destructive">

@@ -656,6 +656,13 @@ function AppContent() {
 
       <AppModeNav mode={appMode} onModeChange={handleAppModeChange} />
 
+      {appMode === "calculator" && (
+        <div className="endfield-system-bar endfield-calculator-system-bar" aria-hidden="true">
+          <span>ENDFIELD INDUSTRIES // PRODUCTION PLAN</span>
+          <span>FACTORY OPERATIONS // PRODUCTION MODEL</span>
+        </div>
+      )}
+
       {appMode === "dictionary" && (
         <MaterialDictionary
           items={items}

@@ -29,7 +29,7 @@ const MobileNav = memo(function MobileNav({
   ] as const;
 
   return (
-    <nav className="shrink-0 grid grid-cols-2 gap-1 rounded-lg bg-muted p-1">
+    <nav className="endfield-mobile-nav shrink-0 grid grid-cols-2 gap-px border bg-muted p-0.5">
       {tabs.map(({ id, icon: Icon, label }) => (
         <button
           key={id}
@@ -37,10 +37,8 @@ const MobileNav = memo(function MobileNav({
           aria-current={view === id ? "page" : undefined}
           onClick={() => onViewChange(id)}
           className={cn(
-            "flex items-center justify-center gap-2 rounded-md py-2 text-sm font-medium transition-colors",
-            view === id
-              ? "bg-background text-foreground shadow-sm"
-              : "text-muted-foreground",
+            "endfield-mobile-nav-button flex min-h-10 items-center justify-center gap-2 py-2 text-sm font-medium transition-colors",
+            view === id ? "is-active" : "text-muted-foreground",
           )}
         >
           <Icon className="h-4 w-4" aria-hidden="true" />

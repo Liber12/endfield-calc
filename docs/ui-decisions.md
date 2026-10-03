@@ -211,3 +211,105 @@ Endfield reference material shows contours across map, UI background, brand, and
 
 **Validation**  
 Removing the contours should reduce world/brand continuity, but should not break semantic comprehension of the screen.
+
+
+---
+
+## ADR-UI-010 — Calculator is an asymmetric operational workspace
+
+**Decision**  
+The production calculator is organized as three semantically different regions:
+plan inputs, resolved production model, and plan telemetry.
+
+**User / context**  
+Production-planning users are editing assumptions while continuously checking
+calculated consequences.
+
+**Goal**  
+Make cause, resolved result, and operating state visually distinct.
+
+**Experience intent**  
+E3 “There is a lot of information, but it is under control” and
+E4 “I am operating a precise system”.
+
+**Evidence**  
+- Task-driven density: input editing, exact comparison, spatial overview, and
+  telemetry have different density needs.
+- Standard IA: persistent input rail + primary work surface + diagnostic summary
+  is appropriate for an operational planning tool.
+- Endfield Operational/System evidence uses lists, connection views, state,
+  numbers, and semantic colors rather than presentation-style whitespace.
+
+**Rejected**  
+Styling the plan rail, production surface, and telemetry as three equivalent
+floating cards.
+
+**Validation**  
+Without reading help copy, users should be able to point to where they change
+the plan, where the calculated result appears, and where they check overall
+operating condition.
+
+---
+
+## ADR-UI-011 — Calculator technical labels name real regions
+
+**Decision**  
+Use semantic editorial labels such as
+`ENDFIELD INDUSTRIES // PRODUCTION PLAN`, `PRODUCTION MODEL`, and
+`PLAN TELEMETRY`.
+
+**Reason**  
+These labels identify actual page/region functions and therefore satisfy the
+technical-text referent rule.
+
+**Rejected**  
+Fake console serial numbers, “LIVE” states, or sector/grid IDs not represented
+by the product model.
+
+**Validation**  
+Every label must still have a one-sentence referent explanation.
+
+---
+
+## ADR-UI-012 — Contours are layered by semantic region
+
+**Decision**  
+Introduce a broad, very-low-contrast contour field at shell level and a stronger
+cropped contour field behind the selected material. Keep relationship canvases
+subordinate to their actual relation lines.
+
+**Goal**  
+Use the contour motif as measurement/classification and brand continuity while
+preserving task hierarchy.
+
+**Evidence**  
+- Domain evidence supports contours as geography, technical texture, brand, and
+  world-space motif.
+- Task-driven density requires different texture strength by region.
+- Production graphs already encode meaning spatially through edges; their
+  decorative texture therefore has lower priority than selected-object
+  inspection fields.
+
+**Validation**  
+Contours should be perceptible as atmosphere/structure but should not reduce
+text contrast or compete with graph edges.
+
+---
+
+## ADR-UI-013 — Entry motion is restrained and non-springy
+
+**Decision**  
+Replace scale/spring-style picker and target-card entry animations with short
+opacity + small translation transitions.
+
+**Goal**  
+Make additions legible as state changes without making the interface feel
+elastic or consumer-app-like.
+
+**Evidence**  
+- Project experience intent E4.
+- Endfield motion evidence favors restrained, mechanical continuity.
+- `prefers-reduced-motion` remains honored.
+
+**Validation**  
+New targets/items should be noticeable without overshoot or visual bounce.
