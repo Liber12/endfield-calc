@@ -17,6 +17,11 @@ UI decisions follow this order:
 
 Visual language must not be used to compensate for an unclear semantic or information model.
 
+Surface-specific specifications:
+- [Material Dictionary UI Specification](./material-dictionary-ui-spec.md)
+- [Production Calculator UI Specification](./production-calculator-ui-spec.md)
+- [UI Decision Records](./ui-decisions.md)
+
 ## 2. User model
 
 The project is designed around usage modes, not demographic personas.
