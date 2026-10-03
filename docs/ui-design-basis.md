@@ -24,6 +24,7 @@ Surface-specific specifications and design references:
 - [Production Calculator UI Specification](./production-calculator-ui-spec.md)
 - [UI Decision Records](./ui-decisions.md)
 - [UI Review Checklist](./ui-review-checklist.md)
+- [UI Validation Protocol](./ui-validation-protocol.md)
 
 ## 2. User model
 
