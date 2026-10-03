@@ -426,3 +426,40 @@ the two tools.
 In dictionary mode, every remaining header action should have an immediate and
 valid dictionary/global effect. Switching back to calculator restores the plan
 actions without losing plan state.
+
+
+---
+
+## ADR-UI-018 — Relationship canvases use one subordinate technical texture stack
+
+**Decision**  
+The material relationship workspace uses one low-contrast measurement grid plus
+one irregular contour field. The additional React Flow dot background and the
+former synthetic concentric-ring background are removed.
+
+**User / context**  
+Structure-investigation users need to perceive dependency topology before
+background styling.
+
+**Goal**  
+Keep relation edges and node placement as the strongest spatial information
+while retaining the Endfield surveying/technical-document texture.
+
+**Experience intent**  
+E2 “I can see how this is connected” before E5 “This belongs to the Endfield
+world”.
+
+**Evidence**  
+- Relation graphics are semantic: dependency lines carry actual production/use
+  meaning.
+- Endfield domain evidence supports contours and grids as technical texture,
+  including non-map backgrounds, but does not require every technical texture
+  to be stacked simultaneously.
+- Task-driven density: a graph already has high spatial information density.
+
+**Rejected**  
+Grid + synthetic concentric rings + React Flow dot field simultaneously.
+
+**Validation**  
+At fit-to-view, branch/merge topology and arrow direction should remain more
+salient than either the grid or contour field.
