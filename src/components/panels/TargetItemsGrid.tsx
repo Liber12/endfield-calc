@@ -426,7 +426,7 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
 
   // Shared reveal classes for hover-hidden action buttons.
   const reveal =
-    "[@media(hover:none)]:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 focus-visible:opacity-100 transition-all";
+    "[@media(hover:none)]:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-120";
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -448,7 +448,7 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
               // by slimming the fixed elements at max-sm (smaller
               // icon/input/buttons, /min and the Max stub hidden)
               // rather than pushing controls to a second line.
-              "target-card-enter group flex items-center gap-1.5 rounded border border-border/40 border-l-2 bg-card px-2 py-1.5 min-h-11 sm:min-h-0 transition-all duration-150",
+              "target-card-enter group flex items-center gap-1.5 rounded border border-border/40 border-l-2 bg-card px-2 py-1.5 min-h-11 sm:min-h-0 transition-colors duration-150",
               tc.border,
               focusedIndex === index && "ring-2 ring-primary/40",
             )}
@@ -556,7 +556,7 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
                   size="sm"
                   onClick={() => onTargetRemove(index)}
                 className={cn(
-                  "h-7 w-7 max-sm:h-6 max-sm:w-6 p-0 rounded-full hover:bg-destructive hover:text-destructive-foreground",
+                  "h-7 w-7 max-sm:h-6 max-sm:w-6 p-0 hover:bg-destructive hover:text-destructive-foreground",
                   reveal,
                 )}
                   aria-label={t("removeTarget")}
@@ -574,9 +574,9 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
         <button
           type="button"
           onClick={onAddClick}
-          className="group flex w-full items-center justify-center gap-2 rounded border-2 border-dashed border-border px-2 py-2 min-h-11 sm:min-h-0 sm:py-1.5 text-xs font-medium text-muted-foreground cursor-pointer transition-all duration-200 hover:border-primary/50 hover:bg-accent/40 hover:text-foreground active:scale-[0.98]"
+          className="group flex w-full items-center justify-center gap-2 rounded border-2 border-dashed border-border px-2 py-2 min-h-11 sm:min-h-0 sm:py-1.5 text-xs font-medium text-muted-foreground cursor-pointer transition-colors duration-150 hover:border-primary/50 hover:bg-accent/40 hover:text-foreground"
         >
-          <Plus className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
+          <Plus className="h-4 w-4" />
           {t("addTarget")}
         </button>
       )}
