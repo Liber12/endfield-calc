@@ -282,7 +282,7 @@
 @layer components {
   /* Queue pill pop-in */
   .pill-enter {
-    animation: pillEnter 0.16s ease-out both;
+    animation: pillEnter var(--ef-motion-state) ease-out both;
   }
   @keyframes pillEnter {
     from { opacity: 0; transform: translateY(3px); }
@@ -291,7 +291,7 @@
 
   /* Target card entrance — short mechanical translation, no overshoot. */
   .target-card-enter {
-    animation: cardSlideIn 0.18s ease-out both;
+    animation: cardSlideIn var(--ef-motion-state) ease-out both;
   }
   @keyframes cardSlideIn {
     from { opacity: 0; transform: translateY(5px); }
@@ -346,6 +346,20 @@
     --ef-purple: #a468ff;
     --ef-orange: #ff9f45;
 
+    /* Semantic UI roles. These are project tokens, not official
+       Hypergryph/Endfield design tokens; see docs/ui-token-model.md. */
+    --ef-type-display: clamp(1.45rem, 2.7vw, 2.2rem);
+    --ef-type-functional: 0.72rem;
+    --ef-type-meta: 0.5625rem;
+    --ef-type-system: 0.53rem;
+    --ef-track-meta: 0.12em;
+    --ef-track-system: 0.145em;
+    --ef-motion-fast: 120ms;
+    --ef-motion-state: 180ms;
+    --ef-contour-shell-opacity: 0.035;
+    --ef-contour-subject-opacity: 0.075;
+    --ef-contour-operational-opacity: 0.022;
+
     background-color: var(--ef-paper);
     background-image:
       linear-gradient(
@@ -371,7 +385,7 @@
     z-index: 0;
     pointer-events: none;
     background: currentColor;
-    opacity: 0.035;
+    opacity: var(--ef-contour-shell-opacity);
     -webkit-mask-image: url("./assets/contour-field.svg");
     mask-image: url("./assets/contour-field.svg");
     -webkit-mask-repeat: no-repeat;
@@ -460,7 +474,7 @@
     background: transparent;
     color: var(--ef-meta);
     box-shadow: none;
-    font-size: 0.72rem;
+    font-size: var(--ef-type-functional);
     font-weight: 750;
     letter-spacing: 0.025em;
   }
@@ -495,9 +509,9 @@
     background: var(--ef-ink);
     padding: 0.2rem 0.7rem;
     color: var(--ef-paper-strong);
-    font-size: 0.53rem;
+    font-size: var(--ef-type-system);
     font-weight: 750;
-    letter-spacing: 0.145em;
+    letter-spacing: var(--ef-track-system);
     line-height: 1;
     text-transform: uppercase;
   }
@@ -552,7 +566,7 @@
     z-index: 0;
     pointer-events: none;
     background: currentColor;
-    opacity: 0.075;
+    opacity: var(--ef-contour-subject-opacity);
     -webkit-mask-image: url("./assets/contour-field.svg");
     mask-image: url("./assets/contour-field.svg");
     -webkit-mask-repeat: no-repeat;
@@ -582,7 +596,7 @@
   }
 
   .endfield-display-name {
-    font-size: clamp(1.45rem, 2.7vw, 2.2rem);
+    font-size: var(--ef-type-display);
     font-weight: 900;
     line-height: 0.92;
     letter-spacing: -0.05em;
@@ -631,7 +645,7 @@
     background: var(--ef-subtle) !important;
     color: var(--ef-meta) !important;
     box-shadow: none !important;
-    font-size: 0.7rem;
+    font-size: var(--ef-type-functional);
     font-weight: 800;
     letter-spacing: 0.025em;
   }
@@ -951,7 +965,7 @@
 
   .endfield-dictionary button,
   .endfield-picker button {
-    transition-duration: 120ms;
+    transition-duration: var(--ef-motion-fast);
   }
 
   .endfield-dictionary .rounded-xl,
@@ -1076,7 +1090,8 @@
   }
 
   .endfield-app-shell::before {
-    opacity: 0.022;
+    --ef-contour-shell-opacity: 0.022;
+    opacity: var(--ef-contour-shell-opacity);
     -webkit-mask-size: 760px auto;
     mask-size: 760px auto;
     -webkit-mask-position: 64% 12%;
@@ -1307,7 +1322,7 @@
     inset: 0;
     pointer-events: none;
     background: currentColor;
-    opacity: 0.022;
+    opacity: var(--ef-contour-operational-opacity);
     -webkit-mask-image: url("./assets/contour-field.svg");
     mask-image: url("./assets/contour-field.svg");
     -webkit-mask-repeat: no-repeat;
