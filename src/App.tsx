@@ -648,6 +648,7 @@ function AppContent() {
       }
     >
       <AppHeader
+        mode={appMode}
         onLanguageChange={handleLanguageChange}
         onSavePlan={handleSavePlan}
         onOpenPlan={handleOpenPlan}
