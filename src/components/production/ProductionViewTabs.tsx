@@ -119,12 +119,16 @@ export default function ProductionViewTabs({
       <Card className="endfield-production-card h-full flex flex-col">
         <CardHeader className="endfield-production-header shrink-0">
           <div className="flex items-center justify-between gap-4">
-            <Tabs
-              value={activeTab}
-              onValueChange={(val) => onTabChange(val as "table" | "tree")}
-              className="flex-1"
-            >
-              <TabsList className="endfield-factory-view-tabs grid w-full max-w-md grid-cols-2">
+            <div className="flex min-w-0 flex-1 items-center gap-3">
+              <span className="hidden shrink-0 text-[9px] font-black uppercase tracking-[0.14em] text-muted-foreground xl:inline">
+                PRODUCTION MODEL
+              </span>
+              <Tabs
+                value={activeTab}
+                onValueChange={(val) => onTabChange(val as "table" | "tree")}
+                className="min-w-0 flex-1"
+              >
+                <TabsList className="endfield-factory-view-tabs grid w-full max-w-md grid-cols-2">
                 <TabsTrigger value="table" className="gap-2">
                   <BarChart3 className="h-4 w-4 shrink-0" />
                   <span className="hidden sm:inline">{t("tabs.table")}</span>
@@ -133,8 +137,9 @@ export default function ProductionViewTabs({
                   <Network className="h-4 w-4 shrink-0" />
                   <span className="hidden sm:inline">{t("tabs.tree")}</span>
                 </TabsTrigger>
-              </TabsList>
-            </Tabs>
+                </TabsList>
+              </Tabs>
+            </div>
 
             {/* Tree-view options — inline at lg+, consolidated into a
                 labelled dropdown below that (narrow desktop + phones):
