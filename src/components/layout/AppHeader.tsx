@@ -32,6 +32,7 @@ import { SiGithub, SiDiscord, SiTencentqq } from "react-icons/si";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface AppHeaderProps {
+  mode: "calculator" | "dictionary";
   onLanguageChange: (lang: string) => void;
   onSavePlan: () => void;
   onOpenPlan: () => void;
@@ -120,11 +121,16 @@ function HeaderIconButton({
  *     separators (file · community · app) + a compact language select.
  *     Labels live in the tooltips — the old labelled buttons overflowed
  *     at mid widths and were clipped entirely in portrait.
- *   - Mobile (`<md`): a single ⋯ overflow menu carrying Save/Open,
- *     community links and a language radio group; Settings and theme
- *     stay as always-visible icon buttons (the two most-used actions).
+ *   - Mobile (`<md`): a single ⋯ overflow menu carries contextual
+ *     plan actions (calculator only), community links and language.
+ *     Settings is calculator-only; theme remains global.
+ *
+ * Tool-specific actions are deliberately absent in dictionary mode:
+ * they are not valid actions on a material record surface, and the
+ * Settings sheet itself is calculator-scoped.
  */
 export default function AppHeader({
+  mode,
   onLanguageChange,
   onSavePlan,
   onOpenPlan,
@@ -142,14 +148,17 @@ export default function AppHeader({
 
       {/* Desktop toolbar */}
       <div className="hidden md:flex items-center gap-1">
-        <HeaderIconButton label={t("header.save")} onClick={onSavePlan}>
-          <Save className="h-4 w-4" />
-        </HeaderIconButton>
-        <HeaderIconButton label={t("header.open")} onClick={onOpenPlan}>
-          <FolderOpen className="h-4 w-4" />
-        </HeaderIconButton>
-
-        <Separator orientation="vertical" className="h-5 mx-1" />
+        {mode === "calculator" && (
+          <>
+            <HeaderIconButton label={t("header.save")} onClick={onSavePlan}>
+              <Save className="h-4 w-4" />
+            </HeaderIconButton>
+            <HeaderIconButton label={t("header.open")} onClick={onOpenPlan}>
+              <FolderOpen className="h-4 w-4" />
+            </HeaderIconButton>
+            <Separator orientation="vertical" className="h-5 mx-1" />
+          </>
+        )}
 
         <HeaderIconButton
           label={t("header.discord")}
@@ -172,9 +181,11 @@ export default function AppHeader({
 
         <Separator orientation="vertical" className="h-5 mx-1" />
 
-        <HeaderIconButton label={settingsLabel} onClick={onOpenSettings}>
-          <Settings className="h-4 w-4" />
-        </HeaderIconButton>
+        {mode === "calculator" && (
+          <HeaderIconButton label={settingsLabel} onClick={onOpenSettings}>
+            <Settings className="h-4 w-4" />
+          </HeaderIconButton>
+        )}
         <HeaderIconButton
           label={t("header.toggleTheme", { defaultValue: "Toggle theme" })}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -218,15 +229,19 @@ export default function AppHeader({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuItem onClick={onSavePlan}>
-              <Save className="h-4 w-4" />
-              {t("header.save")}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={onOpenPlan}>
-              <FolderOpen className="h-4 w-4" />
-              {t("header.open")}
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            {mode === "calculator" && (
+              <>
+                <DropdownMenuItem onClick={onSavePlan}>
+                  <Save className="h-4 w-4" />
+                  {t("header.save")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onOpenPlan}>
+                  <FolderOpen className="h-4 w-4" />
+                  {t("header.open")}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </>
+            )}
             <DropdownMenuItem asChild>
               <a
                 href="https://discord.gg/6V7CupPwb6"
@@ -275,9 +290,11 @@ export default function AppHeader({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <HeaderIconButton label={settingsLabel} onClick={onOpenSettings}>
-          <Settings className="h-4 w-4" />
-        </HeaderIconButton>
+        {mode === "calculator" && (
+          <HeaderIconButton label={settingsLabel} onClick={onOpenSettings}>
+            <Settings className="h-4 w-4" />
+          </HeaderIconButton>
+        )}
         <HeaderIconButton
           label={t("header.toggleTheme", { defaultValue: "Toggle theme" })}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
