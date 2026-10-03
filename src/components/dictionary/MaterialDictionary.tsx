@@ -292,9 +292,10 @@ function ItemRecipeSummary({
                     </div>
                   </div>
 
-                  <div className="endfield-recipe-transform flex min-w-[124px] flex-col items-center gap-1">
+                  <div className="endfield-recipe-transform flex min-w-[160px] flex-col items-center gap-1 md:flex-row">
                     <ArrowDown className="h-3.5 w-3.5 text-muted-foreground md:hidden" />
-                    <div className="w-full border px-2 py-1.5 text-center">
+                    <ArrowRight className="hidden h-3.5 w-3.5 shrink-0 text-muted-foreground md:block" />
+                    <div className="w-full min-w-[124px] border px-2 py-1.5 text-center">
                       <div className="text-[8px] font-black uppercase tracking-[0.12em] text-muted-foreground">
                         {t("dictionary.flowProcess", {
                           defaultValue: "Process",
@@ -308,9 +309,7 @@ function ItemRecipeSummary({
                       </div>
                     </div>
                     <ArrowDown className="h-3.5 w-3.5 text-muted-foreground md:hidden" />
-                    <div className="hidden items-center gap-1 md:flex">
-                      <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
-                    </div>
+                    <ArrowRight className="hidden h-3.5 w-3.5 shrink-0 text-muted-foreground md:block" />
                   </div>
 
                   <div className="min-w-0">
