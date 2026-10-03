@@ -514,7 +514,7 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
                   disabled={!maxEnabled || optimizerBusy || alreadyMaxed}
                   onClick={() => onMaximizeTarget(index)}
                   className={cn(
-                    "h-7 w-7 max-sm:h-6 max-sm:w-6 p-0",
+                    "h-7 w-7 p-0",
                     (!maxEnabled || alreadyMaxed) && "opacity-40",
                   )}
                   aria-label={t("maximize")}
@@ -539,7 +539,7 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
                   }
                   title={target.locked ? t("unlockTarget") : t("lockTarget")}
                 className={cn(
-                  "h-7 w-7 max-sm:h-6 max-sm:w-6 p-0",
+                  "h-7 w-7 p-0",
                   target.locked ? "text-foreground" : reveal,
                 )}
                 >
@@ -556,7 +556,7 @@ const TargetItemsGrid = memo(function TargetItemsGrid({
                   size="sm"
                   onClick={() => onTargetRemove(index)}
                 className={cn(
-                  "h-7 w-7 max-sm:h-6 max-sm:w-6 p-0 hover:bg-destructive hover:text-destructive-foreground",
+                  "h-7 w-7 p-0 hover:bg-destructive hover:text-destructive-foreground",
                   reveal,
                 )}
                   aria-label={t("removeTarget")}
