@@ -1,5 +1,10 @@
 # Material Dictionary UX model
 
+This document defines the semantic direction model. For the project-wide design rationale and
+evidence hierarchy, see [UI Design Basis](./ui-design-basis.md). For concrete attention, density,
+and area-level presentation rules, see
+[Material Dictionary UI Specification](./material-dictionary-ui-spec.md).
+
 ## Goal
 
 The dictionary is an item-centered reference surface. The selected item is always the subject.
