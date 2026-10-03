@@ -72,8 +72,11 @@ Project rule:
 - sticky headers/docks must not completely hide the focused control.
 
 The project uses a two-part focus treatment on Endfield surfaces:
-- dark/light structural outline;
+- near-black structural outline;
 - Signal Yellow outer ring.
+
+The two-tone treatment is intentional: the dark edge remains visible on Signal
+Yellow controls, while the yellow outer ring remains visible on dark surfaces.
 
 This is deliberately stronger than the surrounding restrained chrome.
 
