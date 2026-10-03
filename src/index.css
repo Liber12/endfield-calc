@@ -668,16 +668,6 @@
     isolation: isolate;
     background-color: var(--ef-paper-strong);
     background-image:
-      radial-gradient(
-        ellipse at 48% 56%,
-        transparent 0 22%,
-        color-mix(in srgb, var(--ef-ink) 5%, transparent) 22.2% 22.45%,
-        transparent 22.6% 34%,
-        color-mix(in srgb, var(--ef-ink) 4%, transparent) 34.2% 34.45%,
-        transparent 34.6% 46%,
-        color-mix(in srgb, var(--ef-ink) 3%, transparent) 46.2% 46.45%,
-        transparent 46.6%
-      ),
       linear-gradient(
         to right,
         color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
@@ -688,13 +678,34 @@
         color-mix(in srgb, var(--ef-ink) 4%, transparent) 1px,
         transparent 1px
       );
-    background-size: 100% 100%, 32px 32px, 32px 32px;
+    background-size: 32px 32px, 32px 32px;
+  }
+
+  /* Relationship canvases already carry real topology. Keep the technical
+     texture subordinate: one measurement grid + one irregular contour field,
+     not a stack of concentric rings and React Flow dots. */
+  .endfield-route-canvas::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: currentColor;
+    opacity: var(--ef-contour-operational-opacity);
+    -webkit-mask-image: url("./assets/contour-field.svg");
+    mask-image: url("./assets/contour-field.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: min(980px, 92%) auto;
+    mask-size: min(980px, 92%) auto;
+    -webkit-mask-position: 54% 48%;
+    mask-position: 54% 48%;
   }
 
   .endfield-route-canvas::before {
     content: "SUPPLY RELATION CANVAS";
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     top: 0.45rem;
     left: 0.55rem;
     color: var(--ef-meta);
@@ -703,6 +714,11 @@
     letter-spacing: 0.14em;
     opacity: 0.58;
     pointer-events: none;
+  }
+
+  .endfield-route-canvas > * {
+    position: relative;
+    z-index: 2;
   }
 
   .endfield-route-material {
