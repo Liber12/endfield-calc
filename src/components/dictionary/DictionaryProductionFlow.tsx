@@ -1,6 +1,4 @@
 import {
-  Background,
-  BackgroundVariant,
   Controls,
   Handle,
   MarkerType,
@@ -449,7 +447,6 @@ export default function DictionaryProductionFlow({
           maxZoom={1.5}
           proOptions={{ hideAttribution: true }}
         >
-          <Background variant={BackgroundVariant.Dots} gap={14} size={1} />
           <Controls
             showInteractive={false}
             className="flow-controls"
