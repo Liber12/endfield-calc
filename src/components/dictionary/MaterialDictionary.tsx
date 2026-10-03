@@ -243,8 +243,11 @@ function ItemRecipeSummary({
             defaultValue: "Production recipe",
           })}
         </h2>
-        <span className="ml-auto text-[10px] text-muted-foreground">
-          {recipes.length}
+        <span className="ml-auto text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          {t("dictionary.recipeMethodCount", {
+            count: recipes.length,
+            defaultValue: "{{count}} methods",
+          })}
         </span>
       </div>
 
@@ -258,14 +261,14 @@ function ItemRecipeSummary({
                 key={recipe.id}
                 className="endfield-item-recipe border bg-card p-2.5"
               >
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 border-b border-dashed pb-1.5">
                   <h3 className="text-[11px] font-bold">
                     {getRecipeName(recipe)}
                   </h3>
-                  <span className="text-[10px] text-muted-foreground">
-                    {facility ? getFacilityName(facility) : recipe.facilityId}
-                    {" · "}
-                    {recipe.craftingTime}s
+                  <span className="text-[9px] uppercase tracking-[0.08em] text-muted-foreground">
+                    {t("dictionary.recipeRecord", {
+                      defaultValue: "Production process",
+                    })}
                   </span>
                 </div>
 
@@ -289,8 +292,26 @@ function ItemRecipeSummary({
                     </div>
                   </div>
 
-                  <ArrowRight className="hidden h-4 w-4 shrink-0 text-muted-foreground md:block" />
-                  <ArrowDown className="mx-auto h-4 w-4 text-muted-foreground md:hidden" />
+                  <div className="endfield-recipe-transform flex min-w-[124px] flex-col items-center gap-1">
+                    <ArrowDown className="h-3.5 w-3.5 text-muted-foreground md:hidden" />
+                    <div className="w-full border px-2 py-1.5 text-center">
+                      <div className="text-[8px] font-black uppercase tracking-[0.12em] text-muted-foreground">
+                        {t("dictionary.flowProcess", {
+                          defaultValue: "Process",
+                        })}
+                      </div>
+                      <div className="mt-0.5 truncate text-[10px] font-bold">
+                        {facility ? getFacilityName(facility) : recipe.facilityId}
+                      </div>
+                      <div className="text-[9px] tabular-nums text-muted-foreground">
+                        {recipe.craftingTime}s
+                      </div>
+                    </div>
+                    <ArrowDown className="h-3.5 w-3.5 text-muted-foreground md:hidden" />
+                    <div className="hidden items-center gap-1 md:flex">
+                      <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+                    </div>
+                  </div>
 
                   <div className="min-w-0">
                     <div className="mb-1 text-[9px] font-black uppercase tracking-[0.12em] text-muted-foreground">
@@ -1115,9 +1136,9 @@ export default function MaterialDictionary({
               <button
                 type="button"
                 onClick={() => setPickerOpen(true)}
-                className="endfield-material-subject flex min-h-16 min-w-0 flex-1 items-center gap-2.5 border bg-background px-2.5 text-left transition-colors hover:bg-accent md:min-w-[280px] md:max-w-[360px] md:gap-3 md:px-3"
+                className="endfield-material-subject flex min-h-20 min-w-0 flex-1 items-center gap-3 border bg-background px-3 text-left transition-colors hover:bg-accent md:min-w-[340px] md:max-w-[520px] md:px-4"
               >
-                <ItemIcon item={selectedItem} size="md" />
+                <ItemIcon item={selectedItem} size="lg" />
                 <span className="min-w-0 flex-1">
                   <span className="block text-[9px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
                     {t("dictionary.selectedItem", {
@@ -1127,20 +1148,16 @@ export default function MaterialDictionary({
                   <span className="endfield-display-name block truncate text-lg font-bold">
                     {getItemName(selectedItem)}
                   </span>
-                  <span className="mt-1 flex flex-wrap gap-1">
+                  <span className="endfield-item-metadata mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
                     {selectedCategory && (
-                      <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                        {categoryLabel(t, selectedCategory)}
-                      </span>
+                      <span>{categoryLabel(t, selectedCategory)}</span>
                     )}
+                    {selectedCategory && selectedSubtype && <span>/</span>}
                     {selectedSubtype && (
-                      <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                        {subtypeLabel(t, selectedSubtype)}
-                      </span>
+                      <span>{subtypeLabel(t, selectedSubtype)}</span>
                     )}
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
-                      T{selectedItem.tier}
-                    </span>
+                    <span>/</span>
+                    <span>T{selectedItem.tier}</span>
                   </span>
                 </span>
                 <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
