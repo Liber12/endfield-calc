@@ -258,6 +258,6 @@
     "flowProcess": "工程",
     "recipeMethodCount": "{{count}}製法",
     "recipeRecord": "製造工程",
-    "productionFlowSummary": "素材 {{materials}} · 工程 {{processes}}"
+    "productionFlowSummary": "素材ノード {{materials}} · 工程 {{processes}}"
   }
 }
