@@ -22,13 +22,17 @@ fact: facility, crafting time, all inputs, and all outputs.
 
 The recursive production view below is not a replacement for that basic recipe. It is the
 expanded dependency view used to answer the broader "what does this ultimately require?"
-question.
+question. The default presentation is a connected **production flow**: material nodes and
+process nodes are linked spatially so branching, merging, and alternative recipes remain
+visible at a glance.
 
 ### Production
 
-Production is owned by the selected item. It uses the upstream requirement tree and includes
-**all recipe inputs recursively**, including co-inputs. Alternative normal producer recipes remain
-separate branches rather than being silently chosen.
+Production is owned by the selected item. It uses the upstream requirement tree as the data
+model and renders it as a connected flow graph. It includes **all recipe inputs recursively**,
+including co-inputs. Alternative normal producer recipes remain separate branches rather than
+being silently chosen. On portrait/mobile layouts the graph flows vertically; wider layouts use a
+left-to-right flow.
 
 Recovery/disassembly operations are not normal upstream manufacturing choices. In particular,
 dismantling a filled container to recover an empty bottle must not create an alternative production

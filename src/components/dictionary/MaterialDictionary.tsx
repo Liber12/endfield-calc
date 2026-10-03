@@ -44,6 +44,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import DictionaryProductionFlow from "./DictionaryProductionFlow";
 import {
   getFacilityName,
   getItemName,
@@ -54,7 +55,6 @@ import {
   buildRequirementTree,
   getPrimaryProductionRecipes,
 } from "@/lib/material-dictionary";
-import type { RequirementTreeNode as RequirementNode } from "@/lib/material-dictionary";
 import {
   findShortestMaterialRoute,
   getItemUseSummary,
@@ -801,184 +801,6 @@ function RouteEndpointDetail({ endpoint }: { endpoint: UsefulEndpoint }) {
   );
 }
 
-function RequirementTreeNode({
-  node,
-  itemById,
-  recipeById,
-  facilityById,
-  onSelectItem,
-  depth = 0,
-}: {
-  node: RequirementNode;
-  itemById: ReadonlyMap<ItemId, Item>;
-  recipeById: ReadonlyMap<Recipe["id"], Recipe>;
-  facilityById: ReadonlyMap<Facility["id"], Facility>;
-  onSelectItem: (itemId: ItemId) => void;
-  depth?: number;
-}) {
-  const { t } = useTranslation("app");
-  const item = itemById.get(node.itemId);
-
-  const stopReason = node.cycle
-    ? t("dictionary.requirementCycle", {
-        defaultValue: "Cycle detected — expansion stopped",
-      })
-    : node.depthLimited
-      ? t("dictionary.requirementDepthLimit", {
-          defaultValue: "Depth limit reached",
-        })
-      : node.nodeLimited
-        ? t("dictionary.requirementNodeLimit", {
-            defaultValue: "Tree size limit reached",
-          })
-        : node.recipes.length === 0
-          ? t("dictionary.requirementSource", {
-              defaultValue: "Source material / no production recipe",
-            })
-          : null;
-
-  return (
-    <div className="min-w-0">
-      <button
-        type="button"
-        onClick={() => onSelectItem(node.itemId)}
-        className={cn(
-          "endfield-production-item flex w-full items-center gap-2 border bg-card p-2.5 text-left transition-colors hover:bg-accent",
-          depth === 0 && "border-primary bg-primary/5",
-          node.cycle && "border-destructive/50",
-        )}
-      >
-        <ItemIcon item={item} size={depth === 0 ? "md" : "sm"} />
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-xs font-semibold">
-            {item ? getItemName(item) : node.itemId}
-          </span>
-          <span className="mt-0.5 block text-[10px] text-muted-foreground">
-            {depth === 0
-              ? t("dictionary.requirementRootAmount", {
-                  defaultValue: "Target amount",
-                })
-              : t("dictionary.requirementCumulativeAmount", {
-                  defaultValue: "Required per target",
-                })}
-          </span>
-        </span>
-        <span className="shrink-0 rounded-md bg-muted px-2 py-1 text-xs font-bold tabular-nums">
-          ×{formatAmount(node.amount)}
-        </span>
-      </button>
-
-      {stopReason ? (
-        <div className="mt-1.5 border-l-2 pl-2 text-[10px] text-muted-foreground">
-          {stopReason}
-        </div>
-      ) : (
-        <div className="mt-2 space-y-2 border-l pl-2 md:pl-3">
-          {node.recipes.map((branch, recipeIndex) => {
-            const recipe = recipeById.get(branch.recipeId);
-            const facility = recipe
-              ? facilityById.get(recipe.facilityId)
-              : undefined;
-
-            return (
-              <section
-                key={branch.recipeId}
-                className="endfield-production-process border border-dashed bg-background/70 p-2.5"
-              >
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                  <span className="text-[11px] font-semibold">
-                    {recipe ? getRecipeName(recipe) : branch.recipeId}
-                  </span>
-                  {node.recipes.length > 1 && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] font-medium text-muted-foreground">
-                      {t("dictionary.requirementAlternative", {
-                        index: recipeIndex + 1,
-                        defaultValue: "Alternative {{index}}",
-                      })}
-                    </span>
-                  )}
-                  {facility && (
-                    <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-muted-foreground">
-                      <Factory className="h-3 w-3" />
-                      {getFacilityName(facility)}
-                    </span>
-                  )}
-                </div>
-
-                {branch.inputs.length > 0 ? (
-                  <div className="mt-2 space-y-2">
-                    {branch.inputs.map((input, inputIndex) => (
-                      <RequirementTreeNode
-                        key={`${branch.recipeId}-${input.itemId}-${inputIndex}`}
-                        node={input}
-                        itemById={itemById}
-                        recipeById={recipeById}
-                        facilityById={facilityById}
-                        onSelectItem={onSelectItem}
-                        depth={depth + 1}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="mt-2 text-[10px] text-muted-foreground">
-                    {t("dictionary.requirementNoInputs", {
-                      defaultValue: "This recipe has no material inputs.",
-                    })}
-                  </div>
-                )}
-              </section>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function RequirementTree({
-  tree,
-  itemById,
-  recipeById,
-  facilityById,
-  onSelectItem,
-}: {
-  tree: RequirementNode;
-  itemById: ReadonlyMap<ItemId, Item>;
-  recipeById: ReadonlyMap<Recipe["id"], Recipe>;
-  facilityById: ReadonlyMap<Facility["id"], Facility>;
-  onSelectItem: (itemId: ItemId) => void;
-}) {
-  const { t } = useTranslation("app");
-
-  return (
-    <div className="space-y-3">
-      <div className="endfield-production-intro border bg-muted/30 px-3 py-2.5">
-        <div className="flex items-center gap-2">
-          <Factory className="h-4 w-4 shrink-0" />
-          <h2 className="text-sm font-bold">
-            {t("dictionary.productionRouteTitle", {
-              defaultValue: "Production route",
-            })}
-          </h2>
-        </div>
-        <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
-          {t("dictionary.requirementTreeDescription", {
-            defaultValue:
-              "Shows how to produce the selected item, expanding every required input. Quantities are cumulative amounts needed for one unit of the selected item.",
-          })}
-        </p>
-      </div>
-      <RequirementTreeNode
-        node={tree}
-        itemById={itemById}
-        recipeById={recipeById}
-        facilityById={facilityById}
-        onSelectItem={onSelectItem}
-      />
-    </div>
-  );
-}
-
 function ExternalDirectUses({ itemId }: { itemId: ItemId }) {
   const { t } = useTranslation("app");
   const external = externalItemUseById.get(itemId);
@@ -1541,7 +1363,12 @@ export default function MaterialDictionary({
 
           <div
             ref={routeRef}
-            className="endfield-route-canvas min-h-0 flex-1 overflow-auto p-3 md:p-5"
+            className={cn(
+              "endfield-route-canvas min-h-0 flex-1",
+              mainView === "production"
+                ? "overflow-hidden p-0"
+                : "overflow-auto p-3 md:p-5",
+            )}
           >
 
             {!selectedItem ? (
@@ -1572,7 +1399,7 @@ export default function MaterialDictionary({
               </div>
             ) : mainView === "production" ? (
               requirementTree ? (
-                <RequirementTree
+                <DictionaryProductionFlow
                   tree={requirementTree}
                   itemById={itemById}
                   recipeById={recipeById}

@@ -246,6 +246,15 @@
     "productionRouteTitle": "生産ルート",
     "itemRecipes": "製造レシピ",
     "recipeInputs": "入力素材",
-    "recipeOutputs": "生産物"
+    "recipeOutputs": "生産物",
+    "productionFlowTitle": "生産フロー",
+    "productionFlowDescription": "必要素材を原料から選択中の製品まで接続して表示します。代替レシピは別の枝として表示します。",
+    "productionFlowNodeCount": "{{count}}ノード",
+    "productionFlowArranging": "フローを配置中…",
+    "flowTarget": "対象製品",
+    "flowMaterial": "必要素材",
+    "flowTargetAmount": "対象 ×{{amount}}",
+    "flowRequiredAmount": "必要 ×{{amount}}",
+    "flowProcess": "工程"
   }
 }
