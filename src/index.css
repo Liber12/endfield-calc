@@ -442,7 +442,7 @@
       [role="combobox"],
       [role="tab"]
     ):focus-visible {
-    outline: 2px solid var(--ef-ink) !important;
+    outline: 2px solid #161816 !important;
     outline-offset: 2px;
     box-shadow: 0 0 0 4px var(--ef-signal) !important;
   }
