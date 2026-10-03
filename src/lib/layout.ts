@@ -404,6 +404,10 @@ const PLACEMENT_TUNING_MAX_NODES = 600;
  *   `LayoutCancelledError` when `cancelLayoutLane(lane)` kills the job
  *   mid-flight; every OTHER failure keeps the legacy behaviour of
  *   returning the un-layouted inputs.
+ * @param spacing Optional per-surface spacing. The production calculator keeps
+ *   the established defaults; compact relationship surfaces such as the
+ *   material dictionary can request tighter layer/node spacing without
+ *   changing the shared graph model.
  */
 export type LayoutSpacing = {
   layerGap?: number;
