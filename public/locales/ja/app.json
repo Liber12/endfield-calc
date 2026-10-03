@@ -255,6 +255,9 @@
     "flowMaterial": "必要素材",
     "flowTargetAmount": "対象 ×{{amount}}",
     "flowRequiredAmount": "必要 ×{{amount}}",
-    "flowProcess": "工程"
+    "flowProcess": "工程",
+    "recipeMethodCount": "{{count}}製法",
+    "recipeRecord": "製造工程",
+    "productionFlowSummary": "素材 {{materials}} · 工程 {{processes}}"
   }
 }
