@@ -17,7 +17,9 @@ UI decisions follow this order:
 
 Visual language must not be used to compensate for an unclear semantic or information model.
 
-Surface-specific specifications:
+Surface-specific specifications and design references:
+- [UI Knowledge Map](./ui-knowledge-map.md)
+- [UI Token Model](./ui-token-model.md)
 - [Material Dictionary UI Specification](./material-dictionary-ui-spec.md)
 - [Production Calculator UI Specification](./production-calculator-ui-spec.md)
 - [UI Decision Records](./ui-decisions.md)
