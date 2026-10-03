@@ -172,6 +172,10 @@ Primary references:
   https://www.nngroup.com/articles/recognition-and-recall/
 - Nielsen Norman Group — progressive disclosure.
   https://www.nngroup.com/articles/progressive-disclosure/
+- Nielsen Norman Group — Gestalt proximity: nearby elements are perceived as related.
+  https://www.nngroup.com/articles/gestalt-proximity/
+- Nielsen Norman Group — common region: shared boundaries strongly imply grouping.
+  https://www.nngroup.com/articles/common-region/
 - Ben Shneiderman — information visualization mantra:
   overview first, zoom/filter, details on demand.
   https://www.cs.umd.edu/~ben/about.html
