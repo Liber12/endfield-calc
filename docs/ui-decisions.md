@@ -355,3 +355,38 @@ rather than treating 24 px as a preferred size.
 **Validation**  
 At representative portrait widths, the controls remain independently tappable
 without forcing the rate field or item name out of the row.
+
+
+---
+
+## ADR-UI-016 — Design tokens represent semantic roles, not literal deduplication
+
+**Decision**  
+Promote repeated values to Endfield Calc project tokens only when they express
+a stable semantic role across surfaces, an accessibility constraint, or a
+documented domain grammar.
+
+Initial role families:
+- Display / Functional / Metadata / System typography;
+- metadata/system tracking;
+- fast/state motion;
+- shell/subject/operational contour strength;
+- existing core/signal/semantic colors.
+
+**Reason**  
+Replacing every literal with a variable would make the stylesheet look more
+systematic without making the design decisions more systematic. The role must
+remain explainable if the exact value changes.
+
+**Important limitation**  
+These are Endfield Calc project tokens. They are not presented as official
+Hypergryph or Arknights: Endfield design-token names or values.
+
+**Rejected**  
+- one token per arbitrary pixel value;
+- one global density/spacing token applied to inspection, browse, graph, and
+  operational surfaces alike.
+
+**Validation**  
+For each promoted token, changing its value should intentionally affect a
+coherent family of UI elements rather than unrelated components.
