@@ -258,6 +258,6 @@
     "flowProcess": "Process",
     "recipeMethodCount": "{{count}} methods",
     "recipeRecord": "Production process",
-    "productionFlowSummary": "{{materials}} materials · {{processes}} processes"
+    "productionFlowSummary": "{{materials}} material nodes · {{processes}} processes"
   }
 }
