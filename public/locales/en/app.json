@@ -246,6 +246,15 @@
     "productionRouteTitle": "Production route",
     "itemRecipes": "Production recipe",
     "recipeInputs": "Inputs",
-    "recipeOutputs": "Outputs"
+    "recipeOutputs": "Outputs",
+    "productionFlowTitle": "Production flow",
+    "productionFlowDescription": "Connects all required inputs from raw materials to the selected product. Alternative recipes branch separately.",
+    "productionFlowNodeCount": "{{count}} nodes",
+    "productionFlowArranging": "Arranging flow…",
+    "flowTarget": "Target",
+    "flowMaterial": "Required material",
+    "flowTargetAmount": "Target ×{{amount}}",
+    "flowRequiredAmount": "Required ×{{amount}}",
+    "flowProcess": "Process"
   }
 }
