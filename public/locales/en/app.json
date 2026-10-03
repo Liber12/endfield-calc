@@ -255,6 +255,9 @@
     "flowMaterial": "Required material",
     "flowTargetAmount": "Target ×{{amount}}",
     "flowRequiredAmount": "Required ×{{amount}}",
-    "flowProcess": "Process"
+    "flowProcess": "Process",
+    "recipeMethodCount": "{{count}} methods",
+    "recipeRecord": "Production process",
+    "productionFlowSummary": "{{materials}} material nodes · {{processes}} processes"
   }
 }

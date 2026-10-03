@@ -512,10 +512,14 @@
   }
 
   .endfield-display-name {
-    font-size: clamp(1.15rem, 2.1vw, 1.8rem);
+    font-size: clamp(1.45rem, 2.7vw, 2.2rem);
     font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.045em;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+
+  .endfield-item-metadata {
+    font-variant-numeric: tabular-nums;
   }
 
   .endfield-description {
@@ -604,7 +608,7 @@
   }
 
   .endfield-route-canvas::before {
-    content: "SUPPLY RELATION CANVAS / GRID 04";
+    content: "SUPPLY RELATION CANVAS";
     position: absolute;
     z-index: -1;
     top: 0.45rem;
@@ -941,6 +945,61 @@
     box-shadow: none;
   }
 
+  .endfield-recipe-transform > div {
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    background: var(--ef-ink);
+    color: var(--ef-paper-strong);
+  }
+
+  .endfield-recipe-transform > div .text-muted-foreground {
+    color: color-mix(in srgb, var(--ef-paper-strong) 65%, transparent) !important;
+  }
+
+  .endfield-dictionary-flow-item {
+    position: relative;
+    border-radius: 0;
+    border-color: var(--ef-line-strong);
+    background: var(--ef-paper-strong) !important;
+    color: var(--ef-ink);
+    box-shadow: none;
+  }
+
+  .endfield-dictionary-flow-item::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--ef-line-strong);
+    pointer-events: none;
+  }
+
+  .endfield-dictionary-flow-item.border-primary::before {
+    width: 5px;
+    background: var(--ef-signal);
+  }
+
+  .endfield-dictionary-flow-recipe {
+    border-radius: 0;
+    border-color: #5f645d;
+    background: #191919 !important;
+    color: #fafbf8;
+    box-shadow: none;
+  }
+
+  .endfield-dictionary-flow-recipe .text-muted-foreground {
+    color: #b8bcb5 !important;
+  }
+
+  .endfield-dictionary-production-flow {
+    background: transparent;
+  }
+
+  .endfield-dictionary-production-flow .react-flow__edge-path {
+    stroke: color-mix(in srgb, var(--ef-ink) 62%, transparent);
+    stroke-width: 1.35;
+  }
+
 @media (max-width: 767px) {
   .endfield-app-shell {
     background-size: 48px 48px;
@@ -1030,7 +1089,7 @@
   }
 
   .endfield-display-name {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .endfield-sidebar {
