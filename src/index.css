@@ -427,6 +427,26 @@
     box-shadow: none;
   }
 
+  /*
+   * Flat Endfield chrome often removes component box-shadows. Tailwind's
+   * ring utilities also use box-shadow, so provide a structural focus
+   * fallback that cannot disappear with the visual restyling.
+   */
+  .endfield-app-shell :where(
+      button,
+      a[href],
+      input,
+      select,
+      textarea,
+      [role="button"],
+      [role="combobox"],
+      [role="tab"]
+    ):focus-visible {
+    outline: 2px solid #161816 !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--ef-signal) !important;
+  }
+
   .endfield-app-shell .app-mode-nav {
     border: 1px solid var(--ef-ink);
     border-radius: 0;

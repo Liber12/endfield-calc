@@ -313,3 +313,45 @@ elastic or consumer-app-like.
 
 **Validation**  
 New targets/items should be noticeable without overshoot or visual bounce.
+
+
+---
+
+## ADR-UI-014 — Endfield flat styling must not remove keyboard focus
+
+**Decision**  
+All interactive controls inside the Endfield app shell receive an explicit
+`:focus-visible` treatment even when component box-shadows are removed for
+flat visual styling.
+
+**Reason**  
+The shared Button component implements focus rings through Tailwind ring
+box-shadow. Endfield overrides intentionally remove ordinary shadows, which can
+also suppress that focus signal if no explicit fallback exists.
+
+**Constraint**  
+WCAG 2.2 SC 2.4.7 requires visible focus at Level AA. The project uses a
+2 px structural outline plus a Signal Yellow outer ring to make focus
+conspicuous across light and dark surfaces.
+
+**Validation**  
+Keyboard traversal through header, mode tabs, plan controls, picker controls,
+dictionary controls, and graph controls must always expose a visible focus
+indicator.
+
+---
+
+## ADR-UI-015 — Mobile target actions exceed the minimum pointer floor
+
+**Decision**  
+Target-row Max / Lock / Remove controls remain at least 28×28 CSS px on mobile.
+
+**Reason**  
+WCAG 2.2 SC 2.5.8 defines 24×24 CSS px as the Level AA pointer-target minimum
+unless an exception applies. These actions are tightly adjacent and include a
+destructive action, so the project intentionally keeps them above the minimum
+rather than treating 24 px as a preferred size.
+
+**Validation**  
+At representative portrait widths, the controls remain independently tappable
+without forcing the rate field or item name out of the row.

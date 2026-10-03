@@ -404,7 +404,7 @@ export default function AddTargetDialogGrid({
               <button
                 onClick={() => setActiveTier(null)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all cursor-pointer",
+                  "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors duration-150 cursor-pointer",
                   activeTier === null
                     ? "bg-foreground text-background border-foreground"
                     : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground",
@@ -424,7 +424,7 @@ export default function AddTargetDialogGrid({
                     key={tier}
                     onClick={() => setActiveTier(isActive ? null : tier)}
                     className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all cursor-pointer",
+                      "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors duration-150 cursor-pointer",
                       isActive
                         ? cn(tc.chip, "border-current")
                         : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground",
@@ -642,11 +642,11 @@ const ItemCell = memo(function ItemCell({
       title={tileHint ?? getItemName(item)}
       aria-label={tileHint}
       className={cn(
-        "endfield-target-item group relative aspect-square overflow-hidden border-l-2 border border-border transition-all duration-150 cursor-pointer",
+        "endfield-target-item group relative aspect-square overflow-hidden border-l-2 border border-border transition-colors duration-150 cursor-pointer",
         tc.border,
         isQueued
           ? cn("ring-2", tc.ring, tc.bg)
-          : "hover:shadow-md hover:border-foreground/20 active:scale-[0.97]",
+          : "hover:border-foreground/20",
         isDisabled && !isQueued && "opacity-35 cursor-not-allowed",
         // Locked: greyed + desaturated, but still clickable (routes to
         // Settings). The lock badge disambiguates from a queued/disabled
@@ -689,7 +689,7 @@ const ItemCell = memo(function ItemCell({
           <img
             src={item.iconUrl}
             alt={getItemName(item)}
-            className="w-full h-full object-contain drop-shadow-sm transition-transform duration-150 group-hover:scale-110"
+            className="w-full h-full object-contain drop-shadow-sm"
             draggable={false}
           />
         ) : (
