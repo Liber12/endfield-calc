@@ -1,4 +1,6 @@
 """Current outpost economics: allocation, stage and transfer direction regression."""
+import csv
+import json
 import os
 import sys
 
@@ -63,7 +65,41 @@ def test_real_outpost_catalog():
     assert wuling.outpost_offers["天王原建設支援拠点"][normalize_name("錦草ソーダⅡ")] == 22
 
 
+def test_japanese_game_names():
+    root = os.path.dirname(os.path.dirname(__file__))
+    with open(os.path.join(root, "config", "localization_ja.json"), encoding="utf-8") as stream:
+        localized = json.load(stream)
+    with open(os.path.join(root, "config", "outposts_1_5.json"), encoding="utf-8") as stream:
+        outposts = json.load(stream)["outposts"]
+    expected = {(o["region"], o["japanese"]) for o in localized["outposts"]}
+    actual = {(o["region"], o["name"]) for o in outposts}
+    assert expected == actual, (expected - actual, actual - expected)
+    assert len(expected) == 6
+    assert ("武陵", "満天台建設基地") in actual
+    assert "壌晶雨発生施設" not in {o["name"] for o in outposts}
+
+    with open(os.path.join(root, "config", "outpost_prices.csv"), encoding="utf-8-sig", newline="") as stream:
+        offers = list(csv.DictReader(stream))
+    assert {(offer["地域"], offer["拠点名"]) for offer in offers} <= expected
+
+    # The actual localized catalogue, rather than English item names or
+    # guessed translations, must be the reference for saleable products.
+    master = data_access.load_master()
+    japanese_items = {normalize_name(it["name"]) for it in master["items"].values()}
+    missing_items = {
+        offer["アイテム名"] for offer in offers
+        if normalize_name(offer["アイテム名"]) not in japanese_items
+    }
+    assert not missing_items, missing_items
+    mappings = {row["english"]: row["japanese"] for row in localized["gameplayTerms"]}
+    assert mappings["Wuling Stock Bill"] == "武陵取引券"
+    assert mappings["Valley Stock Bill"] == "谷地取引券"
+    assert mappings["Gas Dispersing Unit"] == "ガス散布機"
+    assert mappings["Total Transfer Value"] == "総転送価値"
+
+
 if __name__ == "__main__":
     test_outpost_income()
     test_real_outpost_catalog()
+    test_japanese_game_names()
     print("Current 1.5 outpost and Metastorage economic constraints passed.")
