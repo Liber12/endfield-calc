@@ -44,6 +44,15 @@ def test_real_outpost_catalog():
     assert wuling.transfer_points == master["metastorageExports"]["domain_1"]
     assert "item_copper_ore" not in wuling.transfer_points
     assert "item_liquid_water" not in wuling.transfer_points
+    copper_name = master["items"]["item_copper_ore"]["name"]
+    xiranite_name = master["items"]["item_gas_xiranite"]["name"]
+    assert wuling.resource_limits[copper_name] == 510
+    assert wuling.resource_limits[xiranite_name] == 150
+    assert master["regionalRawCaps"]["domain_2"]["item_copper_ore"] == 420
+    assert master["regionalRawCaps"]["domain_2"]["item_gas_xiranite"] == 100
+    assert wuling.outpost_offers["心臓修復施設"]["焔銅部品"] == 70
+    assert wuling.outpost_offers["天王原建設支援拠点"]["重息壌"] == 27
+    assert wuling.outpost_offers["天王原建設支援拠点"]["錦草ソーダⅡ"] == 22
 
 
 if __name__ == "__main__":
