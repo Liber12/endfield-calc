@@ -34,7 +34,7 @@ def normalize_name(n):
 
 # --- TSデータ抽出 ---
 
-def parse_ts_to_list(file_path):
+def parse_ts_to_list(file_path, export_name=None):
     """endfield-calc の .ts データファイルから配列リテラルを抽出して dict のリストにする。
 
     Returns:
@@ -46,7 +46,12 @@ def parse_ts_to_list(file_path):
 
     content = re.sub(r'//.*', '', content)
 
-    array_match = re.search(r'=\s*\[(.*)\]', content, re.DOTALL)
+    # Stop at the exported array's closing `];`, not the last bracket in a file
+    # containing subsequent TS exports (e.g. region-subsystems.ts).
+    if export_name:
+        array_match = re.search(r'export\s+const\s+' + re.escape(export_name) + r'[^=]*=\s*\[(.*?)\];', content, re.DOTALL)
+    else:
+        array_match = re.search(r'=\s*\[(.*?)\];', content, re.DOTALL)
     if not array_match:
         return [], [f"{file_path}: 配列リテラル '= [ ... ]' が見つかりません"]
 
@@ -81,9 +86,9 @@ def parse_ts_to_list(file_path):
     return objects, errors
 
 
-def parse_ts_or_exit(file_path):
+def parse_ts_or_exit(file_path, export_name=None):
     """parse_ts_to_list のラッパー。1件でも変換に失敗したら件数と先頭断片を表示して終了する。"""
-    objects, errors = parse_ts_to_list(file_path)
+    objects, errors = parse_ts_to_list(file_path, export_name=export_name)
     if errors:
         print(f"[FATAL] TSパース失敗: {file_path} で {len(errors)} 件のオブジェクトを変換できませんでした。")
         print(f"  先頭のエラー: {errors[0]}")
