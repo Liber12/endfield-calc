@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-10",
+  "description": "Localization audit for imported outpost/1.4-1.5 industrial terms. Japanese game UI and official JP notes take precedence over literal translation of English wiki names.",
+  "outposts": [
+    {
+      "region": "四号谷地",
+      "english": "Refugee Camp",
+      "japanese": "仮設居住地",
+      "area": "谷地通路"
+    },
+    {
+      "region": "四号谷地",
+      "english": "Infra-Station",
+      "japanese": "建設基地",
+      "area": "源石研究パーク"
+    },
+    {
+      "region": "四号谷地",
+      "english": "Reconstruction HQ",
+      "japanese": "再建管理本部",
+      "area": "エネルギー高地"
+    },
+    {
+      "region": "武陵",
+      "english": "Sky King Flats Construction Site",
+      "japanese": "天王原建設支援拠点",
+      "area": "景玉谷"
+    },
+    {
+      "region": "武陵",
+      "english": "Cardiac Remediation Station",
+      "japanese": "心臓修復施設",
+      "area": "首礎"
+    },
+    {
+      "region": "武陵",
+      "english": "Xiranflow Cloudseeder Station",
+      "japanese": "満天台建設基地",
+      "area": "応龍関",
+      "introducedIn": "1.4",
+      "maxLevelRaisedIn": "1.5"
+    }
+  ],
+  "gameplayTerms": [
+    {
+      "english": "Valley Stock Bill",
+      "japanese": "谷地取引券",
+      "id": "item_domain_tundra_coupon"
+    },
+    {
+      "english": "Wuling Stock Bill",
+      "japanese": "武陵取引券",
+      "id": "item_domain_jinlong_coupon"
+    },
+    {
+      "english": "Gas Dispersing Unit",
+      "japanese": "ガス散布機",
+      "id": "vaporizer_1"
+    },
+    {
+      "english": "Metastorage Transfer",
+      "japanese": "地域間転送"
+    },
+    {
+      "english": "Lossless transfer",
+      "japanese": "無在庫転送"
+    },
+    {
+      "english": "Total Transfer Value",
+      "japanese": "総転送価値",
+      "unitName": "転送価値"
+    },
+    {
+      "english": "Outpost Prosperity",
+      "japanese": "拠点発展値"
+    },
+    {
+      "english": "Operator Liaison",
+      "japanese": "派遣オペレーター"
+    },
+    {
+      "english": "Area Defense",
+      "japanese": "拠点防衛"
+    }
+  ],
+  "references": [
+    {
+      "type": "official",
+      "url": "https://endfield.gryphline.com/ja-jp/news/5200",
+      "note": "Ver.1.4: 満天台建設基地 added in 応龍関"
+    },
+    {
+      "type": "jp-guide",
+      "url": "https://game8.jp/arknights-endfield/758820",
+      "note": "All six Japanese outpost names and map locations"
+    },
+    {
+      "type": "jp-guide",
+      "url": "https://game8.jp/arknights-endfield/763316",
+      "note": "Outpost names and operator assignment wording"
+    },
+    {
+      "type": "jp-guide",
+      "url": "https://game8.jp/arknights-endfield/797924",
+      "note": "ガス散布機"
+    },
+    {
+      "type": "jp-guide",
+      "url": "https://altema.jp/akendfield/chiikikantensou",
+      "note": "総転送価値"
+    },
+    {
+      "type": "jp-wiki",
+      "url": "https://endfield.wiki.gg/wiki/Wuling_Stock_Bill",
+      "note": "武陵取引券 Japanese localized text"
+    },
+    {
+      "type": "jp-wiki",
+      "url": "https://endfield.wiki.gg/wiki/Valley_Stock_Bill",
+      "note": "谷地取引券 Japanese localized text"
+    },
+    {
+      "type": "jp-guide",
+      "url": "https://oyagy.com/endfield-wuling-industrial-guide-and-code/",
+      "note": "1.5 満天台 level 4 and actual industrial goods"
+    }
+  ]
+}
