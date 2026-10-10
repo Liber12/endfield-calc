@@ -139,6 +139,25 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
             iid = str(out['id']).strip()
             if iid in item_net: item_net[iid] += out['amount'] * recipe_rate[rid]
 
+    # Catalyst upkeep is proportional to recipe duty (T seconds per run).
+    for r in master["recipes"]:
+        drain = sustains.get(r["facilityId"])
+        if not drain:
+            continue
+        iid = drain["itemId"]
+        if iid not in item_net:
+            raise ValueError(f"Unknown catalyst item: {iid}")
+        item_net[iid] -= drain["ratePerMinute"] * (r["time"] / 60) * recipe_rate[r["id"]]
+
+    # Gas dispersing units must remain on, even for part-duty machines.
+    for env, info in envs.items():
+        iid = info["gasItemId"]
+        if iid not in item_net:
+            raise ValueError(f"Unknown vaporizer fuel: {iid}")
+        item_net[iid] -= info["ratePerMinute"] * vaporizer_n[str(env)]
+    for iid, rate in source_rate.items():
+        item_net[iid] += rate
+
     for iid, it in master['items'].items():
         iid_clean = str(iid).strip(); name = normalize_name(it['name'])
         supply = inputs.resource_limits.get(name, 0)
@@ -159,6 +178,11 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
 
     # 電力収支
     total_cons = pulp.lpSum([facility_n[r['id']] * master['facilities'].get(r['facilityId'], {}).get('power', 0) for r in master['recipes']])
+    total_cons += pulp.lpSum(
+        source_n[iid] * master["facilities"].get(info["facilityId"], {}).get("power", 0)
+        for iid, info in raw_sources.items()
+    )
+    total_cons += pulp.lpSum(vaporizer_n.values()) * master["facilities"].get("vaporizer_1", {}).get("power", 0)
     total_gen = params["base_power"] + pulp.lpSum([burn_vars[name] * inputs.gen_supply_per_unit[name] for name in gen_item_names])
     prob += total_gen >= total_cons
 
@@ -166,7 +190,7 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     total_profit = pulp.lpSum([sales_vars[iid] * inputs.item_prices.get(normalize_name(master['items'][iid]['name']), 0) for iid in master['items']])
     target_parts = cfg.get("target_parts", [])
     parts_total = pulp.lpSum([item_net[iid] for iid, it in master['items'].items() if normalize_name(it['name']) in target_parts])
-    total_facilities = pulp.lpSum(facility_n.values())
+    total_facilities = pulp.lpSum(facility_n.values()) + pulp.lpSum(source_n.values()) + pulp.lpSum(vaporizer_n.values())
 
     if sanity:
         prob += total_profit
@@ -180,6 +204,8 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
         "recipe_rate": recipe_rate,
         "facility_n": facility_n,
         "gen_n": gen_n,
+        "source_n": source_n,
+        "vaporizer_n": vaporizer_n,
         "burn": burn_vars,
         "sales": sales_vars,
         "transfer": transfer_vars,
@@ -216,6 +242,8 @@ def solve(prob, variables, cfg):
         facility_n={rid: val(v) for rid, v in variables["facility_n"].items()},
         burn={name: val(v) for name, v in variables["burn"].items()},
         generator_counts={name: val(v) for name, v in variables["gen_n"].items()},
+        source_counts={iid: val(v) for iid, v in variables["source_n"].items()},
+        vaporizer_counts={env: val(v) for env, v in variables["vaporizer_n"].items()},
         transfers={iid: val(v) for iid, v in variables["transfer"].items()},
         item_net={iid: val(v) for iid, v in variables["item_net"].items()},
         power_consumed=val(variables["total_cons"]),
@@ -223,9 +251,9 @@ def solve(prob, variables, cfg):
     )
 
 
-def optimize(region, mode="balance", sanity=False, cfg_override=None):
+def optimize(region, mode="balance", sanity=False, cfg_override=None, snapshot=False):
     """データ読込からSolution取得までの便宜関数。地域が未定義なら None を返す。"""
-    master = data_access.load_master()
+    master = data_access.load_master(snapshot=snapshot)
     cfg = cfg_override if cfg_override is not None else data_access.load_config()
     inputs = data_access.load_region_inputs(region, master, sanity=sanity)
     if inputs is None:
