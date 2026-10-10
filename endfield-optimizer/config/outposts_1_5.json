@@ -1,0 +1,112 @@
+{
+  "gameVersion": "1.5",
+  "asOf": "2026-10-10",
+  "units": "stock_bills_per_hour",
+  "description": "Sustainable baseline exchange budgets (per hour, no liaison/auto-defense bonus). Outpost wallet cap is a separate burst/storage constraint and is NOT an hourly income rate. Values confirmed from Endfield Talos Wiki outpost level tables. Level=0 disables a locked outpost; defaults are fully unlocked level 4 (scenario assumption).",
+  "outposts": [
+    {
+      "region": "四号谷地",
+      "name": "仮設居住地",
+      "levels": [
+        2940,
+        4200,
+        13320,
+        20820
+      ],
+      "walletCaps": [
+        18000,
+        125000,
+        420000,
+        2200000
+      ],
+      "source": "https://endfield.wiki.gg/wiki/Refugee_Camp"
+    },
+    {
+      "region": "四号谷地",
+      "name": "建設基地",
+      "levels": [
+        4260,
+        11400,
+        22560,
+        27840
+      ],
+      "walletCaps": [
+        120000,
+        680000,
+        2100000,
+        3000000
+      ],
+      "source": "https://endfield.wiki.gg/wiki/Infra-Station"
+    },
+    {
+      "region": "四号谷地",
+      "name": "再建管理本部",
+      "levels": [
+        7370,
+        17340,
+        26160,
+        42840
+      ],
+      "walletCaps": [
+        326000,
+        1000000,
+        2400000,
+        3800000
+      ],
+      "source": "https://endfield.wiki.gg/wiki/Reconstruction_HQ"
+    },
+    {
+      "region": "武陵",
+      "name": "天王原建設支援拠点",
+      "levels": [
+        4680,
+        12900,
+        26880,
+        30000
+      ],
+      "walletCaps": [
+        135000,
+        1250000,
+        2600000,
+        3200000
+      ],
+      "source": "https://endfield.wiki.gg/wiki/Sky_King_Flats_Construction_Site"
+    },
+    {
+      "region": "武陵",
+      "name": "心臓修復施設",
+      "levels": [
+        3300,
+        8400,
+        19500,
+        22800
+      ],
+      "walletCaps": [
+        280000,
+        720000,
+        1600000,
+        2000000
+      ],
+      "source": "https://endfield.wiki.gg/wiki/Cardiac_Remediation_Station"
+    },
+    {
+      "region": "武陵",
+      "name": "壌晶雨発生施設",
+      "levels": [
+        2700,
+        6300,
+        14400,
+        24000
+      ],
+      "walletCaps": [
+        240000,
+        600000,
+        1400000,
+        2500000
+      ],
+      "source": "https://endfield.wiki.gg/wiki/Xiranflow_Cloudseeder_Station",
+      "notes": "Version 1.5 extends maximum level to 4; trade offers remain unlocked at level 1"
+    }
+  ],
+  "versionEvidence": "https://endfield.hypergryph.com/news/2653"
+}
