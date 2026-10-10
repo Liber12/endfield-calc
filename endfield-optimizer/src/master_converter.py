@@ -196,6 +196,37 @@ def read_current_rules(base_root):
 
     if not sources or "item_liquid_water" not in sources:
         raise ValueError("Current source-facility extraction failed")
+    with open(os.path.join(data_path, "aic-plans.ts"), encoding="utf-8") as f:
+        aic = f.read()
+    facility_caps = {}
+    for fid, domain, base in re.findall(
+        r'facilityId:\s*"(\w+)"\s+as FacilityId,\s*domainId:\s*DomainId\.(DOMAIN_\d+),\s*base:\s*(\d+)',
+        aic,
+    ):
+        facility_caps.setdefault(domain.lower(), {})[fid] = int(base)
+    # Assume fully researched AIC by default, matching the fully unlocked
+    # calculation scenario. Player progression requires a separate input.
+    for fid, domain, delta in re.findall(
+        r'kind:\s*"capRaise",\s*facilityId:\s*"(\w+)"\s+as FacilityId,\s*domainId:\s*DomainId\.(DOMAIN_\d+),\s*delta:\s*(\d+)',
+        aic,
+    ):
+        region_caps = facility_caps.setdefault(domain.lower(), {})
+        region_caps[fid] = region_caps.get(fid, 0) + int(delta)
+    with open(os.path.join(data_path, "region-subsystems.ts"), encoding="utf-8") as f:
+        structures = f.read()
+    # The current map has one region-structure domain. Future multi-domain
+    # maps need an explicit domain parser rather than guessing placement.
+    structure_caps = {}
+    for fac in re.findall(
+        r'solver:\s*\{\s*role:\s*"instance",\s*facilityId:\s*FacilityId\.(\w+)',
+        structures,
+    ):
+        key = fac.lower()
+        structure_caps[key] = structure_caps.get(key, 0) + 1
+    if structure_caps:
+        for fac, amount in structure_caps.items():
+            facility_caps.setdefault("domain_2", {})[fac] = amount
+
     if not drains or len(envs) != 4 or len(domain_caps) < 2 or len(availability) < 2:
         raise ValueError("Current game rule extraction failed (sustain/caps/raw availability)")
     return {
@@ -204,6 +235,7 @@ def read_current_rules(base_root):
         "regionalRawCaps": domain_caps,
         "regionalRawAvailability": availability,
         "rawSourceFacilities": sources,
+        "facilityMaxCapsByDomain": facility_caps,
     }
 
 def write_csvs(master, output_path):
