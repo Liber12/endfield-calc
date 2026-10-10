@@ -91,11 +91,26 @@ def test_japanese_game_names():
         if normalize_name(offer["アイテム名"]) not in japanese_items
     }
     assert not missing_items, missing_items
+    repo_root = os.path.dirname(root)
+    with open(os.path.join(repo_root, "public", "locales", "ja", "item.json"), encoding="utf-8") as stream:
+        jp_items = json.load(stream)
+    with open(os.path.join(repo_root, "public", "locales", "ja", "facility.json"), encoding="utf-8") as stream:
+        jp_facilities = json.load(stream)
+    for term in localized["gameplayTerms"]:
+        item_id = term.get("id")
+        if not item_id:
+            continue
+        dictionary = jp_items if item_id.startswith("item_") else jp_facilities
+        assert dictionary[item_id] == term["japanese"], (
+            term["english"], item_id, dictionary[item_id], term["japanese"]
+        )
     mappings = {row["english"]: row["japanese"] for row in localized["gameplayTerms"]}
     assert mappings["Wuling Stock Bill"] == "武陵取引券"
     assert mappings["Valley Stock Bill"] == "谷地取引券"
     assert mappings["Gas Dispersing Unit"] == "ガス散布機"
     assert mappings["Total Transfer Value"] == "総転送価値"
+    assert mappings["Cuprium Ore"] == "赤銅鉱物"
+    assert mappings["Xiragen"] == "息壌ガス"
 
 
 if __name__ == "__main__":
