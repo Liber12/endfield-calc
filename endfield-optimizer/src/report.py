@@ -41,7 +41,8 @@ def render_dashboard(sol, master, cfg, inputs, mode):
 def _render_summary(sol, master, inputs):
     print("\n[1] 収益・納品サマリー")
     if sol.outpost_income:
-        print(f"  持続可能な基礎収入: {sol.profit:,.2f} 券/分 (補充量による上限、ボーナスなし)")
+        currency = "武陵取引券" if inputs.region == "武陵" else "谷地取引券"
+        print(f"  持続可能な基礎収入: {sol.profit:,.2f} {currency}/分 (補充量による上限、ボーナスなし)")
         for post, budget in inputs.outpost_budget_per_min.items():
             received = sol.outpost_income.get(post, 0)
             print(f"    {post}: {received:,.2f} / {budget:,.2f} 券/分 (拠点Lv {inputs.outpost_levels[post]})")
@@ -100,7 +101,7 @@ def _render_infrastructure(sol, master, cfg, inputs):
     if sources:
         print(f"  原料ポンプ: {', '.join(sources)}")
     if vaporizers:
-        print(f"  ガス散布装置: {', '.join(vaporizers)}")
+        print(f"  ガス散布機: {', '.join(vaporizers)}")
 
     transfer_rules = cfg.get("transfer_rules", {})
     if transfer_rules.get("enabled", False):
@@ -114,7 +115,7 @@ def _render_infrastructure(sol, master, cfg, inputs):
                 total_pts_used += val * transfer_points[iid]
         if transfer_list:
             budget = (inputs.transfer_budget_per_min * 60) if master.get("sourceVersion") else transfer_rules.get("limit_per_hour", 1500)
-            print(f"  無在庫転送: {', '.join(transfer_list)} (計 {total_pts_used * 60:,.1f} / {budget:,.0f} pt/h)")
+            print(f"  無在庫転送（総転送価値）: {', '.join(transfer_list)} (計 {total_pts_used * 60:,.1f} / {budget:,.0f} pt/h)")
 
     disposal_report = []
     for iid, it in master['items'].items():
