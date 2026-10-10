@@ -1,0 +1,52 @@
+"""Current outpost economics: allocation, stage and transfer direction regression."""
+import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.path.insert(0, os.path.dirname(__file__))
+
+import data_access
+import model
+from current_model_test import example_master, make_recipe
+
+
+def test_outpost_income():
+    master = example_master([make_recipe("r", "component_mc_1", "item_ore")])
+    inputs = data_access.RegionInputs(
+        region="武陵",
+        item_prices={"product": 10},
+        resource_limits={"ore": 2},
+        outpost_offers={"high": {"product": 10}, "low": {"product": 2}},
+        outpost_budget_per_min={"high": 10, "low": 2},
+    )
+    cfg = {"solver": {"base_power": 0}, "target_parts": [],
+           "transfer_rules": {"enabled": False}, "min_production_by_region": {}}
+    prob, variables = model.build_model(master, cfg, inputs, mode="profit")
+    sol = model.solve(prob, variables, cfg)
+    assert sol.is_usable, sol.status
+    assert abs(sol.profit - 12) < 0.005, sol.profit
+    assert abs(sol.outpost_income["high"] - 10) < 0.005
+    assert abs(sol.outpost_income["low"] - 2) < 0.005
+    assert abs(sol.sales["item_product"] - 2) < 0.005
+
+
+def test_real_outpost_catalog():
+    master = data_access.load_master()
+    cfg = data_access.load_config()
+    wuling = data_access.load_region_inputs("武陵", master, cfg=cfg)
+    valley = data_access.load_region_inputs("四号谷地", master, cfg=cfg)
+    assert len(wuling.outpost_offers) == len(valley.outpost_offers) == 3
+    assert abs(sum(wuling.outpost_budget_per_min.values()) - 1280) < 0.01
+    assert abs(sum(valley.outpost_budget_per_min.values()) - 1525) < 0.01
+    assert "焔銅部品" in wuling.outpost_offers["壌晶雨発生施設"]
+    assert wuling.outpost_offers["壌晶雨発生施設"]["焔銅部品"] == 70
+    assert not valley.transfer_points, "Valley cannot import its own exports"
+    assert wuling.transfer_points == master["metastorageExports"]["domain_1"]
+    assert "item_copper_ore" not in wuling.transfer_points
+    assert "item_liquid_water" not in wuling.transfer_points
+
+
+if __name__ == "__main__":
+    test_outpost_income()
+    test_real_outpost_catalog()
+    print("Current 1.5 outpost and Metastorage economic constraints passed.")
