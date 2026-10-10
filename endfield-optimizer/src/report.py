@@ -31,7 +31,7 @@ def render_dashboard(sol, master, cfg, inputs, mode):
 
     _render_summary(sol, master, inputs)
     _render_bottlenecks(sol, master, inputs)
-    _render_infrastructure(sol, master, cfg)
+    _render_infrastructure(sol, master, cfg, inputs)
     _render_production_lines(sol, master, cfg)
     _render_supply_chain(sol, master)
 
@@ -90,7 +90,7 @@ def _render_bottlenecks(sol, master, inputs):
             print(f"  {pad_right(name + '枠', COL_NAME)} {pad_left(f'{rate:.1f}%', COL_VAL)}  {pad_right('[MAX] 限界' if rate >= 99.9 else '[OK] 余裕', 12)}")
 
 
-def _render_infrastructure(sol, master, cfg):
+def _render_infrastructure(sol, master, cfg, inputs):
     print(f"\n[3] インフラ状況")
     print(f"  電力収支: {sol.power_consumed:,.1f}W / {sol.power_generated:,.1f}W")
     fuel_list = [f"{n} (消費: {sol.burn[n]:.1f}/min, 発電機: {sol.generator_counts[n]:.1f}台)" for n in sol.burn if sol.burn[n] > 0.001]
@@ -104,7 +104,7 @@ def _render_infrastructure(sol, master, cfg):
 
     transfer_rules = cfg.get("transfer_rules", {})
     if transfer_rules.get("enabled", False):
-        transfer_points = transfer_rules.get("points", {})
+        transfer_points = inputs.transfer_points if master.get("sourceVersion") else transfer_rules.get("points", {})
         transfer_list = []
         total_pts_used = 0.0
         for iid, val in sol.transfers.items():
@@ -113,7 +113,8 @@ def _render_infrastructure(sol, master, cfg):
                 transfer_list.append(f"{item_name} ({val:.1f}/min)")
                 total_pts_used += val * transfer_points[iid]
         if transfer_list:
-            print(f"  無在庫転送: {', '.join(transfer_list)} (計 {total_pts_used * 60:,.1f} / {transfer_rules.get('limit_per_hour', 1500):,.0f} pt/h)")
+            budget = (inputs.transfer_budget_per_min * 60) if master.get("sourceVersion") else transfer_rules.get("limit_per_hour", 1500)
+            print(f"  無在庫転送: {', '.join(transfer_list)} (計 {total_pts_used * 60:,.1f} / {budget:,.0f} pt/h)")
 
     disposal_report = []
     for iid, it in master['items'].items():
