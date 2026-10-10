@@ -29,16 +29,16 @@
     ]
   },
   "min_production": {
-    "息壌装備部品": 0.0,
-    "赤銅部品": 120.0,
-    "緋銅部品": 0.0,
-    "紫晶部品": 0.0,
-    "鉄製部品": 0.0,
-    "鋼製部品": 0.0
+    "息壌装備部品": 0,
+    "赤銅部品": 120,
+    "緋銅部品": 0,
+    "紫晶部品": 0,
+    "鉄製部品": 0,
+    "鋼製部品": 0
   },
   "transfer_rules": {
     "enabled": true,
-    "limit_per_hour": 1500.0,
+    "limit_per_hour": 1500,
     "points": {
       "item_originium_ore": 1,
       "item_quartz_sand": 1,
@@ -107,6 +107,16 @@
         "item_xiranite_powder"
       ],
       "ban_liquids": true
+    }
+  },
+  "min_production_by_region": {
+    "武陵": {
+      "息壌装備部品": 0,
+      "赤銅部品": 120,
+      "緋銅部品": 0,
+      "紫晶部品": 0,
+      "鉄製部品": 0,
+      "鋼製部品": 0
     }
   }
 }
