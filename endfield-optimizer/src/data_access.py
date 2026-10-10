@@ -39,9 +39,12 @@ class RegionInputs:
     gen_supply_per_unit: dict = field(default_factory=dict)  # normalize済み燃料名 -> 発電量(W·min/個)
     gen_seconds: dict = field(default_factory=dict)        # normalize済み燃料名 -> 燃焼秒数
     facility_limits: dict = field(default_factory=dict)    # facilityId -> 設置上限台数
+    outpost_offers: dict = field(default_factory=dict)       # outpost -> normalized Japanese item name -> price
+    outpost_budget_per_min: dict = field(default_factory=dict)  # outpost -> sustainable baseline bills/min
+    outpost_levels: dict = field(default_factory=dict)       # selected prosperity stage per outpost
 
 
-def load_region_inputs(region, master, sanity=False):
+def load_region_inputs(region, master, sanity=False, cfg=None):
     """config/ 以下のCSVから地域の入力データを組み立てる。地域が resources.csv に無ければ None。"""
     outpost_prices_df = pd.read_csv(os.path.join(CONFIG_DIR, 'outpost_prices.csv'))
     all_resources_df = pd.read_csv(os.path.join(CONFIG_DIR, 'resources.csv'))
@@ -56,6 +59,48 @@ def load_region_inputs(region, master, sanity=False):
         name = normalize_name(row['アイテム名'])
         if name not in item_prices or row['単価'] > item_prices[name]:
             item_prices[name] = row['単価']
+
+    outpost_offers = {}
+    outpost_budget_per_min = {}
+    selected_levels = {}
+    if master.get("sourceVersion"):
+        with open(os.path.join(CONFIG_DIR, "outposts_1_5.json"), encoding="utf-8") as handle:
+            outpost_catalog = json.load(handle)
+        if outpost_catalog["gameVersion"] != "1.5":
+            raise ValueError("Expected a verified 1.5 outpost economy catalog")
+        cfg = cfg or load_config()
+        configured_levels = cfg.get("outpost_levels", {})
+        region_posts = [entry for entry in outpost_catalog["outposts"] if entry["region"] == region]
+        source_names = set()
+        for entry in region_posts:
+            name = entry["name"]
+            level = int(configured_levels.get(name, len(entry["levels"])))
+            if level < 0 or level > len(entry["levels"]):
+                raise ValueError(f"Invalid outpost stage {name}: {level}")
+            selected_levels[name] = level
+            if level == 0:
+                continue
+            source_names.add(name)
+            outpost_budget_per_min[name] = entry["levels"][level - 1] / 60.0
+            offers = {}
+            for _, row in outpost_prices_df[
+                (outpost_prices_df["地域"] == region)
+                & (outpost_prices_df["拠点名"] == name)
+                & (outpost_prices_df["発展段階"] <= level)
+            ].iterrows():
+                item_name = normalize_name(row["アイテム名"])
+                offers[item_name] = max(float(row["単価"]), offers.get(item_name, 0))
+            if not offers:
+                raise ValueError(f"No tradable items for active outpost {name} at stage {level}")
+            outpost_offers[name] = offers
+        unexpected = set(outpost_prices_df[outpost_prices_df["地域"] == region]["拠点名"]) - {post["name"] for post in region_posts}
+        if unexpected:
+            raise ValueError(f"Outpost price rows missing verified budget data: {sorted(unexpected)}")
+        known_items = {normalize_name(it["name"]) for it in master["items"].values()}
+        for name, offers in outpost_offers.items():
+            unknown = set(offers) - known_items
+            if unknown:
+                raise ValueError(f"Outpost {name} has unrecognized tradable items: {sorted(unknown)}")
 
     if master.get("sourceVersion"):
         # Default mining caps and availability come from the same current
@@ -117,4 +162,7 @@ def load_region_inputs(region, master, sanity=False):
         gen_supply_per_unit=gen_supply_per_unit,
         gen_seconds=gen_seconds,
         facility_limits=facility_limits,
+        outpost_offers=outpost_offers,
+        outpost_budget_per_min=outpost_budget_per_min,
+        outpost_levels=selected_levels,
     )
