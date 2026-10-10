@@ -17,8 +17,13 @@ def load_sources(base_root):
     with open(os.path.join(ja_path, 'item.json'), 'r', encoding='utf-8') as f: item_names = json.load(f)
     with open(os.path.join(ja_path, 'facility.json'), 'r', encoding='utf-8') as f: facility_names = json.load(f)
 
-    facilities = parse_ts_or_exit(os.path.join(data_path, 'facilities.ts'))
-    recipes = parse_ts_or_exit(os.path.join(data_path, 'recipes.ts'))
+    facilities = parse_ts_or_exit(os.path.join(data_path, 'facilities.ts'), 'facilities')
+    recipes = parse_ts_or_exit(os.path.join(data_path, 'recipes.ts'), 'recipes')
+    # The web calculator also registers map-placed regional facilities and
+    # recipes, which are not part of the generated machine roster.
+    region_file = os.path.join(data_path, 'region-subsystems.ts')
+    facilities += parse_ts_or_exit(region_file, 'regionFacilities')
+    recipes += parse_ts_or_exit(region_file, 'regionRecipes')
     items = parse_ts_or_exit(os.path.join(data_path, 'items.ts'))
 
     with open(os.path.join(data_path, 'index.ts'), 'r', encoding='utf-8') as f: index_content = f.read()
@@ -41,7 +46,9 @@ def build_master(project_root, source_root=None):
     with open(os.path.join(project_root, 'config', 'virtual_entities.json'), 'r', encoding='utf-8') as f:
         virtual = json.load(f)
 
-    master = {"items": {}, "recipes": [], "facilities": {}}
+    with open(os.path.join(base_root, "package.json"), encoding="utf-8") as f:
+        source_version = json.load(f)["version"]
+    master = {"items": {}, "recipes": [], "facilities": {}, "sourceVersion": source_version}
 
     for it in items:
         iid = it['id']
@@ -49,6 +56,7 @@ def build_master(project_root, source_root=None):
             "name": item_names.get(iid, iid),
             "tier": it.get('tier', 1),
             "isLiquid": 1 if it.get('isLiquid') else 0,
+            "isGas": 1 if it.get('isGas') else 0,
             "isRaw": 1 if iid in raw_materials else 0,
             "isDisposal": 1 if iid in disposal_items else 0
         }
@@ -58,9 +66,13 @@ def build_master(project_root, source_root=None):
         master["facilities"][fid] = {
             "name": facility_names.get(fid, fid),
             "power": fac.get('powerConsumption', 0),
-            "tier": fac.get('tier', 1)
+            "tier": fac.get('tier', 1),
+            "domains": fac.get("domains", []),
+            "cacheSlots": fac.get("cacheSlots"),
+            "footprint": fac.get("footprint"),
         }
-    master["facilities"].update(virtual.get("facilities", {}))
+    # Historical virtual water/acid pumps must NOT be inserted into the
+    # current roster: the web source already models both as raw sources.
 
     # --- Integrity Guard Phase ---
     warnings = []
@@ -100,7 +112,9 @@ def build_master(project_root, source_root=None):
         recipe_obj = {
             "id": r['id'], "name": "", "facilityId": fid,
             "facilityName": master["facilities"].get(fid, {}).get("name", fid),
-            "time": r.get('craftingTime', 0), "inputs": [], "outputs": []
+            "time": r.get('craftingTime', 0),
+            "gasEnv": r.get("gasEnv", 0),
+            "inputs": [], "outputs": []
         }
         for inp in r.get('inputs', []):
             recipe_obj["inputs"].append({"id": inp['itemId'], "name": master["items"].get(inp['itemId'], {}).get("name", inp['itemId']), "amount": inp['amount']})
@@ -114,9 +128,73 @@ def build_master(project_root, source_root=None):
             recipe_obj["name"] = r['id']
         master["recipes"].append(recipe_obj)
 
-    master["recipes"].extend(virtual.get("recipes", []))
+    # The original optimizer's virtual collector recipes are intentionally
+    # excluded. Mixing them with real source nodes allows free resources.
+    master.update(read_current_rules(base_root))
     return master
 
+
+
+
+def read_current_rules(base_root):
+    """Extract game-rule metadata absent from the old flattened recipe JSON.
+
+    Fail closed if a generated format changes. A successful conversion must
+    not silently forget gas upkeep or mining caps.
+    """
+    data_path = os.path.join(base_root, "src", "data")
+    with open(os.path.join(data_path, "gas-sustain.ts"), encoding="utf-8") as f:
+        sustain = f.read()
+    with open(os.path.join(data_path, "raw-caps.ts"), encoding="utf-8") as f:
+        caps = f.read()
+    with open(os.path.join(data_path, "index.ts"), encoding="utf-8") as f:
+        index = f.read()
+
+    drains = {}
+    for facility, item, rate in re.findall(
+        r'FacilityId\.(\w+),\s*\{\s*itemId:\s*ItemId\.(\w+),\s*ratePerMinute:\s*([\d.]+)',
+        sustain,
+    ):
+        drains[facility.lower()] = {"itemId": item.lower(), "ratePerMinute": float(rate)}
+
+    envs = {}
+    for env, item, rate in re.findall(
+        r'\[\s*(\d+),\s*\{\s*gasItemId:\s*ItemId\.(\w+),\s*ratePerMinute:\s*([\d.]+)',
+        sustain,
+    ):
+        envs[env] = {"gasItemId": item.lower(), "ratePerMinute": float(rate)}
+
+    domain_caps = {}
+    for domain, rows in re.findall(
+        r'DomainId\.(DOMAIN_\d+),\s*new Map<ItemId,\s*number>\(\[(.*?)\]\)',
+        caps, re.DOTALL,
+    ):
+        domain_caps[domain.lower()] = {
+            item.lower(): float(value) for item, value in re.findall(
+                r'\[\s*ItemId\.(\w+),\s*([\d.]+)\s*\]', rows,
+            )
+        }
+
+    availability = {}
+    raw_map = re.search(
+        r'const rawAvailabilityByDomain:.*?=\s*new Map<.*?>\(\[(.*?)\]\);',
+        index, re.DOTALL,
+    )
+    if raw_map:
+        for domain, body in re.findall(
+            r'DomainId\.(DOMAIN_\d+),\s*new Set<ItemId>\(\[(.*?)\]\)',
+            raw_map.group(1), re.DOTALL,
+        ):
+            availability[domain.lower()] = re.findall(r'"(item_\w+)"', body)
+
+    if not drains or len(envs) != 4 or len(domain_caps) < 2 or len(availability) < 2:
+        raise ValueError("Current game rule extraction failed (sustain/caps/raw availability)")
+    return {
+        "facilitySustainDrains": drains,
+        "vaporizerEnvs": envs,
+        "regionalRawCaps": domain_caps,
+        "regionalRawAvailability": availability,
+    }
 
 def write_csvs(master, output_path):
     """人間向けリファレンスとして master と同内容の3CSVを出力する。"""
