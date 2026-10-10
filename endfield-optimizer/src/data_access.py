@@ -94,6 +94,12 @@ def load_region_inputs(region, master, sanity=False):
         fac_limits_df = pd.read_csv(fac_limits_path)
         facility_limits = {row['ID']: row['上限'] for _, row in fac_limits_df.iterrows()}
 
+    if master.get("sourceVersion"):
+        # Current fully-unlocked facility maxima supersede stale legacy CSV
+        # ids (item_port_...). Base caps + AIC capRaise + map instances.
+        domain = {"四号谷地": "domain_1", "武陵": "domain_2"}[region]
+        facility_limits = dict(master["facilityMaxCapsByDomain"].get(domain, {}))
+
     return RegionInputs(
         region=region,
         item_prices=item_prices,
