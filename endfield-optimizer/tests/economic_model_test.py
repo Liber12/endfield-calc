@@ -29,6 +29,13 @@ def test_outpost_income():
     assert abs(sol.outpost_income["high"] - 10) < 0.005
     assert abs(sol.outpost_income["low"] - 2) < 0.005
     assert abs(sol.sales["item_product"] - 2) < 0.005
+    # Minimum local output must remain after goods are sent to the outposts.
+    cfg["min_production_by_region"] = {"武陵": {"product": 1}}
+    reserved_problem, reserved_vars = model.build_model(master, cfg, inputs, mode="profit")
+    reserved = model.solve(reserved_problem, reserved_vars, cfg)
+    assert reserved.is_usable, reserved.status
+    assert abs(reserved.profit - 10) < 0.005, reserved.profit
+    assert reserved.sales["item_product"] <= 1.001
 
 
 def test_real_outpost_catalog():
