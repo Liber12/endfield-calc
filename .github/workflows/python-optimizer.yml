@@ -29,6 +29,8 @@ jobs:
       - name: Check current game-rule constraints
         run: python endfield-optimizer/tests/current_model_test.py
 
+      - name: Verify 1.5 outpost budget and transfer economics
+        run: python endfield-optimizer/tests/economic_model_test.py
       - name: Solve current Wuling and Valley scenarios
         run: python endfield-optimizer/tests/current_integration_test.py
       - name: Execute current CLI dashboard
