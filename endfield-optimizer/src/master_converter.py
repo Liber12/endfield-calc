@@ -237,6 +237,30 @@ def read_current_rules(base_root):
         fuels[iid.lower()] = {"powerGeneration": float(power), "seconds": float(seconds)}
     if len(fuels) < 5:
         raise ValueError("Power fuel conversion failed; refuse historical generators")
+    with open(os.path.join(data_path, "metastorage.ts"), encoding="utf-8") as f:
+        metastorage = f.read()
+    transfer_sources = {}
+    for domain, budget, cycle, routes in re.findall(
+        r'DomainId\.(DOMAIN_\d+),\s*\{\s*ttvCapPerCycle:\s*(\d+),\s*cycleSeconds:\s*(\d+),\s*unlockLosslessLevel:\s*\d+,\s*routeNum:\s*(\d+)',
+        metastorage,
+    ):
+        transfer_sources[domain.lower()] = {
+            "ttvCapPerCycle": float(budget),
+            "cycleSeconds": float(cycle),
+            "routeNum": int(routes),
+        }
+    transfer_exports = {}
+    for domain, rows in re.findall(
+        r'DomainId\.(DOMAIN_\d+),\s*new Map<ItemId,\s*number>\(\[(.*?)\]\)',
+        metastorage, re.DOTALL,
+    ):
+        transfer_exports[domain.lower()] = {
+            item.lower(): float(cost) for item, cost in re.findall(
+                r'\[\s*ItemId\.(\w+),\s*([\d.]+)\s*\]', rows,
+            )
+        }
+    if not transfer_sources or not transfer_exports:
+        raise ValueError("Metastorage current-source extraction failed")
     if not drains or len(envs) != 4 or len(domain_caps) < 2 or len(availability) < 2:
         raise ValueError("Current game rule extraction failed (sustain/caps/raw availability)")
     return {
@@ -247,6 +271,8 @@ def read_current_rules(base_root):
         "rawSourceFacilities": sources,
         "facilityMaxCapsByDomain": facility_caps,
         "powerFuels": fuels,
+        "metastorageSources": transfer_sources,
+        "metastorageExports": transfer_exports,
     }
 
 def write_csvs(master, output_path):
