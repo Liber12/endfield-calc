@@ -12,7 +12,15 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 CONFIG_DIR = os.path.join(PROJECT_ROOT, 'config')
 
 
-def load_master():
+def load_master(snapshot=False):
+    """Use the current checked-in calculator sources by default.
+
+    The v0.6.2 snapshot remains available only for historical regression
+    comparison; it must never silently stand in for today's game data.
+    """
+    if not snapshot:
+        from master_converter import build_master
+        return build_master(PROJECT_ROOT)
     with open(os.path.join(DATA_DIR, 'master_data.json'), 'r', encoding='utf-8-sig') as f:
         return json.load(f)
 
@@ -49,11 +57,33 @@ def load_region_inputs(region, master, sanity=False):
         if name not in item_prices or row['単価'] > item_prices[name]:
             item_prices[name] = row['単価']
 
-    if sanity:
-        # サニティチェック: 天然資源の供給を全て0にして「無から利益が湧かないか」を検証する
-        resource_limits = {normalize_name(it['name']): 0 for iid, it in master['items'].items() if it['isRaw']}
+    if master.get("sourceVersion"):
+        # Default mining caps and availability come from the same current
+        # source maps as the web calculator, not historical resources.csv.
+        domain = {"四号谷地": "domain_1", "武陵": "domain_2"}.get(region)
+        if domain is None:
+            raise ValueError(f"Current game domain mapping missing for {region}")
+        allowed = master["regionalRawAvailability"][domain]
+        caps = master["regionalRawCaps"][domain]
+        legacy = {normalize_name(k): v for k, v in zip(resources_df['資源名'], resources_df['産出量(/min)'])}
+        resource_limits = {}
+        for iid in allowed:
+            it = master["items"][iid]
+            name = normalize_name(it["name"])
+            if iid in caps:
+                resource_limits[name] = caps[iid]
+            elif it["isLiquid"]:
+                # Pumped liquids enter via explicit source-machine variables.
+                resource_limits[name] = 0
+            else:
+                # Non-node gatherable raws are scenario inputs, not free
+                # unlimited imports. Preserve user-configured manual supply.
+                resource_limits[name] = float(legacy.get(name, 0))
     else:
         resource_limits = {normalize_name(k): v for k, v in zip(resources_df['資源名'], resources_df['産出量(/min)'])}
+
+    if sanity:
+        resource_limits = {name: 0 for name in resource_limits}
 
     gen_supply_per_unit = {normalize_name(row['アイテム名']): (row['発電量'] * row['秒数']) / 60 for _, row in generator_df.iterrows()}
     gen_seconds = {normalize_name(row['アイテム名']): row['秒数'] for _, row in generator_df.iterrows()}
