@@ -172,7 +172,14 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
 
         if name not in inputs.item_prices: prob += sales_vars[iid_clean] == 0
 
-        min_prod = cfg.get("min_production", {}).get(name, 0.0)
+        # Historical snapshots preserve their original global floor.
+        # Current-game floors must be region-scoped: Wuling parts are
+        # impossible to require in Valley IV.
+        floors = (
+            cfg.get("min_production_by_region", {}).get(inputs.region, {})
+            if current else cfg.get("min_production", {})
+        )
+        min_prod = floors.get(name, 0.0)
         if min_prod > 0.001:
             prob += item_net[iid_clean] + supply + trans_val - burn >= min_prod
 
