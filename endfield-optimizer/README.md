@@ -73,10 +73,17 @@ endfield-optimizer/.venv/Scripts/python endfield-optimizer/src/master_converter.
 - 拠点の基礎収益、商品、段階：https://endfield.wiki.gg/wiki/Outpost
 - 新拠点「Xiranflow Cloudseeder Station」：https://endfield.wiki.gg/wiki/Xiranflow_Cloudseeder_Station
 
-**検証留保:** ゲームVer.1.5では地域建設レベル上限が上昇しています。
-リポジトリ内の `src/data/raw-caps.ts` はゲーム1.4系の採集上限を含むため、
-Ver.1.5での採集上限増加を反映できたとは確認していません。
-その差分は後日のゲーム内値・新しいゲームデータ抽出で再検証が必要です。
+**Ver.1.5 資源差分:** 自動生成されたWeb側の `src/data/raw-caps.ts` は
+ゲーム1.4系の値を含みます。Pythonソルバーでは
+`config/raw_caps_1_5.json` の検証済み差分を重ね、武陵の
+**赤銅鉱石420→510個/分 / 息壌ガス100→150個/分** を適用します。
+ゲームVer.1.5で武陵の地域建設レベル上限は27に拡張されました。
+上記数量は地域建設Lv24以上・新エリア解放と全採集地点の設置を前提とします。
+元データが更新されたときは期待旧値を検査し、未知の差分があれば例外にします。
+その他の未検証のVer.1.5鉱脈・設備データは現行Webの値を引き継ぎます。
+
+根拠： https://sayo-nyaa.tistory.com/1943 /
+https://endfieldhub.org/guides/endgame-blueprints-part-13
 
 PythonとWebの計算目的は異なります。現時点では収益値が両者と一致することを
 合格条件にせず、移植された各制約を単体テストと両地域の実データ求解で監視しています。
