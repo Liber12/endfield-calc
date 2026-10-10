@@ -42,6 +42,8 @@ class RegionInputs:
     outpost_offers: dict = field(default_factory=dict)       # outpost -> normalized Japanese item name -> price
     outpost_budget_per_min: dict = field(default_factory=dict)  # outpost -> sustainable baseline bills/min
     outpost_levels: dict = field(default_factory=dict)       # selected prosperity stage per outpost
+    transfer_points: dict = field(default_factory=dict)     # eligible source export item IDs -> real TTV cost
+    transfer_budget_per_min: float = 0.0
 
 
 def load_region_inputs(region, master, sanity=False, cfg=None):
@@ -101,6 +103,25 @@ def load_region_inputs(region, master, sanity=False, cfg=None):
             unknown = set(offers) - known_items
             if unknown:
                 raise ValueError(f"Outpost {name} has unrecognized tradable items: {sorted(unknown)}")
+
+    transfer_points = {}
+    transfer_budget_per_min = 0.0
+    if master.get("sourceVersion") and cfg.get("transfer_rules", {}).get("enabled", False):
+        destination = {"四号谷地": "domain_1", "武陵": "domain_2"}[region]
+        active_sources = [
+            domain for domain in master["metastorageSources"]
+            if domain != destination
+            and domain in master["metastorageExports"]
+        ]
+        if len(active_sources) > 1:
+            raise ValueError("Multiple Metastorage sources require explicit route selection")
+        if active_sources:
+            source = active_sources[0]
+            transfer_points = dict(master["metastorageExports"][source])
+            source_info = master["metastorageSources"][source]
+            transfer_budget_per_min = (
+                source_info["ttvCapPerCycle"] / (source_info["cycleSeconds"] / 60)
+            )
 
     if master.get("sourceVersion"):
         # Default mining caps and availability come from the same current
@@ -165,4 +186,6 @@ def load_region_inputs(region, master, sanity=False, cfg=None):
         outpost_offers=outpost_offers,
         outpost_budget_per_min=outpost_budget_per_min,
         outpost_levels=selected_levels,
+        transfer_points=transfer_points,
+        transfer_budget_per_min=transfer_budget_per_min,
     )
