@@ -63,7 +63,7 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     # Current data: pumped liquids require real throughput and electric power.
     raw_sources = {
         iid: info for iid, info in master.get("rawSourceFacilities", {}).items()
-        if iid in master["items"] and master["items"][iid].get("isLiquid")
+        if not sanity and iid in master["items"] and master["items"][iid].get("isLiquid")
         and normalize_name(master["items"][iid]["name"]) in inputs.resource_limits
         and info.get("ratePerMinute")
     }
