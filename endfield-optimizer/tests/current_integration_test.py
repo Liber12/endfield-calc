@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import data_access
 import model
+from utils import normalize_name
 
 
 def main():
@@ -53,7 +54,7 @@ def main():
                 if amount <= 0.0001:
                     continue
                 name = master["items"][iid]["name"]
-                price = inputs.outpost_offers[post][name]
+                price = inputs.outpost_offers[post][normalize_name(name)]
                 products.append({
                     "itemId": iid, "itemName": name, "unitsPerMinute": amount,
                     "price": price, "stockBillsPerMinute": amount * price,
