@@ -23,6 +23,8 @@ class Solution:
     facility_n: dict = field(default_factory=dict)     # recipe_id -> 整数変数としての施設台数
     burn: dict = field(default_factory=dict)           # 燃料名(normalize済) -> 消費量/min
     generator_counts: dict = field(default_factory=dict)  # 燃料名 -> 発電機台数
+    source_counts: dict = field(default_factory=dict)
+    vaporizer_counts: dict = field(default_factory=dict)
     transfers: dict = field(default_factory=dict)      # item_id -> 無在庫転送量/min
     item_net: dict = field(default_factory=dict)       # item_id -> レシピ収支の純増減/min
     power_consumed: float = 0.0
@@ -30,7 +32,7 @@ class Solution:
 
     @property
     def is_usable(self):
-        return self.status not in ("Infeasible", "Unbounded") and self.profit is not None
+        return self.status == "Optimal" and self.profit is not None
 
 
 def _solver_params(cfg):
@@ -43,6 +45,12 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     """MILPを構築して (prob, 変数・式の束) を返す。"""
     params = _solver_params(cfg)
     gen_item_names = list(inputs.gen_supply_per_unit.keys())
+    current = bool(master.get("sourceVersion"))
+    region_domain = {"四号谷地": "domain_1", "武陵": "domain_2"}.get(inputs.region)
+    if current and not region_domain:
+        raise ValueError(f"Unknown current game domain: {inputs.region}")
+    sustains = master.get("facilitySustainDrains", {})
+    envs = master.get("vaporizerEnvs", {})
 
     prob = pulp.LpProblem(f"Endfield_{inputs.region}_{mode}", pulp.LpMaximize)
     recipe_rate = {r['id']: pulp.LpVariable(f"Rate_{r['id']}", lowBound=0) for r in master['recipes']}
@@ -52,6 +60,24 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     gen_n = {name: pulp.LpVariable(f"GenN_{name}", lowBound=0, cat=gen_cat) for name in gen_item_names}
 
     burn_vars = pulp.LpVariable.dicts("Burn", gen_item_names, lowBound=0)
+    # Current data: pumped liquids require real throughput and electric power.
+    raw_sources = {
+        iid: info for iid, info in master.get("rawSourceFacilities", {}).items()
+        if iid in master["items"] and master["items"][iid].get("isLiquid")
+        and normalize_name(master["items"][iid]["name"]) in inputs.resource_limits
+        and info.get("ratePerMinute")
+    }
+    source_n = {iid: pulp.LpVariable(f"RawSource_{iid}", lowBound=0, cat="Integer") for iid in raw_sources}
+    source_rate = {iid: pulp.LpVariable(f"RawRate_{iid}", lowBound=0) for iid in raw_sources}
+    for iid, info in raw_sources.items():
+        prob += source_rate[iid] <= source_n[iid] * info["ratePerMinute"]
+
+    # Vaporizer runs continuously; aggregate coverage is conservative.
+    vaporizer_n = {str(e): pulp.LpVariable(f"Vaporizer_{e}", lowBound=0, cat="Integer") for e in envs}
+    per_vaporizer = max(1, int(cfg.get("machines_per_vaporizer", 4)))
+    for env, count in vaporizer_n.items():
+        participating = [facility_n[r["id"]] for r in master["recipes"] if str(r.get("gasEnv", 0)) == env]
+        prob += pulp.lpSum(participating) <= per_vaporizer * count
     sales_vars = pulp.LpVariable.dicts("Sales", master['items'].keys(), lowBound=0)
 
     # 無在庫転送: ポイント予算内で素材を外部から持ち込める
@@ -85,6 +111,9 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     for r in master['recipes']:
         rid = r['id']; is_banned = False
         if r['facilityId'] in banned_facilities: is_banned = True
+        facility_domains = master["facilities"].get(r["facilityId"], {}).get("domains", [])
+        if current and facility_domains and region_domain not in facility_domains:
+            is_banned = True
         for inp in r['inputs']:
             if inp['id'] in banned_item_ids: is_banned = True; break
         for out in r['outputs']:
