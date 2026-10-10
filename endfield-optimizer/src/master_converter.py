@@ -187,6 +187,15 @@ def read_current_rules(base_root):
         ):
             availability[domain.lower()] = re.findall(r'"(item_\w+)"', body)
 
+    sources = {}
+    for item, facility, rate in re.findall(
+        r'\[\s*"(item_\w+)",\s*\{\s*sourceFacility:\s*FacilityId\.(\w+)(?:,\s*ratePerMinute:\s*([\d.]+))?\s*\}\s*\]',
+        index,
+    ):
+        sources[item] = {"facilityId": facility.lower(), "ratePerMinute": float(rate) if rate else None}
+
+    if not sources or "item_liquid_water" not in sources:
+        raise ValueError("Current source-facility extraction failed")
     if not drains or len(envs) != 4 or len(domain_caps) < 2 or len(availability) < 2:
         raise ValueError("Current game rule extraction failed (sustain/caps/raw availability)")
     return {
@@ -194,6 +203,7 @@ def read_current_rules(base_root):
         "vaporizerEnvs": envs,
         "regionalRawCaps": domain_caps,
         "regionalRawAvailability": availability,
+        "rawSourceFacilities": sources,
     }
 
 def write_csvs(master, output_path):
