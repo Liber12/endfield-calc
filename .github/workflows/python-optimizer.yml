@@ -33,5 +33,13 @@ jobs:
         run: python endfield-optimizer/tests/economic_model_test.py
       - name: Solve current Wuling and Valley scenarios
         run: python endfield-optimizer/tests/current_integration_test.py
+      - name: Upload Ver.1.5 baseline production plans
+        uses: actions/upload-artifact@v4
+        with:
+          name: endfield-v1_5-production-preview
+          path: |
+            endfield-optimizer/reports/current_plan_1_5.json
+            endfield-optimizer/reports/current_plan_1_5.md
+          if-no-files-found: error
       - name: Execute current CLI dashboard
         run: python endfield-optimizer/src/solver.py 武陵 profit > /tmp/current-optimizer.txt && grep '基地運用ダッシュボード' /tmp/current-optimizer.txt
