@@ -39,18 +39,35 @@ def render_dashboard(sol, master, cfg, inputs, mode):
 
 
 def _render_summary(sol, master, inputs):
-    print(f"\n[1] 収益・納品サマリー")
-    print(f"  合計収益  : {sol.profit:,.2f} 券/分 (ステータス: {sol.status})\n")
-    print(f"  {pad_right('アイテム名', COL_NAME)} {pad_left('単価', COL_PRICE)} {pad_left('納品/分', COL_VAL)} {pad_left('収益/分', COL_PROFIT)} {pad_left('貢献率', COL_RATIO)}")
-    sales_results = []
-    for iid, val in sol.sales.items():
-        if val > 0.001:
-            name = master['items'][iid]['name']
+    print("\n[1] 収益・納品サマリー")
+    if sol.outpost_income:
+        print(f"  持続可能な基礎収入: {sol.profit:,.2f} 券/分 (補充量による上限、ボーナスなし)")
+        for post, budget in inputs.outpost_budget_per_min.items():
+            received = sol.outpost_income.get(post, 0)
+            print(f"    {post}: {received:,.2f} / {budget:,.2f} 券/分 (拠点Lv {inputs.outpost_levels[post]})")
+        rows = []
+        for post, offers in sol.outpost_sales.items():
+            for iid, amount in offers.items():
+                if amount <= 0.001:
+                    continue
+                item = master["items"][iid]
+                price = inputs.outpost_offers[post][normalize_name(item["name"])]
+                rows.append((post, item["name"], price, amount, amount * price))
+        print(f"  {pad_right('拠点・アイテム名', 36)} {pad_left('単価', COL_PRICE)} {pad_left('納品/分', COL_VAL)} {pad_left('券/分', COL_PROFIT)}")
+        for post, name, price, amount, income in sorted(rows, key=lambda x: x[-1], reverse=True):
+            label = f"{post} / {name}"
+            print(f"  {pad_right(label, 36)} {pad_left(price, COL_PRICE)} {pad_left(f'{amount:.2f}', COL_VAL)} {pad_left(f'{income:.2f}', COL_PROFIT)}")
+    else:
+        print(f"  合計収益  : {sol.profit:,.2f} 券/分 (旧モデル/単体テスト)")
+        rows = []
+        for iid, amount in sol.sales.items():
+            if amount <= 0.001:
+                continue
+            name = master["items"][iid]["name"]
             price = inputs.item_prices.get(normalize_name(name), 0)
-            sales_results.append({"name": name, "price": price, "val": val, "profit": val * price})
-    for row in sorted(sales_results, key=lambda x: x['profit'], reverse=True):
-        ratio = (row['profit'] / sol.profit * 100) if sol.profit > 0 else 0
-        print(f"  {pad_right(row['name'], COL_NAME)} {pad_left(row['price'], COL_PRICE)} {pad_left(f'{row['val']:.1f}', COL_VAL)} {pad_left(f'{row['profit']:.1f}', COL_PROFIT)} {pad_left(f'{ratio:.1f}%', COL_RATIO)}")
+            rows.append((name, price, amount, amount * price))
+        for name, price, amount, income in sorted(rows, key=lambda x: x[-1], reverse=True):
+            print(f"  {pad_right(name, COL_NAME)} {pad_left(price, COL_PRICE)} {pad_left(f'{amount:.1f}', COL_VAL)} {pad_left(f'{income:.1f}', COL_PROFIT)}")
 
 
 def _render_bottlenecks(sol, master, inputs):
