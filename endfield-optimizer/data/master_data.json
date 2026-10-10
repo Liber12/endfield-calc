@@ -1,0 +1,7801 @@
+﻿{
+  "items": {
+    "item_originium_ore": {
+      "name": "源石鉱物",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 1,
+      "isDisposal": 0
+    },
+    "item_quartz_sand": {
+      "name": "紫晶鉱物",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 1,
+      "isDisposal": 0
+    },
+    "item_iron_ore": {
+      "name": "青鉄鉱物",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 1,
+      "isDisposal": 0
+    },
+    "item_copper_ore": {
+      "name": "赤銅鉱物",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 1,
+      "isDisposal": 0
+    },
+    "item_liquid_water": {
+      "name": "水",
+      "tier": 1,
+      "isLiquid": 1,
+      "isRaw": 1,
+      "isDisposal": 0
+    },
+    "item_liquid_acid": {
+      "name": "沈殿酸",
+      "tier": 1,
+      "isLiquid": 1,
+      "isRaw": 1,
+      "isDisposal": 0
+    },
+    "item_plant_moss_1": {
+      "name": "蕎花",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_seed_1": {
+      "name": "蕎花の種",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_2": {
+      "name": "シトローム",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_seed_2": {
+      "name": "シトロームの種",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_3": {
+      "name": "サンドリーフ",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_seed_3": {
+      "name": "サンドリーフの種",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_bbflower_1": {
+      "name": "アケトン樹木",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_bbflower_seed_1": {
+      "name": "アケトンの種",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_grass_1": {
+      "name": "錦草",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_grass_seed_1": {
+      "name": "錦草の種",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_grass_2": {
+      "name": "芽針",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_grass_seed_2": {
+      "name": "芽針の種",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_1": {
+      "name": "灰麦",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_2": {
+      "name": "苦葉椒",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_3": {
+      "name": "玉葉人参",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_4": {
+      "name": "金石稲",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_seed_1": {
+      "name": "灰麦の種",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_seed_2": {
+      "name": "苦葉椒の種",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_seed_3": {
+      "name": "玉葉人参の種",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_sp_seed_4": {
+      "name": "金石稲の種",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_tundra_wood": {
+      "name": "木材",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_bottle": {
+      "name": "実験用息壌ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_cmpt": {
+      "name": "実験用息壌部品",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_carbon_mtl": {
+      "name": "炭塊",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_enr_bottle": {
+      "name": "実験用重息壌ボトル",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_crystal_shell": {
+      "name": "結晶外殻",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_xiranenr_grass_2": {
+      "name": "実験用重息壌ボトル",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_enr_cmpt": {
+      "name": "実験用重息壌部品",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_quartz_glass": {
+      "name": "紫晶繊維",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_enr_tool": {
+      "name": "実験用玉銅拡散装置",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_nugget": {
+      "name": "青鉄塊",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_hulu": {
+      "name": "息壌ひょうたん",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_nugget": {
+      "name": "赤銅塊",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_activity_xiranite_enr_hulu": {
+      "name": "息壌玉ひょうたん",
+      "tier": 5,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_originium_powder": {
+      "name": "源石粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_carbon_powder": {
+      "name": "炭塊粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_crystal_powder": {
+      "name": "結晶外殻粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_quartz_powder": {
+      "name": "紫晶粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_powder": {
+      "name": "青鉄粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_powder": {
+      "name": "赤銅粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_powder_3": {
+      "name": "サンドリーフ粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_bbflower_powder_1": {
+      "name": "アケトン粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_originium_enr_powder": {
+      "name": "高密度源石粉末",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_carbon_enr_powder": {
+      "name": "高密度炭塊粉末",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_crystal_enr_powder": {
+      "name": "高密度結晶粉末",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_quartz_enr_powder": {
+      "name": "高晶粉末",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_enr_powder": {
+      "name": "高密度青鉄粉末",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_enr_powder_1": {
+      "name": "蕎花細粉",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_enr_powder_2": {
+      "name": "シトローム細粉",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_carbon_enr": {
+      "name": "安定炭塊",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_crystal_enr": {
+      "name": "特製結晶",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_quartz_enr": {
+      "name": "高晶繊維",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_enr": {
+      "name": "鋼",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_muck_xiranite_1": {
+      "name": "ポンポン肥料",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_enr": {
+      "name": "緋銅塊",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_acid": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_copper": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_copper_enr": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_grass_1": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_grass_2": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_sewage": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_water": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_xiranite": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_xiranite_enr": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_xiranite_lowpoly": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glass_xiranite_poly": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_glass_bottle": {
+      "name": "紫晶製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_acid": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_copper": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_copper_enr": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_grass_1": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_grass_2": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_sewage": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_water": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_xiranite": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_xiranite_enr": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_xiranite_lowpoly": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_glassenr_xiranite_poly": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_glass_enr_bottle": {
+      "name": "高晶製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_acid": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_copper": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_copper_enr": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_grass_1": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_grass_2": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_sewage": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_water": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_xiranite": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_xiranite_enr": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_xiranite_lowpoly": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_iron_xiranite_poly": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_bottle": {
+      "name": "青鉄製ボトル",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_acid": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_copper": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_copper_enr": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_grass_1": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_grass_2": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_sewage": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_water": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_xiranite": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_xiranite_enr": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_xiranite_lowpoly": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_ironenr_xiranite_poly": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_enr_bottle": {
+      "name": "鋼製ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_bottle": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_acid": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_copper": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_copper_enr": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_grass_1": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_grass_2": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_sewage": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_water": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_xiranite": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_xiranite_enr": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_xiranite_lowpoly": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copper_xiranite_poly": {
+      "name": "赤銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_enr_bottle": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_acid": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_copper": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_copper_enr": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_grass_1": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_grass_2": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_sewage": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_water": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_xiranite": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_xiranite_enr": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_xiranite_lowpoly": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_fbottle_copperenr_xiranite_poly": {
+      "name": "緋銅ボトル",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_xiranite_powder": {
+      "name": "息壌",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_xiranite_enr_powder": {
+      "name": "重息壌",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_xiranite_poly": {
+      "name": "壌晶",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_proc_battery_1": {
+      "name": "小容量谷地バッテリー",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_proc_battery_2": {
+      "name": "中容量谷地バッテリー",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_proc_battery_3": {
+      "name": "大容量谷地バッテリー",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_proc_battery_4": {
+      "name": "小容量武陵バッテリー",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_proc_battery_5": {
+      "name": "中容量武陵バッテリー",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_glass_cmpt": {
+      "name": "紫晶部品",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_glass_enr_cmpt": {
+      "name": "高晶部品",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_cmpt": {
+      "name": "鉄製部品",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_iron_enr_cmpt": {
+      "name": "鋼製部品",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_cmpt": {
+      "name": "赤銅部品",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_copper_enr_cmpt": {
+      "name": "緋銅部品",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_equip_script_1": {
+      "name": "紫晶装備部品",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_equip_script_2": {
+      "name": "青鉄装備部品",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_equip_script_3": {
+      "name": "高晶装備部品",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_equip_script_4": {
+      "name": "息壌装備部品",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_equip_script_4_1": {
+      "name": "赤銅装備部品",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_equip_script_4_2": {
+      "name": "緋銅装備部品",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_liquid_sewage": {
+      "name": "汚水",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 1
+    },
+    "item_liquid_plant_grass_1": {
+      "name": "錦草エキス",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_liquid_plant_grass_2": {
+      "name": "芽針エキス",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_liquid_xiranite": {
+      "name": "液化息壌",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_liquid_xiranite_enr": {
+      "name": "液化重息壌",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_liquid_xiranite_poly": {
+      "name": "壌晶廃液",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 1
+    },
+    "item_liquid_xiranite_lowpoly": {
+      "name": "不活性壌晶廃液",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 1
+    },
+    "item_liquid_copper": {
+      "name": "赤銅溶液",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_liquid_copper_enr": {
+      "name": "緋銅溶液",
+      "tier": 3,
+      "isLiquid": 1,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_food_1": {
+      "name": "シトロームの缶詰Ⅰ",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_food_2": {
+      "name": "シトロームの缶詰Ⅱ",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_food_3": {
+      "name": "シトロームの缶詰Ⅲ",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_food_4": {
+      "name": "錦草ソーダⅠ",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_food_5": {
+      "name": "錦草ソーダⅡ",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_rec_hp_1": {
+      "name": "蕎花カプセルⅠ",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_rec_hp_2": {
+      "name": "蕎花カプセルⅡ",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_rec_hp_3": {
+      "name": "蕎花カプセルⅢ",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_rec_hp_4": {
+      "name": "芽針注射剤Ⅰ",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_bottled_rec_hp_5": {
+      "name": "芽針注射剤Ⅱ",
+      "tier": 4,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_powder_1": {
+      "name": "蕎花粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_moss_powder_2": {
+      "name": "シトローム粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_grass_powder_1": {
+      "name": "錦草粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_plant_grass_powder_2": {
+      "name": "芽針粉末",
+      "tier": 2,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_proc_bomb_1": {
+      "name": "工業爆弾",
+      "tier": 3,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    },
+    "item_muck_feces_1": {
+      "name": "駄獣のフン",
+      "tier": 1,
+      "isLiquid": 0,
+      "isRaw": 0,
+      "isDisposal": 0
+    }
+  },
+  "recipes": [
+    {
+      "id": "component_activity_xiranite_cmpt_1",
+      "name": "実験用息壌部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_cmpt",
+          "name": "実験用息壌部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_activity_xiranite_enr_cmpt_1",
+      "name": "実験用重息壌部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 20,
+      "inputs": [
+        {
+          "id": "item_xiranite_enr_powder",
+          "name": "重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_enr_cmpt",
+          "name": "実験用重息壌部品",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "component_copper_cmpt_1",
+      "name": "赤銅部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_nugget",
+          "name": "赤銅塊",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_cmpt",
+          "name": "赤銅部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_copper_enr_cmpt_1",
+      "name": "緋銅部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_copper_enr",
+          "name": "緋銅塊",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_cmpt",
+          "name": "緋銅部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_glass_cmpt_1",
+      "name": "紫晶部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_glass",
+          "name": "紫晶繊維",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_cmpt",
+          "name": "紫晶部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_glass_enr_cmpt_1",
+      "name": "高晶部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_enr",
+          "name": "高晶繊維",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_cmpt",
+          "name": "高晶部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_iron_cmpt_1",
+      "name": "鉄製部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_nugget",
+          "name": "青鉄塊",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_cmpt",
+          "name": "鉄製部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_iron_enr_cmpt_1",
+      "name": "鋼製部品",
+      "facilityId": "item_port_cmpt_mc_1",
+      "facilityName": "組立機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr",
+          "name": "鋼",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_cmpt",
+          "name": "鋼製部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_acid_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_acid",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_copper_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_copper",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_copper_enr_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_copper_enr",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_grass_1_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_grass_1",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_grass_2_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_grass_2",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_sewage_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_sewage",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_water_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_water",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_xiranite_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_xiranite",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_xiranite_enr_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_xiranite_enr",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_xiranite_lowpoly_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_xiranite_lowpoly",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copper_xiranite_poly_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copper_xiranite_poly",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_acid_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_acid",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_copper_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_copper",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_copper_enr_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_copper_enr",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_grass_1_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_grass_1",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_grass_2_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_grass_2",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_sewage_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_sewage",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_water_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_water",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_xiranite_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_xiranite_enr_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite_enr",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_xiranite_lowpoly_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite_lowpoly",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_copperenr_xiranite_poly_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite_poly",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_acid_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_acid",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_copper_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_copper",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_copper_enr_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_copper_enr",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_grass_1_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_grass_1",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_grass_2_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_grass_2",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_sewage_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_sewage",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_water_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_water",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_xiranite_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_xiranite",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_xiranite_enr_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_xiranite_enr",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_xiranite_lowpoly_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_xiranite_lowpoly",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_xiranite_poly_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glass_xiranite_poly",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_acid_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_acid",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_copper_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_copper",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_copper_enr_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_copper_enr",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_grass_1_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_grass_1",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_grass_2_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_grass_2",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_sewage_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_sewage",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_water_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_water",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_xiranite_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_xiranite_enr_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite_enr",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_xiranite_lowpoly_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite_lowpoly",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_xiranite_poly_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite_poly",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_acid_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_acid",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_copper_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_copper",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_copper_enr_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_copper_enr",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_grass_1_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_grass_1",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_grass_2_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_grass_2",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_sewage_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_sewage",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_water_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_water",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_xiranite_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_xiranite",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_xiranite_enr_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_xiranite_enr",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_xiranite_lowpoly_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_xiranite_lowpoly",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_xiranite_poly_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_iron_xiranite_poly",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_acid_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_acid",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_copper_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_copper",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_copper_enr_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_copper_enr",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_grass_1_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_grass_1",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_grass_2_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_grass_2",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_sewage_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_sewage",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_water_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_water",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_xiranite_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_xiranite_enr_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite_enr",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_xiranite_lowpoly_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite_lowpoly",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_xiranite_poly_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite_poly",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_xiranenr_grass_2_1",
+      "name": "実験用重息壌ボトル",
+      "facilityId": "item_port_dismantler_1",
+      "facilityName": "解体機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_fbottle_xiranenr_grass_2",
+          "name": "実験用重息壌ボトル",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_enr_bottle",
+          "name": "実験用重息壌ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_acid",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_acid",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_copper",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_copper",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_copper_enr",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_copper_enr",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_grass_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_grass_1",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_grass_2",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_grass_2",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_sewage",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_sewage",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_water",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_water",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_xiranite",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_xiranite",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_xiranite_enr",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_xiranite_enr",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_xiranite_lowpoly",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_xiranite_lowpoly",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copper_xiranite_poly",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copper_xiranite_poly",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_acid",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_acid",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_copper",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_copper",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_copper_enr",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_copper_enr",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_grass_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_grass_1",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_grass_2",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_grass_2",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_sewage",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_sewage",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_water",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_water",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_xiranite",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_xiranite_enr",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite_enr",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_xiranite_lowpoly",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite_lowpoly",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_copperenr_xiranite_poly",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_copperenr_xiranite_poly",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_food_1_1",
+      "name": "シトロームの缶詰Ⅰ",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 5
+        },
+        {
+          "id": "item_plant_moss_powder_2",
+          "name": "シトローム粉末",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_food_1",
+          "name": "シトロームの缶詰Ⅰ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_food_2_1",
+      "name": "シトロームの缶詰Ⅱ",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 10
+        },
+        {
+          "id": "item_plant_moss_powder_2",
+          "name": "シトローム粉末",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_food_2",
+          "name": "シトロームの缶詰Ⅱ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_food_3_1",
+      "name": "シトロームの缶詰Ⅲ",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 10
+        },
+        {
+          "id": "item_plant_moss_enr_powder_2",
+          "name": "シトローム細粉",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_food_3",
+          "name": "シトロームの缶詰Ⅲ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_acid",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_acid",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_copper",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_copper",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_copper_enr",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_copper_enr",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_grass_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_grass_1",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_grass_2",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_grass_2",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_sewage",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_sewage",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_water",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_water",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_xiranite",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_xiranite",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_xiranite_enr",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_xiranite_enr",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_xiranite_lowpoly",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_xiranite_lowpoly",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_xiranite_poly",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glass_xiranite_poly",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_acid",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_acid",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_copper",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_copper",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_copper_enr",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_copper_enr",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_grass_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_grass_1",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_grass_2",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_grass_2",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_sewage",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_sewage",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_water",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_water",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_xiranite",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_xiranite_enr",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite_enr",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_xiranite_lowpoly",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite_lowpoly",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_xiranite_poly",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_glassenr_xiranite_poly",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_acid",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_acid",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_copper",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_copper",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_copper_enr",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_copper_enr",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_grass_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_grass_1",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_grass_2",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_grass_2",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_sewage",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_sewage",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_water",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_water",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_xiranite",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_xiranite",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_xiranite_enr",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_xiranite_enr",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_xiranite_lowpoly",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_xiranite_lowpoly",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_xiranite_poly",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_iron_xiranite_poly",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_acid",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_acid",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_copper",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_copper",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_copper_enr",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_copper_enr",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_grass_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_grass_1",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_grass_2",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_grass_2",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_sewage",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_sewage",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_water",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_water",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_xiranite",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_xiranite_enr",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite_enr",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_xiranite_lowpoly",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite_lowpoly",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_xiranite_poly",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_ironenr_xiranite_poly",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_rec_hp_1_1",
+      "name": "蕎花カプセルⅠ",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 5
+        },
+        {
+          "id": "item_plant_moss_powder_1",
+          "name": "蕎花粉末",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_rec_hp_1",
+          "name": "蕎花カプセルⅠ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_rec_hp_2_1",
+      "name": "蕎花カプセルⅡ",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 10
+        },
+        {
+          "id": "item_plant_moss_powder_1",
+          "name": "蕎花粉末",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_rec_hp_2",
+          "name": "蕎花カプセルⅡ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_rec_hp_3_1",
+      "name": "蕎花カプセルⅢ",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 10
+        },
+        {
+          "id": "item_plant_moss_enr_powder_1",
+          "name": "蕎花細粉",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_rec_hp_3",
+          "name": "蕎花カプセルⅢ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_xiranenr_grass_2",
+      "name": "実験用重息壌ボトル",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "facilityName": "充填機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_activity_xiranite_enr_bottle",
+          "name": "実験用重息壌ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_fbottle_xiranenr_grass_2",
+          "name": "実験用重息壌ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_consume_liquid_cleaner_1_item_liquid_sewage",
+      "name": "汚水処理",
+      "facilityId": "item_port_liquid_cleaner_1",
+      "facilityName": "廃水処理機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "fluid_consume_liquid_cleaner_1_item_liquid_xiranite_lowpoly",
+      "name": "不活性壌晶廃液処理",
+      "facilityId": "item_port_liquid_cleaner_1",
+      "facilityName": "廃水処理機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "fluid_consume_liquid_cleaner_1_item_liquid_xiranite_poly",
+      "name": "壌晶廃液処理",
+      "facilityId": "item_port_liquid_cleaner_1",
+      "facilityName": "廃水処理機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "furnance_carbon_enr_1",
+      "name": "安定炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_carbon_enr_powder",
+          "name": "高密度炭塊粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_enr",
+          "name": "安定炭塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_enr_powder_1",
+      "name": "高密度炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_enr_powder_1",
+          "name": "蕎花細粉",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_enr_powder",
+          "name": "高密度炭塊粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_enr_powder_2",
+      "name": "高密度炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_enr_powder_2",
+          "name": "シトローム細粉",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_enr_powder",
+          "name": "高密度炭塊粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_1",
+      "name": "炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_1",
+          "name": "蕎花",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_2",
+      "name": "炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_2",
+          "name": "シトローム",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_3",
+      "name": "炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_3",
+          "name": "サンドリーフ",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_4",
+      "name": "炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_tundra_wood",
+          "name": "木材",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_5",
+      "name": "炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_1",
+          "name": "錦草",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_6",
+      "name": "炭塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_2",
+          "name": "芽針",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_1",
+      "name": "炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_powder_1",
+          "name": "蕎花粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_2",
+      "name": "炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_powder_2",
+          "name": "シトローム粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_3",
+      "name": "炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 3
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_4",
+      "name": "炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_powder_1",
+          "name": "錦草粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_5",
+      "name": "炭塊粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_powder_2",
+          "name": "芽針粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_copper_nugget_1",
+      "name": "赤銅塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_ore",
+          "name": "赤銅鉱物",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_nugget",
+          "name": "赤銅塊",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_enr_1",
+      "name": "特製結晶",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_crystal_enr_powder",
+          "name": "高密度結晶粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_enr",
+          "name": "特製結晶",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_enr_powder_1",
+      "name": "高密度結晶粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_originium_enr_powder",
+          "name": "高密度源石粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_enr_powder",
+          "name": "高密度結晶粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_powder_1",
+      "name": "結晶外殻粉末",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_originium_powder",
+          "name": "源石粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_powder",
+          "name": "結晶外殻粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_shell_1",
+      "name": "結晶外殻",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_originium_ore",
+          "name": "源石鉱物",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_shell",
+          "name": "結晶外殻",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_shell_2",
+      "name": "結晶外殻",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_crystal_powder",
+          "name": "結晶外殻粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_shell",
+          "name": "結晶外殻",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_iron_enr_1",
+      "name": "鋼",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr_powder",
+          "name": "高密度青鉄粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr",
+          "name": "鋼",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_iron_nugget_1",
+      "name": "青鉄塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_ore",
+          "name": "青鉄鉱物",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_nugget",
+          "name": "青鉄塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_iron_nugget_2",
+      "name": "青鉄塊",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_nugget",
+          "name": "青鉄塊",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_quartz_enr_1",
+      "name": "高晶繊維",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_enr_powder",
+          "name": "高晶粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_quartz_enr",
+          "name": "高晶繊維",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_quartz_glass_1",
+      "name": "紫晶繊維",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_sand",
+          "name": "紫晶鉱物",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_quartz_glass",
+          "name": "紫晶繊維",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_quartz_glass_2",
+      "name": "紫晶繊維",
+      "facilityId": "item_port_furnance_1",
+      "facilityName": "精錬炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_powder",
+          "name": "紫晶粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_quartz_glass",
+          "name": "紫晶繊維",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_carbon_powder_1",
+      "name": "炭塊粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_carbon_mtl",
+          "name": "炭塊",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_copper_powder_1",
+      "name": "赤銅粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_nugget",
+          "name": "赤銅塊",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_powder",
+          "name": "赤銅粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_crystal_powder_1",
+      "name": "結晶外殻粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_crystal_shell",
+          "name": "結晶外殻",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_powder",
+          "name": "結晶外殻粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_iron_powder_1",
+      "name": "青鉄粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_nugget",
+          "name": "青鉄塊",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_originium_powder_1",
+      "name": "源石粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_originium_ore",
+          "name": "源石鉱物",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_originium_powder",
+          "name": "源石粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_bbflower_powder_1_1",
+      "name": "アケトン粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_bbflower_1",
+          "name": "アケトン樹木",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_bbflower_powder_1",
+          "name": "アケトン粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_grass_powder_1_1",
+      "name": "錦草粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_1",
+          "name": "錦草",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_grass_powder_1",
+          "name": "錦草粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_grass_powder_2_1",
+      "name": "芽針粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_2",
+          "name": "芽針",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_grass_powder_2",
+          "name": "芽針粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_moss_powder_1_1",
+      "name": "蕎花粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_1",
+          "name": "蕎花",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_powder_1",
+          "name": "蕎花粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_moss_powder_2_1",
+      "name": "シトローム粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_2",
+          "name": "シトローム",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_powder_2",
+          "name": "シトローム粉末",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_moss_powder_3_1",
+      "name": "サンドリーフ粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_3",
+          "name": "サンドリーフ",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "grinder_quartz_powder_1",
+      "name": "紫晶粉末",
+      "facilityId": "item_port_grinder_1",
+      "facilityName": "粉砕機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_glass",
+          "name": "紫晶繊維",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_quartz_powder",
+          "name": "紫晶粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "liquid_purifier_copper_enr_1",
+      "name": "緋銅溶液",
+      "facilityId": "item_port_liquid_purifier_1",
+      "facilityName": "精製機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 4
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "liquid_purifier_xiranite_poly_1",
+      "name": "壌晶廃液",
+      "facilityId": "item_port_liquid_purifier_1",
+      "facilityName": "精製機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 4
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_bbflower_1",
+      "name": "アケトン樹木",
+      "facilityId": "item_port_planter_1",
+      "facilityName": "栽培機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_bbflower_seed_1",
+          "name": "アケトンの種",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_bbflower_1",
+          "name": "アケトン樹木",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_grass_1_1",
+      "name": "錦草",
+      "facilityId": "item_port_planter_1",
+      "facilityName": "栽培機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_seed_1",
+          "name": "錦草の種",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_grass_1",
+          "name": "錦草",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_grass_2_1",
+      "name": "芽針",
+      "facilityId": "item_port_planter_1",
+      "facilityName": "栽培機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_seed_2",
+          "name": "芽針の種",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_grass_2",
+          "name": "芽針",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_moss_1_1",
+      "name": "蕎花",
+      "facilityId": "item_port_planter_1",
+      "facilityName": "栽培機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_seed_1",
+          "name": "蕎花の種",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_1",
+          "name": "蕎花",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_moss_2_1",
+      "name": "シトローム",
+      "facilityId": "item_port_planter_1",
+      "facilityName": "栽培機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_seed_2",
+          "name": "シトロームの種",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_2",
+          "name": "シトローム",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_moss_3_1",
+      "name": "サンドリーフ",
+      "facilityId": "item_port_planter_1",
+      "facilityName": "栽培機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_seed_3",
+          "name": "サンドリーフの種",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_3",
+          "name": "サンドリーフ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_copper_enr_1",
+      "name": "緋銅塊",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 2
+        },
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr",
+          "name": "緋銅塊",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_copper_enr_2",
+      "name": "緋銅塊",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_copper_enr",
+          "name": "緋銅溶液",
+          "amount": 2
+        },
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr",
+          "name": "緋銅塊",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_copper_1",
+      "name": "赤銅溶液",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_powder",
+          "name": "赤銅粉末",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_copper_2",
+      "name": "赤銅溶液",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_powder",
+          "name": "赤銅粉末",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_copper",
+          "name": "赤銅溶液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_liquid_xiranite_1",
+      "name": "液化息壌",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_liquid_xiranite_2",
+      "name": "液化息壌",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_plant_grass_1_1",
+      "name": "錦草エキス",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_powder_1",
+          "name": "錦草粉末",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_plant_grass_1_2",
+      "name": "錦草エキス",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_powder_1",
+          "name": "錦草粉末",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_plant_grass_1",
+          "name": "錦草エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_plant_grass_2_1",
+      "name": "芽針エキス",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_powder_2",
+          "name": "芽針粉末",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_plant_grass_2_2",
+      "name": "芽針エキス",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_powder_2",
+          "name": "芽針粉末",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_plant_grass_2",
+          "name": "芽針エキス",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_xiranite_enr_1",
+      "name": "液化重息壌",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_xiranite_enr_powder",
+          "name": "重息壌",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_xiranite_enr_2",
+      "name": "液化重息壌",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_xiranite_enr_powder",
+          "name": "重息壌",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite_enr",
+          "name": "液化重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_xiranite_poly_1",
+      "name": "壌晶廃液",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_xiranite_poly_2",
+      "name": "壌晶廃液",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite_lowpoly",
+          "name": "不活性壌晶廃液",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_xiranite_poly_1",
+      "name": "壌晶",
+      "facilityId": "item_port_mix_pool_1",
+      "facilityName": "化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 2
+        },
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_xiranite_poly",
+          "name": "壌晶",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_xiranite_poly_2",
+      "name": "壌晶",
+      "facilityId": "item_port_mix_pool_2",
+      "facilityName": "大型化学反応炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 2
+        },
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_xiranite_poly",
+          "name": "壌晶",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_sewage",
+          "name": "汚水",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_bbflower_1",
+      "name": "アケトンの種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_bbflower_1",
+          "name": "アケトン樹木",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_bbflower_seed_1",
+          "name": "アケトンの種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_grass_1_1",
+      "name": "錦草の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_1",
+          "name": "錦草",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_grass_seed_1",
+          "name": "錦草の種",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_grass_2_1",
+      "name": "芽針の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_grass_2",
+          "name": "芽針",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_grass_seed_2",
+          "name": "芽針の種",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_moss_1_1",
+      "name": "蕎花の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_1",
+          "name": "蕎花",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_seed_1",
+          "name": "蕎花の種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_moss_2_1",
+      "name": "シトロームの種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_2",
+          "name": "シトローム",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_seed_2",
+          "name": "シトロームの種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_moss_3_1",
+      "name": "サンドリーフの種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_3",
+          "name": "サンドリーフ",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_seed_3",
+          "name": "サンドリーフの種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_1",
+      "name": "灰麦の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_sp_1",
+          "name": "灰麦",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_sp_seed_1",
+          "name": "灰麦の種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_2",
+      "name": "苦葉椒の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_sp_2",
+          "name": "苦葉椒",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_sp_seed_2",
+          "name": "苦葉椒の種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_3",
+      "name": "玉葉人参の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_sp_3",
+          "name": "玉葉人参",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_sp_seed_3",
+          "name": "玉葉人参の種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_4",
+      "name": "金石稲の種",
+      "facilityId": "item_port_seedcol_1",
+      "facilityName": "採種機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_sp_4",
+          "name": "金石稲",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_sp_seed_4",
+          "name": "金石稲の種",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "shaper_activity_xiranite_bottle_1",
+      "name": "実験用息壌ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_bottle",
+          "name": "実験用息壌ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_activity_xiranite_enr_bottle_1",
+      "name": "実験用重息壌ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 20,
+      "inputs": [
+        {
+          "id": "item_xiranite_enr_powder",
+          "name": "重息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_enr_bottle",
+          "name": "実験用重息壌ボトル",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "shaper_copper_bottle_1",
+      "name": "赤銅ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_nugget",
+          "name": "赤銅塊",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_bottle",
+          "name": "赤銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_copper_enr_bottle_1",
+      "name": "緋銅ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_copper_enr",
+          "name": "緋銅塊",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_copper_enr_bottle",
+          "name": "緋銅ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_glass_bottle_1",
+      "name": "紫晶製ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_glass",
+          "name": "紫晶繊維",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_bottle",
+          "name": "紫晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_glass_enr_bottle_1",
+      "name": "高晶製ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_enr",
+          "name": "高晶繊維",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_glass_enr_bottle",
+          "name": "高晶製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_iron_bottle_1",
+      "name": "青鉄製ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_nugget",
+          "name": "青鉄塊",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_bottle",
+          "name": "青鉄製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_iron_enr_bottle_1",
+      "name": "鋼製ボトル",
+      "facilityId": "item_port_shaper_1",
+      "facilityName": "成形機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_enr",
+          "name": "鋼",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_bottle",
+          "name": "鋼製ボトル",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_carbon_enr_powder_1",
+      "name": "高密度炭塊粉末",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_carbon_powder",
+          "name": "炭塊粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_carbon_enr_powder",
+          "name": "高密度炭塊粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_crystal_enr_powder_1",
+      "name": "高密度結晶粉末",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_crystal_powder",
+          "name": "結晶外殻粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_crystal_enr_powder",
+          "name": "高密度結晶粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_iron_enr_powder_1",
+      "name": "高密度青鉄粉末",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_iron_powder",
+          "name": "青鉄粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_iron_enr_powder",
+          "name": "高密度青鉄粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_originium_enr_powder_1",
+      "name": "高密度源石粉末",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_originium_powder",
+          "name": "源石粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_originium_enr_powder",
+          "name": "高密度源石粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_plant_moss_enr_powder_1_1",
+      "name": "蕎花細粉",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_powder_1",
+          "name": "蕎花粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_enr_powder_1",
+          "name": "蕎花細粉",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_plant_moss_enr_powder_2_1",
+      "name": "シトローム細粉",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_plant_moss_powder_2",
+          "name": "シトローム粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_plant_moss_enr_powder_2",
+          "name": "シトローム細粉",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_quartz_enr_powder_1",
+      "name": "高晶粉末",
+      "facilityId": "item_port_thickener_1",
+      "facilityName": "研磨機",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_quartz_powder",
+          "name": "紫晶粉末",
+          "amount": 2
+        },
+        {
+          "id": "item_plant_moss_powder_3",
+          "name": "サンドリーフ粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_quartz_enr_powder",
+          "name": "高晶粉末",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_activity_xiranite_enr_hulu_1",
+      "name": "息壌玉ひょうたん",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_fbottle_xiranenr_grass_2",
+          "name": "実験用重息壌ボトル",
+          "amount": 1
+        },
+        {
+          "id": "item_activity_xiranite_enr_tool",
+          "name": "実験用玉銅拡散装置",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_enr_hulu",
+          "name": "息壌玉ひょうたん",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_activity_xiranite_enr_tool_1",
+      "name": "実験用玉銅拡散装置",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_activity_xiranite_enr_cmpt",
+          "name": "実験用重息壌部品",
+          "amount": 1
+        },
+        {
+          "id": "item_copper_enr",
+          "name": "緋銅塊",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_enr_tool",
+          "name": "実験用玉銅拡散装置",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_activity_xiranite_hulu_1",
+      "name": "息壌ひょうたん",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_activity_xiranite_bottle",
+          "name": "実験用息壌ボトル",
+          "amount": 5
+        },
+        {
+          "id": "item_activity_xiranite_cmpt",
+          "name": "実験用息壌部品",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_activity_xiranite_hulu",
+          "name": "息壌ひょうたん",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_1_1",
+      "name": "小容量谷地バッテリー",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_glass_cmpt",
+          "name": "紫晶部品",
+          "amount": 5
+        },
+        {
+          "id": "item_originium_powder",
+          "name": "源石粉末",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_proc_battery_1",
+          "name": "小容量谷地バッテリー",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_2_1",
+      "name": "中容量谷地バッテリー",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_cmpt",
+          "name": "鉄製部品",
+          "amount": 10
+        },
+        {
+          "id": "item_originium_powder",
+          "name": "源石粉末",
+          "amount": 15
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_proc_battery_2",
+          "name": "中容量谷地バッテリー",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_3_1",
+      "name": "大容量谷地バッテリー",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_enr_cmpt",
+          "name": "鋼製部品",
+          "amount": 10
+        },
+        {
+          "id": "item_originium_enr_powder",
+          "name": "高密度源石粉末",
+          "amount": 15
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_proc_battery_3",
+          "name": "大容量谷地バッテリー",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_4_1",
+      "name": "小容量武陵バッテリー",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 5
+        },
+        {
+          "id": "item_originium_enr_powder",
+          "name": "高密度源石粉末",
+          "amount": 15
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_proc_battery_4",
+          "name": "小容量武陵バッテリー",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_5_1",
+      "name": "中容量武陵バッテリー",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_xiranite_poly",
+          "name": "壌晶",
+          "amount": 5
+        },
+        {
+          "id": "item_originium_enr_powder",
+          "name": "高密度源石粉末",
+          "amount": 20
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_proc_battery_5",
+          "name": "中容量武陵バッテリー",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_bomb_1_1",
+      "name": "工業爆弾",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_glass_cmpt",
+          "name": "紫晶部品",
+          "amount": 5
+        },
+        {
+          "id": "item_plant_bbflower_powder_1",
+          "name": "アケトン粉末",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_proc_bomb_1",
+          "name": "工業爆弾",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_food_4_1",
+      "name": "錦草ソーダⅠ",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_cmpt",
+          "name": "鉄製部品",
+          "amount": 10
+        },
+        {
+          "id": "item_fbottle_iron_grass_1",
+          "name": "青鉄製ボトル",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_food_4",
+          "name": "錦草ソーダⅠ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_food_5_1",
+      "name": "錦草ソーダⅡ",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_copper_cmpt",
+          "name": "赤銅部品",
+          "amount": 10
+        },
+        {
+          "id": "item_fbottle_copper_grass_1",
+          "name": "赤銅ボトル",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_food_5",
+          "name": "錦草ソーダⅡ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_rec_hp_4_1",
+      "name": "芽針注射剤Ⅰ",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_iron_cmpt",
+          "name": "鉄製部品",
+          "amount": 10
+        },
+        {
+          "id": "item_fbottle_iron_grass_2",
+          "name": "青鉄製ボトル",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_rec_hp_4",
+          "name": "芽針注射剤Ⅰ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_rec_hp_5_1",
+      "name": "芽針注射剤Ⅱ",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "facilityName": "包装機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_copper_cmpt",
+          "name": "赤銅部品",
+          "amount": 10
+        },
+        {
+          "id": "item_fbottle_copper_grass_2",
+          "name": "赤銅ボトル",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_bottled_rec_hp_5",
+          "name": "芽針注射剤Ⅱ",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_1",
+      "name": "紫晶装備部品",
+      "facilityId": "item_port_winder_1",
+      "facilityName": "装備部品加工機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_crystal_shell",
+          "name": "結晶外殻",
+          "amount": 5
+        },
+        {
+          "id": "item_quartz_glass",
+          "name": "紫晶繊維",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_equip_script_1",
+          "name": "紫晶装備部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_2",
+      "name": "青鉄装備部品",
+      "facilityId": "item_port_winder_1",
+      "facilityName": "装備部品加工機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_crystal_shell",
+          "name": "結晶外殻",
+          "amount": 10
+        },
+        {
+          "id": "item_iron_nugget",
+          "name": "青鉄塊",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_equip_script_2",
+          "name": "青鉄装備部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_3",
+      "name": "高晶装備部品",
+      "facilityId": "item_port_winder_1",
+      "facilityName": "装備部品加工機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_crystal_enr",
+          "name": "特製結晶",
+          "amount": 10
+        },
+        {
+          "id": "item_quartz_enr",
+          "name": "高晶繊維",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_equip_script_3",
+          "name": "高晶装備部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_4",
+      "name": "息壌装備部品",
+      "facilityId": "item_port_winder_1",
+      "facilityName": "装備部品加工機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_crystal_enr",
+          "name": "特製結晶",
+          "amount": 10
+        },
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_equip_script_4",
+          "name": "息壌装備部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_4_1",
+      "name": "赤銅装備部品",
+      "facilityId": "item_port_winder_1",
+      "facilityName": "装備部品加工機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_copper_cmpt",
+          "name": "赤銅部品",
+          "amount": 10
+        },
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_equip_script_4_1",
+          "name": "赤銅装備部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_4_2",
+      "name": "緋銅装備部品",
+      "facilityId": "item_port_winder_1",
+      "facilityName": "装備部品加工機",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_copper_enr_cmpt",
+          "name": "緋銅部品",
+          "amount": 2
+        },
+        {
+          "id": "item_xiranite_enr_powder",
+          "name": "重息壌",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_equip_script_4_2",
+          "name": "緋銅装備部品",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_muck_xiranite_1",
+      "name": "ポンポン肥料",
+      "facilityId": "item_port_xiranite_oven_1",
+      "facilityName": "天有洪炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_muck_feces_1",
+          "name": "駄獣のフン",
+          "amount": 1
+        },
+        {
+          "id": "item_liquid_xiranite",
+          "name": "液化息壌",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_muck_xiranite_1",
+          "name": "ポンポン肥料",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_xiranite_enr_powder_1",
+      "name": "重息壌",
+      "facilityId": "item_port_xiranite_oven_1",
+      "facilityName": "天有洪炉",
+      "time": 10,
+      "inputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 10
+        },
+        {
+          "id": "item_liquid_xiranite_poly",
+          "name": "壌晶廃液",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_xiranite_enr_powder",
+          "name": "重息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_xiranite_powder_1",
+      "name": "息壌",
+      "facilityId": "item_port_xiranite_oven_1",
+      "facilityName": "天有洪炉",
+      "time": 2,
+      "inputs": [
+        {
+          "id": "item_carbon_enr",
+          "name": "安定炭塊",
+          "amount": 2
+        },
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "item_xiranite_powder",
+          "name": "息壌",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "item_recipe_water_collect",
+      "name": "水",
+      "facilityId": "item_port_liquid_pump_1",
+      "facilityName": "液体ポンプ",
+      "time": 1.0,
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "item_liquid_water",
+          "name": "水",
+          "amount": 1.0
+        }
+      ]
+    },
+    {
+      "id": "item_recipe_acid_collect",
+      "name": "沈殿酸",
+      "facilityId": "item_port_acid_pump_2",
+      "facilityName": "耐酸性液体ポンプⅡ",
+      "time": 1.0,
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "item_liquid_acid",
+          "name": "沈殿酸",
+          "amount": 1.0
+        }
+      ]
+    }
+  ],
+  "facilities": {
+    "item_port_cmpt_mc_1": {
+      "name": "組立機",
+      "power": 20,
+      "tier": 2
+    },
+    "item_port_dismantler_1": {
+      "name": "解体機",
+      "power": 20,
+      "tier": 3
+    },
+    "item_port_filling_pd_mc_1": {
+      "name": "充填機",
+      "power": 20,
+      "tier": 3
+    },
+    "item_port_furnance_1": {
+      "name": "精錬炉",
+      "power": 5,
+      "tier": 1
+    },
+    "item_port_grinder_1": {
+      "name": "粉砕機",
+      "power": 5,
+      "tier": 1
+    },
+    "item_port_liquid_cleaner_1": {
+      "name": "廃水処理機",
+      "power": 50,
+      "tier": 3
+    },
+    "item_port_liquid_purifier_1": {
+      "name": "精製機",
+      "power": 50,
+      "tier": 4
+    },
+    "item_port_mix_pool_1": {
+      "name": "化学反応炉",
+      "power": 50,
+      "tier": 3
+    },
+    "item_port_mix_pool_2": {
+      "name": "大型化学反応炉",
+      "power": 100,
+      "tier": 3
+    },
+    "item_port_planter_1": {
+      "name": "栽培機",
+      "power": 20,
+      "tier": 3
+    },
+    "item_port_seedcol_1": {
+      "name": "採種機",
+      "power": 10,
+      "tier": 3
+    },
+    "item_port_shaper_1": {
+      "name": "成形機",
+      "power": 10,
+      "tier": 2
+    },
+    "item_port_thickener_1": {
+      "name": "研磨機",
+      "power": 50,
+      "tier": 4
+    },
+    "item_port_tools_asm_mc_1": {
+      "name": "包装機",
+      "power": 20,
+      "tier": 3
+    },
+    "item_port_winder_1": {
+      "name": "装備部品加工機",
+      "power": 10,
+      "tier": 1
+    },
+    "item_port_xiranite_oven_1": {
+      "name": "天有洪炉",
+      "power": 50,
+      "tier": 4
+    },
+    "item_port_liquid_pump_1": {
+      "name": "液体ポンプ",
+      "power": 10,
+      "tier": 2
+    },
+    "item_port_acid_pump_2": {
+      "name": "耐酸性液体ポンプⅡ",
+      "power": 20,
+      "tier": 3
+    }
+  }
+}
