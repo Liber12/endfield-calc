@@ -46,8 +46,8 @@ def test_real_outpost_catalog():
     assert len(wuling.outpost_offers) == len(valley.outpost_offers) == 3
     assert abs(sum(wuling.outpost_budget_per_min.values()) - 1280) < 0.01
     assert abs(sum(valley.outpost_budget_per_min.values()) - 1525) < 0.01
-    assert "焔銅部品" in wuling.outpost_offers["壌晶雨発生施設"]
-    assert wuling.outpost_offers["壌晶雨発生施設"]["焔銅部品"] == 70
+    assert "焔銅部品" in wuling.outpost_offers["満天台建設基地"]
+    assert wuling.outpost_offers["満天台建設基地"]["焔銅部品"] == 70
     assert not valley.transfer_points, "Valley cannot import its own exports"
     assert wuling.transfer_points == master["metastorageExports"]["domain_1"]
     assert "item_copper_ore" not in wuling.transfer_points
