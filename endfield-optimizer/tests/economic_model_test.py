@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 import data_access
 import model
+from utils import normalize_name
 from current_model_test import example_master, make_recipe
 
 
@@ -52,7 +53,7 @@ def test_real_outpost_catalog():
     assert master["regionalRawCaps"]["domain_2"]["item_gas_xiranite"] == 100
     assert wuling.outpost_offers["心臓修復施設"]["焔銅部品"] == 70
     assert wuling.outpost_offers["天王原建設支援拠点"]["重息壌"] == 27
-    assert wuling.outpost_offers["天王原建設支援拠点"]["錦草ソーダⅡ"] == 22
+    assert wuling.outpost_offers["天王原建設支援拠点"][normalize_name("錦草ソーダⅡ")] == 22
 
 
 if __name__ == "__main__":
