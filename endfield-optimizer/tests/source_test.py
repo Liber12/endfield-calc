@@ -29,6 +29,8 @@ def main():
     assert master["regionalRawCaps"]["domain_2"]["item_gas_inert"] == 460
     assert master["regionalRawCaps"]["domain_2"]["item_gas_xiranite"] == 100
     assert master["rawSourceFacilities"]["item_liquid_water"]["ratePerMinute"] == 60
+    assert master["facilityMaxCapsByDomain"]["domain_2"]["xiranite_oven_1"] == 12
+    assert master["facilityMaxCapsByDomain"]["domain_2"]["liquid_clean_gate_1"] == 3
     assert any(r["gasEnv"] for r in master["recipes"]), "Gas-env recipe lost during conversion"
     print('Integrated calculator source conversion passed.')
 
