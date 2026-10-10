@@ -227,6 +227,16 @@ def read_current_rules(base_root):
         for fac, amount in structure_caps.items():
             facility_caps.setdefault("domain_2", {})[fac] = amount
 
+    with open(os.path.join(data_path, "power.ts"), encoding="utf-8") as f:
+        power_source = f.read()
+    fuels = {}
+    for power, iid, seconds in re.findall(
+        r'powerGeneration:\s*(\d+),\s*recipe:\s*\{.*?inputs:\s*\[\{\s*itemId:\s*ItemId\.(\w+),\s*amount:\s*1\s*\}\].*?craftingTime:\s*([\d.]+)',
+        power_source, re.DOTALL,
+    ):
+        fuels[iid.lower()] = {"powerGeneration": float(power), "seconds": float(seconds)}
+    if len(fuels) < 5:
+        raise ValueError("Power fuel conversion failed; refuse historical generators")
     if not drains or len(envs) != 4 or len(domain_caps) < 2 or len(availability) < 2:
         raise ValueError("Current game rule extraction failed (sustain/caps/raw availability)")
     return {
@@ -236,6 +246,7 @@ def read_current_rules(base_root):
         "regionalRawAvailability": availability,
         "rawSourceFacilities": sources,
         "facilityMaxCapsByDomain": facility_caps,
+        "powerFuels": fuels,
     }
 
 def write_csvs(master, output_path):
