@@ -19,6 +19,8 @@ class Solution:
     status: str
     profit: float = None                        # 純粋な販売収益(目的関数の補正項を含まない)
     sales: dict = field(default_factory=dict)          # item_id -> 納品量/min
+    outpost_sales: dict = field(default_factory=dict)  # outpost -> item_id -> traded items/min
+    outpost_income: dict = field(default_factory=dict) # outpost -> baseline bills/min
     recipe_rates: dict = field(default_factory=dict)   # recipe_id -> 生産レート/min
     facility_n: dict = field(default_factory=dict)     # recipe_id -> 整数変数としての施設台数
     burn: dict = field(default_factory=dict)           # 燃料名(normalize済) -> 消費量/min
@@ -79,6 +81,34 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
         participating = [facility_n[r["id"]] for r in master["recipes"] if str(r.get("gasEnv", 0)) == env]
         prob += pulp.lpSum(participating) <= per_vaporizer * count
     sales_vars = pulp.LpVariable.dicts("Sales", master['items'].keys(), lowBound=0)
+
+    # Unlike the old pooled best-price heuristic, all current-game sales are
+    # routed to a specific outpost and draw on that outpost's finite stock
+    # bill regeneration. This is the sustainable *baseline* case, not a
+    # finite-wallet burst or liaison-bonus scenario.
+    outpost_sales = {}
+    outpost_income = {}
+    if current and inputs.outpost_offers:
+        for index, (post, offers) in enumerate(inputs.outpost_offers.items()):
+            offered_ids = [
+                iid for iid, info in master["items"].items()
+                if normalize_name(info["name"]) in offers
+            ]
+            for iid in offered_ids:
+                outpost_sales[post, iid] = pulp.LpVariable(
+                    f"OutpostSale_{index}_{iid}", lowBound=0
+                )
+            income = pulp.lpSum(
+                outpost_sales[post, iid] * offers[normalize_name(master["items"][iid]["name"])]
+                for iid in offered_ids
+            )
+            outpost_income[post] = income
+            prob += income <= inputs.outpost_budget_per_min[post], f"OutpostBudget_{index}"
+
+        for iid in master["items"]:
+            prob += sales_vars[iid] == pulp.lpSum(
+                var for (post, item), var in outpost_sales.items() if item == iid
+            )
 
     # 無在庫転送: ポイント予算内で素材を外部から持ち込める
     transfer_rules = cfg.get("transfer_rules", {})
@@ -194,7 +224,10 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     prob += total_gen >= total_cons
 
     # 目的関数
-    total_profit = pulp.lpSum([sales_vars[iid] * inputs.item_prices.get(normalize_name(master['items'][iid]['name']), 0) for iid in master['items']])
+    if current and inputs.outpost_offers:
+        total_profit = pulp.lpSum(outpost_income.values())
+    else:
+        total_profit = pulp.lpSum([sales_vars[iid] * inputs.item_prices.get(normalize_name(master['items'][iid]['name']), 0) for iid in master['items']])
     target_parts = cfg.get("target_parts", [])
     parts_total = pulp.lpSum([item_net[iid] for iid, it in master['items'].items() if normalize_name(it['name']) in target_parts])
     total_facilities = pulp.lpSum(facility_n.values()) + pulp.lpSum(source_n.values()) + pulp.lpSum(vaporizer_n.values())
@@ -215,6 +248,8 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
         "vaporizer_n": vaporizer_n,
         "burn": burn_vars,
         "sales": sales_vars,
+        "outpost_sales": outpost_sales,
+        "outpost_income": outpost_income,
         "transfer": transfer_vars,
         "item_net": item_net,
         "total_profit": total_profit,
@@ -245,6 +280,15 @@ def solve(prob, variables, cfg):
         status=status,
         profit=profit,
         sales={iid: val(v) for iid, v in variables["sales"].items()},
+        outpost_sales={
+            post: {
+                iid: val(v)
+                for (post_id, iid), v in variables["outpost_sales"].items()
+                if post_id == post
+            }
+            for post in {post_id for post_id, _ in variables["outpost_sales"]}
+        },
+        outpost_income={post: val(value) for post, value in variables["outpost_income"].items()},
         recipe_rates={rid: val(v) for rid, v in variables["recipe_rate"].items()},
         facility_n={rid: val(v) for rid, v in variables["facility_n"].items()},
         burn={name: val(v) for name, v in variables["burn"].items()},
@@ -262,7 +306,7 @@ def optimize(region, mode="balance", sanity=False, cfg_override=None, snapshot=F
     """データ読込からSolution取得までの便宜関数。地域が未定義なら None を返す。"""
     master = data_access.load_master(snapshot=snapshot)
     cfg = cfg_override if cfg_override is not None else data_access.load_config()
-    inputs = data_access.load_region_inputs(region, master, sanity=sanity)
+    inputs = data_access.load_region_inputs(region, master, sanity=sanity, cfg=cfg)
     if inputs is None:
         return None
     prob, variables = build_model(master, cfg, inputs, mode=mode, sanity=sanity)
