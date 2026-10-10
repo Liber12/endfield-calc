@@ -130,7 +130,19 @@ def load_region_inputs(region, master, sanity=False, cfg=None):
         if domain is None:
             raise ValueError(f"Current game domain mapping missing for {region}")
         allowed = master["regionalRawAvailability"][domain]
-        caps = master["regionalRawCaps"][domain]
+        caps = dict(master["regionalRawCaps"][domain])
+        if domain == "domain_2":
+            with open(os.path.join(CONFIG_DIR, "raw_caps_1_5.json"), encoding="utf-8") as handle:
+                override_data = json.load(handle)
+            if override_data["gameVersion"] != "1.5" or override_data["region"] != domain:
+                raise ValueError("Unsupported Wuling raw-cap overlay version")
+            for iid, change in override_data["overrides"].items():
+                old = caps.get(iid)
+                if old not in (change["expectedOldCap"], change["newCap"]):
+                    raise ValueError(
+                        f"Unexpected updated Wuling raw cap for {iid}: {old}; verify game version"
+                    )
+                caps[iid] = change["newCap"]
         legacy = {normalize_name(k): v for k, v in zip(resources_df['資源名'], resources_df['産出量(/min)'])}
         resource_limits = {}
         for iid in allowed:
