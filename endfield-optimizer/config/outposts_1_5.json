@@ -91,7 +91,7 @@
     },
     {
       "region": "武陵",
-      "name": "壌晶雨発生施設",
+      "name": "満天台建設基地",
       "levels": [
         2700,
         6300,
@@ -105,7 +105,12 @@
         2500000
       ],
       "source": "https://endfield.wiki.gg/wiki/Xiranflow_Cloudseeder_Station",
-      "notes": "Version 1.5 extends maximum level to 4; trade offers remain unlocked at level 1"
+      "notes": "Introduced in Version 1.4. Version 1.5 extends its level cap to 4. Japanese name verified against official Japanese Version 1.4 notes and JP gameplay guides.",
+      "japaneseNameEvidence": [
+        "https://endfield.gryphline.com/ja-jp/news/5200",
+        "https://game8.jp/arknights-endfield/758820",
+        "https://appmedia.jp/arknights_endfield/80222305"
+      ]
     }
   ],
   "versionEvidence": "https://endfield.hypergryph.com/news/2653"
