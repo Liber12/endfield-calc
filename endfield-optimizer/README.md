@@ -88,6 +88,22 @@ https://endfieldhub.org/guides/endgame-blueprints-part-13
 PythonとWebの計算目的は異なります。現時点では収益値が両者と一致することを
 合格条件にせず、移植された各制約を単体テストと両地域の実データ求解で監視しています。
 
+### 日本語名称の扱い
+
+固有名詞は英語から直訳せず、日本語公式告知・ゲーム内表記と日本語攻略資料を
+照合して採用します。出典付き対応表は `config/localization_ja.json` です。
+
+- `Xiranflow Cloudseeder Station` = **満天台建設基地**（武陵・応龍関）
+- `Sky King Flats Construction Site` = **天王原建設支援拠点**（景玉谷）
+- `Cardiac Remediation Station` = **心臓修復施設**（首礎）
+- `Stock Bills` = **谷地取引券／武陵取引券**（地域による）
+- `Gas Dispersing Unit` = **ガス散布機**
+- `Total Transfer Value (TTV)` = **総転送価値**（品目ごとに転送価値を消費）
+
+満天台建設基地は**Ver.1.4で追加**され、**Ver.1.5でレベル4が解放**されました。
+固有の日本語名を英名から推測して付けないこと。データ上の原料・レシピ名は
+既存の `public/locales/ja` の表示文字列を優先します。
+
 ### CIで生成する最適化レポート
 
 GitHub Actions の `Python Optimizer` で、武陵・四号谷地の持続販売計画を
