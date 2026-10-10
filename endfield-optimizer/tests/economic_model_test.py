@@ -100,9 +100,14 @@ def test_japanese_game_names():
         item_id = term.get("id")
         if not item_id:
             continue
+        # Region currencies are not industrial production items and are
+        # excluded from public/locales/ja/item.json. Their JP strings are
+        # verified separately from the multilingual game-item catalog.
+        if item_id in ("item_domain_tundra_coupon", "item_domain_jinlong_coupon"):
+            continue
         dictionary = jp_items if item_id.startswith("item_") else jp_facilities
         assert dictionary[item_id] == term["japanese"], (
-            term["english"], item_id, dictionary[item_id], term["japanese"]
+            term["english"], item_id, dictionary.get(item_id), term["japanese"]
         )
     mappings = {row["english"]: row["japanese"] for row in localized["gameplayTerms"]}
     assert mappings["Wuling Stock Bill"] == "武陵取引券"
