@@ -88,6 +88,16 @@ def load_region_inputs(region, master, sanity=False):
     gen_supply_per_unit = {normalize_name(row['アイテム名']): (row['発電量'] * row['秒数']) / 60 for _, row in generator_df.iterrows()}
     gen_seconds = {normalize_name(row['アイテム名']): row['秒数'] for _, row in generator_df.iterrows()}
 
+    if master.get("sourceVersion"):
+        # No direct ore burning: the web calculator's Thermal Bank supports
+        # only powerFuels declared in generated power.ts.
+        gen_supply_per_unit = {}
+        gen_seconds = {}
+        for iid, info in master["powerFuels"].items():
+            name = normalize_name(master["items"][iid]["name"])
+            gen_seconds[name] = info["seconds"]
+            gen_supply_per_unit[name] = info["powerGeneration"] * info["seconds"] / 60
+
     facility_limits = {}
     fac_limits_path = os.path.join(CONFIG_DIR, 'facility_limits.csv')
     if os.path.exists(fac_limits_path):
