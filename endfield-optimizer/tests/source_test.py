@@ -22,6 +22,14 @@ def main():
             assert item['id'] in master['items'], recipe['id']
     for item_id in ('item_originium_ore', 'item_liquid_water', 'item_liquid_acid'):
         assert master['items'][item_id]['isRaw'], item_id
+    assert master["sourceVersion"] == "0.10.0", master["sourceVersion"]
+    assert master["facilities"]["liquid_clean_gate_1"]["domains"] == ["domain_2"]
+    assert len(master["facilitySustainDrains"]) >= 2
+    assert len(master["vaporizerEnvs"]) == 4
+    assert master["regionalRawCaps"]["domain_2"]["item_gas_inert"] == 460
+    assert master["regionalRawCaps"]["domain_2"]["item_gas_xiranite"] == 100
+    assert master["rawSourceFacilities"]["item_liquid_water"]["ratePerMinute"] == 60
+    assert any(r["gasEnv"] for r in master["recipes"]), "Gas-env recipe lost during conversion"
     print('Integrated calculator source conversion passed.')
 
 
