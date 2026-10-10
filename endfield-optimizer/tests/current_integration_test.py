@@ -107,10 +107,10 @@ def main():
     with open(os.path.join(report_dir, "current_plan_1_5.md"), "w", encoding="utf-8") as file:
         file.write("\n".join(summary_lines) + "\n")
     cfg = data_access.load_config()
-    cfg["outpost_levels"] = {"壌晶雨発生施設": 0}
+    cfg["outpost_levels"] = {"満天台建設基地": 0}
     closed = model.optimize("武陵", mode="profit", cfg_override=cfg)
     assert closed.is_usable, closed.status
-    assert "壌晶雨発生施設" not in closed.outpost_income
+    assert "満天台建設基地" not in closed.outpost_income
     assert closed.profit <= (30000 + 22800) / 60 + 0.01, closed.profit
 
 
