@@ -82,9 +82,69 @@
     {
       "english": "Area Defense",
       "japanese": "拠点防衛"
+    },
+    {
+      "english": "Cuprium Ore",
+      "japanese": "赤銅鉱物",
+      "id": "item_copper_ore"
+    },
+    {
+      "english": "Xiragen",
+      "japanese": "息壌ガス",
+      "id": "item_gas_xiranite"
+    },
+    {
+      "english": "Inergen",
+      "japanese": "不活性ガス",
+      "id": "item_gas_inert"
+    },
+    {
+      "english": "Liquid Xiranite",
+      "japanese": "液化息壌",
+      "id": "item_liquid_xiranite"
+    },
+    {
+      "english": "Xiranite",
+      "japanese": "息壌",
+      "id": "item_xiranite_powder"
+    },
+    {
+      "english": "Heavy Xiranite",
+      "japanese": "重息壌",
+      "id": "item_xiranite_enr_powder"
+    },
+    {
+      "english": "Gas Extractor",
+      "japanese": "ガス収集ポンプ",
+      "id": "gas_pump_1"
+    },
+    {
+      "english": "Gas Reactor Globe",
+      "japanese": "ガス反応装置",
+      "id": "gas_reactor_1"
+    },
+    {
+      "english": "Fluid-Gas Transmuting Unit",
+      "japanese": "ガス液体転換機",
+      "id": "transmuter_1"
+    },
+    {
+      "english": "Solid-Gas Transmuting Unit",
+      "japanese": "ガス固体転換機",
+      "id": "transmuter_2"
     }
   ],
   "references": [
+    {
+      "type": "repo-locale",
+      "path": "public/locales/ja/item.json",
+      "note": "In-game Japanese item IDs and display names are canonical"
+    },
+    {
+      "type": "repo-locale",
+      "path": "public/locales/ja/facility.json",
+      "note": "In-game Japanese machine IDs and display names are canonical"
+    },
     {
       "type": "official",
       "url": "https://endfield.gryphline.com/ja-jp/news/5200",
