@@ -113,12 +113,18 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
     # 無在庫転送: ポイント予算内で素材を外部から持ち込める
     transfer_rules = cfg.get("transfer_rules", {})
     use_transfer = transfer_rules.get("enabled", False)
-    transfer_points = transfer_rules.get("points", {}) if use_transfer else {}
+    if current:
+        # Current Metastorage catalog includes route direction, export
+        # eligibility and real item-specific TTV costs.
+        transfer_points = inputs.transfer_points if use_transfer else {}
+        use_transfer = bool(transfer_points)
+    else:
+        transfer_points = transfer_rules.get("points", {}) if use_transfer else {}
     transfer_item_ids = list(transfer_points.keys())
     transfer_vars = pulp.LpVariable.dicts("Transfer", transfer_item_ids, lowBound=0) if use_transfer else {}
 
     if use_transfer:
-        limit_per_min = transfer_rules.get("limit_per_hour", 1500) / 60.0
+        limit_per_min = inputs.transfer_budget_per_min if current else transfer_rules.get("limit_per_hour", 1500) / 60.0
         prob += pulp.lpSum([transfer_vars[iid] * transfer_points[iid] for iid in transfer_item_ids]) <= limit_per_min
 
     # 施設設置上限
