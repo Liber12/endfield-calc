@@ -45,7 +45,7 @@ endfield-optimizer/.venv/Scripts/python endfield-optimizer/src/master_converter.
   複数レシピを同じ施設へ詰めるbin packing、拠点の貯蓄済み残高と売却時点・
   ボーナス込みの時間変動、在庫・物流トポロジー、原料供給のゲーム内物流・採取設備の詳細。
 - **シナリオ依存**: 取引単価は `config/outpost_prices.csv` の従来手入力値を
-  引き継ぎ、壌晶雨発生施設の7品だけを2026年10月時点の資料で追加しました。
+  引き継ぎ、満天台建設基地の7品だけを2026年10月時点の資料で追加しました。
   拠点ごとの基礎補充量と上限残高は `config/outposts_1_5.json` に出典付きで保存。
   転送可能品目とTTVコストは現行 `src/data/metastorage.ts` から再生成します。
 - **計算値の扱い**: `Optimal` は *このMILP近似モデル内* での最適解を意味し、
@@ -58,20 +58,20 @@ endfield-optimizer/.venv/Scripts/python endfield-optimizer/src/master_converter.
 最適化し、**各拠点の収入 `Σ(販売数/分 × 単価)` を、券の補充量/分以下**
 に制約します。複数拠点に同じ商品がある場合も、各拠点へ分けて販売します。
 
-初期値は**6拠点とも解放・発展段階4（最大レベル）、防衛・連絡員ボーナスなし**
+初期値は**6拠点とも解放・発展段階4（最大レベル）、拠点防衛・派遣オペレーターボーナスなし**
 というシナリオです。全拠点の券の基礎補充量を足した持続収入の理論上限は
 **武陵 1,280.00券/分 / 四号谷地 1,525.00券/分**です。
 この値はレシピ・施設・物流条件を満たした**実現可能な最適収入の保証ではありません**。
 施設の実配置・保管残高・ゲーム内進捗で変わります。
 
-例: 壌晶雨発生施設を未解放として扱うには
-`optimizer_config.json` に `"outpost_levels": {"壌晶雨発生施設": 0}`
+例: 満天台建設基地を未解放として扱うには
+`optimizer_config.json` に `"outpost_levels": {"満天台建設基地": 0}`
 を追加します（1～4は発展レベル）。各拠点ごとにレベルを設定できます。
 
 参考資料:
 - 公式Ver.1.5「雪氷の幽夢」更新：https://endfield.hypergryph.com/news/2653
 - 拠点の基礎収益、商品、段階：https://endfield.wiki.gg/wiki/Outpost
-- 新拠点「Xiranflow Cloudseeder Station」：https://endfield.wiki.gg/wiki/Xiranflow_Cloudseeder_Station
+- Ver.1.4実装の満天台建設基地（英語名：Xiranflow Cloudseeder Station）：https://endfield.wiki.gg/wiki/Xiranflow_Cloudseeder_Station
 
 **Ver.1.5 資源差分:** 自動生成されたWeb側の `src/data/raw-caps.ts` は
 ゲーム1.4系の値を含みます。Pythonソルバーでは
@@ -98,7 +98,7 @@ GitHub Actions の `Python Optimizer` で、武陵・四号谷地の持続販売
 
 このレポートは**モデル上の参考計画**です。設備共有・ベルト/配管接続・
 配置不可領域を満たす保証はありません。また1.5での券補充量には
-連絡員ボーナス・防衛ボーナス・貯蔵済み残高を含めていません。
+派遣オペレーター・拠点防衛ボーナス・貯蔵済み残高を含めていません。
 
 ## 構成
 
