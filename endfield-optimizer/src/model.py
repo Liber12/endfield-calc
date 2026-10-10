@@ -217,7 +217,11 @@ def build_model(master, cfg, inputs, mode="balance", sanity=False):
         )
         min_prod = floors.get(name, 0.0)
         if min_prod > 0.001:
-            prob += item_net[iid_clean] + supply + trans_val - burn >= min_prod
+            # Current-game minimum output is a RESERVED surplus after
+            # deliveries. Selling those same units must not satisfy the
+            # production floor a second time.
+            reserved_for_sale = sales_vars[iid_clean] if current else 0
+            prob += item_net[iid_clean] + supply + trans_val - burn - reserved_for_sale >= min_prod
 
     # 電力収支
     total_cons = pulp.lpSum([facility_n[r['id']] * master['facilities'].get(r['facilityId'], {}).get('power', 0) for r in master['recipes']])
