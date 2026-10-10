@@ -78,6 +78,12 @@ def _render_infrastructure(sol, master, cfg):
     print(f"  電力収支: {sol.power_consumed:,.1f}W / {sol.power_generated:,.1f}W")
     fuel_list = [f"{n} (消費: {sol.burn[n]:.1f}/min, 発電機: {sol.generator_counts[n]:.1f}台)" for n in sol.burn if sol.burn[n] > 0.001]
     if fuel_list: print(f"  燃料消費: {', '.join(fuel_list)}")
+    sources = [f"{master['items'][iid]['name']}: {count:.0f}台" for iid, count in sol.source_counts.items() if count > 0.001]
+    vaporizers = [f"環境{env}: {count:.0f}台" for env, count in sol.vaporizer_counts.items() if count > 0.001]
+    if sources:
+        print(f"  原料ポンプ: {', '.join(sources)}")
+    if vaporizers:
+        print(f"  ガス散布装置: {', '.join(vaporizers)}")
 
     transfer_rules = cfg.get("transfer_rules", {})
     if transfer_rules.get("enabled", False):
@@ -111,7 +117,7 @@ def _render_production_lines(sol, master, cfg):
     for r in master['recipes']:
         rate = sol.recipe_rates[r['id']]
         if rate > 0.001:
-            num = rate / (60 / r['time'])
+            num = sol.facility_n[r['id']]
             active_recipes.append({"r": r, "num": num, "rate": rate})
     for cat_name, fac_types in cfg.get("categories", {}).items():
         cat_items = [x for x in active_recipes if x['r']['facilityName'] in fac_types]
@@ -131,7 +137,7 @@ def _render_supply_chain(sol, master):
                 if any(o['id'] == iid for o in r['outputs']):
                     r_rate = sol.recipe_rates[r['id']]
                     if r_rate > 0.001:
-                        print(f"    <- {pad_right('[' + r['facilityName'] + ']', COL_FAC)} {r['id']} ({r_rate / (60 / r['time']):.1f}台)")
+                        print(f"    <- {pad_right('[' + r['facilityName'] + ']', COL_FAC)} {r['id']} ({sol.facility_n[r['id']]:.0f}台)")
 
     # 廃棄物（汚水など）のトレース
     for iid, it in master['items'].items():
