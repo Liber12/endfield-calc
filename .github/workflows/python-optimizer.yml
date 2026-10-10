@@ -1,0 +1,26 @@
+name: Python Optimizer
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  optimizer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install optimizer dependencies
+        run: python -m pip install -r endfield-optimizer/requirements.txt
+      - name: Check integrated data source
+        run: python endfield-optimizer/tests/source_test.py
+      - name: Check validated optimizer snapshot
+        run: python endfield-optimizer/tests/smoke_test.py
