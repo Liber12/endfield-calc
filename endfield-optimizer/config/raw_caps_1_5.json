@@ -1,0 +1,28 @@
+{
+  "gameVersion": "1.5",
+  "asOf": "2026-10-10",
+  "description": "Verified max Wuling raw-rate changes after Snowy Forest expansion. Keep separate from generated 1.4-era Web raw-caps.ts until its upstream extractor is refreshed. Fail closed if upstream values drift.",
+  "region": "domain_2",
+  "regionalDevelopmentLevelForMaxPurity": 24,
+  "overrides": {
+    "item_copper_ore": {
+      "expectedOldCap": 420,
+      "newCap": 510,
+      "reason": "+90/min Cuprium in 1.5 snowy forest",
+      "source": [
+        "https://endfieldhub.org/guides/endgame-blueprints-part-13",
+        "https://sayo-nyaa.tistory.com/1943"
+      ]
+    },
+    "item_gas_xiranite": {
+      "expectedOldCap": 100,
+      "newCap": 150,
+      "reason": "+50/min Xiragen from 1.5 snowy forest",
+      "source": [
+        "https://endfieldhub.org/guides/endgame-blueprints-part-13",
+        "https://sayo-nyaa.tistory.com/1943"
+      ]
+    }
+  },
+  "versionAnnouncement": "https://endfield.hypergryph.com/news/2653"
+}

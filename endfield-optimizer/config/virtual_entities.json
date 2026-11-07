@@ -1,0 +1,27 @@
+{
+  "_comment": "ゲームデータ(endfield-calc)に存在しない仮想の施設・レシピ。水・沈殿酸の無限供給ポンプをモデル化する。master_converter.py が読み込む。",
+  "facilities": {
+    "item_port_liquid_pump_1": { "name": "液体ポンプ", "power": 10, "tier": 2 },
+    "item_port_acid_pump_2": { "name": "耐酸性液体ポンプⅡ", "power": 20, "tier": 3 }
+  },
+  "recipes": [
+    {
+      "id": "item_recipe_water_collect",
+      "name": "水",
+      "facilityId": "item_port_liquid_pump_1",
+      "facilityName": "液体ポンプ",
+      "time": 1.0,
+      "inputs": [],
+      "outputs": [{ "id": "item_liquid_water", "name": "水", "amount": 1.0 }]
+    },
+    {
+      "id": "item_recipe_acid_collect",
+      "name": "沈殿酸",
+      "facilityId": "item_port_acid_pump_2",
+      "facilityName": "耐酸性液体ポンプⅡ",
+      "time": 1.0,
+      "inputs": [],
+      "outputs": [{ "id": "item_liquid_acid", "name": "沈殿酸", "amount": 1.0 }]
+    }
+  ]
+}

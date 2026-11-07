@@ -1,0 +1,122 @@
+{
+  "target_parts": [
+    "息壌装備部品",
+    "赤銅部品",
+    "緋銅部品",
+    "紫晶部品",
+    "鉄製部品",
+    "鋼製部品"
+  ],
+  "parts_weight": 0.01,
+  "integer_generators": true,
+  "solver": {
+    "base_power": 200,
+    "facility_penalty": 0.0001,
+    "time_limit_sec": 15,
+    "gap_rel": 0.001
+  },
+  "loop_analysis_items": [
+    "壌晶廃液",
+    "不活性壌晶廃液",
+    "液化息壌",
+    "息壌",
+    "重息壌"
+  ],
+  "tracer": {
+    "loop_suppressed_facilities": [
+      "解体機",
+      "充填機"
+    ]
+  },
+  "min_production": {
+    "息壌装備部品": 0,
+    "赤銅部品": 120,
+    "緋銅部品": 0,
+    "紫晶部品": 0,
+    "鉄製部品": 0,
+    "鋼製部品": 0
+  },
+  "transfer_rules": {
+    "enabled": true,
+    "limit_per_hour": 1500,
+    "points": {
+      "item_originium_ore": 1,
+      "item_quartz_sand": 1,
+      "item_iron_ore": 1,
+      "item_copper_ore": 1,
+      "item_carbon_mtl": 1,
+      "item_iron_enr": 2,
+      "item_originium_powder": 1,
+      "item_carbon_powder": 1,
+      "item_crystal_powder": 1,
+      "item_quartz_powder": 1,
+      "item_iron_powder": 1,
+      "item_copper_powder": 1,
+      "item_originium_enr_powder": 1,
+      "item_crystal_enr_powder": 2,
+      "item_crystal_enr": 2,
+      "item_copper_nugget": 2,
+      "item_iron_nugget": 2,
+      "item_carbon_enr_powder": 1,
+      "item_iron_enr_powder": 1,
+      "item_liquid_water": 1,
+      "item_liquid_acid": 2
+    }
+  },
+  "categories": {
+    "最終製品・販売": [
+      "包装機",
+      "充填機"
+    ],
+    "基礎工業・部品": [
+      "組立機",
+      "精錬炉",
+      "粉砕機",
+      "成形機",
+      "研磨機"
+    ],
+    "化学・流体": [
+      "化学反応炉",
+      "大型化学反応炉",
+      "精製機",
+      "廃水処理機",
+      "液体ポンプ",
+      "耐酸性液体ポンプⅡ"
+    ],
+    "農業・種": [
+      "栽培機",
+      "放牧機",
+      "採種機"
+    ],
+    "特殊工程": [
+      "天有洪炉",
+      "解体機",
+      "装備部品加工機"
+    ]
+  },
+  "regional_rules": {
+    "四号谷地": {
+      "banned_facilities": [
+        "item_port_liquid_pump_1",
+        "item_port_acid_pump_2",
+        "item_port_xiranite_oven_1",
+        "item_port_liquid_purifier_1",
+        "item_port_liquid_cleaner_1"
+      ],
+      "banned_items": [
+        "item_xiranite_powder"
+      ],
+      "ban_liquids": true
+    }
+  },
+  "min_production_by_region": {
+    "武陵": {
+      "息壌装備部品": 0,
+      "赤銅部品": 120,
+      "緋銅部品": 0,
+      "紫晶部品": 0,
+      "鉄製部品": 0,
+      "鋼製部品": 0
+    }
+  }
+}

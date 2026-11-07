@@ -12,6 +12,10 @@
 
 ## Key Features
 
+### Python Factory Optimizer
+
+The repository also includes a [Python production optimizer](./endfield-optimizer/README.md) for regional profit planning with resource, power, and integer facility constraints. It runs independently of the web app, uses current checked-in calculator data by default, and preserves the old validated snapshot only for historical regression tests. Current-game profit estimates are experimental: economic delivery limits, unlock progression, and spatial facility packing are not yet fully modeled. See its README for setup and the calculator-data refresh workflow.
+
 ### 🎯 Core Functionality
 - **Multi-target planning** with automatic dependency resolution
 - **Smart recipe selection** with circular dependency handling
